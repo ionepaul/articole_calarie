@@ -356,7 +356,7 @@ input {
   color: #ffffff;
 }
 .header .topbar .top-contact {
-  font-size: 14px;
+  font-size: 12px;
   color: #ffffff;
   padding-top: 10px;  
 }
@@ -422,7 +422,7 @@ input {
   padding: 0 20px;
 }
 .header.layout1 .main-header {
-  padding: 45px 0 50px;
+  padding: 15px 0 20px;
 }
 .header .logo {
   display: inline-block;
@@ -1644,9 +1644,9 @@ input {
 }
 /*HEADER LAYOUT9*/
 .special-container  {
-  max-width: 1830px;
+  max-width: 1480px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 35px;
 }
 .header.layout9 .topbar {
   padding: 2px 0 3px;
@@ -7951,7 +7951,7 @@ input {
   padding: 5px 0;
 }
 .header.layout1 .main-header {
-  padding: 55px 0;
+  padding: 25px 0;
 }
 .main-menu > li.categories .mega-menu li {
   width: 100%;
@@ -8126,24 +8126,49 @@ input {
 }
 @media(max-width: 991px) {
 
-.header .topbar .top-contact {
-  text-align: right;
+/* MY CSS */
+.main-header-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+
+.header.layout1 .main-header .right-content {
+    text-align: center;
+    flex-basis: 100%;
+}
+
+.header.layout1 .top-links {
+    width: 100%;
+}
+
+.top-links > li {
+    float: none;
+}
+
+.header .topbar .top-contact,
+.header .topbar .menu-topbar {
+  text-align: center;
+}
+
 .header.layout1 .main-header {
-  padding: 30px 0;
+  padding: 10px 0;
+  position: relative;
 }
 .header .topbar {
   padding: 5px 15px;
 }
 .header.layout1 .main-header .left-content {
   text-align: center;
-  margin: 10px 0 30px;
+  margin: 0;
+  order: 1;
 }
 .header.layout1 .main-header .midle-content {
   text-align: left;
+  flex-basis: 400px;
 }
 .header.layout1 .search-form {
-  border: solid 1px #aaa;
+  border: 1px solid #efefef;
   padding: 0 10px;
 }
 
@@ -8774,10 +8799,6 @@ input {
 }
 .header.layout1 .main-header .right-content {
   width: 100%;
-}
-.header .topbar .top-contact,
-.header .topbar .menu-topbar {
-  text-align: center;
 }
 
 .header.layout4 .main-header {
