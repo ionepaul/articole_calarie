@@ -16,6 +16,8 @@ namespace ArticoleCalarie.Repository
 
         public DbSet<Color> Colors { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
         public static ArticoleCalarieDataContext Create()
         {
             return new ArticoleCalarieDataContext();

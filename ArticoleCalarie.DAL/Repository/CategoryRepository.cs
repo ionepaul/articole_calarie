@@ -3,9 +3,9 @@ using ArticoleCalarie.Repository.IRepository;
 
 namespace ArticoleCalarie.Repository.Repository
 {
-    public class ProductRepository : AbstractRepository<Product>, IProductRepository
+    public class CategoryRepository : AbstractRepository<Category>, ICategoryRepository
     {
-        public ProductRepository(ArticoleCalarieDataContext dataContext) : base(dataContext)
+        public CategoryRepository(ArticoleCalarieDataContext dataContext) : base(dataContext)
         {
         }
     }

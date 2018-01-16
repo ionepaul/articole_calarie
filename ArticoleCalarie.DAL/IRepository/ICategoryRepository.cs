@@ -2,7 +2,7 @@
 
 namespace ArticoleCalarie.Repository.IRepository
 {
-    public interface IProductRepository : IAbstractRepository<Product>
+    public interface ICategoryRepository : IAbstractRepository<Category>
     {
     }
 }

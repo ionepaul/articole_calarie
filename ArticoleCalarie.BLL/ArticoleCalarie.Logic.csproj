@@ -78,8 +78,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\AccountConverter.cs" />
+    <Compile Include="Converters\CategoryConverter.cs" />
+    <Compile Include="Converters\ProductConverter.cs" />
     <Compile Include="ILogic\IAccountLogic.cs" />
+    <Compile Include="ILogic\ICategoryLogic.cs" />
+    <Compile Include="ILogic\IProductLogic.cs" />
     <Compile Include="Logic\AccountLogic.cs" />
+    <Compile Include="Logic\CategoryLogic.cs" />
+    <Compile Include="Logic\ProductLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

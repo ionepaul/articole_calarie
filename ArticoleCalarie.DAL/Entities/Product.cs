@@ -35,6 +35,9 @@ namespace ArticoleCalarie.Repository.Entities
 
         public string MaterialDetails { get; set; }
 
+        [ForeignKey("CategoryId")]
+        public virtual Category Category { get; set; }
+
         public virtual ICollection<Image> Images { get; set; }
 
         public virtual ICollection<Color> AvailableColors { get; set; }
