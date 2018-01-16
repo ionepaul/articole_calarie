@@ -86,21 +86,9 @@
     <Compile Include="IRepository\IAccountRepository.cs" />
     <Compile Include="IRepository\IAddressRepository.cs" />
     <Compile Include="IRepository\IProductRepository.cs" />
-    <Compile Include="Migrations\201801091806441_InitialCreate.cs" />
-    <Compile Include="Migrations\201801091806441_InitialCreate.Designer.cs">
-      <DependentUpon>201801091806441_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801091952494_NullableAddressFK.cs" />
-    <Compile Include="Migrations\201801091952494_NullableAddressFK.Designer.cs">
-      <DependentUpon>201801091952494_NullableAddressFK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801100519265_NameAndPhoneOnAddress.cs" />
-    <Compile Include="Migrations\201801100519265_NameAndPhoneOnAddress.Designer.cs">
-      <DependentUpon>201801100519265_NameAndPhoneOnAddress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801150556385_Product.cs" />
-    <Compile Include="Migrations\201801150556385_Product.Designer.cs">
-      <DependentUpon>201801150556385_Product.cs</DependentUpon>
+    <Compile Include="Migrations\201801161542254_InitialCreate.cs" />
+    <Compile Include="Migrations\201801161542254_InitialCreate.Designer.cs">
+      <DependentUpon>201801161542254_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\AbstractRepository.cs" />
@@ -112,21 +100,14 @@
     <Compile Include="Repository\ProductRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801091806441_InitialCreate.resx">
-      <DependentUpon>201801091806441_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801091952494_NullableAddressFK.resx">
-      <DependentUpon>201801091952494_NullableAddressFK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801100519265_NameAndPhoneOnAddress.resx">
-      <DependentUpon>201801100519265_NameAndPhoneOnAddress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801150556385_Product.resx">
-      <DependentUpon>201801150556385_Product.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801161542254_InitialCreate.resx">
+      <DependentUpon>201801161542254_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

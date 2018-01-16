@@ -8,6 +8,64 @@ namespace ArticoleCalarie.DAL.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Addresses",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FullName = c.String(nullable: false),
+                        AddressLine1 = c.String(nullable: false),
+                        AddressLine2 = c.String(),
+                        City = c.String(nullable: false),
+                        PostalCode = c.String(nullable: false),
+                        County = c.String(nullable: false),
+                        Country = c.String(nullable: false),
+                        PhoneNumber = c.String(nullable: false),
+                        AddressType = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Colors",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        HexValue = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Products",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        ProductCode = c.String(nullable: false, maxLength: 50),
+                        ProductName = c.String(nullable: false),
+                        Description = c.String(nullable: false),
+                        CategoryId = c.String(nullable: false),
+                        DatePosted = c.DateTime(nullable: false),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Brand = c.String(),
+                        MaterialDetails = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.ProductCode);
+            
+            CreateTable(
+                "dbo.Images",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        IsSizeChart = c.Boolean(nullable: false),
+                        IsFirstImage = c.Boolean(nullable: false),
+                        ProductId = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Products", t => t.ProductId)
+                .Index(t => t.ProductId);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -36,8 +94,8 @@ namespace ArticoleCalarie.DAL.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         FullName = c.String(),
-                        BillingAddressId = c.Int(nullable: false),
-                        DeliveryAddressId = c.Int(nullable: false),
+                        BillingAddressId = c.Int(),
+                        DeliveryAddressId = c.Int(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -51,26 +109,11 @@ namespace ArticoleCalarie.DAL.Migrations
                         UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Addresses", t => t.BillingAddressId, cascadeDelete: false)
-                .ForeignKey("dbo.Addresses", t => t.DeliveryAddressId, cascadeDelete: false)
+                .ForeignKey("dbo.Addresses", t => t.BillingAddressId)
+                .ForeignKey("dbo.Addresses", t => t.DeliveryAddressId)
                 .Index(t => t.BillingAddressId)
                 .Index(t => t.DeliveryAddressId)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
-            
-            CreateTable(
-                "dbo.Addresses",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        AddressLine1 = c.String(nullable: false),
-                        AddressLine2 = c.String(),
-                        City = c.String(nullable: false),
-                        PostalCode = c.String(nullable: false),
-                        County = c.String(nullable: false),
-                        Country = c.String(nullable: false),
-                        AddressType = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.AspNetUserClaims",
@@ -97,6 +140,19 @@ namespace ArticoleCalarie.DAL.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.ProductColors",
+                c => new
+                    {
+                        Product_Id = c.Int(nullable: false),
+                        Color_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Product_Id, t.Color_Id })
+                .ForeignKey("dbo.Products", t => t.Product_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Colors", t => t.Color_Id, cascadeDelete: true)
+                .Index(t => t.Product_Id)
+                .Index(t => t.Color_Id);
+            
         }
         
         public override void Down()
@@ -107,6 +163,11 @@ namespace ArticoleCalarie.DAL.Migrations
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUsers", "BillingAddressId", "dbo.Addresses");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Images", "ProductId", "dbo.Products");
+            DropForeignKey("dbo.ProductColors", "Color_Id", "dbo.Colors");
+            DropForeignKey("dbo.ProductColors", "Product_Id", "dbo.Products");
+            DropIndex("dbo.ProductColors", new[] { "Color_Id" });
+            DropIndex("dbo.ProductColors", new[] { "Product_Id" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -115,12 +176,18 @@ namespace ArticoleCalarie.DAL.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Images", new[] { "ProductId" });
+            DropIndex("dbo.Products", new[] { "ProductCode" });
+            DropTable("dbo.ProductColors");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.Addresses");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Images");
+            DropTable("dbo.Products");
+            DropTable("dbo.Colors");
+            DropTable("dbo.Addresses");
         }
     }
 }
