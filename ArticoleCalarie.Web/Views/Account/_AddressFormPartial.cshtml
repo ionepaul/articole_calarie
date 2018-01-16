@@ -1,0 +1,63 @@
+﻿@model ArticoleCalarie.Models.AddressViewModel
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.FullName) } })
+            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.PhoneNumber) } })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.AddressLine1, new { htmlAttributes = new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.AddressLine1) } })
+            @Html.ValidationMessageFor(model => model.AddressLine1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.AddressLine2, new { htmlAttributes = new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.AddressLine2) } })
+            @Html.ValidationMessageFor(model => model.AddressLine2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.PostalCode) } })
+            @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-8">
+            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.City) } })
+            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.County, new { htmlAttributes = new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.County) } })
+            @Html.ValidationMessageFor(model => model.County, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Country) } })
+            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.AddressType)
+
+</div>

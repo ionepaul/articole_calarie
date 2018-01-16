@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title | Articole Călărie</title>
+    <link rel="icon" type="image/png" href="~/images/favicon.jpg">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header layout1">
+            <div class="topbar">
+                <div class="special-container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="topbar-content left-content">
+                                <div class="top-contact">
+                                    <span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span><span class="text">Contactați-ne: (+100) 123 456 7890</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <ul class="topbar-content right-content menu-topbar">
+                                <li class="currencies">
+                                    <ul class="list-currencies">
+                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="special-container">
+                <div class="main-header box-has-content">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12 left-content">
+                            <div class="search-form box-has-content">
+                                <div class="search-block">
+                                    <div class="search-inner">
+                                        <a href="#" class="search-button"><i class="flaticon-search3"></i></a>
+                                        <input type="text" class="search-info" placeholder="Caută">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6  midle-content">
+                            <div class="logo">
+                                <a href='@Url.Action("Index", "Home")'>
+                                    <img src="~/images/my_logo3.png" alt="Articole Călărie logo">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-4 col-sm-6 col-xs-6 right-content">
+                            <ul class="top-links">
+                                @Html.Partial("_LoginPartial")
+                                <li class="box-minicart">
+                                    <div class="minicart">
+                                        <div class="cart-block">
+                                            <a href="shopping-cart.html" class="cart-icon"><span class="flaticon-cart"></span></a>
+                                            <span class="count">0</span>
+                                        </div>
+                                        <div class="cart-inner cart-empty">
+                                            <p class="content">You have no item(s) in your shopping Cart</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-nav">
+                <div class="header-nav-inner">
+                    <div class="box-header-nav container-wapper">
+                        <div class="container main-menu-wapper">
+                            <a class="menu-bar mobile-navigation" href="#">
+                                <span class="icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                                <span class="text">Main Menu</span>
+                            </a>
+                            <ul id="menu-main-menu" class="main-menu clone-main-menu">
+                                <li class="menu-item menu-item-has-children shop">
+                                    <!-- <span class="top-flash new"> new</span> -->
+                                    <a href="#" class="kt-item-title" title="SHOP">CĂLĂREȚ</a>
+                                    <div class="mega-menu submenu">
+                                        <div class="widget widget-custom-menu">
+                                            <h3 class="widgettitle">Antrenament</h3>
+                                            <ul>
+                                                <li><a href="grid-category.html">Pantaloni de antrenament</a></li>
+                                                <li><a href="home2.html">Pantaloni de concurs</a></li>
+                                                <li><a href="home3.html">Tricouri</a></li>
+                                                <li><a href="home4.html">Chaps</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="widget widget-custom-menu">
+                                            <h3 class="widgettitle">Concurs</h3>
+                                            <ul>
+                                                <li><a href="home5.html">Ghete și cizme</a></li>
+                                                <li><a href="home6.html">Sacouri de concurs</a></li>
+                                                <li><a href="home7.html">Geci și veste</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="widget widget-custom-menu">
+                                            <h3 class="widgettitle">Accesorii</h3>
+                                            <ul>
+                                                <li><a href="home8.html">Cămăși</a></li>
+                                                <li><a href="home9.html">Mănuși</a></li>
+                                                <li><a href="home10.html">Accesorii</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="menu-item menu-item-has-children">
+                                    <a href="#" class="kt-item-title" title="Demos">CAL</a>
+                                    <ul class="submenu">
+                                        <li><a href="product-details.html">Frâie</a></li>
+                                        <li><a href="list-category.html">Pieptare</a></li>
+                                        <li><a href="grid-category.html">Jambieri</a></li>
+                                        <li><a href="category-nosidebar.html">Valtrape</a></li>
+                                        <li><a href="category-banner.html">Burete</a></li>
+                                        <li><a href="category-banner.html">Întreținere</a></li>
+                                        <li><a href="category-banner.html">Suplimente</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item menu-item-has-children">
+                                    <a href="#" class="kt-item-title" title="Demos">BRANDS</a>
+                                    <ul class="submenu">
+                                        <li><a href="product-details.html">Animo</a></li>
+                                        <li><a href="list-category.html">Kingsland</a></li>
+                                        <li><a href="grid-category.html">Equiline</a></li>
+                                        <li><a href="category-nosidebar.html">Freejump</a></li>
+                                    </ul>
+                                </li>
+                                <!-- <li class="menu-item menu-item-has-children categories">
+                                    <span class="top-flash hot">hot</span>
+                                    <a href="#" class="kt-item-title" title="Hot Categories">BRANDS</a>
+                                    <ul class="submenu mega-menu">
+                                        <li class="col-md-3 col-lg-3">
+                                            <div class="category layout1">
+                                                <div class="thumb">
+                                                    <div class="info">
+                                                        <h3 class="name">Backpacks</h3>
+                                                        <span class="count-item">( 38 items )</span>
+                                                    </div>
+                                                    <img src="images/category1.jpg" alt="">
+                                                </div>
+                                                <a class="shop-button" href="#">SHOP CATEGORY</a>
+                                            </div>
+                                        </li>
+                                        <li class="col-md-3 col-lg-3">
+                                            <div class="category layout2">
+                                            <a class="shop-button" href="#">SHOP CATEGORY</a>
+                                                <div class="thumb">
+                                                    <div class="info">
+                                                        <h3 class="name">Shoes & Boots</h3>
+                                                        <span class="count-item">( 58 items )</span>
+                                                    </div>
+                                                    <img src="images/category2.jpg" alt="">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="col-md-3 col-lg-3">
+                                            <div class="category layout1">
+                                                <div class="thumb">
+                                                    <div class="info">
+                                                        <h3 class="name">T-Shirts & Top</h3>
+                                                        <span class="count-item">( 135 items )</span>
+                                                    </div>
+                                                    <img src="images/category3.jpg" alt="">
+                                                </div>
+                                                <a class="shop-button" href="#">SHOP CATEGORY</a>
+                                            </div>
+                                        </li>
+                                        <li class="col-md-3 col-lg-3">
+                                            <div class="category layout2">
+                                                <a class="shop-button" href="#">SHOP CATEGORY</a>
+                                                <div class="thumb">
+                                                    <div class="info">
+                                                        <h3 class="name">Sunglasses</h3>
+                                                        <span class="count-item">( 63 items )</span>
+                                                    </div>
+                                                    <img src="images/category4.jpg" alt="">
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li> -->
+
+                                <li class="menu-item">
+                                    <a href="#" class="kt-item-title" title="PAGES">NOUTĂȚI</a>
+                                </li>
+                                <li class="menu-item"><span class="top-flash hot">hot</span><a href="about.html">OFERTE</a></li>
+
+                                <li class="menu-item">
+                                    <a href="blog.html">DESPRE</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="blog.html">CONTACT</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container body-content">
+        @RenderBody()     
+    </div>
+
+    <footer>
+        <div class="footer layout1 ">
+            <div class="container">
+                <div class="main-footer">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-lg-4 col-ss-12">
+                            <div class="widget widget-text">
+                                <h3 class="widgettitle">Welcome to Maxstore</h3>
+                                <p class="des">Maecenas lorem nibh, scelerisque nec justo gravida, commodo facilisis ipsum nulla ut porttitor.</p>
+                            </div>
+                            <ul class="list-socials">
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-6 col-sm-6  col-lg-2 col-ss-12">
+                            <div class="widget custom-menu">
+                                <h3 class="widgettitle">Our Store</h3>
+                                <ul>
+                                    <li><a href="#">New York</a></li>
+                                    <li><a href="#">London</a></li>
+                                    <li><a href="#">Bevelly Hill</a></li>
+                                    <li><a href="#">Tokyo</a></li>
+                                    <li><a href="#">Los Angeles</a></li>
+                                    <li><a href="#">Chicago</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-lg-4 col-ss-12">
+                            <div class="widget custom-menu">
+                                <h3 class="widgettitle">EXPLORE</h3>
+                                <div class="row">
+                                    <ul class="col-xs-6 col-ss-12">
+                                        <li><a href="#">Men</a></li>
+                                        <li><a href="#">Women</a></li>
+                                        <li><a href="#">Backpacks</a></li>
+                                        <li><a href="#">Boots</a></li>
+                                        <li><a href="#">Accessories</a></li>
+                                        <li><a href="#">Gifts</a></li>
+                                    </ul>
+                                    <ul class="col-xs-6 col-ss-12">
+                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="#">Services</a></li>
+                                        <li><a href="#">Delivery</a></li>
+                                        <li><a href="#">Returns</a></li>
+                                        <li><a href="#">FAQs</a></li>
+                                        <li><a href="#">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-lg-2 col-ss-12">
+                            <div class="widget custom-menu">
+                                <h3 class="widgettitle">INFORMATION</h3>
+                                <ul>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Returns</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">Latest News</a></li>
+                                    <li><a href="#">Our Sitemap</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-note">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 left-content">
+                            <div class="logo logo-footer">
+                                <img src="images/main-logo2.png" alt="">
+                            </div>
+                            <div class="coppy-right">
+                                <h3 class="content">© 2017<span class="text"> Articole Călărie</span> All rights reserved</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/Footer -->
+    <a class="back-to-top" href="#"></a>
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/external")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>
