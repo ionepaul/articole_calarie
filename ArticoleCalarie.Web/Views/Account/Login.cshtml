@@ -1,0 +1,71 @@
+﻿@using ArticoleCalarie.Models
+@model ArticoleCalarie.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Conectează-te";
+}
+
+<div class="row">
+    <div style="padding: 50px;" class="col-xs-12 col-sm-6 contact-content">
+        <h3>@ViewBag.Title</h3>
+        <hr />
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Email) })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.PasswordFor(m => m.Password, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Password) })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <p>
+                            @Html.ActionLink("Ți-ai uitat parola?", "ForgotPassword")
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" style="border: none; width: 100%" value="Log in" class="submit send" />
+                    </div>
+                </div>
+
+            }
+        </section>
+    </div>
+    <div style="padding: 50px;" class="col-xs-12 col-sm-6 contact-content">
+        <h3>Nu ai cont ?</h3>
+        <hr />
+       
+        <div style="padding-top: 30px" id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </div>
+        <div class="text-center">
+            <br />
+            <h4>SAU</h4>
+        </div>
+        <div class="form-group">
+            <p>
+                @Html.ActionLink("Înregistrează-te acum", "Register", new { @class = "submit send" })
+            </p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

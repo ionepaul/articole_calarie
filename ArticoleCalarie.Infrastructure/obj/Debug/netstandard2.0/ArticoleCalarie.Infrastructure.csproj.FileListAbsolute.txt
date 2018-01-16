@@ -1,0 +1,17 @@
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\bin\Debug\netstandard2.0\ArticoleCalarie.Infrastructure.deps.json
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\bin\Debug\netstandard2.0\ArticoleCalarie.Infrastructure.dll
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\bin\Debug\netstandard2.0\ArticoleCalarie.Infrastructure.pdb
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\bin\Debug\netstandard2.0\ArticoleCalarie.Models.dll
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\bin\Debug\netstandard2.0\System.ComponentModel.DataAnnotations.dll
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\bin\Debug\netstandard2.0\System.Configuration.dll
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\bin\Debug\netstandard2.0\System.Security.dll
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\bin\Debug\netstandard2.0\ArticoleCalarie.Models.pdb
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\bin\Debug\netstandard2.0\System.ComponentModel.DataAnnotations.xml
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\bin\Debug\netstandard2.0\System.Configuration.xml
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\bin\Debug\netstandard2.0\System.Security.xml
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\obj\Debug\netstandard2.0\ArticoleCalarie.Infrastructure.csprojResolveAssemblyReference.cache
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\obj\Debug\netstandard2.0\ArticoleCalarie.Infrastructure.csproj.CoreCompileInputs.cache
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\obj\Debug\netstandard2.0\ArticoleCalarie.Infrastructure.AssemblyInfoInputs.cache
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\obj\Debug\netstandard2.0\ArticoleCalarie.Infrastructure.AssemblyInfo.cs
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\obj\Debug\netstandard2.0\ArticoleCalarie.Infrastructure.dll
+D:\ARTICOLE_CALARIE_LAURA\ArticoleCalarie\ArticoleCalarie.Infrastructure\obj\Debug\netstandard2.0\ArticoleCalarie.Infrastructure.pdb

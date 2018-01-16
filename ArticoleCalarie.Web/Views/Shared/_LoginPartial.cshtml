@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <li>
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+            <li class="menu-item-has-children account">
+                @Html.ActionLink("Salut, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style="color: #000" })
+                <ul class="submenu">
+                    <li>@Html.ActionLink("Contul Meu", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
+                    <li><a href="shopping-cart.html">Shopping Bag</a></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+                </ul>
+            </li>
+        }
+    </li>
+}
+else
+{
+    <li><i class="glyphicon glyphicon-user"></i> @Html.ActionLink("Conectează-te", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+}
