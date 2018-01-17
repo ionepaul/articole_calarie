@@ -34,6 +34,89 @@ body{
   overflow-x: hidden;
   line-height: 24px;
 }
+
+.page-wrapper {
+    padding: 60px 0;
+}
+
+.text-in-lines {
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 0.1em;
+    margin: 30px 0;
+    font-style: italic;
+    color: #000000;
+}
+
+.text-in-lines span {
+    background:#fff; 
+    padding:0 10px; 
+}
+
+/* CUSTOM CHECKBOXES */
+/* The container */
+.checkbox-container {
+    display: block;
+    padding-left: 20px;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkbox-checkmark {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkbox-checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a #333333 background */
+.checkbox-container input:checked ~ .checkbox-checkmark {
+    background-color: #333333;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkbox-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkbox-checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkbox-checkmark:after {
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 10px;
+    border: 0px solid white;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+
 img {
 	max-width: 100%;
 }
@@ -476,6 +559,14 @@ input {
   display: inline-block;
   position: relative;
   padding: 0;
+}
+
+/* CONNECT ROW */
+.connect-row .fa-facebook {
+    font-size: 15px;
+    position: relative;
+    top: 1px;
+    margin-right: 10px;
 }
 
 /*Search form layout1*/
@@ -2911,8 +3002,8 @@ input {
   color: #555;
   margin: 6px 0 0;
 }
-.contact-content {
-  padding: 0 0 80px;
+.contact-content .register-now {
+  text-align: center;
 }
 .contact-content .input-info {
   width: 100%;
@@ -2922,8 +3013,7 @@ input {
   border: solid 1px #bbbbbb;
   outline: 0;
   box-shadow: none;
-  margin-top: 10px;
-  height: 46px;
+  height: 40px;
   line-height: 46px;
 }
 .contact-content .input-content {
@@ -8552,6 +8642,10 @@ input {
 }
 }
 @media(max-width: 767px) {
+
+.page-wrapper {
+    padding: 20px 0;
+}
 
 /*HEADER LAYOUT2*/
 .header.layout2 {
