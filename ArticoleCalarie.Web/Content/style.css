@@ -27,6 +27,10 @@ SLIDESHOW
 REPONSIVE
 /*-------------------------*/
 
+html, body {
+    height: 100%;
+}
+
 body{
 	font-family: 'Raleway', sans-serif;
 	position: relative;
@@ -35,8 +39,22 @@ body{
   line-height: 24px;
 }
 
+/* MY GENERAL CLASSES */
+body ul {
+    list-style: none;
+}
+
+.body-content {
+    min-height: 100%;
+}
+
 .page-wrapper {
     padding: 60px 0;
+}
+
+.narrow-container {
+    width: 700px;
+    margin: auto;
 }
 
 .text-in-lines {
@@ -51,6 +69,24 @@ body{
 .text-in-lines span {
     background:#fff; 
     padding:0 10px; 
+}
+
+.form-group-full-width {
+    width: 100%;
+}
+
+.btn-full-width {
+    width: 100%;
+}
+
+.my-btn-default {
+    background: #ffffff;
+    border: 1px solid #bbbbbb;
+}
+
+.my-btn-default:hover {
+    background: #324a76;
+    color: #ffffff;
 }
 
 /* CUSTOM CHECKBOXES */
@@ -8647,6 +8683,10 @@ input {
     padding: 20px 0;
 }
 
+.narrow-container {
+    width: 100%;
+}
+
 /*HEADER LAYOUT2*/
 .header.layout2 {
   padding: 15px 0;
@@ -9196,7 +9236,12 @@ input {
 @media(max-width: 479px) {
 .col-ss-12 {
   width: 100% ;
+  margin-bottom: 10px;
 }
+.col-ss-12:last-of-type {
+    margin-bottom: 0;
+}
+
 /*HEADER LAYOUT3*/ 
 .header .topbar-links > li {
   margin-right: 10px;
