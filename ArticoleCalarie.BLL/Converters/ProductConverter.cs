@@ -1,4 +1,5 @@
-﻿using ArticoleCalarie.Models;
+﻿using System;
+using ArticoleCalarie.Models;
 using ArticoleCalarie.Repository.Entities;
 
 namespace ArticoleCalarie.Logic.Converters
@@ -9,7 +10,12 @@ namespace ArticoleCalarie.Logic.Converters
         {
             var product = new Product
             {
-
+                ProductName = productViewModel.ProductName,
+                Description = productViewModel.Description,
+                DatePosted = DateTime.UtcNow,
+                MaterialDetails = productViewModel.MaterialDetails,
+                Price = productViewModel.Price,
+                Brand = productViewModel.Brand
             };
 
             return product;

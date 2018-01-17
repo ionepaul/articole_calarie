@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using ArticoleCalarie.Logic.Converters;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
+using ArticoleCalarie.Repository.Entities;
 using ArticoleCalarie.Repository.IRepository;
 
 namespace ArticoleCalarie.Logic.Logic
@@ -15,11 +16,26 @@ namespace ArticoleCalarie.Logic.Logic
             _iProductRepository = iProductRepository;
         }
 
-        public async Task AddProduct(ProductViewModel productViewModel)
+        public void AddProduct(ProductViewModel productViewModel)
         {
             var product = productViewModel.ToDbProduct();
 
-            await _iProductRepository.Add(product);
+            try
+            {
+                var categoryId = Convert.ToInt32(productViewModel.CategoryId);
+
+                product.CategoryId = categoryId;
+            }
+            catch (FormatException)
+            {
+                var newCategory = new Category { Name = productViewModel.CategoryId };
+
+                product.Category = newCategory;
+            }
+
+            product.ProductCode = "a";
+
+            _iProductRepository.Add(product);
         }
     }
 }

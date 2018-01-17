@@ -23,7 +23,7 @@ namespace ArticoleCalarie.Repository.Entities
         public string Description { get; set; }
 
         [Required]
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
         public DateTime DatePosted { get; set; }

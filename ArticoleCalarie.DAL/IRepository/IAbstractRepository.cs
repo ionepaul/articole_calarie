@@ -7,7 +7,8 @@ namespace ArticoleCalarie.Repository.IRepository
     {
         Task<T> GetById(int id);
         IEnumerable<T> GetAll();
-        Task Add(T entity);
+        Task AddAsync(T entity);
+        void Add(T entity);
         Task SaveChanges();
         Task Delete(T entity);
     }

@@ -35,12 +35,20 @@ namespace ArticoleCalarie.Repository.Repository
             return await _dbset.FindAsync(id);
         }
 
-        public virtual async Task Add(T entity)
+        public virtual async Task AddAsync(T entity)
         {
             _dbset.Add(entity);
 
             await _ctx.SaveChangesAsync();
         }
+
+        public virtual void Add(T entity)
+        {
+            _dbset.Add(entity);
+
+            _ctx.SaveChanges();
+        }
+
 
         public virtual IEnumerable<T> GetAll()
         {

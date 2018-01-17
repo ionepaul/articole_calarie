@@ -1,20 +1,37 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
 {
     <li>
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
         {
             @Html.AntiForgeryToken()
             <li class="menu-item-has-children account">
-                @Html.ActionLink("Salut, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style="color: #000" })
-                <ul class="submenu">
-                    <li>@Html.ActionLink("Contul Meu", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
-                    <li><a href="shopping-cart.html">Shopping Bag</a></li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
-                </ul>
-            </li>
+            @Html.ActionLink("Salut, " + User.Identity.GetUserName() + "!", "Account", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style = "color: #000" })
+            <ul class="submenu">
+                <li>@Html.ActionLink("Adaugă produs", "Add", "Product", routeValues: null, htmlAttributes: new { title = "Adaugă produs" })</li>
+                <li>@Html.ActionLink("Vezi comenzi", "Index", "Orders", routeValues: null, htmlAttributes: new { title = "Vezi comenzi" })</li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+            </ul>
+        </li>
         }
-    </li>
+   </li>
+}
+else if (Request.IsAuthenticated)
+{
+    <li>
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+            <li class="menu-item-has-children account">
+            @Html.ActionLink("Salut, " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage", style = "color: #000" })
+            <ul class="submenu">
+                <li>@Html.ActionLink("Contul Meu", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
+                <li><a href="shopping-cart.html">Shopping Bag</a></li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+            </ul>
+        </li>
+        }
+   </li>
 }
 else
 {

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ArticoleCalarie.BLL.Converters;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
@@ -15,11 +16,18 @@ namespace ArticoleCalarie.Logic.Logic
             _iCategoryRepository = iCategoryRepository;
         }
 
-        public async Task AddCategory(CategoryViewModel categoryViewModel)
+        public IEnumerable<CategoryViewModel> GetAllCategories(string term = "")
         {
-            var category = categoryViewModel.ToDbCategory();
+            if (string.IsNullOrEmpty(term))
+            {
+                var categoriesViewModel = _iCategoryRepository.GetAll().Select(x => x.ToCategoryViewModel());
 
-            await _iCategoryRepository.Add(category);
+                return categoriesViewModel;
+            }
+
+            var categoriesViewModelByTerm = _iCategoryRepository.GetCategories(term).Select(x => x.ToCategoryViewModel());
+
+            return categoriesViewModelByTerm;
         }
     }
 }
