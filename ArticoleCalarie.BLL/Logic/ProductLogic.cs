@@ -20,6 +20,18 @@ namespace ArticoleCalarie.Logic.Logic
         {
             var product = productViewModel.ToDbProduct();
 
+            var images = productViewModel.Images?.Split(',');
+
+            foreach (var image in images)
+            {
+                var imgModel = new Image
+                {
+                    Name = image
+                };
+
+                product.Images.Add(imgModel);
+            }
+
             try
             {
                 var categoryId = Convert.ToInt32(productViewModel.CategoryId);

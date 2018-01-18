@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ArticoleCalarie.Models;
 using ArticoleCalarie.Repository.Entities;
 
@@ -15,7 +16,8 @@ namespace ArticoleCalarie.Logic.Converters
                 DatePosted = DateTime.UtcNow,
                 MaterialDetails = productViewModel.MaterialDetails,
                 Price = productViewModel.Price,
-                Brand = productViewModel.Brand
+                Brand = productViewModel.Brand,
+                Images = new List<Image>()
             };
 
             return product;

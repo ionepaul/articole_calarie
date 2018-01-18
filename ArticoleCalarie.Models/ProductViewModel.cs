@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ArticoleCalarie.Models
 {
@@ -21,6 +20,8 @@ namespace ArticoleCalarie.Models
 
         public string MaterialDetails { get; set; }
 
-        public IEnumerable<object> Categories { get; set; }
+        public string Images { get; set; }
+
+        public string SizeChartImage { get; set; }
     }
 }
