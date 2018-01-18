@@ -152,6 +152,24 @@ input[type="checkbox"] {
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
+/* REGISTER */
+.register-wrapper {
+    width: 500px;
+    margin: auto;
+}
+
+.register-wrapper .fa {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 25px;
+    color: #324a76;
+}
+
+.register-wrapper.contact-content .input-info {
+    padding: 0 30px;
+}
+
 /* DELIVERY ADDRESS */
 .address-details-wrapper {
     background: url(../images/paper.png) top left repeat;
@@ -8740,6 +8758,11 @@ input {
 
 .narrow-container {
     width: 100%;
+}
+
+/* REGISTER */
+.register-wrapper {
+    width: auto;
 }
 
 /*HEADER LAYOUT2*/

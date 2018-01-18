@@ -4,8 +4,8 @@
     ViewBag.Title = "Înregistrează-te";
 }
 
-<div class="page-wrapper">
-    <div class="col-xs-12 col-md-offset-3 col-md-6 contact-content">
+<div class="page-wrapper ">
+    <div class="register-wrapper contact-content">
         @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
@@ -16,24 +16,28 @@
 
             <div class="form-group">
                 <div class="col-md-12">
+                    <i class="fa fa-user" aria-hidden="true"></i>
                     @Html.TextBoxFor(m => m.FullName, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.FullName) })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-12">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
                     @Html.TextBoxFor(m => m.Email, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Email) })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-12">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
                     @Html.PasswordFor(m => m.Password, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Password) })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-12">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.ConfirmPassword) })
                 </div>
             </div>
