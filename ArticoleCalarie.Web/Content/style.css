@@ -152,6 +152,48 @@ input[type="checkbox"] {
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
+/* DELIVERY ADDRESS */
+.address-details-wrapper {
+    background: url(../images/paper.png) top left repeat;
+    padding: 15px;
+    border-radius: 5px;
+    position: relative;
+    min-height: 300px;
+}
+
+.address-details-wrapper .delivery-truck {
+    position: absolute;
+    right: 15px;
+    bottom: 0px;
+    opacity: .6;
+    width: 100px;
+    transform: rotateZ(-10deg);
+}
+
+.address-details-wrapper .address-details-edit {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: #222;
+    text-transform: uppercase;
+    border: 1px dotted #222;
+    padding: 2px 25px;
+    cursor: pointer;
+}
+
+.address-details-wrapper p {
+    margin: 0;
+    border-bottom: 1px dotted #ccc;
+    padding: 5px 0;
+}
+
+.address-details-wrapper p.name {
+    margin-bottom: 5px;
+    font-weight: 700;
+    border: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
 
 img {
 	max-width: 100%;
@@ -8678,6 +8720,19 @@ input {
 }
 }
 @media(max-width: 767px) {
+
+/* GENERAL */
+.col-sm-6 {
+    margin-bottom: 35px;
+}
+
+.col-sm-6:last-of-type {
+    margin-bottom: 0;
+}
+
+.address-details-wrapper .delivery-truck {
+    width: 70px;
+}
 
 .page-wrapper {
     padding: 20px 0;

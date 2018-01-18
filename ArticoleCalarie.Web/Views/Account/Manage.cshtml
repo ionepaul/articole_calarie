@@ -4,85 +4,83 @@
     ViewBag.Title = "Contul Meu";
 }
 
-<div style="padding: 50px" class="col-md-6">
-    <h4>Addresa de livrare</h4>
-    <hr />
+<div class="page-wrapper">
+    <div class="col-sm-6">
+        <h4>Addresa de livrare</h4>
+        <hr />
 
-    <div id="deliveryAddressForm" class="contact-content @(Model.DeliveryAddress == null ? "" : "hidden")">
-        @using (Html.BeginForm("SaveDeliveryAddress", "Account"))
-        {
-            @Html.AntiForgeryToken()
-
-            @Html.Partial("_AddressFormPartial", Model.DeliveryAddress, new ViewDataDictionary()
+        <div id="deliveryAddressForm" class="contact-content @(Model.DeliveryAddress == null ? "" : "hidden")">
+            @using (Html.BeginForm("SaveDeliveryAddress", "Account"))
             {
-                TemplateInfo = new TemplateInfo()
-                {
-                    HtmlFieldPrefix = "DeliveryAddress"
-                }
-            })
+                @Html.AntiForgeryToken()
 
-            <div class="form-group">
-                <input id="deliveryAddressSaveBtn" type="submit" style="border: none; width: 100%" value="Salvează" class="submit send" />
-            </div>
-        }
-    </div>
+                @Html.Partial("_AddressFormPartial", Model.DeliveryAddress, new ViewDataDictionary()
+       {
+           TemplateInfo = new TemplateInfo()
+           {
+               HtmlFieldPrefix = "DeliveryAddress"
+           }
+       })
 
-    <div id="deliveryAddress" class="contact-content @(Model.DeliveryAddress != null ? "" : "hidden")">
-        @if (Model.DeliveryAddress != null)
-        {
-            <div class="col-md-8">
-                <b>@Model.DeliveryAddress.FullName</b> <br />
-                @Model.DeliveryAddress.PhoneNumber <br />
-                @Model.DeliveryAddress.AddressLine1<span>, </span>@Model.DeliveryAddress.AddressLine2 <br />
-                @Model.DeliveryAddress.PostalCode<span>, </span>@Model.DeliveryAddress.City <br />
-                @Model.DeliveryAddress.County<span>, </span>@Model.DeliveryAddress.Country <br />
-            </div>
+                <div class="form-group">
+                    <input id="deliveryAddressSaveBtn" type="submit" style="border: none; width: 100%" value="Salvează" class="submit send" />
+                </div>
+            }
+        </div>
 
-            <div class="col-md-4">
-                <a id="editDeliveryAddressBtn" title="Edit">Edit</a>
-            </div>
-        }
-    </div>
-</div>
-
-<div style="padding: 50px" class="col-md-6">
-    <h4>Adresa de facturare</h4>
-    <hr />
-
-    <div id="billingAddressForm" class="contact-content @(Model.BillingAddress == null ? "" : "hidden")">
-        @using (Html.BeginForm("SaveBillingAddress", "Account"))
-        {
-            @Html.AntiForgeryToken()
-
-            @Html.Partial("_AddressFormPartial", Model.BillingAddress, new ViewDataDictionary()
+        <div id="deliveryAddress" class="contact-content @(Model.DeliveryAddress != null ? "" : "hidden")">
+            @if (Model.DeliveryAddress != null)
             {
-                TemplateInfo = new TemplateInfo()
-                {
-                    HtmlFieldPrefix = "BillingAddress"
-                }
-            })
-
-            <div class="form-group">
-                <input id="billingAddressSaveBtn" type="submit" style="border: none; width: 100%" value="Salvează" class="submit send" />
-            </div>
-        }
+                <div class="address-details-wrapper">
+                    <p class="name">@Model.DeliveryAddress.FullName</p>
+                    <p> @Model.DeliveryAddress.PhoneNumber</p>
+                    <p> @Model.DeliveryAddress.AddressLine1<span>, </span>@Model.DeliveryAddress.AddressLine2</p>
+                    <p>@Model.DeliveryAddress.PostalCode<span>, </span>@Model.DeliveryAddress.City</p>
+                    <p> @Model.DeliveryAddress.County<span>, </span>@Model.DeliveryAddress.Country</p>
+                    <a class="address-details-edit" id="editDeliveryAddressBtn" title="Edit">Edit</a>
+                    <img class="delivery-truck" src="../images/delivery.png" alt="Delivery Truck" />
+                </div>
+            }
+        </div>
     </div>
 
-    <div id="billingAddress" class="@(Model.BillingAddress == null ? "hidden" : "")">
-        @if (Model.BillingAddress != null)
-        {
-            <div class="col-md-8">
-                <b>@Model.BillingAddress.FullName</b> <br />
-                @Model.BillingAddress.PhoneNumber <br />
-                @Model.BillingAddress.AddressLine1<span>, </span>@Model.BillingAddress.AddressLine2 <br />
-                @Model.BillingAddress.PostalCode<span>, </span>@Model.BillingAddress.City <br />
-                @Model.BillingAddress.County<span>, </span>@Model.BillingAddress.Country <br />
-            </div>
+    <div class="col-sm-6">
+        <h4>Adresa de facturare</h4>
+        <hr />
 
-            <div class="col-md-4">
-                <a id="editBillingAddressBtn" title="Edit">Edit</a>
-            </div>
-        }
+        <div id="billingAddressForm" class="contact-content @(Model.BillingAddress == null ? "" : "hidden")">
+            @using (Html.BeginForm("SaveBillingAddress", "Account"))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.Partial("_AddressFormPartial", Model.BillingAddress, new ViewDataDictionary()
+       {
+           TemplateInfo = new TemplateInfo()
+           {
+               HtmlFieldPrefix = "BillingAddress"
+           }
+       })
+
+                <div class="form-group">
+                    <input id="billingAddressSaveBtn" type="submit" style="border: none; width: 100%" value="Salvează" class="submit send" />
+                </div>
+            }
+        </div>
+
+        <div id="billingAddress" class="@(Model.BillingAddress == null ? "hidden" : "")">
+            @if (Model.BillingAddress != null)
+            {
+                <div class="address-details-wrapper">
+                    <p class="name">@Model.BillingAddress.FullName</p>
+                    <p>@Model.BillingAddress.PhoneNumber</p>
+                    <p>@Model.BillingAddress.AddressLine1<span>, </span>@Model.BillingAddress.AddressLine2</p>
+                    <p>@Model.BillingAddress.PostalCode<span>, </span>@Model.BillingAddress.City</p>
+                    <p>@Model.BillingAddress.County<span>, </span>@Model.BillingAddress.Country</p>
+                    <a class="address-details-edit" id="editBillingAddressBtn" title="Edit">Edit</a>
+                    <img class="delivery-truck" src="../images/delivery.png" alt="Delivery Truck" />
+                </div>
+            }
+        </div>
     </div>
 </div>
 
