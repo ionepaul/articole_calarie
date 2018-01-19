@@ -18,6 +18,8 @@ namespace ArticoleCalarie.Repository
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<SizeChart> SizeCharts { get; set; }
+
         public static ArticoleCalarieDataContext Create()
         {
             return new ArticoleCalarieDataContext();

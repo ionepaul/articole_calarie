@@ -98,14 +98,25 @@
         </div>
 
         <div class="form-group">
-            <label>Images</label>
+            <label class="col-md-2">Images</label>
             <div class="col-md-10">
-                <input type="file" id="imageUploade" multiple onchange="previewAndUpload(this)" />
+                <input type="file" multiple onchange="previewAndUpload(this, false)" />
                 <div id="imgDirectory">
                 </div>
             </div>
         </div>
 
+        <div class="form-group">
+            <label class="col-md-2">Size Chart</label>
+            <div class="col-md-10">
+                <div id="sizeChartImgContainer">
+                </div>
+                <div id="newChartSizeImgContainer">
+                </div>
+
+                <input type="file" onchange="previewAndUpload(this, true)" />
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -113,8 +124,10 @@
             </div>
         </div>
     </div>
+
     @Html.HiddenFor(m => m.CategoryId);
     @Html.HiddenFor(m => m.Images);
+    @Html.HiddenFor(m => m.SizeChartImage);
 }
 
 @section Scripts {
@@ -125,6 +138,8 @@
 <script>
 
     $(document).ready(function () {
+        loadSizeCharts();
+
         $("#categoryAutocomplete").autocomplete({
             source: function (request, response) {
                 $.getJSON('/Category/GetCategories?term=' + request.term, function (data) {
@@ -154,20 +169,28 @@
         });
     });
 
-    function previewAndUpload(input) {
+    function previewAndUpload(input, isSizeChart) {
         if (input.files) {
             $.each(input.files, function (i, file) {
-                var upload = new Upload(file);
+                var formattedFileName = file.name.replace(' ', '').replace('-', '').replace('_', '');
+                var containerId = formattedFileName.replace('.', '');
 
-                // maby check size or type here with upload.getSize() and upload.getType()
-
-                // execute upload
+                var upload = new Upload(file, isSizeChart);
                 upload.doUpload();
 
                 var ImageDir = new FileReader();
                 ImageDir.onload = function (e) {
-                    $('#imgDirectory').append('<div id="progress-wrp"><div class="progress-bar"></div><div class="status">0%</div></div>');
-                    $('#imgDirectory').append('<img src="' + e.target.result + '" height="100" />');
+                    if (!isSizeChart) {
+                        $('#imgDirectory').append('<div id="' + containerId + '"></div>');
+                        $('#' + containerId).append('<div id="progress-wrp"><div class="progress-bar"></div><div class="status">0%</div></div>');
+                        $('#' + containerId).append('<img src="' + e.target.result + '" height="100" />');
+                        $('#' + containerId).append('<a onclick="deleteImage(\'' + formattedFileName + '\')">delete image</a>');
+                    } else {
+                        $('#newChartSizeImgContainer').append('<div id="' + containerId + '"></div>');
+                        $('#' + containerId).append('<div id="progress-wrp"><div class="progress-bar"></div><div class="status">0%</div></div>');
+                        $('#' + containerId).append('<img src="' + e.target.result + '" height="100" />');
+                        $('#' + containerId).append('<a onclick="deleteImage(\'' + formattedFileName + '\')">delete image</a>');
+                    }
                 }
 
                 ImageDir.readAsDataURL(file);
@@ -177,8 +200,9 @@
 
     var savedImages = new Array();
     
-    var Upload = function (file) {
+    var Upload = function (file, isSizeChart) {
         this.file = file;
+        this.isSizeChart = isSizeChart;
     };
 
     Upload.prototype.getType = function () {
@@ -193,7 +217,7 @@
     Upload.prototype.doUpload = function () {
         var that = this;
         var formData = new FormData();
-
+        
         // add assoc key values, this will be posts values
         formData.append("file", this.file, this.getName());
         formData.append("upload_file", true);
@@ -209,8 +233,13 @@
                 return myXhr;
             },
             success: function (data) {
-                savedImages.push(data);
-                $('#Images').val(savedImages);
+                if (!that.isSizeChart) {
+                    savedImages.push(data);
+                    $('#Images').val(savedImages);
+                }
+                else {
+                    $('#SizeChartImage').val(data);
+                }
             },
             error: function (error) {
                 // handle error
@@ -236,4 +265,43 @@
         $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
         $(progress_bar_id + " .status").text(percent + "%");
     };
+
+    function deleteImage(fileName) {
+        $.ajax({
+            type: "POST",
+            url: "DeleteImage?filename=" + fileName,
+            success: function () {
+                $('#' + fileName.replace('.', '')).remove();
+            },
+            error: function (error) {
+                // handle error
+            },
+            async: true,
+            timeout: 60000
+        });
+    }
+
+    function loadSizeCharts() {
+        $.ajax({
+            type: "GET",
+            url: "GetSizeCharts",
+            success: function (data) {
+                console.log(data);
+                if (data && data.length > 0) {
+                    $.each(data, function (i, sizeChart) {
+                        $('#sizeChartImgContainer').append('<img src="' + window.location.origin + '/images/products/' + sizeChart.FileName + '" height="200" onclick="selectSizeChart(' + sizeChart.Id + ')"/>');
+                    });
+                }
+            },
+            error: function (error) {
+                // handle error
+            },
+            async: true,
+            timeout: 60000
+        });
+    }
+
+    function selectSizeChart(sizeChartId) {
+        console.log(sizeChartId);
+    }
 </script>

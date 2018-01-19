@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ArticoleCalarie.Logic.ILogic;
@@ -12,16 +13,26 @@ namespace ArticoleCalarie.Web.Controllers
     public class ProductController : Controller
     {
         private IProductLogic _iProductLogic;
+        private ISizeChartLogic _iSizeChartLogic;
 
-        public ProductController(IProductLogic iProductLogic)
+        public ProductController(IProductLogic iProductLogic, ISizeChartLogic iSizeChartLogic)
         {
             _iProductLogic = iProductLogic;
+            _iSizeChartLogic = iSizeChartLogic;
         }
 
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public ActionResult Add()
         {
             return View();
+        }
+
+        [HttpGet]
+        //[Authorize(Roles = "Admin")]
+        public JsonResult GetSizeCharts()
+        {
+            return Json(_iSizeChartLogic.GetAllSizeCharts(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -62,6 +73,18 @@ namespace ArticoleCalarie.Web.Controllers
             }
 
             return null;
+        }
+
+        [HttpPost]
+        public void DeleteImage(string fileName)
+        {
+            var serverPath = Server.MapPath(ConfigurationManager.AppSettings["ProductsImagesFolder"]);
+            var filePath = Path.Combine(serverPath, fileName);
+
+            if (Directory.Exists(Path.GetDirectoryName(serverPath)) && System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
         }
     }
 }

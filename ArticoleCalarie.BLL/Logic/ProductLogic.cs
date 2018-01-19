@@ -24,10 +24,7 @@ namespace ArticoleCalarie.Logic.Logic
 
             foreach (var image in images)
             {
-                var imgModel = new Image
-                {
-                    Name = image
-                };
+                var imgModel = new Image { FileName = image };
 
                 product.Images.Add(imgModel);
             }
@@ -43,6 +40,19 @@ namespace ArticoleCalarie.Logic.Logic
                 var newCategory = new Category { Name = productViewModel.CategoryId };
 
                 product.Category = newCategory;
+            }
+
+            try
+            {
+                var sizeChartImageId = Convert.ToInt32(productViewModel.SizeChartImage);
+
+                product.SizeChartId = sizeChartImageId;
+            }
+            catch (FormatException)
+            {
+                var newSizeChartImage = new SizeChart { FileName = productViewModel.SizeChartImage };
+
+                product.SizeChart = newSizeChartImage;
             }
 
             product.ProductCode = "a";

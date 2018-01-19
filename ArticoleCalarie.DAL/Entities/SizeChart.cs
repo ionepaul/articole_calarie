@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ArticoleCalarie.Repository.Entities
 {
-    public class Image
+    public class SizeChart
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -11,12 +11,5 @@ namespace ArticoleCalarie.Repository.Entities
 
         [Required]
         public string FileName { get; set; }
-
-        public bool IsFirstImage { get; set; }
-
-        public int ProductId { get; set; }
-
-        [ForeignKey("ProductId")]
-        public virtual Product Product { get; set; }
     }
 }

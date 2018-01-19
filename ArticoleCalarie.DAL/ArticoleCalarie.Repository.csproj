@@ -81,6 +81,7 @@
     <Compile Include="Entities\Color.cs" />
     <Compile Include="Entities\Image.cs" />
     <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\SizeChart.cs" />
     <Compile Include="Enums\AddressType.cs" />
     <Compile Include="Identity\ApplicationSignInManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
@@ -88,9 +89,10 @@
     <Compile Include="IRepository\IAddressRepository.cs" />
     <Compile Include="IRepository\ICategoryRepository.cs" />
     <Compile Include="IRepository\IProductRepository.cs" />
-    <Compile Include="Migrations\201801170409332_InitialCreate.cs" />
-    <Compile Include="Migrations\201801170409332_InitialCreate.Designer.cs">
-      <DependentUpon>201801170409332_InitialCreate.cs</DependentUpon>
+    <Compile Include="IRepository\ISizeChartRepository.cs" />
+    <Compile Include="Migrations\201801190551293_InitialCreate.cs" />
+    <Compile Include="Migrations\201801190551293_InitialCreate.Designer.cs">
+      <DependentUpon>201801190551293_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\AbstractRepository.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Repository\AddressRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
+    <Compile Include="Repository\SizeChartRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -109,8 +112,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801170409332_InitialCreate.resx">
-      <DependentUpon>201801170409332_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801190551293_InitialCreate.resx">
+      <DependentUpon>201801190551293_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

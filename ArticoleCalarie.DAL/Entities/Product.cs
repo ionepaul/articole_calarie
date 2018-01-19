@@ -35,6 +35,11 @@ namespace ArticoleCalarie.Repository.Entities
 
         public string MaterialDetails { get; set; }
 
+        public int? SizeChartId { get; set; }
+        
+        [ForeignKey("SizeChartId")]
+        public virtual SizeChart SizeChart { get; set; }
+
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
