@@ -20,6 +20,8 @@ namespace ArticoleCalarie.Repository
 
         public DbSet<SizeChart> SizeCharts { get; set; }
 
+        public DbSet<Brand> Brands { get; set; }
+
         public static ArticoleCalarieDataContext Create()
         {
             return new ArticoleCalarieDataContext();

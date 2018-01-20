@@ -5,6 +5,6 @@ namespace ArticoleCalarie.Repository.IRepository
 {
     public interface ICategoryRepository : IAbstractRepository<Category>
     {
-        IEnumerable<Category> GetCategories(string term);
+        IEnumerable<Category> GetCategoriesBySearchTerm(string searchTerm);
     }
 }

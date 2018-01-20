@@ -5,7 +5,8 @@ namespace ArticoleCalarie.Repository.IRepository
 {
     public interface IAbstractRepository<T>
     {
-        Task<T> GetById(int id);
+        Task<T> GetByIdAsync(int id);
+        T GetById(int id);
         IEnumerable<T> GetAll();
         Task AddAsync(T entity);
         void Add(T entity);

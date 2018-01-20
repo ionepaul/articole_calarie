@@ -16,16 +16,16 @@ namespace ArticoleCalarie.Logic.Logic
             _iCategoryRepository = iCategoryRepository;
         }
 
-        public IEnumerable<CategoryViewModel> GetAllCategories(string term = "")
+        public IEnumerable<CategoryViewModel> GetAllCategories(string searchTerm = "")
         {
-            if (string.IsNullOrEmpty(term))
+            if (string.IsNullOrEmpty(searchTerm))
             {
-                var categoriesViewModel = _iCategoryRepository.GetAll().Select(x => x.ToCategoryViewModel());
+                var categoriesViewModel = _iCategoryRepository.GetAll().Select(x => x.ToViewModel());
 
                 return categoriesViewModel;
             }
 
-            var categoriesViewModelByTerm = _iCategoryRepository.GetCategories(term).Select(x => x.ToCategoryViewModel());
+            var categoriesViewModelByTerm = _iCategoryRepository.GetCategoriesBySearchTerm(searchTerm).Select(x => x.ToViewModel());
 
             return categoriesViewModelByTerm;
         }

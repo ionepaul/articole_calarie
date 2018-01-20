@@ -31,7 +31,7 @@ namespace ArticoleCalarie.Repository.Entities
         [Required]
         public decimal Price { get; set; }
 
-        public string Brand { get; set; }
+        public int? BrandId { get; set; }
 
         public string MaterialDetails { get; set; }
 
@@ -42,6 +42,9 @@ namespace ArticoleCalarie.Repository.Entities
 
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
+
+        [ForeignKey("BrandId")]
+        public Brand Brand { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }
 

@@ -30,9 +30,14 @@ namespace ArticoleCalarie.Repository.Repository
 
         #region Public Methods
 
-        public virtual async Task<T> GetById(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
             return await _dbset.FindAsync(id);
+        }
+
+        public virtual T GetById(int id)
+        {
+            return _dbset.Find(id);
         }
 
         public virtual async Task AddAsync(T entity)

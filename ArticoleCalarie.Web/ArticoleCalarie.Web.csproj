@@ -698,21 +698,21 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ArticoleCalarie.BLL\ArticoleCalarie.Logic.csproj">
-      <Project>{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}</Project>
-      <Name>ArticoleCalarie.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ArticoleCalarie.DAL\ArticoleCalarie.Repository.csproj">
-      <Project>{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}</Project>
-      <Name>ArticoleCalarie.Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ArticoleCalarie.Infrastructure\ArticoleCalarie.Infrastructure.csproj">
       <Project>{70B700E8-A2D3-4713-8347-87168CB81214}</Project>
       <Name>ArticoleCalarie.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ArticoleCalarie.Logic\ArticoleCalarie.Logic.csproj">
+      <Project>{fa33bb89-e77f-40af-aa46-6f8544e4b7c7}</Project>
+      <Name>ArticoleCalarie.Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ArticoleCalarie.Models\ArticoleCalarie.Models.csproj">
       <Project>{9BDC5DFC-0A6A-4E4C-BB41-A803BFCC45E7}</Project>
       <Name>ArticoleCalarie.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArticoleCalarie.Repository\ArticoleCalarie.Repository.csproj">
+      <Project>{f7ad96bc-82b6-4b5b-b4f0-cd7f61ba35fe}</Project>
+      <Name>ArticoleCalarie.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

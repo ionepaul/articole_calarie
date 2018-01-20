@@ -11,9 +11,9 @@ namespace ArticoleCalarie.Repository.Repository
         {
         }
 
-        public IEnumerable<Category> GetCategories(string term)
+        public IEnumerable<Category> GetCategoriesBySearchTerm(string searchTerm)
         {
-            var categories = _dbset.Where(x => x.Name.StartsWith(term)).AsEnumerable();
+            var categories = _dbset.Where(x => x.Name.StartsWith(searchTerm)).AsEnumerable();
 
             return categories;
         }

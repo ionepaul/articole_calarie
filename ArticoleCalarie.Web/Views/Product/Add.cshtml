@@ -1,7 +1,7 @@
 ﻿@model ArticoleCalarie.Models.ProductViewModel
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Adaugă produs";
 }
 
 <style>
@@ -41,8 +41,14 @@
             display: inline-block;
             color: #000000;
         }
+
+        ul#colors-list li {
+            height: 30px;
+            width: 30px;
+            border-radius: 100%;
+        }
 </style>
-<h2>View</h2>
+<h2>Adaugă produs</h2>
 
 
 @using (Html.BeginForm())
@@ -50,7 +56,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>ProductViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -121,6 +126,14 @@
                 <input type="file" onchange="previewAndUpload(this, true)" />
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-md-2">Colors</label>
+            <div class="col-md-10">
+                <ul id="colors-list">
+
+                </ul>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -132,6 +145,7 @@
     @Html.HiddenFor(m => m.CategoryId);
     @Html.HiddenFor(m => m.Images);
     @Html.HiddenFor(m => m.SizeChartImage);
+    @Html.HiddenFor(m => m.Colors);
 }
 
 @section Scripts {
@@ -143,6 +157,7 @@
 
     $(document).ready(function () {
         loadSizeCharts();
+        loadColors();
 
         $("#categoryAutocomplete").autocomplete({
             source: function (request, response) {
@@ -203,6 +218,7 @@
     }
 
     var savedImages = new Array();
+    var savedColors = new Array();
     
     var Upload = function (file, isSizeChart) {
         this.file = file;
@@ -290,10 +306,28 @@
             type: "GET",
             url: "GetSizeCharts",
             success: function (data) {
-                console.log(data);
                 if (data && data.length > 0) {
                     $.each(data, function (i, sizeChart) {
-                        $('#sizeChartImgContainer').append('<img id="' + i + '"src="' + window.location.origin + '/images/products/' + sizeChart.FileName + '" height="200" onclick="selectSizeChart(' + sizeChart.Id + ')"/>');
+                        $('#sizeChartImgContainer').append('<img id="' + i + '" src="' + window.location.origin + '/images/products/' + sizeChart.FileName + '" height="200" onclick="selectSizeChart(' + sizeChart.Id + ')"/>');
+                    });
+                }
+            },
+            error: function (error) {
+                // handle error
+            },
+            async: true,
+            timeout: 60000
+        });
+    }
+
+    function loadColors() {
+        $.ajax({
+            type: "GET",
+            url: "GetColors",
+            success: function (data) {
+                if (data && data.length > 0) {
+                    $.each(data, function (i, color) {
+                        $('#colors-list').append('<li id="' + color.Name + '" style="background-color:' + color.Hex + '" onclick="selectColor(' + color.Name + ',' + color.Id + ')"/>');
                     });
                 }
             },
@@ -309,5 +343,18 @@
         $('#sizeChartImgContainer img').removeClass('selected');
         $('#sizeChartImgContainer img#' + sizeChartId).addClass('selected');
         $('#SizeChartImage').val(sizeChartId);
+    }
+
+    function selectColor(colorName, colorId) {
+        let colorIndexInArray = savedColors.indexOf(colorId);
+        if (colorIndexInArray >= 0) {
+            $(colorName).removeClass('selected');
+            savedColors.slice(colorIndexInArray, 1);
+        }
+        else {
+            $(colorName).addClass('selected');
+            savedColors.push(colorId);
+        }
+        $('#Colors').val(savedColors);
     }
 </script>

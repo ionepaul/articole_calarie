@@ -5,7 +5,7 @@ namespace ArticoleCalarie.BLL.Converters
 {
     public static class CategoryConverter
     {
-        public static Category ToDbCategory(this CategoryViewModel categoryViewModel)
+        public static Category ToDbModel(this CategoryViewModel categoryViewModel)
         {
             var category = new Category
             {
@@ -15,7 +15,7 @@ namespace ArticoleCalarie.BLL.Converters
             return category;
         }
 
-        public static CategoryViewModel ToCategoryViewModel(this Category category)
+        public static CategoryViewModel ToViewModel(this Category category)
         {
             var categoryViewModel = new CategoryViewModel
             {

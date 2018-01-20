@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ArticoleCalarie.Logic.Converters;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
@@ -10,10 +11,12 @@ namespace ArticoleCalarie.Logic.Logic
     public class ProductLogic : IProductLogic
     {
         private IProductRepository _iProductRepository;
+        private IColorRepository _iColorRepository;
 
-        public ProductLogic(IProductRepository iProductRepository)
+        public ProductLogic(IProductRepository iProductRepository, IColorRepository iColorRepoository)
         {
             _iProductRepository = iProductRepository;
+            _iColorRepository = iColorRepoository;
         }
 
         public void AddProduct(ProductViewModel productViewModel)
@@ -21,6 +24,17 @@ namespace ArticoleCalarie.Logic.Logic
             var product = productViewModel.ToDbProduct();
 
             var images = productViewModel.Images?.Split(',');
+
+            try
+            {
+                var price = Convert.ToDecimal(productViewModel.Price);
+
+                product.Price = price;
+            }
+            catch (Exception)
+            {
+                //log and handle
+            }
 
             foreach (var image in images)
             {
@@ -55,6 +69,29 @@ namespace ArticoleCalarie.Logic.Logic
                     var newSizeChartImage = new SizeChart { FileName = productViewModel.SizeChartImage };
 
                     product.SizeChart = newSizeChartImage;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(productViewModel.Colors))
+            {
+                product.AvailableColors = new List<Color>();
+
+                var availableColors = productViewModel.Colors?.Split(',');
+
+                try
+                {
+                    foreach (var colorId in availableColors)
+                    {
+                        var intColorId = Convert.ToInt32(colorId);
+
+                        var color = _iColorRepository.GetById(intColorId);
+
+                        product.AvailableColors.Add(color);
+                    }
+                }
+                catch (Exception)
+                {
+                    //log and handle
                 }
             }
 

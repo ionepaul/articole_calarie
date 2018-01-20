@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArticoleCalarie.Logic", "ArticoleCalarie.BLL\ArticoleCalarie.Logic.csproj", "{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArticoleCalarie.Repository", "ArticoleCalarie.DAL\ArticoleCalarie.Repository.csproj", "{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArticoleCalarie.Web", "ArticoleCalarie.Web\ArticoleCalarie.Web.csproj", "{CD085D52-80A4-4106-B7D6-C8737C85CE7E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticoleCalarie.Models", "ArticoleCalarie.Models\ArticoleCalarie.Models.csproj", "{9BDC5DFC-0A6A-4E4C-BB41-A803BFCC45E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArticoleCalarie.Infrastructure", "ArticoleCalarie.Infrastructure\ArticoleCalarie.Infrastructure.csproj", "{70B700E8-A2D3-4713-8347-87168CB81214}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticoleCalarie.Infrastructure", "ArticoleCalarie.Infrastructure\ArticoleCalarie.Infrastructure.csproj", "{70B700E8-A2D3-4713-8347-87168CB81214}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArticoleCalarie.Repository", "ArticoleCalarie.Repository\ArticoleCalarie.Repository.csproj", "{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArticoleCalarie.Logic", "ArticoleCalarie.Logic\ArticoleCalarie.Logic.csproj", "{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CD085D52-80A4-4106-B7D6-C8737C85CE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD085D52-80A4-4106-B7D6-C8737C85CE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD085D52-80A4-4106-B7D6-C8737C85CE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +31,14 @@ Global
 		{70B700E8-A2D3-4713-8347-87168CB81214}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70B700E8-A2D3-4713-8347-87168CB81214}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70B700E8-A2D3-4713-8347-87168CB81214}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
