@@ -52,6 +52,10 @@ namespace ArticoleCalarie.Web
                       "~/Scripts/owl.thumbs.min.js",
                       "~/Scripts/packery.min.js",
                       "~/Scripts/timecircles.js"));
+
+            //custom made scripts
+            bundles.Add(new ScriptBundle("~/bundles/product-add").Include(
+                    "~/Scripts/product-add.js"));
         }
     }
 }

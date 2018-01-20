@@ -97,6 +97,10 @@
     <Compile Include="Migrations\201801190551293_InitialCreate.Designer.cs">
       <DependentUpon>201801190551293_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801200708392_Brand.cs" />
+    <Compile Include="Migrations\201801200708392_Brand.Designer.cs">
+      <DependentUpon>201801200708392_Brand.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\AbstractRepository.cs" />
     <Compile Include="Entities\UserModel.cs" />
@@ -119,6 +123,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801190551293_InitialCreate.resx">
       <DependentUpon>201801190551293_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801200708392_Brand.resx">
+      <DependentUpon>201801200708392_Brand.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

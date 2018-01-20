@@ -23,8 +23,44 @@ namespace ArticoleCalarie.Logic.Logic
         {
             var product = productViewModel.ToDbProduct();
 
+            ConvertPrice(product, productViewModel);
+            StoreImages(product, productViewModel);
+            StoreCategory(product, productViewModel);
+            StoreBrand(product, productViewModel);
+
+            if (!string.IsNullOrEmpty(productViewModel.SizeChartImage))
+            {
+                StoreSizeChart(product, productViewModel);
+            }
+
+            if (!string.IsNullOrEmpty(productViewModel.Colors))
+            {
+                StoreColors(product, productViewModel);
+            }
+
+            product.ProductCode = "a";
+
+            _iProductRepository.Add(product);
+
+            var productId = product.Id;
+        }
+
+        #region Private Methods
+
+        private void StoreImages(Product product, ProductViewModel productViewModel)
+        {
             var images = productViewModel.Images?.Split(',');
 
+            foreach (var image in images)
+            {
+                var imgModel = new Image { FileName = image };
+
+                product.Images.Add(imgModel);
+            }
+        }
+
+        private void ConvertPrice(Product product, ProductViewModel productViewModel)
+        {
             try
             {
                 var price = Convert.ToDecimal(productViewModel.Price);
@@ -35,14 +71,10 @@ namespace ArticoleCalarie.Logic.Logic
             {
                 //log and handle
             }
+        }
 
-            foreach (var image in images)
-            {
-                var imgModel = new Image { FileName = image };
-
-                product.Images.Add(imgModel);
-            }
-
+        private void StoreCategory(Product product, ProductViewModel productViewModel)
+        {
             try
             {
                 var categoryId = Convert.ToInt32(productViewModel.CategoryId);
@@ -55,49 +87,63 @@ namespace ArticoleCalarie.Logic.Logic
 
                 product.Category = newCategory;
             }
-
-            if (!string.IsNullOrEmpty(productViewModel.SizeChartImage))
-            {
-                try
-                {
-                    var sizeChartImageId = Convert.ToInt32(productViewModel.SizeChartImage);
-
-                    product.SizeChartId = sizeChartImageId;
-                }
-                catch (FormatException)
-                {
-                    var newSizeChartImage = new SizeChart { FileName = productViewModel.SizeChartImage };
-
-                    product.SizeChart = newSizeChartImage;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(productViewModel.Colors))
-            {
-                product.AvailableColors = new List<Color>();
-
-                var availableColors = productViewModel.Colors?.Split(',');
-
-                try
-                {
-                    foreach (var colorId in availableColors)
-                    {
-                        var intColorId = Convert.ToInt32(colorId);
-
-                        var color = _iColorRepository.GetById(intColorId);
-
-                        product.AvailableColors.Add(color);
-                    }
-                }
-                catch (Exception)
-                {
-                    //log and handle
-                }
-            }
-
-            product.ProductCode = "a";
-
-            _iProductRepository.Add(product);
         }
+
+        private void StoreBrand(Product product, ProductViewModel productViewModel)
+        {
+            try
+            {
+                var brandId = Convert.ToInt32(productViewModel.Brand);
+
+                product.BrandId = brandId;
+            }
+            catch (FormatException)
+            {
+                var newBrand = new Brand { Name = productViewModel.Brand };
+
+                product.Brand = newBrand;
+            }
+        }
+
+        private void StoreSizeChart(Product product, ProductViewModel productViewModel)
+        {
+            try
+            {
+                var sizeChartImageId = Convert.ToInt32(productViewModel.SizeChartImage);
+
+                product.SizeChartId = sizeChartImageId;
+            }
+            catch (FormatException)
+            {
+                var newSizeChartImage = new SizeChart { FileName = productViewModel.SizeChartImage };
+
+                product.SizeChart = newSizeChartImage;
+            }
+        }
+
+        private void StoreColors(Product product, ProductViewModel productViewModel)
+        {
+            product.AvailableColors = new List<Color>();
+
+            var availableColors = productViewModel.Colors?.Split(',');
+
+            try
+            {
+                foreach (var colorId in availableColors)
+                {
+                    var intColorId = Convert.ToInt32(colorId);
+
+                    var color = _iColorRepository.GetById(intColorId);
+
+                    product.AvailableColors.Add(color);
+                }
+            }
+            catch (Exception)
+            {
+                //log and handle
+            }
+        }
+
+        #endregion
     }
 }

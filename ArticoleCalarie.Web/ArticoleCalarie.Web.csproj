@@ -654,6 +654,7 @@
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\owl.thumbs.min.js" />
     <Content Include="Scripts\packery.min.js" />
+    <Content Include="Scripts\product-add.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\timecircles.js" />

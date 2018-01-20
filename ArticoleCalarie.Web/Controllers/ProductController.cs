@@ -13,12 +13,14 @@ namespace ArticoleCalarie.Web.Controllers
         private IProductLogic _iProductLogic;
         private ISizeChartLogic _iSizeChartLogic;
         private IColorLogic _iColorLogic;
+        private IBrandLogic _iBrandLogic;
 
-        public ProductController(IProductLogic iProductLogic, ISizeChartLogic iSizeChartLogic, IColorLogic iColorLogic)
+        public ProductController(IProductLogic iProductLogic, ISizeChartLogic iSizeChartLogic, IColorLogic iColorLogic, IBrandLogic iBrandLogic)
         {
             _iProductLogic = iProductLogic;
             _iSizeChartLogic = iSizeChartLogic;
             _iColorLogic = iColorLogic;
+            _iBrandLogic = iBrandLogic;
         }
 
         [HttpGet]
@@ -29,17 +31,26 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public JsonResult GetSizeCharts()
         {
             return Json(_iSizeChartLogic.GetAllSizeCharts(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public JsonResult GetColors()
         {
             return Json(_iColorLogic.GetAllColors(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public JsonResult GetBrands(string searchTerm)
+        {
+            var brands = _iBrandLogic.GetAllBrands(searchTerm);
+
+            return Json(brands, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
