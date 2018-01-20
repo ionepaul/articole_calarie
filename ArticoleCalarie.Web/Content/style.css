@@ -87,8 +87,11 @@ body ul {
 }
 
 .my-btn-default {
-    background: #ffffff;
+    background: #324a76;
     border: 1px solid #bbbbbb;
+    color: #ffffff;
+    padding: 9px;
+    border-radius: 0;
 }
 
 .my-btn-default:hover {
@@ -166,7 +169,8 @@ input[type="checkbox"] {
 }
 
 .register-wrapper .fa,
-.connect-row .contact-content:first-of-type .form-wrapper .fa {
+.connect-row .contact-content:first-of-type .form-wrapper .fa,
+.forgot-password .fa {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -3154,7 +3158,7 @@ input {
 .contact-content .register-now {
   text-align: center;
 }
-.contact-content .input-info {
+.input-info {
   width: 100%;
   color: #555;
   font-size: 14px;
