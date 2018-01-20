@@ -40,6 +40,13 @@ body{
 }
 
 /* MY GENERAL CLASSES */
+.form-title {
+    background: #393D40;
+    color: #ffffff;
+    padding: 20px 40px;
+    margin: 0;
+}
+
 body ul {
     list-style: none;
 }
@@ -67,7 +74,7 @@ body ul {
 }
 
 .text-in-lines span {
-    background:#fff; 
+    background:#f2f2f2; 
     padding:0 10px; 
 }
 
@@ -158,7 +165,8 @@ input[type="checkbox"] {
     margin: auto;
 }
 
-.register-wrapper .fa {
+.register-wrapper .fa,
+.connect-row .contact-content:first-of-type .form-wrapper .fa {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -166,14 +174,10 @@ input[type="checkbox"] {
     color: #324a76;
 }
 
-.register-wrapper.contact-content .input-info {
-    padding: 0 30px;
-}
-
 /* DELIVERY ADDRESS */
 .address-details-wrapper {
     background: url(../images/paper.png) top left repeat;
-    padding: 15px;
+    padding: 15px 40px;
     border-radius: 5px;
     position: relative;
     min-height: 300px;
@@ -181,7 +185,7 @@ input[type="checkbox"] {
 
 .address-details-wrapper .delivery-truck {
     position: absolute;
-    right: 15px;
+    left: 15px;
     bottom: 0px;
     opacity: .6;
     width: 100px;
@@ -191,7 +195,7 @@ input[type="checkbox"] {
 .address-details-wrapper .address-details-edit {
     position: absolute;
     bottom: 15px;
-    left: 15px;
+    right: 15px;
     color: #222;
     text-transform: uppercase;
     border: 1px dotted #222;
@@ -658,11 +662,60 @@ input {
 }
 
 /* CONNECT ROW */
+.connect-row {
+    display: flex;
+    justify-content: space-between;
+}
+
 .connect-row .fa-facebook {
     font-size: 15px;
     position: relative;
     top: 1px;
     margin-right: 10px;
+}
+
+.connect-row .contact-content {
+    flex-basis: 45%;
+}
+
+.connect-row .contact-content:first-of-type .form-wrapper {
+    background: 0;
+    border: 1px solid #ccc;
+}
+
+.form-wrapper {
+    background: #f2f2f2;
+    padding: 20px 40px;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.connect-row .register-now a {
+    display: block;
+    background: #324a76;
+    color: #fff;
+    padding: 8px;
+    font-weight: 700;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.connect-row .register-now a:hover {
+    background: #333;
+}
+
+.connect-row .form-section {
+    background: #f2f2f2;
+    padding: 10px 40px;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 1px #FFFFFF inset, 0 1px 1px rgba(34, 25, 25, 0.4);
 }
 
 /*Search form layout1*/
@@ -3105,7 +3158,7 @@ input {
   width: 100%;
   color: #555;
   font-size: 14px;
-  padding: 0 20px;
+  padding: 0 30px;
   border: solid 1px #bbbbbb;
   outline: 0;
   box-shadow: none;
@@ -4181,6 +4234,7 @@ input {
 .footer {
   background-color: #111111;
   clear: both;
+  margin-top: 50px;
 }
 .footer .widget {
   margin-bottom: 0;
@@ -8319,6 +8373,10 @@ input {
     justify-content: center;
 }
 
+.form-wrapper {
+    padding: 20px;
+}
+
 .header.layout1 .main-header .right-content {
     text-align: center;
     flex-basis: 100%;
@@ -8740,12 +8798,20 @@ input {
 @media(max-width: 767px) {
 
 /* GENERAL */
+.footer {
+    margin-top: 0;
+}
+
 .col-sm-6 {
     margin-bottom: 35px;
 }
 
 .col-sm-6:last-of-type {
     margin-bottom: 0;
+}
+
+.form-title {
+    padding: 20px;
 }
 
 .address-details-wrapper .delivery-truck {
@@ -8763,6 +8829,38 @@ input {
 /* REGISTER */
 .register-wrapper {
     width: auto;
+}
+
+/* CONNECT */
+.connect-row {
+    flex-flow: column;
+    padding: 0 15px;
+}
+.connect-row .register-now a,
+.connect-row #Facebook {
+    font-size: 11px;
+}
+
+
+.connect-row .text-right {
+    text-align: left;
+}
+
+.connect-row .form-wrapper .col-sm-6 {
+    margin-bottom: 0;
+}
+
+.connect-row .contact-content {
+    margin-bottom: 35px;
+}
+
+.connect-row .form-wrapper {
+    padding: 35px 20px 20px;
+}
+
+/* livrare address */
+.address-details-wrapper {
+    padding: 15px 20px;
 }
 
 /*HEADER LAYOUT2*/

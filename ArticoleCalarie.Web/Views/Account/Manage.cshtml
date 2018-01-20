@@ -6,9 +6,7 @@
 
 <div class="page-wrapper">
     <div class="col-sm-6">
-        <h4>Addresa de livrare</h4>
-        <hr />
-
+        <h4 class="form-title">Adresa de livrare</h4>
         <div id="deliveryAddressForm" class="contact-content @(Model.DeliveryAddress == null ? "" : "hidden")">
             @using (Html.BeginForm("SaveDeliveryAddress", "Account"))
             {
@@ -45,9 +43,7 @@
     </div>
 
     <div class="col-sm-6">
-        <h4>Adresa de facturare</h4>
-        <hr />
-
+        <h4 class="form-title">Adresa de facturare</h4>
         <div id="billingAddressForm" class="contact-content @(Model.BillingAddress == null ? "" : "hidden")">
             @using (Html.BeginForm("SaveBillingAddress", "Account"))
             {

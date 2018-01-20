@@ -9,44 +9,43 @@
         @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
-            <h3>Înregistrează-te</h3>
-
-            @Html.ValidationSummary("", new { @class = "text-danger" })
-
-
-            <div class="form-group">
-                <div class="col-md-12">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    @Html.TextBoxFor(m => m.FullName, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.FullName) })
+            <h3 class="form-title">Înregistrează-te</h3>
+            <section class="form-wrapper">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.FullName) })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-12">
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Email) })
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Email) })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-12">
-                    <i class="fa fa-lock" aria-hidden="true"></i>
-                    @Html.PasswordFor(m => m.Password, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Password) })
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        @Html.PasswordFor(m => m.Password, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Password) })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-12">
-                    <i class="fa fa-lock" aria-hidden="true"></i>
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.ConfirmPassword) })
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.ConfirmPassword) })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-12">
-                    <input type="submit" style="border: none; width: 100%" class="submit send" value="Confirmă" />
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" style="border: none; width: 100%" class="submit send" value="Confirmă" />
+                    </div>
                 </div>
-            </div>
+            </section>
         }
     </div>
 </div>

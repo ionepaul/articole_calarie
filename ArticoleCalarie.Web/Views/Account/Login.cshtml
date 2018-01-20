@@ -6,10 +6,9 @@
 }
 <div class="page-wrapper">
     <div class="row connect-row">
-        <div class="col-sm-6 contact-content">
-            <h3>@ViewBag.Title</h3>
-            <hr />
-            <section id="loginForm">
+        <div class="login-col contact-content">
+            <h4 class="form-title">@ViewBag.Title</h4>
+            <section class="form-wrapper" id="loginForm">
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                     @Html.AntiForgeryToken()
@@ -17,25 +16,27 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         <div class="col-md-12">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
                             @Html.TextBoxFor(m => m.Email, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Email) })
                             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
                             @Html.PasswordFor(m => m.Password, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Password) })
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-xs-6">
+                        <div class="col-sm-6">
                             <label class="checkbox-container">
                                 @Html.CheckBoxFor(m => m.RememberMe)
                                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox-label" })
                                 <span class="checkbox-checkmark"></span>
                             </label>
                         </div>
-                        <div class="col-xs-6 text-right">
+                        <div class="col-sm-6 text-right">
                             <p>
                                 @Html.ActionLink("Ți-ai uitat parola?", "ForgotPassword")
                             </p>
@@ -50,21 +51,21 @@
                 }
             </section>
         </div>
-        <div class="col-sm-6 contact-content">
-            <h3>Nu ai cont ?</h3>
-            <hr />
-
-            <div id="socialLoginForm">
-                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-            </div>
-            <p class="text-in-lines">
-                <span>sau</span>
-            </p>
-            <div class="form-group">
-                <p class="register-now">
-                    @Html.ActionLink("Înregistrează-te acum", "Register", new { @class = "submit send" })
+        <div class="register-col contact-content">
+            <h4 class="form-title">Nu ai cont ?</h4>
+            <section class="form-wrapper">
+                <div id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </div>
+                <p class="text-in-lines">
+                    <span>sau</span>
                 </p>
-            </div>
+                <div class="form-group">
+                    <p class="register-now">
+                        @Html.ActionLink("Înregistrează-te acum", "Register", new { @class = "submit send" })
+                    </p>
+                </div>
+            </section>
         </div>
     </div>
 </div>
