@@ -14,11 +14,13 @@ namespace ArticoleCalarie.Web.Controllers
     {
         private IProductLogic _iProductLogic;
         private ISizeChartLogic _iSizeChartLogic;
+        private IColorLogic _iColorLogic;
 
-        public ProductController(IProductLogic iProductLogic, ISizeChartLogic iSizeChartLogic)
+        public ProductController(IProductLogic iProductLogic, ISizeChartLogic iSizeChartLogic, IColorLogic iColorLogic)
         {
             _iProductLogic = iProductLogic;
             _iSizeChartLogic = iSizeChartLogic;
+            _iColorLogic = iColorLogic;
         }
 
         [HttpGet]
@@ -33,6 +35,13 @@ namespace ArticoleCalarie.Web.Controllers
         public JsonResult GetSizeCharts()
         {
             return Json(_iSizeChartLogic.GetAllSizeCharts(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        //[Authorize(Roles = "Admin")]
+        public JsonResult GetColors()
+        {
+            return Json(_iColorLogic.GetAllColors(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

@@ -88,6 +88,7 @@
     <Compile Include="IRepository\IAccountRepository.cs" />
     <Compile Include="IRepository\IAddressRepository.cs" />
     <Compile Include="IRepository\ICategoryRepository.cs" />
+    <Compile Include="IRepository\IColorRepository.cs" />
     <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\ISizeChartRepository.cs" />
     <Compile Include="Migrations\201801190551293_InitialCreate.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Repository\AccountRepository.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
+    <Compile Include="Repository\ColorRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\SizeChartRepository.cs" />
   </ItemGroup>

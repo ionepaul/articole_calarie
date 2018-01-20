@@ -42,17 +42,20 @@ namespace ArticoleCalarie.Logic.Logic
                 product.Category = newCategory;
             }
 
-            try
+            if (!string.IsNullOrEmpty(productViewModel.SizeChartImage))
             {
-                var sizeChartImageId = Convert.ToInt32(productViewModel.SizeChartImage);
+                try
+                {
+                    var sizeChartImageId = Convert.ToInt32(productViewModel.SizeChartImage);
 
-                product.SizeChartId = sizeChartImageId;
-            }
-            catch (FormatException)
-            {
-                var newSizeChartImage = new SizeChart { FileName = productViewModel.SizeChartImage };
+                    product.SizeChartId = sizeChartImageId;
+                }
+                catch (FormatException)
+                {
+                    var newSizeChartImage = new SizeChart { FileName = productViewModel.SizeChartImage };
 
-                product.SizeChart = newSizeChartImage;
+                    product.SizeChart = newSizeChartImage;
+                }
             }
 
             product.ProductCode = "a";

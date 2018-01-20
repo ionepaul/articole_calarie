@@ -10,6 +10,10 @@
         z-index: 2;
     }
 
+    .selected {
+        opacity: 0.5;
+    }
+
     #progress-wrp {
         border: 1px solid #0099CC;
         padding: 1px;
@@ -289,7 +293,7 @@
                 console.log(data);
                 if (data && data.length > 0) {
                     $.each(data, function (i, sizeChart) {
-                        $('#sizeChartImgContainer').append('<img src="' + window.location.origin + '/images/products/' + sizeChart.FileName + '" height="200" onclick="selectSizeChart(' + sizeChart.Id + ')"/>');
+                        $('#sizeChartImgContainer').append('<img id="' + i + '"src="' + window.location.origin + '/images/products/' + sizeChart.FileName + '" height="200" onclick="selectSizeChart(' + sizeChart.Id + ')"/>');
                     });
                 }
             },
@@ -302,6 +306,8 @@
     }
 
     function selectSizeChart(sizeChartId) {
-        console.log(sizeChartId);
+        $('#sizeChartImgContainer img').removeClass('selected');
+        $('#sizeChartImgContainer img#' + sizeChartId).addClass('selected');
+        $('#SizeChartImage').val(sizeChartId);
     }
 </script>
