@@ -12,6 +12,7 @@ $(document).ready(function () {
         source: function (request, response) {
             $.getJSON('/Subcategory/GetSubcategories?categoryId=' + selectedCategoryId + '&searchTerm=' + request.term, function (data) {
                 if (data.length == 0) {
+                    console.log(data);
                     $('#SubcategoryId').val(request.term);
                 }
                 response($.map(data, function (item) {
@@ -170,7 +171,7 @@ function loadCategories() {
 
     $('#categories-select').on('change', function () {
         selectedCategoryId = this.value;
-        $('CategoryId').val(selectedCategoryId);
+        $('#CategoryId').val(selectedCategoryId);
     })
 }
 

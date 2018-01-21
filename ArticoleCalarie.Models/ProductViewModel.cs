@@ -40,6 +40,6 @@ namespace ArticoleCalarie.Models
         public string SizeChartImage { get; set; }
 
         [Display(Name = "Reducere (%)")]
-        public int SalePercentage { get; set; }
+        public int? SalePercentage { get; set; }
     }
 }

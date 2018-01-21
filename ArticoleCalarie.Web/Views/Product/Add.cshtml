@@ -159,9 +159,11 @@
     </div>
 
     @Html.HiddenFor(m => m.CategoryId);
+    @Html.HiddenFor(m => m.SubcategoryId);
     @Html.HiddenFor(m => m.Images);
     @Html.HiddenFor(m => m.SizeChartImage);
     @Html.HiddenFor(m => m.Colors);
+    @Html.HiddenFor(m => m.Brand);
 }
 
 @section Scripts {

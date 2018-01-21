@@ -43,9 +43,11 @@ namespace ArticoleCalarie.Logic.Logic
 
             _iProductRepository.Add(product);
 
-            var productCode = GenerateProductCode(product);
+            var savedProduct = _iProductRepository.GetById(product.Id);
 
-            _iProductRepository.UpdateProductCode(product.Id, productCode);
+            var productCode = GenerateProductCode(savedProduct);
+
+            _iProductRepository.UpdateProductCode(savedProduct.Id, productCode);
         }
 
         #region Private Methods
@@ -128,11 +130,11 @@ namespace ArticoleCalarie.Logic.Logic
         {
             product.AvailableColors = new List<Color>();
 
-            var availableColors = productViewModel.Colors?.Split(',');
+            var selectedColors = productViewModel.Colors?.Split(',');
 
             try
             {
-                foreach (var colorId in availableColors)
+                foreach (var colorId in selectedColors)
                 {
                     var intColorId = Convert.ToInt32(colorId);
 
