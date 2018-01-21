@@ -59,6 +59,11 @@ body ul {
     padding: 60px 0;
 }
 
+.page-wrapper-small {
+    width: 500px;
+    margin: auto;
+}
+
 .narrow-container {
     width: 700px;
     margin: auto;
@@ -92,6 +97,10 @@ body ul {
     color: #ffffff;
     padding: 9px;
     border-radius: 0;
+}
+
+.my-btn-default-full-width {
+    width: 100%;
 }
 
 .my-btn-default:hover {
@@ -170,7 +179,8 @@ input[type="checkbox"] {
 
 .register-wrapper .fa,
 .connect-row .contact-content:first-of-type .form-wrapper .fa,
-.forgot-password .fa {
+.forgot-password .fa,
+.reset-password .fa {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -8800,6 +8810,10 @@ input {
 }
 }
 @media(max-width: 767px) {
+
+.page-wrapper-small {
+    width: auto;
+}
 
 /* GENERAL */
 .footer {
