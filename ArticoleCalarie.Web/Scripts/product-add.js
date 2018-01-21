@@ -69,8 +69,8 @@ $(document).ready(function () {
 function previewAndUpload(input, isSizeChart) {
     if (input.files) {
         $.each(input.files, function (i, file) {
-            var formattedFileName = file.name.replace(' ', '').replace('-', '').replace('_', '');
-            var containerId = formattedFileName.replace('.', '');
+            var formattedFileName = file.name.replace(" ", "").replace("-", "").replace("_", "");
+            var containerId = formattedFileName.replace(".", "");
 
             var upload = new Upload(file, isSizeChart);
             upload.doUpload();
@@ -78,15 +78,15 @@ function previewAndUpload(input, isSizeChart) {
             var ImageDir = new FileReader();
             ImageDir.onload = function (e) {
                 if (!isSizeChart) {
-                    $('#imgDirectory').append('<div id="' + containerId + '"></div>');
-                    $('#' + containerId).append('<div id="progress-wrp"><div class="progress-bar"></div><div class="status">0%</div></div>');
-                    $('#' + containerId).append('<img src="' + e.target.result + '" height="100" />');
-                    $('#' + containerId).append('<a onclick="deleteImage(\'' + formattedFileName + '\')">delete image</a>');
+                    $('#imgDirectory').append('<div class="image-wrapper" id="' + containerId + '"></div>');
+                   // $('#' + containerId).append('<div id="progress-wrp"><div class="progress-bar"></div><div class="status">0%</div></div>');
+                    $('#' + containerId).append('<img class="image" src="' + e.target.result + '" height="100" />');
+                    $('#' + containerId).append('<a class="delete-btn" onclick="deleteImage(\'' + formattedFileName + '\')">delete image</a>');
                 } else {
-                    $('#newChartSizeImgContainer').append('<div id="' + containerId + '"></div>');
-                    $('#' + containerId).append('<div id="progress-wrp"><div class="progress-bar"></div><div class="status">0%</div></div>');
-                    $('#' + containerId).append('<img src="' + e.target.result + '" height="100" />');
-                    $('#' + containerId).append('<a onclick="deleteImage(\'' + formattedFileName + '\')">delete image</a>');
+                    $('#newChartSizeImgContainer').append('<div class="image-wrapper" id="' + containerId + '"></div>');
+                    //$('#' + containerId).append('<div id="progress-wrp"><div class="progress-bar"></div><div class="status">0%</div></div>');
+                    $('#' + containerId).append('<img class="image" src="' + e.target.result + '" height="100" />');
+                    $('#' + containerId).append('<a class="delete-btn" onclick="deleteImage(\'' + formattedFileName + '\')">delete image</a>');
                 }
             }
 
@@ -185,7 +185,7 @@ function selectColor(colorName, colorId) {
     let colorIndexInArray = savedColors.indexOf(colorId);
     if (colorIndexInArray >= 0) {
         $(colorName).removeClass('selected');
-        savedColors.slice(colorIndexInArray, 1);
+        savedColors.splice(colorIndexInArray, 1);
     }
     else {
         $(colorName).addClass('selected');
@@ -249,7 +249,7 @@ Upload.prototype.doUpload = function () {
 };
 
 Upload.prototype.progressHandling = function (event) {
-    var percent = 0;
+   /* var percent = 0;
     var position = event.loaded || event.position;
     var total = event.total;
     var progress_bar_id = "#progress-wrp";
@@ -258,5 +258,5 @@ Upload.prototype.progressHandling = function (event) {
     }
     // update progressbars classes so it fits your code
     $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
-    $(progress_bar_id + " .status").text(percent + "%");
+    $(progress_bar_id + " .status").text(percent + "%"); */
 };
