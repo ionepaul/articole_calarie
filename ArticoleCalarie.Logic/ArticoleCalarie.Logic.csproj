@@ -83,18 +83,21 @@
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\ProductConverter.cs" />
     <Compile Include="Converters\SizeChartConverter.cs" />
+    <Compile Include="Converters\SubcategoryConverter.cs" />
     <Compile Include="ILogic\IAccountLogic.cs" />
     <Compile Include="ILogic\IBrandLogic.cs" />
     <Compile Include="ILogic\ICategoryLogic.cs" />
     <Compile Include="ILogic\IColorLogic.cs" />
     <Compile Include="ILogic\IProductLogic.cs" />
     <Compile Include="ILogic\ISizeChartLogic.cs" />
+    <Compile Include="ILogic\ISubcategoryLogic.cs" />
     <Compile Include="Logic\AccountLogic.cs" />
     <Compile Include="Logic\BrandLogic.cs" />
     <Compile Include="Logic\CategoryLogic.cs" />
     <Compile Include="Logic\ColorLogic.cs" />
     <Compile Include="Logic\ProductLogic.cs" />
     <Compile Include="Logic\SizeChartLogic.cs" />
+    <Compile Include="Logic\SubcategoryLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

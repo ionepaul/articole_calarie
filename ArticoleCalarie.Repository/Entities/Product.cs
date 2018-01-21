@@ -23,25 +23,27 @@ namespace ArticoleCalarie.Repository.Entities
         public string Description { get; set; }
 
         [Required]
-        public int CategoryId { get; set; }
-
-        [Required]
         public DateTime DatePosted { get; set; }
 
         [Required]
         public decimal Price { get; set; }
 
-        public int? BrandId { get; set; }
-
         public string MaterialDetails { get; set; }
 
+        public int SalePercentage { get; set; }
+
+        [Required]
+        public int SubcategoryId { get; set; }
+
+        public int? BrandId { get; set; }
+
         public int? SizeChartId { get; set; }
-        
+
         [ForeignKey("SizeChartId")]
         public virtual SizeChart SizeChart { get; set; }
 
-        [ForeignKey("CategoryId")]
-        public virtual Category Category { get; set; }
+        [ForeignKey("SubcategoryId")]
+        public virtual Subcategory Subcategory { get; set; }
 
         [ForeignKey("BrandId")]
         public Brand Brand { get; set; }

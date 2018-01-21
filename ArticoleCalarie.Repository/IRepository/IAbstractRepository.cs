@@ -10,7 +10,8 @@ namespace ArticoleCalarie.Repository.IRepository
         IEnumerable<T> GetAll();
         Task AddAsync(T entity);
         void Add(T entity);
-        Task SaveChanges();
+        Task SaveChangesAsync();
+        void SaveChanges();
         Task Delete(T entity);
     }
 }

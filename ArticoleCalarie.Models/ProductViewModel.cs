@@ -14,7 +14,11 @@ namespace ArticoleCalarie.Models
 
         [Required]
         [Display(Name = "Categorie")]
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
+
+        [Required]
+        [Display(Name = "Subcategorie")]
+        public string SubcategoryId { get; set; }
 
         [Required]
         [Display(Name = "Preț")]
@@ -34,5 +38,8 @@ namespace ArticoleCalarie.Models
 
         [Display(Name = "Tabel de marimi")]
         public string SizeChartImage { get; set; }
+
+        [Display(Name = "Reducere (%)")]
+        public string SalePercentage { get; set; }
     }
 }

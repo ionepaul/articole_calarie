@@ -60,9 +60,14 @@ namespace ArticoleCalarie.Repository.Repository
             return _dbset.AsEnumerable();
         }
 
-        public virtual async Task SaveChanges()
+        public virtual async Task SaveChangesAsync()
         {
             await _ctx.SaveChangesAsync();
+        }
+
+        public virtual void SaveChanges()
+        {
+            _ctx.SaveChanges();
         }
 
         public virtual async Task Delete(T entity)

@@ -25,7 +25,7 @@ namespace ArticoleCalarie.Logic.Logic
 
             ConvertPrice(product, productViewModel);
             StoreImages(product, productViewModel);
-            StoreCategory(product, productViewModel);
+            StoreSubcategory(product, productViewModel);
             StoreBrand(product, productViewModel);
 
             if (!string.IsNullOrEmpty(productViewModel.SizeChartImage))
@@ -38,11 +38,13 @@ namespace ArticoleCalarie.Logic.Logic
                 StoreColors(product, productViewModel);
             }
 
-            product.ProductCode = "a";
+            product.ProductCode = Guid.NewGuid().ToString();
 
             _iProductRepository.Add(product);
 
-            var productId = product.Id;
+            var productCode = GenerateProductCode(product);
+
+            _iProductRepository.UpdateProductCode(product.Id, productCode);
         }
 
         #region Private Methods
@@ -73,19 +75,19 @@ namespace ArticoleCalarie.Logic.Logic
             }
         }
 
-        private void StoreCategory(Product product, ProductViewModel productViewModel)
+        private void StoreSubcategory(Product product, ProductViewModel productViewModel)
         {
             try
             {
-                var categoryId = Convert.ToInt32(productViewModel.CategoryId);
+                var subcategoryId = Convert.ToInt32(productViewModel.SubcategoryId);
 
-                product.CategoryId = categoryId;
+                product.SubcategoryId = subcategoryId;
             }
             catch (FormatException)
             {
-                var newCategory = new Category { Name = productViewModel.CategoryId };
+                var newSubcategory = new Subcategory { Name = productViewModel.SubcategoryId, CategoryId = productViewModel.CategoryId };
 
-                product.Category = newCategory;
+                product.Subcategory = newSubcategory;
             }
         }
 
@@ -142,6 +144,48 @@ namespace ArticoleCalarie.Logic.Logic
             {
                 //log and handle
             }
+        }
+
+        private string GenerateProductCode(Product product)
+        {
+            var productCategory = product.Subcategory.Category.Name.Substring(0, 1).ToUpperInvariant();
+            var productSubcategory = product.Subcategory.Name.Substring(0, 2).ToUpperInvariant();
+            var formattedProductId = FormatProductId(product.Id);
+
+            var productCode = productCategory + productSubcategory + "-" + formattedProductId;
+
+            return productCode;
+        }
+
+        private string FormatProductId(int productId)
+        {
+            var formmatedProductId = string.Empty;
+            var numbers = new List<int>();
+
+            while (productId != 0)
+            {
+                var cif = productId % 10;
+
+                numbers.Add(cif);
+
+                productId = productId / 10;
+            }
+
+            var arrayLength = numbers.Count;
+
+            while (arrayLength != 0) {
+                numbers.Add(0);
+                arrayLength -= 1;
+            }
+
+            numbers.Reverse();
+
+            foreach (var x in numbers)
+            {
+                formmatedProductId += x.ToString();
+            }
+
+            return formmatedProductId;
         }
 
         #endregion

@@ -83,6 +83,7 @@
     <Compile Include="Entities\Image.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\SizeChart.cs" />
+    <Compile Include="Entities\Subcategory.cs" />
     <Compile Include="Enums\AddressType.cs" />
     <Compile Include="Identity\ApplicationSignInManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="IRepository\IColorRepository.cs" />
     <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\ISizeChartRepository.cs" />
+    <Compile Include="IRepository\ISubcategoryRepository.cs" />
     <Compile Include="Migrations\201801190551293_InitialCreate.cs" />
     <Compile Include="Migrations\201801190551293_InitialCreate.Designer.cs">
       <DependentUpon>201801190551293_InitialCreate.cs</DependentUpon>
@@ -113,6 +115,7 @@
     <Compile Include="Repository\ColorRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\SizeChartRepository.cs" />
+    <Compile Include="Repository\SubcategoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

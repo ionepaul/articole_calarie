@@ -5,6 +5,6 @@ namespace ArticoleCalarie.Logic.ILogic
 {
     public interface ICategoryLogic
     {
-        IEnumerable<CategoryViewModel> GetAllCategories(string term = "");
+        IEnumerable<CategoryViewModel> GetAllCategories();
     }
 }
