@@ -51,5 +51,8 @@ namespace ArticoleCalarie.Repository.Entities
         public virtual ICollection<Image> Images { get; set; }
 
         public virtual ICollection<Color> AvailableColors { get; set; }
+
+        [NotMapped]
+        public List<int> ColorIds { get; set; }
     }
 }

@@ -158,6 +158,9 @@ function loadCategories() {
                     $('#categories-select').append('<option value="' + category.Id + '">' + category.Name + '</option>');
                 });
             }
+
+            selectedCategoryId = $('#categories-select option:selected')[0].value;
+            $('#CategoryId').val(selectedCategoryId);
         },
         error: function (error) {
             // handle error
@@ -165,9 +168,6 @@ function loadCategories() {
         async: true,
         timeout: 60000
     });
-
-    selectedCategoryId = $('#categories-select').find(":selected").value;
-    $('#CategoryId').val(selectedCategoryId);
 
     $('#categories-select').on('change', function () {
         selectedCategoryId = this.value;

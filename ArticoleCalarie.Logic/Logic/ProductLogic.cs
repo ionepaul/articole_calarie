@@ -27,7 +27,11 @@ namespace ArticoleCalarie.Logic.Logic
             ConvertPrice(product, productViewModel);
             StoreImages(product, productViewModel);
             StoreSubcategory(product, productViewModel);
-            StoreBrand(product, productViewModel);
+
+            if (!string.IsNullOrEmpty(productViewModel.Brand))
+            {
+                StoreBrand(product, productViewModel);
+            }
 
             if (!string.IsNullOrEmpty(productViewModel.SizeChartImage))
             {
@@ -41,9 +45,9 @@ namespace ArticoleCalarie.Logic.Logic
 
             product.ProductCode = Guid.NewGuid().ToString();
 
-            _iProductRepository.Add(product);
+            _iProductRepository.AddProductToDb(product);
 
-            var savedProduct = _iProductRepository.GetById(product.Id);
+            var savedProduct = _iProductRepository.GetProductById(product.Id);
 
             var productCode = GenerateProductCode(savedProduct);
 
@@ -128,19 +132,17 @@ namespace ArticoleCalarie.Logic.Logic
 
         private void StoreColors(Product product, ProductViewModel productViewModel)
         {
-            product.AvailableColors = new List<Color>();
-
             var selectedColors = productViewModel.Colors?.Split(',');
 
             try
             {
+                product.ColorIds = new List<int>();
+
                 foreach (var colorId in selectedColors)
                 {
                     var intColorId = Convert.ToInt32(colorId);
 
-                    var color = _iColorRepository.GetById(intColorId);
-
-                    product.AvailableColors.Add(color);
+                    product.ColorIds.Add(intColorId);
                 }
             }
             catch (Exception)
@@ -188,11 +190,11 @@ namespace ArticoleCalarie.Logic.Logic
                 productId = productId / 10;
             }
 
-            var arrayLength = numbers.Count;
+            var zeroToAdd = 4 - numbers.Count;
 
-            while (arrayLength != 0) {
+            while (zeroToAdd != 0) {
                 numbers.Add(0);
-                arrayLength -= 1;
+                zeroToAdd -= 1;
             }
 
             numbers.Reverse();

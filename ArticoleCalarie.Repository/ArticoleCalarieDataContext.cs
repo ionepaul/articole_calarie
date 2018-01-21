@@ -6,7 +6,10 @@ namespace ArticoleCalarie.Repository
 {
     public class ArticoleCalarieDataContext : IdentityDbContext<UserModel>
     {
-        public ArticoleCalarieDataContext() : base("ArticoleCalarieDataContext") { }
+        public ArticoleCalarieDataContext() : base("ArticoleCalarieDataContext")
+        {
+            this.Configuration.LazyLoadingEnabled = false;
+        }
 
         public DbSet<Address> Addresses { get; set; }
 

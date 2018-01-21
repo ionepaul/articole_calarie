@@ -95,17 +95,9 @@
     <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\ISizeChartRepository.cs" />
     <Compile Include="IRepository\ISubcategoryRepository.cs" />
-    <Compile Include="Migrations\201801190551293_InitialCreate.cs" />
-    <Compile Include="Migrations\201801190551293_InitialCreate.Designer.cs">
-      <DependentUpon>201801190551293_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801200708392_Brand.cs" />
-    <Compile Include="Migrations\201801200708392_Brand.Designer.cs">
-      <DependentUpon>201801200708392_Brand.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801210718519_Subcategories.cs" />
-    <Compile Include="Migrations\201801210718519_Subcategories.Designer.cs">
-      <DependentUpon>201801210718519_Subcategories.cs</DependentUpon>
+    <Compile Include="Migrations\201801211539562_InitialCreate.cs" />
+    <Compile Include="Migrations\201801211539562_InitialCreate.Designer.cs">
+      <DependentUpon>201801211539562_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\AbstractRepository.cs" />
@@ -128,14 +120,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801190551293_InitialCreate.resx">
-      <DependentUpon>201801190551293_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801200708392_Brand.resx">
-      <DependentUpon>201801200708392_Brand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801210718519_Subcategories.resx">
-      <DependentUpon>201801210718519_Subcategories.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801211539562_InitialCreate.resx">
+      <DependentUpon>201801211539562_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
