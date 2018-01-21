@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ArticoleCalarie.Logic.Converters;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
+using ArticoleCalarie.Models.Constants;
 using ArticoleCalarie.Repository.Entities;
 using ArticoleCalarie.Repository.IRepository;
 
@@ -148,11 +149,25 @@ namespace ArticoleCalarie.Logic.Logic
 
         private string GenerateProductCode(Product product)
         {
-            var productCategory = product.Subcategory.Category.Name.Substring(0, 1).ToUpperInvariant();
-            var productSubcategory = product.Subcategory.Name.Substring(0, 2).ToUpperInvariant();
-            var formattedProductId = FormatProductId(product.Id);
+            var categoryCode = string.Empty;
 
-            var productCode = productCategory + productSubcategory + "-" + formattedProductId;
+            switch (product.Subcategory.Category.Id)
+            {
+                case 1:
+                    categoryCode = ApplicationConstants.HorseCategoryCode;
+                    break;
+                case 2:
+                    categoryCode = ApplicationConstants.RiderCategoryCode;
+                    break;
+                case 3:
+                    categoryCode = ApplicationConstants.StableCategoryCode;
+                    break;
+            }
+
+            var subcategoryCode = product.Subcategory.Name.Substring(0, 2).ToUpperInvariant();
+            var productIdCode = FormatProductId(product.Id);
+
+            var productCode = categoryCode + subcategoryCode + "-" + productIdCode;
 
             return productCode;
         }

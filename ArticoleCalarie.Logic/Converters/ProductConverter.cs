@@ -15,7 +15,7 @@ namespace ArticoleCalarie.Logic.Converters
                 Description = productViewModel.Description,
                 DatePosted = DateTime.UtcNow,
                 MaterialDetails = productViewModel.MaterialDetails,
-                //Brand = productViewModel.Brand,
+                SalePercentage = productViewModel.SalePercentage,
                 Images = new List<Image>()
             };
 

@@ -12,9 +12,11 @@ namespace ArticoleCalarie.Web.Controllers
             _iCategoryLogic = iCategoryLogic;
         }
 
-        public ActionResult GetCategories(string term)
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public JsonResult GetCategories()
         {
-            var categories = _iCategoryLogic.GetAllCategories(term);
+            var categories = _iCategoryLogic.GetAllCategories();
 
             return Json(categories, JsonRequestBehavior.AllowGet);
         }

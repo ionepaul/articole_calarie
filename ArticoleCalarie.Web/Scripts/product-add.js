@@ -1,12 +1,18 @@
 ﻿$(document).ready(function () {
     loadSizeCharts();
     loadColors();
+    loadCategories();
 
-    $("#categoryAutocomplete").autocomplete({
+    //globalVariables
+    var selectedCategoryId;
+    var savedImages = new Array();
+    var savedColors = new Array();
+
+    $("#subcategory-autocomplete").autocomplete({
         source: function (request, response) {
-            $.getJSON('/Category/GetCategories?term=' + request.term, function (data) {
+            $.getJSON('/Subcategory/GetSubcategories?categoryId=' + selectedCategoryId + '&searchTerm=' + request.term, function (data) {
                 if (data.length == 0) {
-                    $('#CategoryId').val(request.term);
+                    $('#SubcategoryId').val(request.term);
                 }
                 response($.map(data, function (item) {
                     return {
@@ -26,11 +32,11 @@
             event.preventDefault();
             var categoryName = ui.item.label;
             $(this).val(categoryName);
-            $('#CategoryId').val(ui.item.value);
+            $('#SubcategoryId').val(ui.item.value);
         }
     });
 
-    $("#brandAutocomplete").autocomplete({
+    $("#brand-autocomplete").autocomplete({
         source: function (request, response) {
             $.getJSON('/Product/GetBrands?searchTerm=' + request.term, function (data) {
                 if (data.length == 0) {
@@ -88,9 +94,102 @@ function previewAndUpload(input, isSizeChart) {
     }
 }
 
-var savedImages = new Array();
-var savedColors = new Array();
+function deleteImage(fileName) {
+    $.ajax({
+        type: "POST",
+        url: "DeleteImage?filename=" + fileName,
+        success: function () {
+            $('#' + fileName.replace('.', '')).remove();
+        },
+        error: function (error) {
+            // handle error
+        },
+        async: true,
+        timeout: 60000
+    });
+}
 
+function loadSizeCharts() {
+    $.ajax({
+        type: "GET",
+        url: "GetSizeCharts",
+        success: function (data) {
+            if (data && data.length > 0) {
+                $.each(data, function (i, sizeChart) {
+                    $('#sizeChartImgContainer').append('<img id="' + i + '" src="' + window.location.origin + '/images/products/' + sizeChart.FileName + '" height="200" onclick="selectSizeChart(' + sizeChart.Id + ')"/>');
+                });
+            }
+        },
+        error: function (error) {
+            // handle error
+        },
+        async: true,
+        timeout: 60000
+    });
+}
+
+function loadColors() {
+    $.ajax({
+        type: "GET",
+        url: "GetColors",
+        success: function (data) {
+            if (data && data.length > 0) {
+                $.each(data, function (i, color) {
+                    $('#colors-list').append('<li id="' + color.Name + '" style="background-color:' + color.Hex + '" onclick="selectColor(' + color.Name + ',' + color.Id + ')"/>');
+                });
+            }
+        },
+        error: function (error) {
+            // handle error
+        },
+        async: true,
+        timeout: 60000
+    });
+}
+
+function loadCategories() {
+    $.ajax({
+        type: "GET",
+        url: "../Category/GetCategories",
+        success: function (data) {
+            if (data && data.length > 0) {
+                $.each(data, function (i, category) {
+                    $('#categories-select').append('<option value="' + category.Id + '">' + category.Name + '</option>');
+                });
+            }
+        },
+        error: function (error) {
+            // handle error
+        },
+        async: true,
+        timeout: 60000
+    });
+
+    $('#categories-select').on('change', function () {
+        selectedCategoryId = $(this).value;
+    })
+}
+
+function selectSizeChart(sizeChartId) {
+    $('#sizeChartImgContainer img').removeClass('selected');
+    $('#sizeChartImgContainer img#' + sizeChartId).addClass('selected');
+    $('#SizeChartImage').val(sizeChartId);
+}
+
+function selectColor(colorName, colorId) {
+    let colorIndexInArray = savedColors.indexOf(colorId);
+    if (colorIndexInArray >= 0) {
+        $(colorName).removeClass('selected');
+        savedColors.slice(colorIndexInArray, 1);
+    }
+    else {
+        $(colorName).addClass('selected');
+        savedColors.push(colorId);
+    }
+    $('#Colors').val(savedColors);
+}
+
+//Uploading object 
 var Upload = function (file, isSizeChart) {
     this.file = file;
     this.isSizeChart = isSizeChart;
@@ -156,75 +255,3 @@ Upload.prototype.progressHandling = function (event) {
     $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
     $(progress_bar_id + " .status").text(percent + "%");
 };
-
-function deleteImage(fileName) {
-    $.ajax({
-        type: "POST",
-        url: "DeleteImage?filename=" + fileName,
-        success: function () {
-            $('#' + fileName.replace('.', '')).remove();
-        },
-        error: function (error) {
-            // handle error
-        },
-        async: true,
-        timeout: 60000
-    });
-}
-
-function loadSizeCharts() {
-    $.ajax({
-        type: "GET",
-        url: "GetSizeCharts",
-        success: function (data) {
-            if (data && data.length > 0) {
-                $.each(data, function (i, sizeChart) {
-                    $('#sizeChartImgContainer').append('<img id="' + i + '" src="' + window.location.origin + '/images/products/' + sizeChart.FileName + '" height="200" onclick="selectSizeChart(' + sizeChart.Id + ')"/>');
-                });
-            }
-        },
-        error: function (error) {
-            // handle error
-        },
-        async: true,
-        timeout: 60000
-    });
-}
-
-function loadColors() {
-    $.ajax({
-        type: "GET",
-        url: "GetColors",
-        success: function (data) {
-            if (data && data.length > 0) {
-                $.each(data, function (i, color) {
-                    $('#colors-list').append('<li id="' + color.Name + '" style="background-color:' + color.Hex + '" onclick="selectColor(' + color.Name + ',' + color.Id + ')"/>');
-                });
-            }
-        },
-        error: function (error) {
-            // handle error
-        },
-        async: true,
-        timeout: 60000
-    });
-}
-
-function selectSizeChart(sizeChartId) {
-    $('#sizeChartImgContainer img').removeClass('selected');
-    $('#sizeChartImgContainer img#' + sizeChartId).addClass('selected');
-    $('#SizeChartImage').val(sizeChartId);
-}
-
-function selectColor(colorName, colorId) {
-    let colorIndexInArray = savedColors.indexOf(colorId);
-    if (colorIndexInArray >= 0) {
-        $(colorName).removeClass('selected');
-        savedColors.slice(colorIndexInArray, 1);
-    }
-    else {
-        $(colorName).addClass('selected');
-        savedColors.push(colorId);
-    }
-    $('#Colors').val(savedColors);
-}

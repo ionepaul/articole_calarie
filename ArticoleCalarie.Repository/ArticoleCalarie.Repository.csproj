@@ -103,6 +103,10 @@
     <Compile Include="Migrations\201801200708392_Brand.Designer.cs">
       <DependentUpon>201801200708392_Brand.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801210718519_Subcategories.cs" />
+    <Compile Include="Migrations\201801210718519_Subcategories.Designer.cs">
+      <DependentUpon>201801210718519_Subcategories.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\AbstractRepository.cs" />
     <Compile Include="Entities\UserModel.cs" />
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801200708392_Brand.resx">
       <DependentUpon>201801200708392_Brand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801210718519_Subcategories.resx">
+      <DependentUpon>201801210718519_Subcategories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
