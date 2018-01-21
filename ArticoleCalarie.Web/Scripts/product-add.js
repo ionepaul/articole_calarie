@@ -1,12 +1,12 @@
-﻿$(document).ready(function () {
+﻿//globalVariables
+var selectedCategoryId;
+var savedImages = new Array();
+var savedColors = new Array();
+
+$(document).ready(function () {
     loadSizeCharts();
     loadColors();
     loadCategories();
-
-    //globalVariables
-    var selectedCategoryId;
-    var savedImages = new Array();
-    var savedColors = new Array();
 
     $("#subcategory-autocomplete").autocomplete({
         source: function (request, response) {
@@ -165,8 +165,12 @@ function loadCategories() {
         timeout: 60000
     });
 
+    selectedCategoryId = $('#categories-select').find(":selected").value;
+    $('#CategoryId').val(selectedCategoryId);
+
     $('#categories-select').on('change', function () {
-        selectedCategoryId = $(this).value;
+        selectedCategoryId = this.value;
+        $('CategoryId').val(selectedCategoryId);
     })
 }
 
