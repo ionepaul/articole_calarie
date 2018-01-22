@@ -39,6 +39,176 @@ body{
   line-height: 24px;
 }
 
+.form-control {
+    border-radius: 0;
+}
+
+.form-flex-wrapper label {
+    display: block;
+    width: 100%;
+}
+
+.add-product-form .form-flex-column {
+    flex-basis: 48%;
+}
+
+.form-horizontal.add-product-form .control-label {
+    text-align: left;
+}
+
+.add-product-form {
+    width: 700px;
+    margin: auto;
+}
+
+.form-flex-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-product-form textarea {
+    height: 200px;
+    width: 100%;
+    overflow-y: auto;
+    padding: 10px 20px;
+}
+
+.add-product-form select {
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.add-product-form input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.add-product-form .choose-files {
+    border: 2px solid #393D40;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.add-product-form #imgDirectory {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.add-product-form .image-wrapper {
+    display: flex;
+    flex-flow: column;
+    flex-basis: 23%;
+    margin: 5px;
+    border: 1px solid #cccccc;
+}
+
+.add-product-form .image-wrapper  .image {
+    height: 150px;
+    width: auto;
+}
+
+#newChartSizeImgContainer .image {
+    height: auto;
+}
+
+.add-product-form .image-wrapper .delete-btn {
+    background: #324a76;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    padding: 2px;
+    font-size: 11px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.add-product-form .create {
+    width: 100%;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+#sizeChartImgContainer {
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 200px;
+    white-space: nowrap;
+    margin-bottom: 20px;
+}
+
+#sizeChartImgContainer img {
+    display: inline-block;
+    margin: 5px;
+    height: 200px;
+}
+
+#newChartSizeImgContainer {
+    margin-top: 20px;
+}
+
+.ui-autocomplete {
+    background: #ffffff;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.ui-menu .ui-menu-item a {
+    display: block;
+    border-bottom: 1px solid #000;
+    padding-bottom: 4px;
+}
+
+.ui-menu .ui-menu-item:hover,
+.ui-menu .ui-menu-item a:hover {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+ul#colors-list li {
+    height: 45px;
+    width: 45px;
+    border-radius: 100%;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+}
+
+ul#colors-list li.selected {
+    opacity: 0.5;
+}
+
+ul#colors-list li.selected::after {
+    content: "\2713";
+    color: grey;
+    font-size: 24px;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+.ui-menu .ui-menu-item a:hover {
+    background: red;
+}
+
+.ui-menu .ui-menu-item a:last-of-type {
+    border-bottom: 0;
+}
+
+.ui-menu .ui-menu-item:hover {
+    padding: 0;
+}
+
+
 /* MY GENERAL CLASSES */
 .form-title {
     background: #393D40;
