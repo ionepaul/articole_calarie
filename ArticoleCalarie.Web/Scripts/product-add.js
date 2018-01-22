@@ -69,9 +69,9 @@ $(document).ready(function () {
 function previewAndUpload(input, isSizeChart) {
     if (input.files) {
         $.each(input.files, function (i, file) {
-            var formattedFileName = file.name.replace(" ", "").replace("-", "").replace("_", "");
-            var containerId = formattedFileName.replace(".", "");
-
+            var formattedFileName = file.name.replace(/\s/g, '').replace(/-/g, '').replace(/_/g, '').replace(/\(/g, '').replace(/\)/g, '');
+            var containerId = formattedFileName.replace('.', '');
+            console.log(containerId);
             var upload = new Upload(file, isSizeChart);
             upload.doUpload();
 
@@ -83,6 +83,7 @@ function previewAndUpload(input, isSizeChart) {
                     $('#' + containerId).append('<img class="image" src="' + e.target.result + '" height="100" />');
                     $('#' + containerId).append('<a class="delete-btn" onclick="deleteImage(\'' + formattedFileName + '\')">delete image</a>');
                 } else {
+                    $('#newChartSizeImgContainer').empty();
                     $('#newChartSizeImgContainer').append('<div class="image-wrapper" id="' + containerId + '"></div>');
                     //$('#' + containerId).append('<div id="progress-wrp"><div class="progress-bar"></div><div class="status">0%</div></div>');
                     $('#' + containerId).append('<img class="image" src="' + e.target.result + '" height="100" />');
@@ -95,11 +96,27 @@ function previewAndUpload(input, isSizeChart) {
     }
 }
 
-function deleteImage(fileName) {
+function clearFileInput(input) {
+    input.value = null;
+}
+
+function deleteImage(fileName, isSizeChart) {
     $.ajax({
         type: "POST",
         url: "DeleteImage?filename=" + fileName,
         success: function () {
+            if (!isSizeChart) {
+                let arrayIndex = savedImages.indexOf(fileName);
+                if (arrayIndex >= 0) {
+                    savedImages.splice(arrayIndex, 1);
+                }
+
+                $('#Images').val(savedImages);
+            }
+            else {
+                $('#SizeChartImage').val("");
+            }
+
             $('#' + fileName.replace('.', '')).remove();
         },
         error: function (error) {
@@ -117,7 +134,9 @@ function loadSizeCharts() {
         success: function (data) {
             if (data && data.length > 0) {
                 $.each(data, function (i, sizeChart) {
-                    $('#sizeChartImgContainer').append('<img id="' + i + '" src="' + window.location.origin + '/images/products/' + sizeChart.FileName + '" height="200" onclick="selectSizeChart(' + sizeChart.Id + ')"/>');
+                    var formattedSizeChartName = sizeChart.FileName.replace('.', '');
+
+                    $('#sizeChartImgContainer').append('<img id="' + formattedSizeChartName + '" src="' + window.location.origin + '/images/products/' + sizeChart.FileName + '" height="200" onclick="selectSizeChart(' + formattedSizeChartName + ',' + sizeChart.Id + ')"/>');
                 });
             }
         },
@@ -175,9 +194,9 @@ function loadCategories() {
     })
 }
 
-function selectSizeChart(sizeChartId) {
+function selectSizeChart(sizeChart, sizeChartId) {
     $('#sizeChartImgContainer img').removeClass('selected');
-    $('#sizeChartImgContainer img#' + sizeChartId).addClass('selected');
+    $(sizeChart).addClass('selected');
     $('#SizeChartImage').val(sizeChartId);
 }
 

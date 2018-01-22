@@ -91,17 +91,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-12">Images</label>
+                    @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-sm-12" })
                     <div class="col-sm-12">
-                        <label class="choose-files" for="file-1"><i class="fa fa-upload" aria-hidden="true"></i> Choose files</label>
-                        <input id="file-1" type="file" multiple onchange="previewAndUpload(this, false)" />
+                        <label class="choose-files" for="file-1"><i class="fa fa-upload" aria-hidden="true"></i> Încarcă imagini</label>
+                        <input id="file-1" type="file" multiple onclick="clearFileInput(this)" onchange="previewAndUpload(this, false)" />
                         <div id="imgDirectory">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-12">Size Chart</label>
+                    @Html.LabelFor(model => model.SizeChartImage, htmlAttributes: new { @class = "control-label col-sm-12" })
                     <div class="col-sm-12">
                         <div class="size-new-wrapper">
                             <div id="sizeChartImgContainer"></div>
@@ -109,21 +109,21 @@
                         <p class="text-in-lines">
                             <span>sau</span>
                         </p>
-                        <label class="choose-files" for="file-2"><i class="fa fa-upload" aria-hidden="true"></i> Choose Files</label>
+                        <label class="choose-files" for="file-2"><i class="fa fa-upload" aria-hidden="true"></i> Încarcă tabel de mărimi</label>
                         <div id="newChartSizeImgContainer">
                         </div>
-                        <input id="file-2" type="file" onchange="previewAndUpload(this, true)" />
+                        <input id="file-2" type="file" onclick="clearFileInput(this)" onchange="previewAndUpload(this, true)" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-12">Colors</label>
+                    @Html.LabelFor(model => model.Colors, htmlAttributes: new { @class = "control-label col-sm-12" })
                     <div class="col-sm-12">
                         <ul id="colors-list"></ul>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Create" class="create btn my-btn-default" />
+                    <input type="submit" value="Adaugă" class="create btn my-btn-default" />
                 </div>
             </div>
         </section>

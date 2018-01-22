@@ -32,6 +32,15 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
+        public ActionResult List()
+        {
+            var products = _iProductLogic.GetProductsList();
+
+            return View(products);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public JsonResult GetSizeCharts()
         {
             return Json(_iSizeChartLogic.GetAllSizeCharts(), JsonRequestBehavior.AllowGet);
@@ -66,7 +75,7 @@ namespace ArticoleCalarie.Web.Controllers
             //catch exceptions log
             _iProductLogic.AddProduct(productViewModel);
 
-            return View();
+            return RedirectToAction(nameof(List));
         }
 
         [HttpPost]
@@ -77,7 +86,7 @@ namespace ArticoleCalarie.Web.Controllers
                 try
                 {
                     var fileName = Path.GetFileName(file.FileName);
-                    var formattedFileName = fileName.Replace(" ", "").Replace("-", "").Replace("_", "");
+                    var formattedFileName = fileName.Replace(" ", "").Replace("-", "").Replace("_", "").Replace("(", "").Replace(")", "");
                     var serverPath = Server.MapPath(ConfigurationManager.AppSettings["ProductsImagesFolder"]);
                     var path = Path.Combine(serverPath, formattedFileName);
                     file.SaveAs(path);

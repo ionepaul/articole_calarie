@@ -38,6 +38,13 @@ namespace ArticoleCalarie.Repository.Repository
             return product;
         }
 
+        public IEnumerable<Product> GetProducts()
+        {
+            var products = _dbset.Include(x => x.Subcategory).Include(x => x.Brand).AsEnumerable();
+
+            return products;
+        }
+
         public void UpdateProductCode(int productId, string productCode)
         {
             var product = _dbset.Find(productId);

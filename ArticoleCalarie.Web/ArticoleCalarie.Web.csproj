@@ -690,6 +690,7 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\_AddressFormPartial.cshtml" />
     <Content Include="Views\Product\Add.cshtml" />
+    <Content Include="Views\Product\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

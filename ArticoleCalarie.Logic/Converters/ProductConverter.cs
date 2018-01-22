@@ -21,5 +21,21 @@ namespace ArticoleCalarie.Logic.Converters
 
             return product;
         }
+
+        public static ProductListItemModel ToListItemModel(this Product product)
+        {
+            var productListItemModel = new ProductListItemModel
+            {
+                ProductCode = product.ProductCode,
+                ProductName = product.ProductName,
+                SubcategoryName = product.Subcategory.Name,
+                Brand = product.Brand.Name,
+                Price = product.Price,
+                SalePercentage = product.SalePercentage.ToString() + "%"
+                   
+            };
+
+            return productListItemModel;
+        }
     }
 }

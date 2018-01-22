@@ -6,10 +6,11 @@
         {
             @Html.AntiForgeryToken()
             <li class="menu-item-has-children account">
-            @Html.ActionLink("Salut, " + User.Identity.GetUserName() + "!", "Account", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style = "color: #000" })
+            @Html.ActionLink("Salut, " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage", style = "color: #000" })
             <ul class="submenu">
                 <li>@Html.ActionLink("Adaugă produs", "Add", "Product", routeValues: null, htmlAttributes: new { title = "Adaugă produs" })</li>
-                <li>@Html.ActionLink("Vezi comenzi", "Index", "Orders", routeValues: null, htmlAttributes: new { title = "Vezi comenzi" })</li>
+                <li>@Html.ActionLink("Listă produse", "List", "Product", routeValues: null, htmlAttributes: new { title = "Adaugă produs" })</li>
+                @*<li>@Html.ActionLink("Vezi comenzi", "Index", "Orders", routeValues: null, htmlAttributes: new { title = "Vezi comenzi" })</li>*@
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
             </ul>
         </li>

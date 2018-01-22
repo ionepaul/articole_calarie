@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ArticoleCalarie.Logic.Converters;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
@@ -52,6 +53,13 @@ namespace ArticoleCalarie.Logic.Logic
             var productCode = GenerateProductCode(savedProduct);
 
             _iProductRepository.UpdateProductCode(savedProduct.Id, productCode);
+        }
+
+        public IEnumerable<ProductListItemModel> GetProductsList()
+        {
+            var products = _iProductRepository.GetProducts();
+
+            return products.Select(x => x.ToListItemModel());
         }
 
         #region Private Methods

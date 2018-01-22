@@ -1,4 +1,5 @@
-﻿using ArticoleCalarie.Repository.Entities;
+﻿using System.Collections.Generic;
+using ArticoleCalarie.Repository.Entities;
 
 namespace ArticoleCalarie.Repository.IRepository
 {
@@ -7,5 +8,6 @@ namespace ArticoleCalarie.Repository.IRepository
         Product GetProductById(int productId);
         void UpdateProductCode(int productId, string productCode);
         void AddProductToDb(Product product);
+        IEnumerable<Product> GetProducts();
     }
 }

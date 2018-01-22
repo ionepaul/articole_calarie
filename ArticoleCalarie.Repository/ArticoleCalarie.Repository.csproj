@@ -95,9 +95,9 @@
     <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\ISizeChartRepository.cs" />
     <Compile Include="IRepository\ISubcategoryRepository.cs" />
-    <Compile Include="Migrations\201801211539562_InitialCreate.cs" />
-    <Compile Include="Migrations\201801211539562_InitialCreate.Designer.cs">
-      <DependentUpon>201801211539562_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201801220619458_InitialCreate.cs" />
+    <Compile Include="Migrations\201801220619458_InitialCreate.Designer.cs">
+      <DependentUpon>201801220619458_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\AbstractRepository.cs" />
@@ -120,8 +120,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801211539562_InitialCreate.resx">
-      <DependentUpon>201801211539562_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801220619458_InitialCreate.resx">
+      <DependentUpon>201801220619458_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

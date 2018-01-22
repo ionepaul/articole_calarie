@@ -109,7 +109,7 @@ body{
 }
 
 .add-product-form .image-wrapper  .image {
-    height: 150px;
+    height: auto;
     width: auto;
 }
 
@@ -180,11 +180,13 @@ ul#colors-list li {
     position: relative;
 }
 
-ul#colors-list li.selected {
+ul#colors-list li.selected,
+#sizeChartImgContainer img.selected {
     opacity: 0.5;
 }
 
-ul#colors-list li.selected::after {
+ul#colors-list li.selected::after,
+#sizeChartImgContainer img.selected::after {
     content: "\2713";
     color: grey;
     font-size: 24px;
@@ -208,14 +210,31 @@ ul#colors-list li.selected::after {
     padding: 0;
 }
 
-
-/* MY GENERAL CLASSES */
-.form-title {
-    background: #393D40;
-    color: #ffffff;
-    padding: 20px 40px;
-    margin: 0;
+.product-list-header {
+    position: relative;
+    margin-bottom: 20px;
 }
+
+    .product-list-header .product-list-add-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+        .product-list-header .product-list-add-btn .my-btn-default {
+            padding: 23px;
+            border: none;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+    /* MY GENERAL CLASSES */
+    .form-title {
+        background: #393D40;
+        color: #ffffff;
+        padding: 20px 40px;
+        margin: 0;
+    }
 
 body ul {
     list-style: none;
@@ -359,6 +378,10 @@ input[type="checkbox"] {
 }
 
 /* DELIVERY ADDRESS */
+#deliveryAddressForm form,
+#billingAddressForm form {
+    margin-top: 20px;
+}
 .address-details-wrapper {
     background: url(../images/paper.png) top left repeat;
     padding: 15px 40px;
