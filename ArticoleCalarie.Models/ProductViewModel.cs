@@ -41,5 +41,8 @@ namespace ArticoleCalarie.Models
 
         [Display(Name = "Reducere (%)")]
         public int? SalePercentage { get; set; }
+
+        [Display(Name = "Mărimi")]
+        public string Size { get; set; }
     }
 }

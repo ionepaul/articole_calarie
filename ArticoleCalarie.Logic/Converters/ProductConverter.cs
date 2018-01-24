@@ -16,6 +16,8 @@ namespace ArticoleCalarie.Logic.Converters
                 DatePosted = DateTime.UtcNow,
                 MaterialDetails = productViewModel.MaterialDetails,
                 SalePercentage = productViewModel.SalePercentage ?? 0,
+                Size = productViewModel.Size,
+                ColorIds = new List<int>(),
                 Images = new List<Image>()
             };
 
@@ -29,7 +31,7 @@ namespace ArticoleCalarie.Logic.Converters
                 ProductCode = product.ProductCode,
                 ProductName = product.ProductName,
                 SubcategoryName = product.Subcategory.Name,
-                Brand = product.Brand.Name,
+                Brand = product.Brand?.Name,
                 Price = product.Price,
                 SalePercentage = product.SalePercentage.ToString() + "%"
                    

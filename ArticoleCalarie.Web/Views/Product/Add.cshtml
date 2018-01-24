@@ -30,21 +30,35 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-sm-12" })
-                    <div class="col-sm-12">
-                        <select id="categories-select"></select>
-                        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
                 <div class="form-flex-wrapper">
+                    <div class="form-flex-column">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-sm-12" })
+                            <div class="col-sm-12">
+                                <select id="categories-select"></select>
+                                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-flex-column">
                         <div class="form-group">
                             @Html.LabelFor(model => model.SubcategoryId, htmlAttributes: new { @class = "control-label col-sm-12" })
                             <div class="col-sm-12">
                                 <input id="subcategory-autocomplete" type="text" class="input-info" />
                                 @Html.ValidationMessageFor(model => model.SubcategoryId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-flex-wrapper">
+                    <div class="form-flex-column">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label col-sm-12" })
+                            <div class="col-sm-12">
+                                @Html.EditorFor(model => model.Size, new { htmlAttributes = new { @class = "input-info form-control" } })
+                                @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

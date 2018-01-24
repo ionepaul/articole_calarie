@@ -35,6 +35,8 @@ namespace ArticoleCalarie.Repository.Entities
         [Required]
         public int SubcategoryId { get; set; }
 
+        public string Size { get; set; }
+
         public int? BrandId { get; set; }
 
         public int? SizeChartId { get; set; }

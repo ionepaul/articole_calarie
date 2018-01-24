@@ -144,8 +144,6 @@ namespace ArticoleCalarie.Logic.Logic
 
             try
             {
-                product.ColorIds = new List<int>();
-
                 foreach (var colorId in selectedColors)
                 {
                     var intColorId = Convert.ToInt32(colorId);
