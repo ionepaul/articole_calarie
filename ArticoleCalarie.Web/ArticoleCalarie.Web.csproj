@@ -338,6 +338,7 @@
     <Content Include="Views\Account\_AddressFormPartial.cshtml" />
     <Content Include="Views\Product\Add.cshtml" />
     <Content Include="Views\Product\List.cshtml" />
+    <Content Include="Views\Product\ProductViewList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -382,7 +383,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49909</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61909/</IISUrl>
+          <IISUrl>http://localhost:61911/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

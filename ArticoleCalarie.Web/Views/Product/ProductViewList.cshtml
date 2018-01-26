@@ -1,0 +1,150 @@
+﻿@model ArticoleCalarie.Models.ProductSearchViewResult
+
+@{
+    ViewBag.Title = "Produse";
+}
+
+<div class="main-content grid-category-page inner-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 right-content">
+                <div class="auto-clear">
+                    <div class="top-control box-has-content">
+                        <div class="breadcrumbs">
+                            <a href="#">Home</a> / <span class="current">Shop</span>
+                        </div>
+                        <div class="control">
+                            <span class="title">1–9 din @Model.TotalCount rezultate</span>
+                        </div>
+                    </div>
+                    <div class="row product-grid">
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="col-ss-12 col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                                <div class="product-item layout1">
+                                    <div class="product-inner">
+                                        <div class="thumb">
+                                            @if (product.IsNew && product.IsOnSale)
+                                            {
+                                                <div class="group-flash">
+                                                    <span class="flash new">nou</span>
+                                                    <span class="flash sale">-@product.SalePercentage%</span>
+                                                </div>
+                                            }
+                                            else if (product.IsOnSale)
+                                            {
+                                                <div class="group-flash">
+                                                    <span class="flash sale">-@product.SalePercentage%</span>
+                                                </div>
+                                            }
+                                            else if (product.IsNew)
+                                            {
+                                                <div class="group-flash">
+                                                    <span class="flash new">nou</span>
+                                                </div>
+                                            }
+                                            <div class="group-button">
+                                               @* <a href="#" class="wishlist-button"></a>*@
+                                                <a href="#" class="compare-button"></a>
+                                                <a href="#" class="quickview-button"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> Quick View</a>
+                                            </div>
+                                            <a href="#"><img src="~/images/products/@product.ProductImageName" alt=""></a>
+                                        </div>
+                                        <div class="info">
+                                            <a href="#" class="product-name">@product.ProductName</a>
+                                            <a href="#" class="add-to-cart">+ ADD TO CART</a>
+                                            <div class="price">
+                                                @if (product.IsOnSale)
+                                                {
+                                                    <span class="del">@product.Price </span>
+                                                    <span class="ins">@product.PriceAfterSaleApplied RON</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="ins">@product.Price RON</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="pagination">
+                    <ul class="list-page">
+                        <li><a href="#" class="page-number prev">Previous</a></li>
+                        <li><a href="#" class="page-number">1</a></li>
+                        <li><a href="#" class="page-number">2</a></li>
+                        <li><a href="#" class="page-number current">3</a></li>
+                        <li><a href="#" class="page-number">4</a></li>
+                        <li><a href="#" class="page-number">5</a></li>
+                        <li><a href="#" class="page-number">6</a></li>
+                        <li><a href="#" class="page-number next">Next</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 left-sidebar">
+                <div class="widget widget_product_categories">
+                    <h3 class="widgettitle">Cateogrii</h3>
+                    <ul class="product-categories">
+                        <li><a href="#">New Arrivals</a></li>
+                        <li class="menu-item-has-children"><a href="#">Clothing</a></li>
+                        <li><a href="#">Shoes</a></li>
+                        <li><a href="#">Bags</a></li>
+                        <li><a href="#">Grooming</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="widget widget_filter_price box-has-content">
+                    <h3 class="widgettitle">Preţ</h3>
+                    <div class="price-filter">
+                        <div data-label-reasult="price:" data-min="75" data-max="450" data-unit="$" class="slider-range-price " data-value-min="75" data-value-max="250"></div>
+                        <div class="amount-range-price">Price: <span class="from">$75</span> - <span class="to">$250</span></div>
+                        <a href="#" class="filter">Filter</a>
+                    </div>
+                </div>
+                <div class="widget widget_filter_color">
+                    <h3 class="widgettitle">Culori</h3>
+                    <ul class="list-color">
+                        <li><a href="#" class="red"></a></li>
+                        <li><a href="#" class="gray"></a></li>
+                        <li class="current"><a href="#" class="blue-0"></a></li>
+                        <li><a href="#" class="orange"></a></li>
+                        <li><a href="#" class="blue-1"></a></li>
+                        <li><a href="#" class="black"></a></li>
+                        <li><a href="#" class="green"></a></li>
+                    </ul>
+                </div>
+                <div class="widget widget_filter_size">
+                    <h3 class="widgettitle">Mărime</h3>
+                    <ul class="list-size">
+                        <li><a href="#">S<span class="count">(12)</span></a></li>
+                        <li><a href="#">M<span class="count">(34)</span></a></li>
+                        <li><a href="#">L<span class="count">(21)</span></a></li>
+                        <li><a href="#">xl<span class="count">(52)</span></a></li>
+                        <li><a href="#">XXL<span class="count">(16)</span></a></li>
+                    </ul>
+                </div>
+                <div class="widget widget_tags">
+                    <h3 class="widgettitle">TAGS</h3>
+                    <ul class="list-tags">
+                        <li><a href="#">Clothing</a></li>
+                        <li><a href="#">Fashion</a></li>
+                        <li><a href="#">T-Shirt</a></li>
+                        <li><a href="#">Beautiful</a></li>
+                        <li><a href="#">Shoes & Boots</a></li>
+                        <li><a href="#">Blue</a></li>
+                        <li><a href="#">Sweaters</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Hats</a></li>
+                        <li><a href="#">Denims</a></li>
+                        <li><a href="#">Clearances</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

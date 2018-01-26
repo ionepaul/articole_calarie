@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using ArticoleCalarie.Repository.Entities;
 using ArticoleCalarie.Repository.IRepository;
+using ArticoleCalarie.Repository.Models;
 
 namespace ArticoleCalarie.Repository.Repository
 {
@@ -54,6 +56,19 @@ namespace ArticoleCalarie.Repository.Repository
             _ctx.Entry(product).State = EntityState.Modified;
 
             SaveChanges();
+        }
+
+        public async Task<ProductSearchResult> GetProductsBySearch(SearchModel searchModel)
+        {
+            var query = _dbset.Where(x => x.SubcategoryId == searchModel.SubcategoryId).Include(x => x.Images).OrderBy(x => x.DatePosted);
+
+            var productSearchResult = new ProductSearchResult
+            {
+                TotalCount = await query.CountAsync(),
+                Products = await query.Skip(searchModel.ItemsToSkip).Take(searchModel.ItemsPerPage).ToListAsync()
+            };
+
+            return productSearchResult;
         }
     }
 }

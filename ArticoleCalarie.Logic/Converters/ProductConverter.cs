@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using ArticoleCalarie.Models;
 using ArticoleCalarie.Repository.Entities;
 
@@ -38,6 +40,37 @@ namespace ArticoleCalarie.Logic.Converters
             };
 
             return productListItemModel;
+        }
+
+        public static ProductListViewItemModel ToListViewItemModel(this Product product)
+        {
+            var daysToKeepProductMarkedNew = Convert.ToInt32(ConfigurationManager.AppSettings["DaysToKeepProductMarkedNew"]);
+
+            var productListViewItemModel = new ProductListViewItemModel
+            {
+                Id = product.Id,
+                ProductCode = product.ProductCode,
+                ProductName = product.ProductName,
+                Description = product.Description,
+                Price = product.Price,
+                ProductImageName = product.Images?.FirstOrDefault()?.FileName,
+                IsNew = product.DatePosted > DateTime.Now.AddDays((-1) * daysToKeepProductMarkedNew),
+                IsOnSale = product.SalePercentage != 0,
+                SalePercentage = product.SalePercentage
+            };
+
+            if (productListViewItemModel.IsOnSale)
+            {
+                var saleValue = productListViewItemModel.SalePercentage > 0 ? productListViewItemModel.SalePercentage : (-1) * productListViewItemModel.SalePercentage;
+
+                var salePercentage =(decimal)saleValue / 100;
+
+                var saleAmount = productListViewItemModel.Price * salePercentage;
+
+                productListViewItemModel.PriceAfterSaleApplied = Math.Round(productListViewItemModel.Price - saleAmount, 2);
+            }
+
+            return productListViewItemModel;
         }
     }
 }

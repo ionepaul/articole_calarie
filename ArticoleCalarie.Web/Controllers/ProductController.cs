@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ArticoleCalarie.Logic.ILogic;
@@ -60,6 +61,20 @@ namespace ArticoleCalarie.Web.Controllers
             var brands = _iBrandLogic.GetAllBrands(searchTerm);
 
             return Json(brands, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ProductViewList(int subcategoryId, int pageNumber)
+        {
+            var searchViewModel = new SearchViewModel
+            {
+                SubcategoryId = subcategoryId,
+                PageNumber = pageNumber 
+            };
+
+            var productSearchViewResult = await _iProductLogic.GetProductsBySearch(searchViewModel);
+
+            return View(productSearchViewResult);
         }
 
         [HttpPost]

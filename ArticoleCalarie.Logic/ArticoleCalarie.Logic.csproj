@@ -82,6 +82,7 @@
     <Compile Include="Converters\CategoryConverter.cs" />
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\ProductConverter.cs" />
+    <Compile Include="Converters\SearchConverter.cs" />
     <Compile Include="Converters\SizeChartConverter.cs" />
     <Compile Include="Converters\SubcategoryConverter.cs" />
     <Compile Include="ILogic\IAccountLogic.cs" />

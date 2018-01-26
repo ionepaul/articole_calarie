@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ArticoleCalarie.Logic.Converters;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
@@ -60,6 +61,21 @@ namespace ArticoleCalarie.Logic.Logic
             var products = _iProductRepository.GetProducts();
 
             return products.Select(x => x.ToListItemModel());
+        }
+
+        public async Task<ProductSearchViewResult> GetProductsBySearch(SearchViewModel searchViewModel)
+        {
+            var searchModel = searchViewModel.ToDbSearchModel();
+
+            var productSearchResult = await _iProductRepository.GetProductsBySearch(searchModel);
+
+            var productSearchViewResult = new ProductSearchViewResult
+            {
+                TotalCount = productSearchResult.TotalCount,
+                Products = productSearchResult.Products.Select(x => x.ToListViewItemModel())
+            };
+
+            return productSearchViewResult;
         }
 
         #region Private Methods
