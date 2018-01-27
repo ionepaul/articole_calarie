@@ -8584,6 +8584,10 @@ input {
     padding: 20px;
 }
 
+.add-product-wrapper .form-wrapper {
+    flex-flow: row;
+}
+
 .header.layout1 .main-header .right-content {
     text-align: center;
     flex-basis: 100%;
@@ -9307,6 +9311,10 @@ input {
 .comingsoon-content .time_circles > div > h4, .kt-countdown .box-count .text {
   font-size: 18px;
 }
+
+.add-product-form {
+    width: 100%;
+}
 }
 @media(max-width: 639px) {
 .back-to-top {
@@ -9621,6 +9629,15 @@ input {
 }
 }
 @media(max-width: 479px) {
+
+.form-flex-wrapper {
+    flex-flow: column;
+}
+
+.add-product-form .image-wrapper {
+    flex-basis: 45%;
+}
+
 .col-ss-12 {
   width: 100% ;
   margin-bottom: 10px;
