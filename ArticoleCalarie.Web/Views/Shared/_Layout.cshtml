@@ -302,11 +302,11 @@
     <a class="back-to-top" href="#"></a>
 
 
-    @Scripts.Render("~/bundles/bootstrap")
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/external")
+    @Scripts.Render("~/bundles/modernizr")
     @RenderSection("scripts", required: false)
+    @Styles.Render("~/Content/css")
 </body>
 </html>
