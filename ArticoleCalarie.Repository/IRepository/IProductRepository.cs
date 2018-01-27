@@ -10,7 +10,7 @@ namespace ArticoleCalarie.Repository.IRepository
         Product GetProductById(int productId);
         void UpdateProductCode(int productId, string productCode);
         void AddProductToDb(Product product);
-        IEnumerable<Product> GetProducts();
         Task<ProductSearchResult> GetProductsBySearch(SearchModel searchModel);
+        Task<ProductSearchResult> GetProductsForAdmin(int itemsPerPage, int itemsToSkip, string productCode);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using ArticoleCalarie.Logic.Converters;
@@ -56,11 +57,20 @@ namespace ArticoleCalarie.Logic.Logic
             _iProductRepository.UpdateProductCode(savedProduct.Id, productCode);
         }
 
-        public IEnumerable<ProductListItemModel> GetProductsList()
+        public async Task<ProductListAdminViewModel> GetProductsForAdmin(int pageNumber, string productCode)
         {
-            var products = _iProductRepository.GetProducts();
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsToSkip = (pageNumber - 1) * itemsPerPage;
 
-            return products.Select(x => x.ToListItemModel());
+            var productsForAdmin = await _iProductRepository.GetProductsForAdmin(itemsPerPage, itemsToSkip, productCode);
+
+            var productListAdminViewModel = new ProductListAdminViewModel
+            {
+                TotalCount = productsForAdmin.TotalCount,
+                Products = productsForAdmin.Products.Select(x => x.ToListItemModel())
+            };
+
+            return productListAdminViewModel;
         }
 
         public async Task<ProductSearchViewResult> GetProductsBySearch(SearchViewModel searchViewModel)

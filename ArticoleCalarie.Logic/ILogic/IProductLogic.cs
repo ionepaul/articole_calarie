@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ArticoleCalarie.Models;
 
 namespace ArticoleCalarie.Logic.ILogic
@@ -7,7 +6,7 @@ namespace ArticoleCalarie.Logic.ILogic
     public interface IProductLogic
     {
         void AddProduct(ProductViewModel product);
-        IEnumerable<ProductListItemModel> GetProductsList();
+        Task<ProductListAdminViewModel> GetProductsForAdmin(int pageNumber, string productCode);
         Task<ProductSearchViewResult> GetProductsBySearch(SearchViewModel searchViewModel);
     }
 }

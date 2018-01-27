@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace ArticoleCalarie.Repository.Repository
             {
                 product.AvailableColors = new List<Color>();
 
-                foreach(var colorId in product.ColorIds)
+                foreach (var colorId in product.ColorIds)
                 {
                     var color = _ctx.Colors.Find(colorId);
 
@@ -40,11 +41,28 @@ namespace ArticoleCalarie.Repository.Repository
             return product;
         }
 
-        public IEnumerable<Product> GetProducts()
+        public async Task<ProductSearchResult> GetProductsForAdmin(int itemsPerPage, int itemsToSkip, string productCode)
         {
-            var products = _dbset.Include(x => x.Subcategory).Include(x => x.Brand).AsEnumerable();
+            var query = _dbset.Include(x => x.Subcategory).Include(x => x.Brand);
 
-            return products;
+            if (!string.IsNullOrEmpty(productCode))
+            {
+                var productSearchResult = new ProductSearchResult
+                {
+                    TotalCount = await query.Where(x => x.ProductCode.StartsWith(productCode)).CountAsync(),
+                    Products = await query.Where(x => x.ProductCode.StartsWith(productCode)).OrderBy(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+                };
+
+                return productSearchResult;
+            }
+
+            var productResult = new ProductSearchResult
+            {
+                TotalCount = await query.CountAsync(),
+                Products = await query.OrderBy(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+            };
+
+            return productResult;
         }
 
         public void UpdateProductCode(int productId, string productCode)

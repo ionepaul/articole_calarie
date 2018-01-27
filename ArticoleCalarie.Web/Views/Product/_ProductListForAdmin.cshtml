@@ -1,0 +1,99 @@
+﻿@model PagedList.IPagedList<ArticoleCalarie.Models.ProductListItemModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+<div class="row">
+    <div class="col-md-6">
+        <label>Caută după codul produsului</label>
+    </div>
+    <div class="col-md-6">
+        <input id="searchInput" type="text" />
+    </div>
+</div>
+<br />
+
+<table id="products-grid" class="table">
+    <tr>
+        <th>
+            Cod produs
+        </th>
+        <th>
+            Titlu produs
+        </th>
+        <th>
+            Subcategorie
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Preț
+        </th>
+        <th>
+            Reducere (%)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubcategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalePercentage)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("List", new { pageNumber = page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", Url = "Product/List", UpdateTargetId = "products-grid" }))
+
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        $(document).ready(function () {
+            var searchTimeout = null;
+
+            $('#searchInput').on('keyup', function () {
+                clearTimeout(searchTimeout);
+                var $this = $(this);
+                searchTimeout = setTimeout(function () { searchProducts($this.val()) }, 500);
+            });
+
+            function searchProducts(productCode) {
+                $.ajax({
+                    type: "GET",
+                    url: "List?pageNumber=1&productCode=" + productCode,
+                    async: true,
+                    timeout: 60000
+                });
+            }
+        });
+    </script>
+
+}

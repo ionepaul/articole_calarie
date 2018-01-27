@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
+using PagedList;
 
 namespace ArticoleCalarie.Web.Controllers
 {
@@ -33,11 +34,15 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public ActionResult List()
+        public async Task<ActionResult> List(int pageNumber, string productCode = "")
         {
-            var products = _iProductLogic.GetProductsList();
+            var productsForAdmin = await _iProductLogic.GetProductsForAdmin(pageNumber, productCode);
 
-            return View(products);
+            int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+
+            var pagedListModel = new StaticPagedList<ProductListItemModel>(productsForAdmin.Products, pageNumber, pageSize, productsForAdmin.TotalCount);
+
+            return View(pagedListModel);
         }
 
         [HttpGet]
