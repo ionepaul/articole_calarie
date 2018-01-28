@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 </head>
 <body>
+    <div class="progress-container"><div class="progress"><div class="progress-bar"><div class="progress-shadow"></div></div></div></div>
     <header>
         <div class="header layout1">
-            <div class="progress-container"><div class="progress"><div class="progress-bar"><div class="progress-shadow"></div></div></div></div>
             <div class="topbar">
                 <div class="special-container">
                     <div class="row">
@@ -34,49 +34,10 @@
                     </div>
                 </div>
             </div>
-            <div class="special-container">
-                <div class="main-header box-has-content">
-                    <div class="row main-header-row">
-                        <div class="col-lg-5 col-md-4 left-content main-header-search">
-                            <div class="search-form box-has-content">
-                                <div class="search-block">
-                                    <div class="search-inner">
-                                        <a href="#" class="search-button"><i class="flaticon-search3"></i></a>
-                                        <input type="text" class="search-info" placeholder="Caută">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 midle-content">
-                            <div class="logo">
-                                <a href='@Url.Action("Index", "Home")'>
-                                    <img src="~/images/my_logo3.png" alt="Articole Călărie logo">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-md-4 right-content">
-                            <ul class="top-links">
-                                @Html.Partial("_LoginPartial")
-                                <li class="box-minicart">
-                                    <div class="minicart">
-                                        <div class="cart-block">
-                                            <a href="shopping-cart.html" class="cart-icon"><span class="flaticon-cart"></span></a>
-                                            <span class="count">0</span>
-                                        </div>
-                                        <div class="cart-inner cart-empty">
-                                            <p class="content">You have no item(s) in your shopping Cart</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="header-nav">
                 <div class="header-nav-inner">
                     <div class="box-header-nav container-wapper">
-                        <div class="container main-menu-wapper">
+                        <div class="special-container main-menu-wapper">
                             <a class="menu-bar mobile-navigation" href="#">
                                 <span class="icon">
                                     <span></span>
@@ -85,6 +46,11 @@
                                 </span>
                                 <span class="text">Main Menu</span>
                             </a>
+                            <div class="logo">
+                                <a href='@Url.Action("Index", "Home")'>
+                                    <img src="~/images/my_logo3.png" alt="Articole Călărie logo">
+                                </a>
+                            </div>
                             <ul id="menu-main-menu" class="main-menu clone-main-menu">
                                 <li class="menu-item menu-item-has-children shop">
                                     <!-- <span class="top-flash new"> new</span> -->
@@ -203,6 +169,20 @@
                                 </li>
                                 <li class="menu-item">
                                     <a href="blog.html">CONTACT</a>
+                                </li>
+                            </ul>
+                            <ul class="top-links">
+                                @Html.Partial("_LoginPartial")
+                                <li class="box-minicart">
+                                    <div class="minicart">
+                                        <div class="cart-block">
+                                            <a href="shopping-cart.html" class="cart-icon"><span class="flaticon-cart"></span></a>
+                                            <span class="count">0</span>
+                                        </div>
+                                        <div class="cart-inner cart-empty">
+                                            <p class="content">You have no item(s) in your shopping Cart</p>
+                                        </div>
+                                    </div>
                                 </li>
                             </ul>
                         </div>

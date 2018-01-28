@@ -33,30 +33,39 @@ html, body {
 
 .header {
     position: relative;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 20;
 }
 
 /* LOADING BAR */
 .progress-container {
-	left: 50%;
-	position: absolute;
-	transform: translate(-50%, -50%);
+	position: fixed;
+    top: 100px;
+    bottom: 0;
+    height: 100%;
+    background: rgba(255,255,255,0.5);
+    width: 100%;
+    z-index: 999;
+    display: none;
 }
 
 .progress {
-	background-color: rgb(229,233,235);
-	height: 0.25em;
-	position: relative;
-	width: 23em;
+    background-color: rgb(229,233,235);
+    height: 0.2em;
+    position: relative;
+    width: 100%;
+    top: 10px;
+    transform: translateY(-50%);
+    margin: auto;
 }
 .progress-bar {
 	background-size: 23em 0.25em;
 	height: 100%;
 	position: relative;
-	background-image: linear-gradient(to right, rgb(76,217,100), rgb(90,200,250), rgb(0,122,255), rgb(52,170,220), rgb(88,86,214), rgb(255,45,85));
-		background-image: -o-linear-gradient(to right, rgb(76,217,100), rgb(90,200,250), rgb(0,122,255), rgb(52,170,220), rgb(88,86,214), rgb(255,45,85));
-		background-image: -ms-linear-gradient(to right, rgb(76,217,100), rgb(90,200,250), rgb(0,122,255), rgb(52,170,220), rgb(88,86,214), rgb(255,45,85));
-		background-image: -webkit-linear-gradient(to right, rgb(76,217,100), rgb(90,200,250), rgb(0,122,255), rgb(52,170,220), rgb(88,86,214), rgb(255,45,85));
-		background-image: -moz-linear-gradient(to right, rgb(76,217,100), rgb(90,200,250), rgb(0,122,255), rgb(52,170,220), rgb(88,86,214), rgb(255,45,85));
+    background: #324a76;
 	animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
 		-o-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
 		-ms-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
@@ -274,6 +283,17 @@ body{
     border: 1px solid #ccc;
 }
 
+
+.main-menu-wapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-menu-wapper .logo {
+    flex-basis: 15%;
+}
+
 .ui-menu .ui-menu-item a {
     display: block;
     border-bottom: 1px solid #000;
@@ -358,6 +378,7 @@ body ul {
 
 .body-content {
     min-height: 100%;
+    margin-top: 150px;
 }
 
 .page-wrapper {
@@ -675,7 +696,8 @@ input {
   text-align: center;
 }
 .header.layout1 .box-header-nav {
-  background-color: #f2f2f2;
+  background-color: #fff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
 }
 .main-menu > li {
   display: inline-block;
