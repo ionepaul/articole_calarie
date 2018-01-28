@@ -57,12 +57,12 @@ namespace ArticoleCalarie.Logic.Logic
             _iProductRepository.UpdateProductCode(savedProduct.Id, productCode);
         }
 
-        public async Task<ProductListAdminViewModel> GetProductsForAdmin(int pageNumber, string productCode)
+        public ProductListAdminViewModel GetProductsForAdmin(int pageNumber, string productCode)
         {
             var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
             var itemsToSkip = (pageNumber - 1) * itemsPerPage;
 
-            var productsForAdmin = await _iProductRepository.GetProductsForAdmin(itemsPerPage, itemsToSkip, productCode);
+            var productsForAdmin = _iProductRepository.GetProductsForAdmin(itemsPerPage, itemsToSkip, productCode);
 
             var productListAdminViewModel = new ProductListAdminViewModel
             {

@@ -225,14 +225,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Bootstraper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SizeChartController.cs" />
     <Compile Include="Controllers\SubcategoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -312,6 +315,7 @@
     <Content Include="Scripts\owl.thumbs.min.js" />
     <Content Include="Scripts\packery.min.js" />
     <Content Include="Scripts\product-add.js" />
+    <Content Include="Scripts\product-list-admin.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\timecircles.js" />

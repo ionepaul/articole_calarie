@@ -41,7 +41,7 @@ namespace ArticoleCalarie.Repository.Repository
             return product;
         }
 
-        public async Task<ProductSearchResult> GetProductsForAdmin(int itemsPerPage, int itemsToSkip, string productCode)
+        public ProductSearchResult GetProductsForAdmin(int itemsPerPage, int itemsToSkip, string productCode)
         {
             var query = _dbset.Include(x => x.Subcategory).Include(x => x.Brand);
 
@@ -49,8 +49,9 @@ namespace ArticoleCalarie.Repository.Repository
             {
                 var productSearchResult = new ProductSearchResult
                 {
-                    TotalCount = await query.Where(x => x.ProductCode.StartsWith(productCode)).CountAsync(),
-                    Products = await query.Where(x => x.ProductCode.StartsWith(productCode)).OrderBy(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+                    TotalCount = query.Where(x => x.ProductCode.StartsWith(productCode, StringComparison.InvariantCultureIgnoreCase)).Count(),
+                    Products = query.Where(x => x.ProductCode.StartsWith(productCode, StringComparison.InvariantCultureIgnoreCase))
+                                    .OrderBy(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).AsEnumerable()
                 };
 
                 return productSearchResult;
@@ -58,8 +59,8 @@ namespace ArticoleCalarie.Repository.Repository
 
             var productResult = new ProductSearchResult
             {
-                TotalCount = await query.CountAsync(),
-                Products = await query.OrderBy(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+                TotalCount = query.Count(),
+                Products = query.OrderBy(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).AsEnumerable()
             };
 
             return productResult;

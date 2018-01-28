@@ -12,7 +12,6 @@ $(document).ready(function () {
         source: function (request, response) {
             $.getJSON('/Subcategory/GetSubcategories?categoryId=' + selectedCategoryId + '&searchTerm=' + request.term, function (data) {
                 if (data.length == 0) {
-                    console.log(data);
                     $('#SubcategoryId').val(request.term);
                 }
                 response($.map(data, function (item) {
@@ -39,7 +38,7 @@ $(document).ready(function () {
 
     $("#brand-autocomplete").autocomplete({
         source: function (request, response) {
-            $.getJSON('/Product/GetBrands?searchTerm=' + request.term, function (data) {
+            $.getJSON('/Brand/GetBrands?searchTerm=' + request.term, function (data) {
                 if (data.length == 0) {
                     $('#Brand').val(request.term);
                 }
@@ -71,7 +70,6 @@ function previewAndUpload(input, isSizeChart) {
         $.each(input.files, function (i, file) {
             var formattedFileName = file.name.replace(/\s/g, '').replace(/-/g, '').replace(/_/g, '').replace(/\(/g, '').replace(/\)/g, '');
             var containerId = formattedFileName.replace('.', '');
-            console.log(containerId);
             var upload = new Upload(file, isSizeChart);
             upload.doUpload();
 
@@ -103,7 +101,7 @@ function clearFileInput(input) {
 function deleteImage(fileName, isSizeChart) {
     $.ajax({
         type: "POST",
-        url: "DeleteImage?filename=" + fileName,
+        url: "../Image/DeleteImage?filename=" + fileName,
         success: function () {
             if (!isSizeChart) {
                 let arrayIndex = savedImages.indexOf(fileName);
@@ -130,7 +128,7 @@ function deleteImage(fileName, isSizeChart) {
 function loadSizeCharts() {
     $.ajax({
         type: "GET",
-        url: "GetSizeCharts",
+        url: "../SizeChart/GetSizeCharts",
         success: function (data) {
             if (data && data.length > 0) {
                 $.each(data, function (i, sizeChart) {
@@ -151,7 +149,7 @@ function loadSizeCharts() {
 function loadColors() {
     $.ajax({
         type: "GET",
-        url: "GetColors",
+        url: "../Color/GetColors",
         success: function (data) {
             if (data && data.length > 0) {
                 $.each(data, function (i, color) {
@@ -238,7 +236,7 @@ Upload.prototype.doUpload = function () {
 
     $.ajax({
         type: "POST",
-        url: "UploadImage",
+        url: "../Image/UploadImage",
         xhr: function () {
             var myXhr = $.ajaxSettings.xhr();
             if (myXhr.upload) {

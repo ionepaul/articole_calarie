@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ArticoleCalarie.Repository.Entities;
 using ArticoleCalarie.Repository.IRepository;
@@ -20,7 +21,7 @@ namespace ArticoleCalarie.Repository.Repository
 
         public IEnumerable<Subcategory> GetAllByCategoryIdAndSearchTerm(int categoryId, string searchTerm = "")
         {
-            var subcategories = _dbset.Where(x => x.CategoryId == categoryId && x.Name.StartsWith(searchTerm)).AsEnumerable();
+            var subcategories = _dbset.Where(x => x.CategoryId == categoryId && x.Name.StartsWith(searchTerm, StringComparison.InvariantCultureIgnoreCase)).AsEnumerable();
 
             return subcategories;
         }

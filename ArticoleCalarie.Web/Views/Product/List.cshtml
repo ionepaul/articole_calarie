@@ -1,4 +1,8 @@
-﻿@{
+﻿@model PagedList.IPagedList<ArticoleCalarie.Models.ProductListItemModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
     ViewBag.Title = "Listă produse";
 }
 
@@ -10,9 +14,19 @@
             @Html.ActionLink("Adaugă produs", "Add", "Product", null, htmlAttributes: new { @class = "create btn my-btn-default" })
         </p>
     </div>
-
-    <div id="products-list">
-        @Html.Partial("_ProductListForAdmin");
+    
+    <div class="row">
+        <div class="col-md-6">
+            <input id="searchInput" type="text" class="input-info" placeholder="Caută după codul produsului" />
+        </div>
     </div>
+    <br />
+    <br />
+
+    @Html.Partial("_ProductListForAdmin", Model)
 
 </div>
+
+@section scripts {
+    <script src="~/Scripts/product-list-admin.js"></script>
+}
