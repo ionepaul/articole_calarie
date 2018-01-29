@@ -26,10 +26,33 @@ namespace ArticoleCalarie.Logic.Converters
             return product;
         }
 
+        public static ProductViewModel ToViewModel(this Product product)
+        {
+            var productViewModel = new ProductViewModel
+            {
+                ProductName = product.ProductName,
+                Description = product.Description,
+                ProductCode = product.ProductCode,
+                MaterialDetails = product.MaterialDetails,
+                Size = product.Size,
+                Price = product.Price.ToString("F"),
+                SalePercentage = product.SalePercentage,
+                SizeChartImage = product.SizeChart?.FileName,
+                CategoryId = product.Subcategory?.CategoryId ?? 0,
+                Brand = product.Brand?.Name,
+                SubcategoryId = product.Subcategory?.Name,
+                ImagesList = product.Images.Select(x => x.FileName).ToList(),
+                ColorsList = product.AvailableColors.Select(x => x.Name).ToList()
+            };
+
+            return productViewModel;
+        }
+
         public static ProductListItemModel ToListItemModel(this Product product)
         {
             var productListItemModel = new ProductListItemModel
             {
+                Id = product.Id,
                 ProductCode = product.ProductCode,
                 ProductName = product.ProductName,
                 SubcategoryName = product.Subcategory.Name,

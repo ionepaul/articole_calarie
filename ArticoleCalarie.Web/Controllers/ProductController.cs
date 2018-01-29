@@ -28,6 +28,15 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
+        public ActionResult Edit(int id)
+        {
+            var product = _iProductLogic.GetProductById(id);
+
+            return View(product);
+        } 
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ViewResult List(int? pageNumber, string productCode = "")
         {
             ViewBag.ProductCode = productCode;

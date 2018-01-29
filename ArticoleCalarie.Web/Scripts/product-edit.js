@@ -7,6 +7,7 @@ $(document).ready(function () {
     loadSizeCharts();
     loadColors();
     loadCategories();
+    fillProductData();
 
     $("#subcategory-autocomplete").autocomplete({
         source: function (request, response) {
@@ -159,9 +160,14 @@ function loadColors() {
         success: function (data) {
             if (data && data.length > 0) {
                 $.each(data, function (i, color) {
-                    $('#colors-list').append('<li id="' + color.Name + '" style="background-color:' + color.Hex + '" onclick="selectColor(' + color.Name + ',' + color.Id + ')"/>');
+                    $('#colors-list').append('<li id="' + color.Name + '" style="background-color:' + color.Hex + '" onclick= "selectColor(' + color.Name + ',' + color.Id + ')" />');
                 });
             }
+
+            $('#colorsList > li').each(function () {
+                var colorId = $(this).text();
+                $('#' + colorId).click();
+            });
         },
         error: function (error) {
             // handle error
@@ -183,9 +189,14 @@ function loadCategories() {
                     $('#categories-select').append('<option value="' + category.Id + '">' + category.Name + '</option>');
                 });
             }
-
-            selectedCategoryId = $('#categories-select option:selected')[0].value;
-            $('#CategoryId').val(selectedCategoryId);
+            if ($('#CategoryId').attr('value') != "") {
+                let index = $('#CategoryId').attr('value') - 1;
+                $('#categories-select > option').eq(index).attr('selected', 'selected')
+            }
+            else {
+                selectedCategoryId = $('#categories-select option:selected')[0].value;
+                $('#CategoryId').val(selectedCategoryId);
+            }
         },
         error: function (error) {
             // handle error
@@ -217,6 +228,29 @@ function selectColor(colorName, colorId) {
         savedColors.push(colorId);
     }
     $('#Colors').val(savedColors);
+}
+
+function fillProductData() {
+    var brand = $('#Brand').attr('value');
+    if (brand != "") {
+        $('#brand-autocomplete').val(brand);
+    }
+
+    var subcategory = $('#SubcategoryId').attr('value');
+    if (subcategory != "") {
+        $('#subcategory-autocomplete').val(subcategory);
+    }
+
+    $('#imagesList > li').each(function () {
+        let imageName = $(this).text();
+        let url = window.location.origin + '/Images/Products/' + imageName;
+        let idOfContainer = imageName.replace(".", "");
+        savedImages.push(imageName);
+
+        $('#imgDirectory').append('<div class="image-wrapper" id="' + idOfContainer + '"></div>');
+        $('#' + idOfContainer).append('<img class="image" src="' + url + '" height="100" />');
+        $('#' + idOfContainer).append('<a class="delete-btn" onclick="deleteImage(\'' + imageName + '\')">delete image</a>');
+    });
 }
 
 //Uploading object 

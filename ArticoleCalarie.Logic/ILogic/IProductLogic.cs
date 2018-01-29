@@ -8,5 +8,6 @@ namespace ArticoleCalarie.Logic.ILogic
         void AddProduct(ProductViewModel product);
         ProductListAdminViewModel GetProductsForAdmin(int pageNumber, string productCode);
         Task<ProductSearchViewResult> GetProductsBySearch(SearchViewModel searchViewModel);
+        ProductViewModel GetProductById(int id);
     }
 }

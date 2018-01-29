@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +35,14 @@ namespace ArticoleCalarie.Repository.Repository
 
         public Product GetProductById(int productId)
         {
-            var product = _dbset.Where(x => x.Id == productId).Include(x => x.Subcategory).Include(x => x.Subcategory.Category).FirstOrDefault();
+            var product = _dbset.Where(x => x.Id == productId)
+                                .Include(x => x.Subcategory)
+                                .Include(x => x.Subcategory.Category)
+                                .Include(x => x.SizeChart)
+                                .Include(x => x.Images)
+                                .Include(x => x.AvailableColors)
+                                .Include(x => x.Brand)
+                                .FirstOrDefault();
 
             return product;
         }
@@ -49,8 +55,8 @@ namespace ArticoleCalarie.Repository.Repository
             {
                 var productSearchResult = new ProductSearchResult
                 {
-                    TotalCount = query.Where(x => x.ProductCode.StartsWith(productCode, StringComparison.InvariantCultureIgnoreCase)).Count(),
-                    Products = query.Where(x => x.ProductCode.StartsWith(productCode, StringComparison.InvariantCultureIgnoreCase))
+                    TotalCount = query.Where(x => x.ProductCode.StartsWith(productCode)).Count(),
+                    Products = query.Where(x => x.ProductCode.StartsWith(productCode))
                                     .OrderBy(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).AsEnumerable()
                 };
 

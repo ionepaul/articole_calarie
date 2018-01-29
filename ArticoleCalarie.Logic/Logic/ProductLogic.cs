@@ -88,6 +88,15 @@ namespace ArticoleCalarie.Logic.Logic
             return productSearchViewResult;
         }
 
+        public ProductViewModel GetProductById(int id)
+        {
+            var product = _iProductRepository.GetProductById(id);
+
+            var productViewModel = product.ToViewModel();
+
+            return productViewModel;
+        }
+
         #region Private Methods
 
         private void StoreImages(Product product, ProductViewModel productViewModel)

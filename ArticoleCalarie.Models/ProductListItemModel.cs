@@ -4,6 +4,8 @@ namespace ArticoleCalarie.Models
 {
     public class ProductListItemModel
     {
+        public int Id { get; set; }
+
         [Display(Name = "Cod produs")]
         public string ProductCode { get; set; }
 

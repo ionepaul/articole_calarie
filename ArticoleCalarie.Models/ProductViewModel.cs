@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ArticoleCalarie.Models
 {
@@ -44,5 +45,12 @@ namespace ArticoleCalarie.Models
 
         [Display(Name = "Mărimi")]
         public string Size { get; set; }
+
+        [Display(Name = "Cod produs")]
+        public string ProductCode { get; set; }
+
+
+        public List<string> ImagesList { get; set; }
+        public List<string> ColorsList { get; set; }
     }
 }
