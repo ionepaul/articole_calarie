@@ -70,11 +70,18 @@ namespace ArticoleCalarie.Repository.Repository
             _ctx.SaveChanges();
         }
 
-        public virtual async Task Delete(T entity)
+        public virtual async Task DeleteAsync(T entity)
         {
             _dbset.Remove(entity);
 
             await _ctx.SaveChangesAsync();
+        }
+
+        public virtual void Delete(T entity)
+        {
+            _dbset.Remove(entity);
+
+            _ctx.SaveChanges();
         }
 
         public void Dispose()

@@ -12,6 +12,7 @@ namespace ArticoleCalarie.Repository.IRepository
         void Add(T entity);
         Task SaveChangesAsync();
         void SaveChanges();
-        Task Delete(T entity);
+        Task DeleteAsync(T entity);
+        void Delete(T entity);
     }
 }

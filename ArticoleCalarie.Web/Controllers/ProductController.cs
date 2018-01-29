@@ -33,7 +33,7 @@ namespace ArticoleCalarie.Web.Controllers
             var product = _iProductLogic.GetProductById(id);
 
             return View(product);
-        } 
+        }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
@@ -99,6 +99,22 @@ namespace ArticoleCalarie.Web.Controllers
 
             //catch exceptions log
             _iProductLogic.AddProduct(productViewModel);
+
+            return RedirectToAction(nameof(List));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(ProductViewModel productViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(productViewModel);
+            }
+
+            //catch exceptions log
+            _iProductLogic.UpdateProduct(productViewModel.Id, productViewModel);
 
             return RedirectToAction(nameof(List));
         }

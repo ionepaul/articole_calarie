@@ -5,6 +5,8 @@ namespace ArticoleCalarie.Models
 {
     public class ProductViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         [Display(Name ="Titlu produs")]
         public string ProductName { get; set; }

@@ -64,6 +64,7 @@ namespace ArticoleCalarie.Web
             container.RegisterType<IColorRepository, ColorRepository>();
             container.RegisterType<IBrandRepository, BrandRepository>();
             container.RegisterType<ISubcategoryRepository, SubcategoryRepository>();
+            container.RegisterType<IImageRepository, ImageRepository>();
 
             //Infrastructure
             container.RegisterType<IMailService, MailService>();

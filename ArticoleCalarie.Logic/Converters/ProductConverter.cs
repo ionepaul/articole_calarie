@@ -30,6 +30,7 @@ namespace ArticoleCalarie.Logic.Converters
         {
             var productViewModel = new ProductViewModel
             {
+                Id = product.Id,
                 ProductName = product.ProductName,
                 Description = product.Description,
                 ProductCode = product.ProductCode,

@@ -87,6 +87,7 @@ function previewAndUpload(input, isSizeChart) {
                     //$('#' + containerId).append('<div id="progress-wrp"><div class="progress-bar"></div><div class="status">0%</div></div>');
                     $('#' + containerId).append('<img class="image" src="' + e.target.result + '" height="100" />');
                     $('#' + containerId).append('<a class="delete-btn" onclick="deleteImage(\'' + formattedFileName + '\')">delete image</a>');
+                    $('#sizeChartImgContainer img').removeClass('selected');
                 }
             }
 
@@ -138,9 +139,14 @@ function loadSizeCharts() {
             if (data && data.length > 0) {
                 $.each(data, function (i, sizeChart) {
                     var formattedSizeChartName = sizeChart.FileName.replace('.', '');
-
                     $('#sizeChartImgContainer').append('<img id="' + formattedSizeChartName + '" src="' + window.location.origin + '/images/products/' + sizeChart.FileName + '" height="200" onclick="selectSizeChart(' + formattedSizeChartName + ',' + sizeChart.Id + ')"/>');
                 });
+
+                let savedSizeChart = $('#SizeChartImage').attr('value');
+                if (savedSizeChart != "") {
+                    let formattedFileName = savedSizeChart.replace(".", "");
+                    $('#' + formattedFileName).click();
+                }
             }
         },
         error: function (error) {
@@ -246,6 +252,7 @@ function fillProductData() {
         let url = window.location.origin + '/Images/Products/' + imageName;
         let idOfContainer = imageName.replace(".", "");
         savedImages.push(imageName);
+        $('#Images').val(savedImages);
 
         $('#imgDirectory').append('<div class="image-wrapper" id="' + idOfContainer + '"></div>');
         $('#' + idOfContainer).append('<img class="image" src="' + url + '" height="100" />');

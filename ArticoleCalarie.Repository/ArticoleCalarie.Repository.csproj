@@ -92,6 +92,7 @@
     <Compile Include="IRepository\IBrandRepository.cs" />
     <Compile Include="IRepository\ICategoryRepository.cs" />
     <Compile Include="IRepository\IColorRepository.cs" />
+    <Compile Include="IRepository\IImageRepository.cs" />
     <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\ISizeChartRepository.cs" />
     <Compile Include="IRepository\ISubcategoryRepository.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Repository\BrandRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\ColorRepository.cs" />
+    <Compile Include="Repository\ImageRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\SizeChartRepository.cs" />
     <Compile Include="Repository\SubcategoryRepository.cs" />

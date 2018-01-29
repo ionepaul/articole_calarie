@@ -9,5 +9,6 @@ namespace ArticoleCalarie.Logic.ILogic
         ProductListAdminViewModel GetProductsForAdmin(int pageNumber, string productCode);
         Task<ProductSearchViewResult> GetProductsBySearch(SearchViewModel searchViewModel);
         ProductViewModel GetProductById(int id);
+        void UpdateProduct(int id, ProductViewModel productViewModel);
     }
 }

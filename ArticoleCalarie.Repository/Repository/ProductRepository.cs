@@ -30,7 +30,7 @@ namespace ArticoleCalarie.Repository.Repository
 
             _dbset.Add(product);
 
-            _ctx.SaveChanges();
+            SaveChanges();
         }
 
         public Product GetProductById(int productId)
@@ -94,6 +94,25 @@ namespace ArticoleCalarie.Repository.Repository
             };
 
             return productSearchResult;
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            if (product.ColorIds != null)
+            {
+                product.AvailableColors = new List<Color>();
+
+                foreach (var colorId in product.ColorIds)
+                {
+                    var color = _ctx.Colors.Find(colorId);
+
+                    product.AvailableColors.Add(color);
+                }
+            }
+
+            _ctx.Entry(product).State = EntityState.Modified;
+
+            SaveChanges();
         }
     }
 }

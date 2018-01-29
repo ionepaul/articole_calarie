@@ -16,11 +16,13 @@ namespace ArticoleCalarie.Logic.Logic
     {
         private IProductRepository _iProductRepository;
         private IColorRepository _iColorRepository;
+        private IImageRepository _iImageRepository;
 
-        public ProductLogic(IProductRepository iProductRepository, IColorRepository iColorRepoository)
+        public ProductLogic(IProductRepository iProductRepository, IColorRepository iColorRepoository, IImageRepository iImageRepository)
         {
             _iProductRepository = iProductRepository;
             _iColorRepository = iColorRepoository;
+            _iImageRepository = iImageRepository;
         }
 
         public void AddProduct(ProductViewModel productViewModel)
@@ -55,6 +57,67 @@ namespace ArticoleCalarie.Logic.Logic
             var productCode = GenerateProductCode(savedProduct);
 
             _iProductRepository.UpdateProductCode(savedProduct.Id, productCode);
+        }
+
+        public void UpdateProduct(int id, ProductViewModel productViewModel)
+        {
+            var product = _iProductRepository.GetProductById(id);
+
+            product.ProductName = productViewModel.ProductName;
+            product.Description = productViewModel.Description;
+            product.MaterialDetails = productViewModel.MaterialDetails;
+            product.Price = Convert.ToDecimal(productViewModel.Price);
+            product.SalePercentage = productViewModel.SalePercentage ?? 0;
+            product.Size = productViewModel.Size;
+
+            if (!string.IsNullOrEmpty(productViewModel.SizeChartImage))
+            {
+                StoreSizeChart(product, productViewModel);
+            }
+
+            var images = productViewModel.Images?.Split(',');
+
+            foreach (var savedImage in product.Images)
+            {
+                if (!images.Contains(savedImage.FileName))
+                {
+                    var img = _iImageRepository.GetById(savedImage.Id);
+
+                    _iImageRepository.Delete(img);
+                }
+            }
+
+            foreach (var image in images)
+            {
+                if (!product.Images.Select(x => x.FileName).Contains(image))
+                {
+                    var imgModel = new Image { FileName = image };
+
+                    product.Images.Add(imgModel);
+                }
+            }
+
+            var selectedColors = productViewModel.Colors?.Split(',');
+            product.ColorIds = new List<int>();
+
+            foreach (var colorId in selectedColors)
+            {
+                var intColorId = Convert.ToInt32(colorId);
+
+                product.ColorIds.Add(intColorId);
+            }
+
+            if (!string.Equals(product.Subcategory.Name, productViewModel.SubcategoryId))
+            {
+                StoreSubcategory(product, productViewModel);
+            }
+            
+            if (!string.Equals(product.Brand.Name, productViewModel.Brand))
+            {
+                StoreBrand(product, productViewModel);
+            }
+
+            _iProductRepository.UpdateProduct(product);
         }
 
         public ProductListAdminViewModel GetProductsForAdmin(int pageNumber, string productCode)
@@ -233,7 +296,8 @@ namespace ArticoleCalarie.Logic.Logic
 
             var zeroToAdd = 4 - numbers.Count;
 
-            while (zeroToAdd != 0) {
+            while (zeroToAdd != 0)
+            {
                 numbers.Add(0);
                 zeroToAdd -= 1;
             }
