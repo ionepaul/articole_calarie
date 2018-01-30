@@ -6,8 +6,9 @@
         {
             @Html.AntiForgeryToken()
             <li class="menu-item-has-children account">
-            @Html.ActionLink("Salut, " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage", style = "color: #000" })
+                <p class="hello-user"><i class="glyphicon glyphicon-user"></i> Salut <i class="glyphicon glyphicon-chevron-down"></i></p>
             <ul class="submenu">
+                <li class="welcome-user">@Html.ActionLink(User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
                 <li>@Html.ActionLink("Adaugă produs", "Add", "Product", routeValues: null, htmlAttributes: new { title = "Adaugă produs" })</li>
                 <li>@Html.ActionLink("Listă produse", "List", "Product", routeValues: null, htmlAttributes: new { title = "Adaugă produs" })</li>
                 @*<li>@Html.ActionLink("Vezi comenzi", "Index", "Orders", routeValues: null, htmlAttributes: new { title = "Vezi comenzi" })</li>*@

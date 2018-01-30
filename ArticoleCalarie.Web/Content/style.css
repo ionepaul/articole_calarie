@@ -49,7 +49,6 @@ html, body {
     background: rgba(255,255,255,0.5);
     width: 100%;
     z-index: 999;
-    display: none;
 }
 
 .progress {
@@ -57,7 +56,7 @@ html, body {
     height: 0.2em;
     position: relative;
     width: 100%;
-    top: 10px;
+    top: 9px;
     transform: translateY(-50%);
     margin: auto;
 }
@@ -291,7 +290,7 @@ body{
 }
 
 .main-menu-wapper .logo {
-    flex-basis: 15%;
+    flex-basis: 240px;
 }
 
 .ui-menu .ui-menu-item a {
@@ -958,7 +957,7 @@ input {
 }
 .header.layout1 .top-links {
   float: right;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .top-links > li {
   display: inline-block;
@@ -994,6 +993,35 @@ input {
 .top-links > .account .submenu >li >a {
   padding: 0 20px;
 }
+
+/* USER PART LOGGED IN */
+.hello-user {
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.hello-user .glyphicon-chevron-down {
+    font-size: 10px;
+}
+
+.welcome-user {
+    background: #324a76;
+    color: #fff;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.submenu .welcome-user a {
+    color: #fff;
+}
+
+.submenu .welcome-user a:hover {
+    background: 0;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+
 .minicart {
   position: relative;
 }
@@ -8270,7 +8298,10 @@ input {
   margin-top: 10px;
 }
 .main-menu > li {
-  margin: 0 10px;
+  margin: 0 5px;
+}
+.main-menu > li > a {
+    font-size: 13px;
 }
 .category.layout1 .info {
   top: 10px;
@@ -8485,6 +8516,27 @@ input {
 }
 }
 @media(max-width: 1024px) {
+
+.progress-container {
+    top: 105px;
+}
+
+.top-links {
+    position: absolute;
+    right: 130px;
+    top: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.header .logo {
+    order: -1;
+}
+
+.menu-bar.mobile-navigation {
+    order: 1;
+}
+
 .container {
   padding: 0 15px;
 }
@@ -8711,11 +8763,19 @@ input {
 }
 @media(max-width: 991px) {
 
+.progress-container {
+    top: 141px;
+}
+
 /* MY CSS */
 .main-header-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.top-links {
+    top: 95px;
 }
 
 .form-wrapper {
@@ -8729,10 +8789,6 @@ input {
 .header.layout1 .main-header .right-content {
     text-align: center;
     flex-basis: 100%;
-}
-
-.header.layout1 .top-links {
-    width: 100%;
 }
 
 .top-links > li {
@@ -9455,6 +9511,49 @@ input {
 }
 }
 @media(max-width: 639px) {
+
+.header-nav .special-container {
+    padding: 0 12px;
+}
+
+.progress-container {
+    top: 118px;
+}
+
+.main-menu-wapper {
+    flex-wrap: wrap;
+}
+
+.header .logo {
+    flex-basis: 100%;
+    margin-top: 10px;
+}
+
+.header .logo img {
+    width: 300px;
+}
+
+.top-links {
+    position: static;
+}
+
+.topbar {
+    display: none;
+}
+
+.menu-bar.mobile-navigation {
+    padding: 20px 0 5px;
+}
+
+.main-menu-wapper {
+    padding-bottom: 10px;
+}
+
+.menu-item-has-children:last-child .submenu {
+    right: auto;
+    left: auto;
+}
+
 .back-to-top {
   bottom: 30px;
   right: 20px;
