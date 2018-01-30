@@ -49,7 +49,27 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    <a onclick="openDeleteModal('@item.ProductCode')">Delete</a>
+
+                    <div id="@item.ProductCode" class="modal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">@item.ProductName</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Ești sigur ca vrei să ștergi acest produs?</p>
+                                </div>
+                                <div class="modal-footer"> 
+                                    <button type="button" class="btn btn-primary" onclick="deleteProduct(@item.Id)">Șterge</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulează</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         }

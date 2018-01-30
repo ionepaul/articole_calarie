@@ -10,5 +10,6 @@ namespace ArticoleCalarie.Logic.ILogic
         Task<ProductSearchViewResult> GetProductsBySearch(SearchViewModel searchViewModel);
         ProductViewModel GetProductById(int id);
         void UpdateProduct(int id, ProductViewModel productViewModel);
+        void DeleteProduct(int productId);
     }
 }

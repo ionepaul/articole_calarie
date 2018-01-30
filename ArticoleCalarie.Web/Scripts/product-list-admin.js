@@ -30,3 +30,20 @@
         return false;
     });
 });
+
+function openDeleteModal(productCode) {
+    $('#' + productCode).modal('toggle');
+}
+
+function deleteProduct(productId) {
+    let url = window.location.origin + '/Product/Delete?productId=' + productId;
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        cache: false,
+        success: function () {
+            window.location.href = window.location.origin + '/Product/List?pageNumber=1';
+        }
+    });
+}

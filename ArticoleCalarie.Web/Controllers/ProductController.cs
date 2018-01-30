@@ -119,6 +119,16 @@ namespace ArticoleCalarie.Web.Controllers
             return RedirectToAction(nameof(List));
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Delete(int productId)
+        {
+            //catch exceptions log
+            _iProductLogic.DeleteProduct(productId);
+
+            return RedirectToAction(nameof(List));
+        }
+
         #endregion
     }
 }

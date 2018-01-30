@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using ArticoleCalarie.Logic.Converters;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
@@ -118,6 +120,25 @@ namespace ArticoleCalarie.Logic.Logic
             }
 
             _iProductRepository.UpdateProduct(product);
+        }
+
+        public void DeleteProduct(int productId)
+        {
+            var product = _iProductRepository.GetProductById(productId);
+
+            var serverPath = HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductsImagesFolder"]);
+
+            foreach (var image in product.Images)
+            {
+                var filePath = Path.Combine(serverPath, image.FileName);
+
+                if (Directory.Exists(Path.GetDirectoryName(serverPath)) && System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+            }
+
+            _iProductRepository.Delete(product);
         }
 
         public ProductListAdminViewModel GetProductsForAdmin(int pageNumber, string productCode)
