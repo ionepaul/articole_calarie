@@ -83,6 +83,15 @@ namespace ArticoleCalarie.Web.Controllers
             return View(productSearchViewResult);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public ActionResult DetailsForAdmin(string productCode)
+        {
+            var product = _iProductLogic.GetProductByProductCode(productCode);
+
+            return View(product);
+        }
+
         #endregion
 
         #region HttpPost

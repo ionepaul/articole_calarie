@@ -11,5 +11,6 @@ namespace ArticoleCalarie.Logic.ILogic
         ProductViewModel GetProductById(int id);
         void UpdateProduct(int id, ProductViewModel productViewModel);
         void DeleteProduct(int productId);
+        ProductViewModel GetProductByProductCode(string productCode);
     }
 }

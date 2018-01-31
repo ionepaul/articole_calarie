@@ -47,9 +47,9 @@
                     @Html.DisplayFor(modelItem => item.SalePercentage)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    <a onclick="openDeleteModal('@item.ProductCode')">Delete</a>
+                    @Html.ActionLink("Editează", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detalii", "DetailsForAdmin", new { productCode = item.ProductCode  }) |
+                    <a href="javascript:void(0)" onclick="openDeleteModal('@item.ProductCode')">Delete</a>
 
                     <div id="@item.ProductCode" class="modal" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">

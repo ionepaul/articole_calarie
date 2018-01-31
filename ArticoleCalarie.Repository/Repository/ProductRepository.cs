@@ -47,6 +47,20 @@ namespace ArticoleCalarie.Repository.Repository
             return product;
         }
 
+        public Product GetProductByProductCode(string productCode)
+        {
+            var product = _dbset.Where(x => x.ProductCode == productCode)
+                    .Include(x => x.Subcategory)
+                    .Include(x => x.Subcategory.Category)
+                    .Include(x => x.SizeChart)
+                    .Include(x => x.Images)
+                    .Include(x => x.AvailableColors)
+                    .Include(x => x.Brand)
+                    .FirstOrDefault();
+
+            return product;
+        }
+
         public ProductSearchResult GetProductsForAdmin(int itemsPerPage, int itemsToSkip, string productCode)
         {
             var query = _dbset.Include(x => x.Subcategory).Include(x => x.Brand);

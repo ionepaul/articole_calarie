@@ -157,6 +157,17 @@ namespace ArticoleCalarie.Logic.Logic
             return productListAdminViewModel;
         }
 
+        public ProductViewModel GetProductByProductCode(string productCode)
+        {
+            var product = _iProductRepository.GetProductByProductCode(productCode);
+
+            var productViewModel = product.ToViewModel();
+
+            productViewModel.ColorsViewModel = product.AvailableColors?.Select(x => x.ToViewModel()).ToList();
+
+            return productViewModel;
+        }
+
         public async Task<ProductSearchViewResult> GetProductsBySearch(SearchViewModel searchViewModel)
         {
             var searchModel = searchViewModel.ToDbSearchModel();

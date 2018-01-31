@@ -54,5 +54,6 @@ namespace ArticoleCalarie.Models
 
         public List<string> ImagesList { get; set; }
         public List<string> ColorsList { get; set; }
+        public List<ColorViewModel> ColorsViewModel { get; set; }
     }
 }

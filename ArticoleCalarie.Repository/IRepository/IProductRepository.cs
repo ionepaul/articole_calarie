@@ -12,5 +12,6 @@ namespace ArticoleCalarie.Repository.IRepository
         Task<ProductSearchResult> GetProductsBySearch(SearchModel searchModel);
         ProductSearchResult GetProductsForAdmin(int itemsPerPage, int itemsToSkip, string productCode);
         void UpdateProduct(Product product);
+        Product GetProductByProductCode(string productCode);
     }
 }
