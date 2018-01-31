@@ -116,7 +116,7 @@ jQuery(document).ready(function ($) {
       }
     }
 
-     function sticky_menu_run(){
+     /*function sticky_menu_run(){
         if($(window).width() > 1024) {
             if ($(window).scrollTop() > 350) {
                 $('.header .box-sticky').addClass('is-sticky');
@@ -127,7 +127,7 @@ jQuery(document).ready(function ($) {
                 $('.header .this-sticky').removeClass('box-sticky');
             }
         }
-    }
+    }*/
 
     function kt_innit_carousel(){
         //owl has thumbs 
