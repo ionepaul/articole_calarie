@@ -52,7 +52,7 @@ namespace ArticoleCalarie.Logic.Logic
 
             callbackUrl += "?code=" + code;
 
-            await SendRestEmail(email, callbackUrl);
+            await SendResetEmail(email, callbackUrl);
         }
 
         public async Task<SignInStatus> SignIn(LoginViewModel model)
@@ -74,7 +74,12 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task<IdentityResult> CreateExternalAccountLogin(string email, string fullName, UserLoginInfo loginInfo)
         {
-            var userModel = new UserModel { UserName = email, Email = email, FullName = fullName };
+            var userModel = new UserModel
+            {
+                UserName = email,
+                Email = email,
+                FullName = fullName
+            };
 
             var result = await _iAccountRepository.CreateExternalAccountAndSignIn(userModel, loginInfo);
 
@@ -92,7 +97,7 @@ namespace ArticoleCalarie.Logic.Logic
 
             if (userModel == null)
             {
-                //throw Exception();
+                throw new Exception("Invalid user identifier.");
             }
 
             var userViewModel = userModel.ToViewModel();
@@ -106,7 +111,7 @@ namespace ArticoleCalarie.Logic.Logic
 
             if (userModel == null)
             {
-                //throw Exception();
+                throw new Exception("Invalid user identifier.");
             }
 
             var address = addressViewModel.ToDbAddress();
@@ -116,14 +121,7 @@ namespace ArticoleCalarie.Logic.Logic
                 case AddressType.Billing:
                     if (userModel.BillingAddress != null)
                     {
-                        userModel.BillingAddress.FullName = address.FullName;
-                        userModel.BillingAddress.PhoneNumber = address.PhoneNumber;
-                        userModel.BillingAddress.AddressLine1 = address.AddressLine1;
-                        userModel.BillingAddress.AddressLine2 = address.AddressLine2;
-                        userModel.BillingAddress.PostalCode = address.PostalCode;
-                        userModel.BillingAddress.City = address.City;
-                        userModel.BillingAddress.County = address.County;
-                        userModel.BillingAddress.Country = address.Country;
+                        UpdateAddress(userModel.BillingAddress, address);
                     }
                     else
                     {
@@ -133,14 +131,7 @@ namespace ArticoleCalarie.Logic.Logic
                 case AddressType.Delivery:
                     if (userModel.DeliveryAddress != null)
                     {
-                        userModel.DeliveryAddress.FullName = address.FullName;
-                        userModel.DeliveryAddress.PhoneNumber = address.PhoneNumber;
-                        userModel.DeliveryAddress.AddressLine1 = address.AddressLine1;
-                        userModel.DeliveryAddress.AddressLine2 = address.AddressLine2;
-                        userModel.DeliveryAddress.PostalCode = address.PostalCode;
-                        userModel.DeliveryAddress.City = address.City;
-                        userModel.DeliveryAddress.County = address.County;
-                        userModel.DeliveryAddress.Country = address.Country;
+                        UpdateAddress(userModel.DeliveryAddress, address);
                     }
                     else
                     {
@@ -148,18 +139,10 @@ namespace ArticoleCalarie.Logic.Logic
                     }
                     break;
                 default:
-                    //Throw exception invalid address type
-                    break;
+                    throw new Exception("Invalid address type.");
             }
 
-            try
-            {
-                await _iAccountRepository.UpdateUserAsync(userModel);
-            }
-            catch(Exception ex)
-            {
-                //log and handle
-            }
+            await _iAccountRepository.UpdateUserAsync(userModel);
         }
 
         #endregion 
@@ -184,7 +167,7 @@ namespace ArticoleCalarie.Logic.Logic
             await _iMailService.SendMail(emailModel);
         }
 
-        private async Task SendRestEmail(string email, string callbackUrl)
+        private async Task SendResetEmail(string email, string callbackUrl)
         {
             //var templatePath = MailTemplates.ResetPassword;
 
@@ -200,6 +183,18 @@ namespace ArticoleCalarie.Logic.Logic
             };
 
             await _iMailService.SendMail(emailModel);
+        }
+
+        private void UpdateAddress(Address oldAddress, Address newAddress)
+        {
+            oldAddress.FullName = newAddress.FullName;
+            oldAddress.PhoneNumber = newAddress.PhoneNumber;
+            oldAddress.AddressLine1 = newAddress.AddressLine1;
+            oldAddress.AddressLine2 = newAddress.AddressLine2;
+            oldAddress.PostalCode = newAddress.PostalCode;
+            oldAddress.City = newAddress.City;
+            oldAddress.County = newAddress.County;
+            oldAddress.Country = newAddress.Country;
         }
 
         #endregion
