@@ -393,23 +393,6 @@ jQuery(document).ready(function ($) {
     //   }
     // }
 
-    function quickview_popup(){
-      var window_size = parseFloat(jQuery('body').innerWidth());
-      window_size += kt_get_scrollbar_width();
-      if(window_size > 992){
-         $(document).on('click','.quickview-button',function(){
-              $.magnificPopup.open({
-                 items: {
-                  src: '<div class="popup-quickview "><div class="about-product"><div class="details-thumb"><div class="owl-carousel has-thumbs" data-autoplay="false" data-nav="false" data-dots="false" data-loop="true" data-slidespeed="800" data-margin="1"><div class="details-item"><div class="main-img"><a href="product-details"><img src="images/q1.jpg" alt=""></a></div></div><div class="details-item"><div class="main-img"><a href="product-details"><img src="images/q2.jpg" alt=""></a></div></div><div class="details-item"><div class="main-img"><a href="product-details"><img src="images/q3.jpg" alt=""></a></div></div></div></div><div class="details-info"><a class="product-name" href="#">Herschel Supply bag </a><div class="price"><span class="ins">245.00 RON</span></div><ul class="list-color"><li><a href="#" class="red"></a></li><li class="current"><a href="#" class="blue-0"></a></li><li><a href="#" class="black"></a></li><li><a href="#" class="green"></a></li></ul><div class="quantity"><input class="input-text qty text" type="text" size="4" title="Qty" value="1" name="quantity"><div class="group-quantity-button"><a class="plus" href="#"><i class="fa fa-sort-asc" aria-hidden="true"></i></a><a class="minus" href="#"><i class="fa fa-sort-desc" aria-hidden="true"></i></a></div></div><a href="#" class="add-to-cart">ADAUGĂ ÎN COȘ</a><a href="product-details.html" class="view-details">Vezi detalii <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></div></div></div>',
-                  type: 'inline'
-               }
-               });
-              kt_innit_carousel();
-              return false;
-           });
-      }
-    }
-
     function compare_popup(){
       var window_size = parseFloat(jQuery('body').innerWidth());
       window_size += kt_get_scrollbar_width();
@@ -443,7 +426,6 @@ jQuery(document).ready(function ($) {
     sticky_menu();
     kt_innit_carousel();
     special_banner();
-    quickview_popup();
     compare_popup();
 
     $(window).scroll(function() {
@@ -454,14 +436,12 @@ jQuery(document).ready(function ($) {
       kt_resizeMegamenu();
       kt_verticalMegamenu();
       kt_innit_carousel();
-      quickview_popup();
       compare_popup();
     });
     $(window).load(function(){
       kt_scroll();
       kt_innit_carousel();
       //newletter_popup();
-      quickview_popup();
       compare_popup();
     });
 });

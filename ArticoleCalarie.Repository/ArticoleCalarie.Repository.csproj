@@ -96,7 +96,9 @@
     <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\ISizeChartRepository.cs" />
     <Compile Include="IRepository\ISubcategoryRepository.cs" />
+    <Compile Include="Models\ColorDTO.cs" />
     <Compile Include="Models\ProductSearchResult.cs" />
+    <Compile Include="Models\SearchFilters.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Repository\AbstractRepository.cs" />
     <Compile Include="Entities\UserModel.cs" />

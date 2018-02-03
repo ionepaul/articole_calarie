@@ -7,5 +7,7 @@ namespace ArticoleCalarie.Models
         public int TotalCount { get; set; }
 
         public IEnumerable<ProductListViewItemModel> Products { get; set; }
+    
+        public virtual object PagedProductModel { get; set; }
     }
 }

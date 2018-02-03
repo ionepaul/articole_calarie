@@ -116,6 +116,8 @@ namespace ArticoleCalarie.Web.Controllers
         {
             _logger.Info("VIEW > Product List By Subcategory and Search Model");
 
+            ViewBag.SubcategoryId = subcategoryId;
+
             try
             {
                 var searchViewModel = new SearchViewModel
@@ -126,7 +128,13 @@ namespace ArticoleCalarie.Web.Controllers
 
                 var productSearchViewResult = await _iProductLogic.GetProductsBySearch(searchViewModel);
 
-                return View(productSearchViewResult);
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+
+                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(productSearchViewResult.Products, pageNumber, pageSize, productSearchViewResult.TotalCount);
+
+                //productSearchViewResult.PagedProductModel = pagedListModel;
+
+                return View(pagedListModel);
             }
             catch (Exception ex)
             {
@@ -137,7 +145,6 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public ActionResult DetailsForAdmin(string productCode)
         {
             _logger.Info("VIEW > Product Detail for Admin");
@@ -154,7 +161,14 @@ namespace ArticoleCalarie.Web.Controllers
 
                 return View("Error");
             }
+        }
 
+        [HttpGet]
+        public ActionResult ProductListSearchPartial(int subcategoryId)
+        {
+            var searchFilters = _iProductLogic.GetSearchViewFiltersForSubcategory(subcategoryId);
+
+            return PartialView("_ProductListSearch", searchFilters);
         }
 
         #endregion
