@@ -131,8 +131,12 @@ jQuery(document).ready(function ($) {
 
     function kt_innit_carousel(){
         //owl has thumbs 
+   
+        // check if there's only 1 time in the thumbs
+        var isMulti = ($('.owl-carousel .item').length > 1) ? true : false;
+   
         $('.owl-carousel.has-thumbs').owlCarousel({
-            loop: true,
+            loop: isMulti,
             items: 1,
             thumbs: true,
             thumbImage: true,

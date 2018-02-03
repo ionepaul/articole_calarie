@@ -26,6 +26,16 @@
                 </div>
                 <div class="details-info">
                     <a class="product-name">@Model.ProductName </a>
+                    <div class="rating">
+                        <ul class="list-star">
+                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                        </ul>
+                        <span class="text">( Be the firt person to review this item )</span>
+                    </div>
                     <div>Cod Produs: @Model.ProductCode</div>
                     <br>
                     <div class="price"><span class="ins">@Model.Price RON</span></div>
@@ -38,46 +48,29 @@
                             <li><a data-id="@color.Id" style="background-color: @color.Hex"></a></li>
                         }
                     </ul>
+                    <div class="quantity">
+                        <input class="input-text qty text" type="text" size="4" title="Qty" value="1" name="quantity">
+                        <div class="group-quantity-button">
+                            <a class="plus" href="#"><i class="fa fa-sort-asc" aria-hidden="true"></i></a>
+                            <a class="minus" href="#"><i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <a href="#" class="add-to-cart">ADD TO CART</a>
+                    <div class="material-details">
+                        @if (hasMaterialDetails) {
+                          <h4>Detalii Material</h4>
+                          <p>@Model.MaterialDetails</p>   
+                        }
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="infomation-form">
-        <div class="container">
-            <div class="kt-tab-fadeeffect nav-tab-style1">
-                <ul class="nav list-nav">
-                    @if (hasMaterialDetails)
-                    {
-                        <li class="active"><a data-animated="zoomInUp" data-toggle="pill" href="#tab2">Detalii Material</a></li>
-                    }
-                    @if (hasSizeChart)
-                    {
-                        <li><a data-animated="zoomInUp" data-toggle="pill" href="#tab3">Tabel de marimi</a></li>
-                    }
-                </ul>
-                <div class="tab-content">
-                    @if (hasMaterialDetails)
-                    {
-                        <div id="tab2" class="tab-panel active">
-                            <div class="additional">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                                        <p>@Model.MaterialDetails</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    @if (hasSizeChart)
-                    {
-                        <div id="tab3" class="tab-panel">
-                            <div class="additional">
-                                <img src="~/images/products/@Model.SizeChartImage" />
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
+    <div class="product-size-chart">
+        @if (hasSizeChart)
+        {
+            <h4>Tabel de marimi</h4>
+            <p><img src="~/images/products/@Model.SizeChartImage" /></p>
+        }
     </div>
 </div>

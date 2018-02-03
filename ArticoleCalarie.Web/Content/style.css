@@ -348,6 +348,7 @@ ul#colors-list li.selected::after,
 .product-list-header {
     position: relative;
     margin-bottom: 20px;
+    background: #393D40;
 }
 
     .product-list-header .product-list-add-btn {
@@ -361,6 +362,20 @@ ul#colors-list li.selected::after,
             border: none;
             text-transform: uppercase;
             font-weight: bold;
+        }
+
+        .product-list-header input {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            padding: 20px;
+        }
+
+        #products-content {
+            margin-top: 50px;
+            overflow-x: auto;
         }
 
     /* MY GENERAL CLASSES */
@@ -377,7 +392,7 @@ body ul {
 
 .body-content {
     min-height: 100%;
-    margin-top: 150px;
+    margin-top: 90px;
 }
 
 .page-wrapper {
@@ -4954,6 +4969,8 @@ input {
 }
 .product-item .thumb {
   position: relative;
+  height: 300px;
+  overflow: hidden;
 }
 .product-item .thumb img {
   width: 100%;
@@ -5599,6 +5616,22 @@ input {
 }
 .about-product .owl-carousel.has-thumbs .owl-dots {
   display: none !important;
+}
+.about-product .material-details {
+    margin-top: 28px;
+}
+.product-size-chart {
+    text-align: center;
+}
+.product-size-chart h4 {
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+.product-size-chart img {
+    width: 100%;
 }
 .rating .list-star {
   margin-right: 5px;
@@ -8763,6 +8796,17 @@ input {
 }
 @media(max-width: 991px) {
 
+    .body-content {
+        margin-top: 130px;
+    }
+
+    .product-list-header input {
+        position: static;
+        transform: none;
+        width: 100%;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+    }
+
 .progress-container {
     top: 141px;
 }
@@ -9202,6 +9246,18 @@ input {
 }
 @media(max-width: 767px) {
 
+    .product-size-chart {
+        margin-bottom: 40px;
+    }
+
+    .product-single-page .breadcrumbs {
+        margin-top: 35px;
+    }
+
+    .body-content {
+        margin-top: 170px;
+    }
+
 .page-wrapper-small {
     width: auto;
 }
@@ -9511,6 +9567,10 @@ input {
 }
 }
 @media(max-width: 639px) {
+
+    .body-content {
+        margin-top: 150px;
+    }
 
 .header-nav .special-container {
     padding: 0 12px;
@@ -9866,6 +9926,16 @@ input {
 }
 }
 @media(max-width: 479px) {
+
+    .product-list-header .product-list-add-btn {
+        position: static;
+    }
+
+    .product-list-header .product-list-add-btn .my-btn-default {
+            padding: 11px 20px;
+            width: 100%;
+            text-align: left;
+    }
 
 .form-flex-wrapper {
     flex-flow: column;
