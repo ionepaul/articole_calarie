@@ -128,5 +128,36 @@ namespace ArticoleCalarie.Repository.Repository
 
             SaveChanges();
         }
+
+        public SearchFilters GetSearchFiltersForSubcategory(int subcategoryId)
+        {
+            var subcategoryProducts = _dbset.Where(x => x.SubcategoryId == subcategoryId).Include(x => x.AvailableColors);
+
+            var searchFilters = new SearchFilters
+            {
+                MinPrice = subcategoryProducts.Min(p => p.Price),
+                MaxPrice = subcategoryProducts.Max(p => p.Price)
+            };
+
+            var productsColors = subcategoryProducts.Where(x => x.AvailableColors.Count > 0)
+                                            .SelectMany(x => x.AvailableColors).Select(y => new ColorDTO { Id = y.Id, HexValue = y.HexValue }).Distinct();
+
+            searchFilters.Colors = productsColors.AsEnumerable();
+
+            var sizes = subcategoryProducts.Select(x => x.Size).Distinct();
+
+            var productsSizes = new List<string>();
+
+            foreach (var sizeList in sizes)
+            {
+                var itemSizes = sizeList.Split(',');
+
+                productsSizes.AddRange(itemSizes);
+            }
+
+            searchFilters.Sizes = productsSizes.Distinct();
+
+            return searchFilters;
+        }
     }
 }

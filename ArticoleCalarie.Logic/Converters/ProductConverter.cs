@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using ArticoleCalarie.Models;
 using ArticoleCalarie.Repository.Entities;
+using ArticoleCalarie.Repository.Models;
 
 namespace ArticoleCalarie.Logic.Converters
 {
@@ -79,13 +80,14 @@ namespace ArticoleCalarie.Logic.Converters
                 Price = product.Price,
                 ProductImageName = product.Images?.FirstOrDefault()?.FileName,
                 IsNew = product.DatePosted > DateTime.Now.AddDays((-1) * daysToKeepProductMarkedNew),
-                IsOnSale = product.SalePercentage != 0,
-                SalePercentage = product.SalePercentage
+                IsOnSale = product.SalePercentage != 0
             };
 
             if (productListViewItemModel.IsOnSale)
             {
-                var saleValue = productListViewItemModel.SalePercentage > 0 ? productListViewItemModel.SalePercentage : (-1) * productListViewItemModel.SalePercentage;
+                var saleValue = product.SalePercentage > 0 ? product.SalePercentage : (-1) * product.SalePercentage;
+
+                productListViewItemModel.SalePercentage = saleValue;
 
                 var salePercentage =(decimal)saleValue / 100;
 
@@ -95,6 +97,19 @@ namespace ArticoleCalarie.Logic.Converters
             }
 
             return productListViewItemModel;
+        }
+
+        public static SearchViewFilters ToViewModel(this SearchFilters searchFilters)
+        {
+            var searchViewFilters = new SearchViewFilters
+            {
+                MinPrice = searchFilters.MinPrice,
+                MaxPrice = searchFilters.MaxPrice,
+                Colors = searchFilters.Colors.Select(x => x.ToViewModel()).ToList(),
+                Sizes = searchFilters.Sizes.ToList()
+            };
+
+            return searchViewFilters;
         }
     }
 }

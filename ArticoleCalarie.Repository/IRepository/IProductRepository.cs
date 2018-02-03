@@ -13,5 +13,6 @@ namespace ArticoleCalarie.Repository.IRepository
         ProductSearchResult GetProductsForAdmin(int itemsPerPage, int itemsToSkip, string productCode);
         void UpdateProduct(Product product);
         Product GetProductByProductCode(string productCode);
+        SearchFilters GetSearchFiltersForSubcategory(int subcategoryId);
     }
 }

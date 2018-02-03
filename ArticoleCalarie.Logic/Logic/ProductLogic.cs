@@ -197,6 +197,15 @@ namespace ArticoleCalarie.Logic.Logic
             return productViewModel;
         }
 
+        public SearchViewFilters GetSearchViewFiltersForSubcategory(int subcategoryId)
+        {
+            var searchFilters = _iProductRepository.GetSearchFiltersForSubcategory(subcategoryId);
+
+            var searchViewFilters = searchFilters.ToViewModel();
+
+            return searchViewFilters;
+        }
+
         #region Private Methods
 
         private void StoreImages(Product product, ProductViewModel productViewModel)

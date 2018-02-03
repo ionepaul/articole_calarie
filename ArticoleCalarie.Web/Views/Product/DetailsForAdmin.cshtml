@@ -7,9 +7,19 @@
 
 <div class="main-content product-single-page">
     <div class="container">
-        <div class="breadcrumbs">
-            <a href="javascript:void(0)" id="back">Inapoi la listă</a> | @Html.ActionLink("Editează", "Edit", new { id = Model.Id })
-        </div>
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="breadcrumbs">
+                <a href="javascript:void(0)" id="back">Inapoi la listă</a> | @Html.ActionLink("Editează", "Edit", new { id = Model.Id })
+            </div>
+        }
+        else
+        {
+            <div class="breadcrumbs">
+                to be bread crumb
+            </div>
+        }
+
         <div class="product-single-content">
             <div class="about-product">
                 <div class="details-thumb">
