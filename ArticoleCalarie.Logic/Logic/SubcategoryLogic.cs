@@ -26,7 +26,7 @@ namespace ArticoleCalarie.Logic.Logic
             }
 
             var subcategoriesByTerm = _iSubcategoryRepository.GetAllByCategoryIdAndSearchTerm(categoryId, searchTerm)
-                                                                   .Select(x => x.ToViewModel());
+                                                             .Select(x => x.ToViewModel());
 
             return subcategoriesByTerm;
         }

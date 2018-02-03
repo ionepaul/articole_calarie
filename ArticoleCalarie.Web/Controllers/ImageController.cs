@@ -3,15 +3,25 @@ using System.Configuration;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 
 namespace ArticoleCalarie.Web.Controllers
 {
     public class ImageController : Controller
     {
+        private static Logger _logger;
+
+        public ImageController()
+        {
+            _logger = LogManager.GetLogger("Image");
+        }
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public string UploadImage(HttpPostedFileBase file)
         {
+            _logger.Info("POST > Upload Image");
+
             if (file.ContentLength > 0)
             {
                 try
@@ -26,7 +36,7 @@ namespace ArticoleCalarie.Web.Controllers
                 }
                 catch (Exception ex)
                 {
-
+                    _logger.Error($"Failed to save image {file.FileName}. Exception: {ex.Message}");
                 }
             }
 
@@ -37,12 +47,21 @@ namespace ArticoleCalarie.Web.Controllers
         [Authorize(Roles = "Admin")]
         public void DeleteImage(string fileName)
         {
-            var serverPath = Server.MapPath(ConfigurationManager.AppSettings["ProductsImagesFolder"]);
-            var filePath = Path.Combine(serverPath, fileName);
+            _logger.Info("POST > Delete Image");
 
-            if (Directory.Exists(Path.GetDirectoryName(serverPath)) && System.IO.File.Exists(filePath))
+            try
             {
-                System.IO.File.Delete(filePath);
+                var serverPath = Server.MapPath(ConfigurationManager.AppSettings["ProductsImagesFolder"]);
+                var filePath = Path.Combine(serverPath, fileName);
+
+                if (Directory.Exists(Path.GetDirectoryName(serverPath)) && System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to delete image {fileName}. Exception: {ex.Message}");
             }
         }
     }

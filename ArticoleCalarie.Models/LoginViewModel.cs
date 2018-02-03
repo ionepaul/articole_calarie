@@ -4,12 +4,12 @@ namespace ArticoleCalarie.Models
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Email-ul este obligatoriu.")]
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Parola este obligatorie.")]
         [DataType(DataType.Password)]
         [Display(Name = "Parola")]
         public string Password { get; set; }

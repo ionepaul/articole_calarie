@@ -50,13 +50,13 @@ namespace ArticoleCalarie.Repository.Repository
         public Product GetProductByProductCode(string productCode)
         {
             var product = _dbset.Where(x => x.ProductCode == productCode)
-                    .Include(x => x.Subcategory)
-                    .Include(x => x.Subcategory.Category)
-                    .Include(x => x.SizeChart)
-                    .Include(x => x.Images)
-                    .Include(x => x.AvailableColors)
-                    .Include(x => x.Brand)
-                    .FirstOrDefault();
+                                .Include(x => x.Subcategory)
+                                .Include(x => x.Subcategory.Category)
+                                .Include(x => x.SizeChart)
+                                .Include(x => x.Images)
+                                .Include(x => x.AvailableColors)
+                                .Include(x => x.Brand)
+                                .FirstOrDefault();
 
             return product;
         }

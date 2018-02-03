@@ -1,15 +1,11 @@
 ﻿using System.Web.Mvc;
-using NLog;
 
 namespace ArticoleCalarie.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private static Logger _logger = LogManager.GetCurrentClassLogger();
-
         public ActionResult Index()
         {
-            _logger.Info("Index");
             return View();
         }
 

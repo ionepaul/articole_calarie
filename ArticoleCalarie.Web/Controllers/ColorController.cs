@@ -16,7 +16,9 @@ namespace ArticoleCalarie.Web.Controllers
         [Authorize(Roles = "Admin")]
         public JsonResult GetColors()
         {
-            return Json(_iColorLogic.GetAllColors(), JsonRequestBehavior.AllowGet);
+            var colors = _iColorLogic.GetAllColors();
+
+            return Json(colors, JsonRequestBehavior.AllowGet);
         }
     }
 }

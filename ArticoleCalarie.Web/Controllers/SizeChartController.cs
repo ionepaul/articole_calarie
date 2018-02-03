@@ -16,7 +16,9 @@ namespace ArticoleCalarie.Web.Controllers
         [Authorize(Roles = "Admin")]
         public JsonResult GetSizeCharts()
         {
-            return Json(_iSizeChartLogic.GetAllSizeCharts(), JsonRequestBehavior.AllowGet);
+            var sizeCharts = _iSizeChartLogic.GetAllSizeCharts();
+
+            return Json(sizeCharts, JsonRequestBehavior.AllowGet);
         }
     }
 }

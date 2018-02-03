@@ -1,7 +1,7 @@
 ﻿//globalVariables
 var selectedCategoryId;
-var savedImages = new Array();
-var savedColors = new Array();
+var savedImages = [];
+var savedColors = [];
 
 $(document).ready(function () {
     loadSizeCharts();
@@ -77,13 +77,11 @@ function previewAndUpload(input, isSizeChart) {
             ImageDir.onload = function (e) {
                 if (!isSizeChart) {
                     $('#imgDirectory').append('<div class="image-wrapper" id="' + containerId + '"></div>');
-                    // $('#' + containerId).append('<div id="progress-wrp"><div class="progress-bar"></div><div class="status">0%</div></div>');
                     $('#' + containerId).append('<img class="image" src="' + e.target.result + '" height="100" />');
                     $('#' + containerId).append('<a class="delete-btn" onclick="deleteImage(\'' + formattedFileName + '\')">delete image</a>');
                 } else {
                     $('#newChartSizeImgContainer').empty();
                     $('#newChartSizeImgContainer').append('<div class="image-wrapper" id="' + containerId + '"></div>');
-                    //$('#' + containerId).append('<div id="progress-wrp"><div class="progress-bar"></div><div class="status">0%</div></div>');
                     $('#' + containerId).append('<img class="image" src="' + e.target.result + '" height="100" />');
                     $('#' + containerId).append('<a class="delete-btn" onclick="deleteImage(\'' + formattedFileName + '\')">delete image</a>');
                 }
@@ -120,7 +118,7 @@ function deleteImage(fileName, isSizeChart) {
             $('#' + fileName.replace('.', '')).remove();
         },
         error: function (error) {
-            // handle error
+            alert("Eroare la stergerea imaginii. Incercati din nou.");
         },
         async: true,
         timeout: 60000
@@ -143,7 +141,7 @@ function loadSizeCharts() {
             }
         },
         error: function (error) {
-            // handle error
+            alert("Eroare la incarcarea tabelelor de marimi. Faceti un refresh la pagina.");
         },
         async: true,
         timeout: 60000
@@ -164,7 +162,7 @@ function loadColors() {
             }
         },
         error: function (error) {
-            // handle error
+            alert("Eroare la incarcarea culorilor. Faceti un refresh la pagina.");
         },
         async: true,
         timeout: 60000
@@ -188,7 +186,7 @@ function loadCategories() {
             $('#CategoryId').val(selectedCategoryId);
         },
         error: function (error) {
-            // handle error
+            alert("Eroare la incarcarea categoriilor. Faceti un refresh la pagina.");
         },
         async: true,
         timeout: 60000
@@ -264,7 +262,7 @@ Upload.prototype.doUpload = function () {
             }
         },
         error: function (error) {
-            // handle error
+            alert("Eroare la salvarea imaginii. Incercati din nou.");
         },
         async: true,
         data: formData,

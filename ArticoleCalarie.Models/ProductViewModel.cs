@@ -7,23 +7,23 @@ namespace ArticoleCalarie.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Titlul produsului este obligatoriu.")]
         [Display(Name ="Titlu produs")]
         public string ProductName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Descrierea este obligatorie.")]
         [Display(Name = "Descriere")]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Categoria este obligatorie.")]
         [Display(Name = "Categorie")]
         public int CategoryId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Subcategoria este obligatorie.")]
         [Display(Name = "Subcategorie")]
         public string SubcategoryId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Prețul este obligatoriu.")]
         [Display(Name = "Preț")]
         public string Price { get; set; }
 
@@ -51,9 +51,10 @@ namespace ArticoleCalarie.Models
         [Display(Name = "Cod produs")]
         public string ProductCode { get; set; }
 
-
         public List<string> ImagesList { get; set; }
+
         public List<string> ColorsList { get; set; }
+
         public List<ColorViewModel> ColorsViewModel { get; set; }
     }
 }

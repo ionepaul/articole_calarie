@@ -187,6 +187,11 @@ namespace ArticoleCalarie.Logic.Logic
         {
             var product = _iProductRepository.GetProductById(id);
 
+            if (product == null)
+            {
+                throw new Exception("Invalid product identifier.");
+            }
+
             var productViewModel = product.ToViewModel();
 
             return productViewModel;
@@ -216,7 +221,7 @@ namespace ArticoleCalarie.Logic.Logic
             }
             catch (Exception)
             {
-                //log and handle
+                throw new Exception("Invalid price.");
             }
         }
 
@@ -230,7 +235,11 @@ namespace ArticoleCalarie.Logic.Logic
             }
             catch (FormatException)
             {
-                var newSubcategory = new Subcategory { Name = productViewModel.SubcategoryId, CategoryId = productViewModel.CategoryId };
+                var newSubcategory = new Subcategory
+                {
+                    Name = productViewModel.SubcategoryId,
+                    CategoryId = productViewModel.CategoryId
+                };
 
                 product.Subcategory = newSubcategory;
             }
@@ -283,7 +292,7 @@ namespace ArticoleCalarie.Logic.Logic
             }
             catch (Exception)
             {
-                //log and handle
+                throw new Exception("Invalid color identifier.");
             }
         }
 
