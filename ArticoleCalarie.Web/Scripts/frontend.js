@@ -296,9 +296,9 @@ jQuery(document).ready(function ($) {
         min: min,
         max: max,
         values: [ value_min, value_max ],
-        slide: function( event, ui ) {
-          var result = '<span class="from">'+ unit + ui.values[ 0 ] +' </span><span class="to"> '+ unit +ui.values[ 1 ]+'</span>';
-          t.closest('.price-filter').find('.amount-range-price').html(result);
+        slide: function (event, ui) {
+            var result = '<span class="from">' + ui.values[0].toFixed(2) + ' -' + ' </span><span class="to"> ' + ui.values[1].toFixed(2) + '</span>';
+          t.closest('.price-filter').find('.amount-range-price').html('Price: ' + result + ' ' + unit);
         }
       });
     });

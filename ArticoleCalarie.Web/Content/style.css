@@ -163,6 +163,16 @@ body{
   line-height: 24px;
 }
 
+.search-filters {
+    width: 100%;
+    background: #324a76;
+    border: 0;
+    color: #ffffff;
+    margin-bottom: 35px;
+    padding: 5px;
+    text-transform: capitalize;
+}
+
 .form-control {
     border-radius: 0;
 }
@@ -810,7 +820,8 @@ input {
 
 }
 .menu-item-has-children:first-child .submenu {
-  left: 0;
+  left: -293px !important;
+  width: 1480px;
 }
 .menu-item-has-children:last-child .submenu {
   right: 0;
@@ -3620,6 +3631,31 @@ input {
 }
 .inner-page .pagination {
   margin: 55px 0 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination>li>a, .pagination>li>span {
+    border: 0;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    color: #555;
+}
+
+.pagination>li:first-child>a, .pagination>li:first-child>span {
+    border: 0;
+    border-radius: 100%;
+}
+
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+    background-color: #222;
+}
+
+.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus {
+    background-color: #222;
+    color: #ffffff;
 }
 
 /*WIDGET*/
