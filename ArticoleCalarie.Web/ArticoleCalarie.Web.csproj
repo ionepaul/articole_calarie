@@ -716,7 +716,7 @@
     <Content Include="Views\Product\ProductViewList.cshtml" />
     <Content Include="Views\Product\_ProductListForAdmin.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
-    <Content Include="Views\Product\DetailsForAdmin.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\_ProductListSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>

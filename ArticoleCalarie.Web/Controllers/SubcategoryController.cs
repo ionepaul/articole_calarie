@@ -13,7 +13,6 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public JsonResult GetSubcategories(int categoryId, string searchTerm)
         {
             var subcategories = _iSubcategoryLogic.GetAllSubcategories(categoryId, searchTerm);

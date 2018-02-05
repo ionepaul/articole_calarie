@@ -8,22 +8,28 @@
     });
 
     function searchProducts(productCode) {
+        showLoader();
+
         $.ajax({
             type: "GET",
             cache: false,
             url: "ProductListForAdmin?pageNumber=1&productCode=" + productCode,
             success: function (result) {
+                hideLoader();
                 $('#products-content').html(result);
             }
         });
     }
 
     $(document).on("click", "#content-pager a[href]", function () {
+        showLoader();
+
         $.ajax({
             url: $(this).attr("href"),
             type: 'GET',
             cache: false,
             success: function (result) {
+                hideLoader();
                 $('#products-content').html(result);
             }
         });

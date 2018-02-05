@@ -13,7 +13,6 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public JsonResult GetBrands(string searchTerm)
         {
             var brands = _iBrandLogic.GetAllBrands(searchTerm);

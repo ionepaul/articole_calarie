@@ -58,50 +58,49 @@
                                         <div class="widget widget-custom-menu">
                                             <h3 class="widgettitle">Antrenament</h3>
                                             <ul>
-                                                <li><a href="grid-category.html">Pantaloni de antrenament</a></li>
-                                                <li><a href="home2.html">Pantaloni de concurs</a></li>
-                                                <li><a href="home3.html">Tricouri</a></li>
-                                                <li><a href="home4.html">Chaps</a></li>
+                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 2, pageNumber = 1 })">Manusi</a></li>
+                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 3, pageNumber = 1 })">Cizme</a></li>
+                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 4, pageNumber = 1 })">Ghete</a></li>
+                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 5, pageNumber = 1 })">Tricouri</a></li>
                                             </ul>
                                         </div>
                                         <div class="widget widget-custom-menu">
                                             <h3 class="widgettitle">Concurs</h3>
                                             <ul>
-                                                <li><a href="home5.html">Ghete și cizme</a></li>
-                                                <li><a href="home6.html">Sacouri de concurs</a></li>
-                                                <li><a href="home7.html">Geci și veste</a></li>
+                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 6, pageNumber = 1 })">Echipament protectie</a></li>
+                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 7, pageNumber = 1 })">Accesorii</a></li>
+                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 8, pageNumber = 1 })">Accesorii</a></li>
+                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 9, pageNumber = 1 })">Pinteni</a></li>
                                             </ul>
                                         </div>
                                         <div class="widget widget-custom-menu">
                                             <h3 class="widgettitle">Accesorii</h3>
                                             <ul>
-                                                <li><a href="home8.html">Cămăși</a></li>
+                                                @*<li><a href="home8.html">Cămăși</a></li>
                                                 <li><a href="home9.html">Mănuși</a></li>
-                                                <li><a href="home10.html">Accesorii</a></li>
+                                                <li><a href="home10.html">Accesorii</a></li>*@
                                             </ul>
                                         </div>
                                     </div>
                                 </li>
                                 <li class="menu-item menu-item-has-children">
-                                    <a href="#" class="kt-item-title" title="Demos">CAL</a>
-                                    <ul class="submenu">
-                                        <li><a href="product-details.html">Frâie</a></li>
-                                        <li><a href="list-category.html">Pieptare</a></li>
-                                        <li><a href="grid-category.html">Jambieri</a></li>
-                                        <li><a href="category-nosidebar.html">Valtrape</a></li>
-                                        <li><a href="category-banner.html">Burete</a></li>
-                                        <li><a href="category-banner.html">Întreținere</a></li>
-                                        <li><a href="category-banner.html">Suplimente</a></li>
+                                    <a href="#" class="kt-item-title" title="Cal">CAL</a>
+                                    <ul id="horse-products-list" class="submenu">
+                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 10, pageNumber = 1 })">Pinteni</a></li>
+                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 11, pageNumber = 1 })">Frau</a></li>
+                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 12, pageNumber = 1 })">Fraie</a></li>
+                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 13, pageNumber = 1 })">Darlogi</a></li>
+                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 14, pageNumber = 1 })">Accesorii frau</a></li>
+                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 15, pageNumber = 1 })">Martingala</a></li>
+                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 16, pageNumber = 1 })">Valtrap</a></li>
+                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 17, pageNumber = 1 })">Reflex</a></li>
+                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 18, pageNumber = 1 })">Coarda</a></li>
+                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 19, pageNumber = 1 })">Accesorii zabalute</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu-item menu-item-has-children">
-                                    <a href="#" class="kt-item-title" title="Demos">BRANDS</a>
-                                    <ul class="submenu">
-                                        <li><a href="product-details.html">Animo</a></li>
-                                        <li><a href="list-category.html">Kingsland</a></li>
-                                        <li><a href="grid-category.html">Equiline</a></li>
-                                        <li><a href="category-nosidebar.html">Freejump</a></li>
-                                    </ul>
+                                    <a href="#" id="brands-section" class="kt-item-title" title="Brands">BRANDS</a>
+                                    <ul id="brands-list" class="submenu"></ul>
                                 </li>
                                 <!-- <li class="menu-item menu-item-has-children categories">
                                     <span class="top-flash hot">hot</span>
@@ -192,7 +191,7 @@
     </header>
 
     <div class="container body-content">
-        @RenderBody()     
+        @RenderBody()
     </div>
 
     <footer>
@@ -283,10 +282,7 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/external")
-    @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("scripts", required: false)
+
     <script>
         $(document).ready(function () {
             $('#back').on('click', function () {
@@ -300,7 +296,25 @@
             $(window).load(function () {
                 $("#spinner").addClass("hidden");
             });
+
+            loadBrands();
+            loadSubcategories();
         });
+
+        function showLoader() {
+            $("#spinner").removeClass("hidden");
+        }
+
+        function hideLoader() {
+            $("#spinner").addClass("hidden");
+        }
+
     </script>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/external")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("scripts", required: false)
+
 </body>
 </html>

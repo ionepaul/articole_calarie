@@ -145,7 +145,7 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult DetailsForAdmin(string productCode)
+        public ActionResult Details(string productCode)
         {
             _logger.Info("VIEW > Product Detail for Admin");
 

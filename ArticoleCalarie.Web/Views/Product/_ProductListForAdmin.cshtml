@@ -48,7 +48,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Editează", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detalii", "DetailsForAdmin", new { productCode = item.ProductCode  }) |
+                    @Html.ActionLink("Detalii", "Details", new { productCode = item.ProductCode  }) |
                     <a href="javascript:void(0)" onclick="openDeleteModal('@item.ProductCode')">Delete</a>
 
                     <div id="@item.ProductCode" class="modal" tabindex="-1" role="dialog">

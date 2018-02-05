@@ -144,19 +144,25 @@ namespace ArticoleCalarie.Repository.Repository
 
             searchFilters.Colors = productsColors.AsEnumerable();
 
-            var sizes = subcategoryProducts.Select(x => x.Size).Distinct();
+            var sizes = subcategoryProducts.Select(x => x.Size).Distinct().ToList();
 
             var productsSizes = new List<string>();
 
-            foreach (var sizeList in sizes)
+            if (sizes != null && sizes.Count() > 0)
             {
-                var itemSizes = sizeList.Split(',');
+                foreach (var sizeList in sizes)
+                {
+                    if (sizeList != null)
+                    {
+                        var itemSizes = sizeList.Split(',');
 
-                productsSizes.AddRange(itemSizes);
+                        productsSizes.AddRange(itemSizes);
+                    }
+                }
+
+                searchFilters.Sizes = productsSizes.Distinct();
             }
-
-            searchFilters.Sizes = productsSizes.Distinct();
-
+  
             return searchFilters;
         }
     }

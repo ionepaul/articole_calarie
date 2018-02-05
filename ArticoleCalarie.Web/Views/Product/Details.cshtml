@@ -1,6 +1,6 @@
 ﻿@model ArticoleCalarie.Models.ProductViewModel
 @{
-    ViewBag.Title = "DetailsForAdmin";
+    ViewBag.Title = "Details";
     bool hasMaterialDetails = !string.IsNullOrEmpty(Model.MaterialDetails);
     bool hasSizeChart = !string.IsNullOrEmpty(Model.SizeChartImage);
 }
@@ -36,7 +36,7 @@
                 </div>
                 <div class="details-info">
                     <a class="product-name">@Model.ProductName </a>
-                    <div class="rating">
+                    @*<div class="rating">
                         <ul class="list-star">
                             <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
                             <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
@@ -45,7 +45,7 @@
                             <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
                         </ul>
                         <span class="text">( Be the firt person to review this item )</span>
-                    </div>
+                    </div>*@
                     <div>Cod Produs: @Model.ProductCode</div>
                     <br>
                     <div class="price"><span class="ins">@Model.Price RON</span></div>
