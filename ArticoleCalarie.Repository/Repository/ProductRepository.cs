@@ -99,7 +99,25 @@ namespace ArticoleCalarie.Repository.Repository
 
         public async Task<ProductSearchResult> GetProductsBySearch(SearchModel searchModel)
         {
-            var query = _dbset.Where(x => x.SubcategoryId == searchModel.SubcategoryId).Include(x => x.Images).OrderBy(x => x.DatePosted);
+            var query = _dbset.Where(x => x.SubcategoryId == searchModel.SubcategoryId)
+                              .Include(x => x.Images);
+
+            if (searchModel.MinPrice.HasValue && searchModel.MaxPrice.HasValue)
+            {
+                query = query.Where(x => x.Price >= searchModel.MinPrice.Value &&  x.Price <= searchModel.MaxPrice.Value);
+            }
+
+            if (searchModel.ColorIds != null && searchModel.ColorIds.Count > 0)
+            {
+                query = query.Where(x => searchModel.ColorIds.Intersect(x.AvailableColors.Select(y => y.Id)).Count() > 0);
+            }
+
+            if (searchModel.Sizes != null && searchModel.Sizes.Count > 0)
+            {
+                query = query.Where(x => searchModel.Sizes.Intersect(x.Size.Split(',').ToList()).Count() > 0);
+            }
+
+            query = query.OrderBy(x => x.DatePosted);
 
             var productSearchResult = new ProductSearchResult
             {

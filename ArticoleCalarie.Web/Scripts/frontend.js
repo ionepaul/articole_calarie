@@ -267,21 +267,6 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    function kt_countdown(){
-      if($('.kt-countdown').length >0){
-        var labels = ['Years', 'Months', 'Weeks', 'Days', 'Hrs', 'Mins', 'Secs'];
-        var layout = '<span class="box-count day"><ul><li class="number">{dnn}</li> <li class="text">Days</li></ul></span><span class="box-count hrs"><ul><li class="number">{hnn}</li> <li class="text">Hours</li></ul></span><span class="box-count min"><ul><li class="number">{mnn}</li> <li class="text">Mins</li></ul></span><span class="box-count secs"><ul><li class="number">{snn}</li> <li class="text">Secs</li></ul></span>';
-        $('.kt-countdown').each(function() {
-          var austDay = new Date($(this).data('y'),$(this).data('m') - 1,$(this).data('d'),$(this).data('h'),$(this).data('i'),$(this).data('s'));
-          $(this).countdown({
-            until: austDay,
-            labels: labels, 
-            layout: layout
-          });
-        });
-      }
-    };
-
     // Price filter
     $('.slider-range-price').each(function(){
       var min             = parseFloat($(this).data('min'));
@@ -297,7 +282,7 @@ jQuery(document).ready(function ($) {
         max: max,
         values: [ value_min, value_max ],
         slide: function (event, ui) {
-            var result = '<span class="from">' + ui.values[0].toFixed(2) + ' -' + ' </span><span class="to"> ' + ui.values[1].toFixed(2) + '</span>';
+            var result = '<span class="from">' + ui.values[0].toFixed(2).replace(".", ",") + ' -' + ' </span><span class="to"> ' + ui.values[1].toFixed(2).replace(".", ",") + '</span>';
           t.closest('.price-filter').find('.amount-range-price').html('Price: ' + result + ' ' + unit);
         }
       });
@@ -423,7 +408,6 @@ jQuery(document).ready(function ($) {
 
     $(".chosen-select").chosen({disable_search_threshold: 10});
     /*newletter_popup(); */
-    kt_countdown();
     kt_tab_fadeeffect();
     kt_resizeMegamenu();
     kt_verticalMegamenu();
@@ -431,10 +415,6 @@ jQuery(document).ready(function ($) {
     kt_innit_carousel();
     special_banner();
     compare_popup();
-
-    $(window).scroll(function() {
-      sticky_menu_run();
-    });
 
     $(window).resize(function(){
       kt_resizeMegamenu();

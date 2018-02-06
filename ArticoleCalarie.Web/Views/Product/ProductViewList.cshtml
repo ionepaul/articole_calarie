@@ -7,7 +7,7 @@
 
 <div class="main-content grid-category-page inner-page">
     <div class="container">
-        <div class="row">
+        <div id="product-list-page" class="row">
             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 right-content">
                 <div class="auto-clear">
                     <div class="top-control box-has-content">
@@ -83,3 +83,37 @@
         </div>
     </div>
 </div>
+
+@section scripts {
+    <script>
+        var subcategoryId = @ViewBag.SubcategoryId;
+        $(document).ready(function () {
+            var colorIds = [];
+            var sizes = 0;
+
+            $("#product-list-page").on("click", "#searchColors li a", function () {
+                let colorId = $(this).parent().attr("id");
+                var colorIndex = colorIds.indexOf(colorId);
+
+                if (colorIndex > -1) {
+                    $(this).parent().removeClass("current");
+                    colorIds.splice(colorIndex, 1);
+                }
+                else {
+                    $(this).parent().addClass("current");
+                    colorIds.push(colorId);
+                }
+            });
+
+            $("#product-list-page").on('click', '#search', function () {
+                let minPrice = $(".amount-range-price .from").text().replace(/\s/g, '').replace(/-/g, '').replace(',','.');
+                let maxPrice = $(".amount-range-price .to").text().replace(/\s/g, '').replace(/-/g, '').replace(',', '.');
+
+                showLoader();
+
+                window.location.href = '/Product/ProductViewList?subcategoryId=' + subcategoryId + '&pageNumber=1&minPrice=' + minPrice + '&maxPrice=' + maxPrice + '&colors=' + colorIds;                
+            });
+        });
+    </script>
+
+}

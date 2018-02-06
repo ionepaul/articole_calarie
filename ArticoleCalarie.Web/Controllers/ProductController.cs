@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -112,7 +113,7 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> ProductViewList(int subcategoryId, int pageNumber)
+        public async Task<ActionResult> ProductViewList(int subcategoryId, int pageNumber, decimal? minPrice, decimal? maxPrice, string colors = "", string sizes = "")
         {
             _logger.Info("VIEW > Product List By Subcategory and Search Model");
 
@@ -123,7 +124,11 @@ namespace ArticoleCalarie.Web.Controllers
                 var searchViewModel = new SearchViewModel
                 {
                     SubcategoryId = subcategoryId,
-                    PageNumber = pageNumber
+                    PageNumber = pageNumber,
+                    MinPrice = minPrice,
+                    MaxPrice = maxPrice,
+                    ColorIds = colors,
+                    Sizes = sizes
                 };
 
                 var productSearchViewResult = await _iProductLogic.GetProductsBySearch(searchViewModel);
@@ -131,8 +136,6 @@ namespace ArticoleCalarie.Web.Controllers
                 int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
 
                 var pagedListModel = new StaticPagedList<ProductListViewItemModel>(productSearchViewResult.Products, pageNumber, pageSize, productSearchViewResult.TotalCount);
-
-                //productSearchViewResult.PagedProductModel = pagedListModel;
 
                 return View(pagedListModel);
             }

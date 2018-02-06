@@ -290,11 +290,15 @@
             });
 
             $("#content-pager a[href]").on("click", function () {
-                $("#spinner").removeClass("hidden");
+                showLoader();
+            });
+
+            $("#menu-main-menu a[href]").on("click", function () {
+                showLoader();
             });
 
             $(window).load(function () {
-                $("#spinner").addClass("hidden");
+                hideLoader();
             });
         });
 
@@ -309,9 +313,10 @@
     </script>
 
     @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/external")
     @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("scripts", required: false)
+
 
 </body>
 </html>
