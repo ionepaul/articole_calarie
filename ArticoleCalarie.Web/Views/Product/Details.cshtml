@@ -3,6 +3,7 @@
     ViewBag.Title = "Details";
     bool hasMaterialDetails = !string.IsNullOrEmpty(Model.MaterialDetails);
     bool hasSizeChart = !string.IsNullOrEmpty(Model.SizeChartImage);
+    var sizes = Model.Size.Split(',');
 }
 
 <div class="main-content product-single-page">
@@ -49,8 +50,19 @@
                     <div>Cod Produs: @Model.ProductCode</div>
                     <br>
                     <div class="price"><span class="ins">@Model.Price RON</span></div>
-                    <div>Reducere: @Model.SalePercentage%</div>
-                    <div>Mărimi: @Model.Size</div>
+                    @if (Model.SalePercentage != 0)
+                    {
+                        <div>Reducere: @Model.SalePercentage%</div>
+                    }
+                    <br />
+                    <div> <strong>Mărimi</strong> 
+                        <select>
+                            @foreach (var size in sizes)
+                            {
+                                <option>@size</option>
+                            }
+                        </select> 
+                    </div>
                     <div class="des">@Model.Description</div>
                     <ul class="list-color">
                         @foreach (var color in Model.ColorsViewModel)

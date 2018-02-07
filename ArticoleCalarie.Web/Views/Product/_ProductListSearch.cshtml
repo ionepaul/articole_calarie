@@ -1,21 +1,39 @@
 ﻿@model ArticoleCalarie.Models.SearchViewFilters
+@using ArticoleCalarie.Models
+
+@{
+    var savedFilters = Session["SearchModel"] as SearchViewModel;
+}
 
 <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 left-sidebar">
     <div class="widget widget_filter_price box-has-content">
-        <button id="search" class="search-filters">search</button>
         <h3 class="widgettitle">Preţ</h3>
         <div class="price-filter">
             <div id="priceFilter" data-label-reasult="price:" data-min="@Model.MinPrice" data-max="@Model.MaxPrice" data-unit="RON" class="slider-range-price" data-value-min="@Model.MinPrice" data-value-max="@Model.MaxPrice"></div>
-            <div class="amount-range-price">Price: <span id="priceFilterMin" class="from">@Model.SelectedMinPrice</span> - <span id="priceFilterMax" class="to">@Model.SelectedMaxPrice</span> RON</div>
-            @*<a href="#" class="filter">Filter</a>*@
+            @if (savedFilters != null && savedFilters.MinPrice != null && savedFilters.MaxPrice != null)
+            {
+                <div class="amount-range-price">Price: <span id="priceFilterMin" class="from">@savedFilters.MinPrice</span> - <span id="priceFilterMax" class="to">@savedFilters.MaxPrice</span> RON</div>
+
+            }
+            else
+            {
+                <div class="amount-range-price">Price: <span id="priceFilterMin" class="from">@Model.MinPrice</span> - <span id="priceFilterMax" class="to">@Model.MaxPrice</span> RON</div>
+            }
         </div>
     </div>
     <div class="widget widget_filter_color">
         <h3 class="widgettitle">Culori</h3>
         <ul id="searchColors" class="list-color">
-            @foreach(var color in Model.Colors)
+            @foreach (var color in Model.Colors)
             {
-                <li id="@color.Id"><a href="javascript:void(0)" style="background-color: @color.Hex"></a></li>
+                if (savedFilters?.ColorIds != null && savedFilters.ColorIds.Contains(color.Id.ToString()))
+                {
+                    <li class="current" id="@color.Id"><a href="javascript:void(0)" style="background-color: @color.Hex"></a></li>
+                }
+                else
+                {
+                    <li id="@color.Id"><a href="javascript:void(0)" style="background-color: @color.Hex"></a></li>
+                }
             }
         </ul>
     </div>
@@ -26,7 +44,10 @@
             {
                 <li id="@size">@size</li>
             }
-        </ul>
+         </ul>
+    </div>
+    <div class="widget widget_filter_size">
+        <button id="search" class="search-filters"><i class="glyphicon glyphicon-search"></i>search</button>
     </div>
     @*<div class="widget widget_tags">
             <h3 class="widgettitle">TAGS</h3>

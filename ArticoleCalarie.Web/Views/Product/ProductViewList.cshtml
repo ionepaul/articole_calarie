@@ -105,6 +105,13 @@
                 }
             });
 
+            $.each($("#searchColors li"), function (i, el) {
+                if ($(this).hasClass("current")) {
+                    let colorId = $(this).attr("id");
+                    colorIds.push(colorId);
+                }
+            });
+
             $("#product-list-page").on('click', '#search', function () {
                 let minPrice = $(".amount-range-price .from").text().replace(/\s/g, '').replace(/-/g, '').replace(',','.');
                 let maxPrice = $(".amount-range-price .to").text().replace(/\s/g, '').replace(/-/g, '').replace(',', '.');

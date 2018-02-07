@@ -118,18 +118,29 @@ namespace ArticoleCalarie.Web.Controllers
             _logger.Info("VIEW > Product List By Subcategory and Search Model");
 
             ViewBag.SubcategoryId = subcategoryId;
+            var searchViewModel = new SearchViewModel();
+            var sessionSearchModel = Session["SearchModel"] as SearchViewModel;
 
             try
             {
-                var searchViewModel = new SearchViewModel
+                if ((sessionSearchModel != null && sessionSearchModel.SubcategoryId == subcategoryId && minPrice == null && maxPrice == null && string.IsNullOrEmpty(colors) && string.IsNullOrEmpty(sizes)))
                 {
-                    SubcategoryId = subcategoryId,
-                    PageNumber = pageNumber,
-                    MinPrice = minPrice,
-                    MaxPrice = maxPrice,
-                    ColorIds = colors,
-                    Sizes = sizes
-                };
+                    searchViewModel = sessionSearchModel;
+                }
+                else
+                {
+                    searchViewModel = new SearchViewModel
+                    {
+                        SubcategoryId = subcategoryId,
+                        PageNumber = pageNumber,
+                        MinPrice = minPrice,
+                        MaxPrice = maxPrice,
+                        ColorIds = colors,
+                        Sizes = sizes
+                    };
+
+                    Session["SearchModel"] = searchViewModel;
+                }
 
                 var productSearchViewResult = await _iProductLogic.GetProductsBySearch(searchViewModel);
 
