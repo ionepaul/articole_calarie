@@ -12,7 +12,7 @@
             <div id="socialLoginList contact-content">
                 <p>
                     @foreach (AuthenticationDescription p in loginProviders) {
-                        <button type="submit" style="border: none; width: 100%" class="submit send" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">Înregistrează-te cu @p.AuthenticationType</button>
+                        <button type="submit" style="border: none; width: 100%" class="submit send" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="fa fa-facebook"></span> Conectează-te cu @p.AuthenticationType</button>
                     }
                 </p>
             </div>

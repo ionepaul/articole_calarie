@@ -1,0 +1,179 @@
+﻿@model ArticoleCalarie.Models.ProductViewModel
+@{
+    ViewBag.Title = "Editează produs";
+}
+
+
+
+<div class="page-wrapper">
+    <a href="javascript:void(0)" id="back">Inapoi</a>
+    <h3 class="form-title">Editează produs</h3>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <section class="form-wrapper">
+            <div class="form-horizontal add-product-form">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-sm-12" })
+                    <div class="col-sm-12">
+                        @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "input-info form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-sm-12" })
+                    <div class="col-sm-12">
+                        @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "input-info form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-flex-wrapper">
+                    <div class="form-flex-column">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-sm-12" })
+                            <div class="col-sm-12">
+                                <select id="categories-select"></select>
+                                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-flex-column">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SubcategoryId, htmlAttributes: new { @class = "control-label col-sm-12" })
+                            <div class="col-sm-12">
+                                <input id="subcategory-autocomplete" type="text" class="input-info" />
+                                @Html.ValidationMessageFor(model => model.SubcategoryId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-flex-wrapper">
+                    <div class="form-flex-column">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label col-sm-12" })
+                            <div class="col-sm-12">
+                                @Html.EditorFor(model => model.Size, new { htmlAttributes = new { @class = "input-info form-control" } })
+                                @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-flex-column">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-sm-12" })
+                            <div class="col-sm-12">
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "input-info form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-flex-wrapper">
+                    <div class="form-flex-column">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SalePercentage, htmlAttributes: new { @class = "control-label col-sm-12" })
+                            <div class="col-sm-12">
+                                @Html.EditorFor(model => model.SalePercentage, new { htmlAttributes = new { @class = "input-info form-control" } })
+                                @Html.ValidationMessageFor(model => model.SalePercentage, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-flex-column">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-sm-12" })
+                            <div class="col-sm-12">
+                                <input id="brand-autocomplete" type="text" class="input-info" />
+                                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaterialDetails, htmlAttributes: new { @class = "control-label col-sm-12" })
+                    <div class="col-sm-12">
+                        @Html.TextAreaFor(model => model.MaterialDetails, new { htmlAttributes = new { @class = "input-info form-control" } })
+                        @Html.ValidationMessageFor(model => model.MaterialDetails, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-sm-12" })
+                    <div class="col-sm-12">
+                        <label class="choose-files" for="file-1"><i class="fa fa-upload" aria-hidden="true"></i> Încarcă imagini</label>
+                        <input id="file-1" type="file" multiple onclick="clearFileInput(this)" onchange="previewAndUpload(this, false)" />
+                        <div id="imgDirectory">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SizeChartImage, htmlAttributes: new { @class = "control-label col-sm-12" })
+                    <div class="col-sm-12">
+                        <div class="size-new-wrapper">
+                            <div id="sizeChartImgContainer"></div>
+                        </div>
+                        <p class="text-in-lines">
+                            <span>sau</span>
+                        </p>
+                        <label class="choose-files" for="file-2"><i class="fa fa-upload" aria-hidden="true"></i> Încarcă tabel de mărimi</label>
+                        <div id="newChartSizeImgContainer">
+                        </div>
+                        <input id="file-2" type="file" onclick="clearFileInput(this)" onchange="previewAndUpload(this, true)" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Colors, htmlAttributes: new { @class = "control-label col-sm-12" })
+                    <div class="col-sm-12">
+                        <ul id="colors-list"></ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Editează" class="create btn my-btn-default" />
+                </div>
+            </div>
+        </section>
+
+        <ul id="imagesList" class="hidden">
+            @foreach (var img in Model.ImagesList)
+            {
+                <li>@img</li>
+            }
+        </ul>
+
+        if (Model.ColorsList != null)
+        {
+            <ul id="colorsList" class="hidden">
+                @foreach (var color in Model.ColorsList)
+                {
+                    <li>@color</li>
+                }
+            </ul>
+        }
+
+        @Html.HiddenFor(m => m.CategoryId);
+        @Html.HiddenFor(m => m.SubcategoryId);
+        @Html.HiddenFor(m => m.Images);
+        @Html.HiddenFor(m => m.SizeChartImage);
+        @Html.HiddenFor(m => m.Colors);
+        @Html.HiddenFor(m => m.Brand);
+        @Html.HiddenFor(m => m.Id);
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery-ui")
+    <script src="~/Scripts/product-edit.js"></script>
+}
+

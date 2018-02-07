@@ -11,6 +11,9 @@ namespace ArticoleCalarie.Web
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jquery-ui").Include(
+                        "~/Scripts/jquery-ui.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -20,8 +23,7 @@ namespace ArticoleCalarie.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
@@ -38,17 +40,24 @@ namespace ArticoleCalarie.Web
                       "~/Content/timecircles.css"));
 
             bundles.Add(new StyleBundle("~/bundles/external").Include(
-                      "~/Scripts/chosen.min.js",
-                      "~/Scripts/frontend.js",
-                      "~/Scripts/imagesloaded.pkgd.min.js",
-                      "~/Scripts/isotope.pkgd.min.js",
-                      "~/Scripts/magnific-popup.min.js",
-                      "~/Scripts/masonry.min.js",
-                      "~/Scripts/mobilemenu.min.js",
                       "~/Scripts/owl.carousel.min.js",
                       "~/Scripts/owl.thumbs.min.js",
-                      "~/Scripts/packery.min.js",
-                      "~/Scripts/timecircles.js"));
+                      "~/Scripts/magnific-popup.min.js",
+                      "~/Scripts/mobilemenu.min.js",
+                      "~/Scripts/imagesloaded.pkgd.min.js",
+                      "~/Scripts/isotope.pkgd.min.js",
+                      "~/Scripts/masonry.min.js",
+                      "~/Scripts/jquery.plugin-countdown.min.js",
+                      //"~/Scripts/jquery-countdown.min.js",
+                      "~/Scripts/jquery-ui.min.js",
+                      "~/Scripts/chosen.min.js",
+                      "~/Scripts/timecircles.js",
+                      "~/Scripts/jquery.scrollbar.min.js",
+                      "~/Scripts/frontend.js"));
+
+            //custom made scripts
+            bundles.Add(new ScriptBundle("~/bundles/product-add").Include(
+                    "~/Scripts/product-add.js"));
         }
     }
 }

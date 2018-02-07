@@ -1,0 +1,126 @@
+﻿@model PagedList.IPagedList<ArticoleCalarie.Models.ProductListViewItemModel>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Produse";
+}
+
+<div class="main-content grid-category-page inner-page">
+    <div class="container">
+        <div id="product-list-page" class="row">
+            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 right-content">
+                <div class="auto-clear">
+                    <div class="top-control box-has-content">
+                        <div class="breadcrumbs">
+                            <a href="#">Home</a> / <span class="current">Shop</span>
+                        </div>
+                        <div class="control">
+                            <span class="title">Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount</span>
+                        </div>
+                    </div>
+                    <div class="row product-grid">
+                        @foreach (var product in Model)
+                        {
+                            <div class="col-ss-12 col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                                <div class="product-item layout1">
+                                    <div class="product-inner">
+                                        <div class="thumb">
+                                            @if (product.IsNew && product.IsOnSale)
+                                            {
+                                                <div class="group-flash">
+                                                    <span class="flash new">nou</span>
+                                                    <span class="flash sale">-@product.SalePercentage%</span>
+                                                </div>
+                                            }
+                                            else if (product.IsOnSale)
+                                            {
+                                                <div class="group-flash">
+                                                    <span class="flash sale">-@product.SalePercentage%</span>
+                                                </div>
+                                            }
+                                            else if (product.IsNew)
+                                            {
+                                                <div class="group-flash">
+                                                    <span class="flash new">nou</span>
+                                                </div>
+                                            }
+                                            <div class="group-button">
+                                                @* <a href="#" class="wishlist-button"></a>*@
+                                                @*<a href="#" class="compare-button"></a>*@
+                                                <a href="@Url.Action("Details", "Product", new { productCode = product.ProductCode})" class="quickview-button"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> Vezi detalii</a>
+                                            </div>
+                                            <a href="#"><img src="~/images/products/@product.ProductImageName" alt=""></a>
+                                        </div>
+                                        <div class="info">
+                                            <a href="#" class="product-name">@product.ProductName</a>
+                                            <a href="#" class="add-to-cart">+ ADD TO CART</a>
+                                            <div class="price">
+                                                @if (product.IsOnSale)
+                                                {
+                                                    <span class="del">@product.Price </span>
+                                                    <span class="ins">@product.PriceAfterSaleApplied RON</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="ins">@product.Price RON</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div id="content-pager">
+                    @Html.PagedListPager(Model, page => Url.Action("ProductViewList", new { subcategoryId = ViewBag.SubcategoryId, pageNumber = page }))
+                </div>
+
+            </div>
+
+            @Html.Action("ProductListSearchPartial", "Product", new { subcategoryId = ViewBag.SubcategoryId });
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var subcategoryId = @ViewBag.SubcategoryId;
+        $(document).ready(function () {
+            var colorIds = [];
+            var sizes = 0;
+
+            $("#product-list-page").on("click", "#searchColors li a", function () {
+                let colorId = $(this).parent().attr("id");
+                var colorIndex = colorIds.indexOf(colorId);
+
+                if (colorIndex > -1) {
+                    $(this).parent().removeClass("current");
+                    colorIds.splice(colorIndex, 1);
+                }
+                else {
+                    $(this).parent().addClass("current");
+                    colorIds.push(colorId);
+                }
+            });
+
+            $.each($("#searchColors li"), function (i, el) {
+                if ($(this).hasClass("current")) {
+                    let colorId = $(this).attr("id");
+                    colorIds.push(colorId);
+                }
+            });
+
+            $("#product-list-page").on('click', '#search', function () {
+                let minPrice = $(".amount-range-price .from").text().replace(/\s/g, '').replace(/-/g, '').replace(',','.');
+                let maxPrice = $(".amount-range-price .to").text().replace(/\s/g, '').replace(/-/g, '').replace(',', '.');
+
+                showLoader();
+
+                window.location.href = '/Product/ProductViewList?subcategoryId=' + subcategoryId + '&pageNumber=1&minPrice=' + minPrice + '&maxPrice=' + maxPrice + '&colors=' + colorIds;                
+            });
+        });
+    </script>
+
+}

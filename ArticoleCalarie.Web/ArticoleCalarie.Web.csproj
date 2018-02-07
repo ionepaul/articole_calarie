@@ -71,6 +71,15 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -151,13 +160,12 @@
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-    </Reference>
     <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -220,12 +228,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Bootstraper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BrandController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SizeChartController.cs" />
+    <Compile Include="Controllers\SubcategoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -243,6 +256,7 @@
     <Content Include="Content\jquery.scrollbar.min.css" />
     <Content Include="Content\magnific-popup.min.css" />
     <Content Include="Content\owl.carousel.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\timecircles.css" />
     <Content Include="favicon.ico" />
@@ -274,7 +288,363 @@
     <Content Include="fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon.woff" />
     <Content Include="fonts\YaquoteScript_PersonalUse.ttf" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="images\1.jpg" />
+    <Content Include="images\10.jpg" />
+    <Content Include="images\11.jpg" />
+    <Content Include="images\12.jpg" />
+    <Content Include="images\13.jpg" />
+    <Content Include="images\14.jpg" />
+    <Content Include="images\15.jpg" />
+    <Content Include="images\16.jpg" />
+    <Content Include="images\17.jpg" />
+    <Content Include="images\18.jpg" />
+    <Content Include="images\19.jpg" />
+    <Content Include="images\2.jpg" />
+    <Content Include="images\20.jpg" />
+    <Content Include="images\21.jpg" />
+    <Content Include="images\22.jpg" />
+    <Content Include="images\23.jpg" />
+    <Content Include="images\24.jpg" />
+    <Content Include="images\25.jpg" />
+    <Content Include="images\26.jpg" />
+    <Content Include="images\27.jpg" />
+    <Content Include="images\28.jpg" />
+    <Content Include="images\29.jpg" />
+    <Content Include="images\3.jpg" />
+    <Content Include="images\30.jpg" />
+    <Content Include="images\31.jpg" />
+    <Content Include="images\32.jpg" />
+    <Content Include="images\4.jpg" />
+    <Content Include="images\5.jpg" />
+    <Content Include="images\6.jpg" />
+    <Content Include="images\7.jpg" />
+    <Content Include="images\8.jpg" />
+    <Content Include="images\9.jpg" />
+    <Content Include="images\animo.jpg" />
+    <Content Include="images\articole-calarie-logo.png" />
+    <Content Include="images\avata1.png" />
+    <Content Include="images\avata2.png" />
+    <Content Include="images\avata3.png" />
+    <Content Include="images\avata4.png" />
+    <Content Include="images\avata5.png" />
+    <Content Include="images\avata6.jpg" />
+    <Content Include="images\avata6.png" />
+    <Content Include="images\avata7.jpg" />
+    <Content Include="images\avata7.png" />
+    <Content Include="images\avata8.jpg" />
+    <Content Include="images\avata8.png" />
+    <Content Include="images\avata9.png" />
+    <Content Include="images\background.jpeg" />
+    <Content Include="images\background1.jpg" />
+    <Content Include="images\background10.jpg" />
+    <Content Include="images\background11.jpg" />
+    <Content Include="images\background12.jpg" />
+    <Content Include="images\background13.jpg" />
+    <Content Include="images\background2.jpg" />
+    <Content Include="images\background3.jpg" />
+    <Content Include="images\background4.jpg" />
+    <Content Include="images\background5.jpg" />
+    <Content Include="images\background6.jpg" />
+    <Content Include="images\background7.jpg" />
+    <Content Include="images\background7.png" />
+    <Content Include="images\background8.jpg" />
+    <Content Include="images\background9.jpg" />
+    <Content Include="images\banner1.jpg" />
+    <Content Include="images\banner10.jpg" />
+    <Content Include="images\banner11.jpg" />
+    <Content Include="images\banner12.jpg" />
+    <Content Include="images\banner13.jpg" />
+    <Content Include="images\banner14.jpg" />
+    <Content Include="images\banner15.jpg" />
+    <Content Include="images\banner16.jpg" />
+    <Content Include="images\banner17.jpg" />
+    <Content Include="images\banner18.jpg" />
+    <Content Include="images\banner19.jpg" />
+    <Content Include="images\banner2.jpg" />
+    <Content Include="images\banner20.jpg" />
+    <Content Include="images\banner21.jpg" />
+    <Content Include="images\banner22.jpg" />
+    <Content Include="images\banner3.jpg" />
+    <Content Include="images\banner4.jpg" />
+    <Content Include="images\banner5.jpg" />
+    <Content Include="images\banner6.jpg" />
+    <Content Include="images\banner7.jpg" />
+    <Content Include="images\banner8.jpg" />
+    <Content Include="images\banner9.jpg" />
+    <Content Include="images\blog1.jpg" />
+    <Content Include="images\blog10.jpg" />
+    <Content Include="images\blog11.jpg" />
+    <Content Include="images\blog12.jpg" />
+    <Content Include="images\blog13.jpg" />
+    <Content Include="images\blog14.jpg" />
+    <Content Include="images\blog15.jpg" />
+    <Content Include="images\blog16.jpg" />
+    <Content Include="images\blog17.jpg" />
+    <Content Include="images\blog18.jpg" />
+    <Content Include="images\blog19.jpg" />
+    <Content Include="images\blog2.jpg" />
+    <Content Include="images\blog20.jpg" />
+    <Content Include="images\blog21.jpg" />
+    <Content Include="images\blog22.jpg" />
+    <Content Include="images\blog23.jpg" />
+    <Content Include="images\blog24.jpg" />
+    <Content Include="images\blog25.jpg" />
+    <Content Include="images\blog26.jpg" />
+    <Content Include="images\blog27.jpg" />
+    <Content Include="images\blog28.jpg" />
+    <Content Include="images\blog29.jpg" />
+    <Content Include="images\blog3.jpg" />
+    <Content Include="images\blog30.jpg" />
+    <Content Include="images\blog31.jpg" />
+    <Content Include="images\blog32.jpg" />
+    <Content Include="images\blog33.jpg" />
+    <Content Include="images\blog34.jpg" />
+    <Content Include="images\blog35.jpg" />
+    <Content Include="images\blog36.jpg" />
+    <Content Include="images\blog37.jpg" />
+    <Content Include="images\blog38.jpg" />
+    <Content Include="images\blog39.jpg" />
+    <Content Include="images\blog4.jpg" />
+    <Content Include="images\blog40.jpg" />
+    <Content Include="images\blog5.jpg" />
+    <Content Include="images\blog6.jpg" />
+    <Content Include="images\blog7.jpg" />
+    <Content Include="images\blog8.jpg" />
+    <Content Include="images\blog9.jpg" />
+    <Content Include="images\brand1.jpg" />
+    <Content Include="images\brand2.jpg" />
+    <Content Include="images\brand3.jpg" />
+    <Content Include="images\brand4.jpg" />
+    <Content Include="images\brand5.jpg" />
+    <Content Include="images\category1.jpg" />
+    <Content Include="images\category2.jpg" />
+    <Content Include="images\category3.jpg" />
+    <Content Include="images\category4.jpg" />
+    <Content Include="images\character1.png" />
+    <Content Include="images\character2.png" />
+    <Content Include="images\equiline.png" />
+    <Content Include="images\favicon.jpg" />
+    <Content Include="images\feature1.png" />
+    <Content Include="images\feature2.png" />
+    <Content Include="images\feature3.png" />
+    <Content Include="images\feature4.png" />
+    <Content Include="images\feature5.png" />
+    <Content Include="images\feature6.png" />
+    <Content Include="images\feature7.png" />
+    <Content Include="images\feature8.png" />
+    <Content Include="images\flag1.jpg" />
+    <Content Include="images\flag2.jpg" />
+    <Content Include="images\flag3.jpg" />
+    <Content Include="images\flag4.jpg" />
+    <Content Include="images\freejump.jpg" />
+    <Content Include="images\home2-1.jpg" />
+    <Content Include="images\home2-2.jpg" />
+    <Content Include="images\home2-3.jpg" />
+    <Content Include="images\home2-4.jpg" />
+    <Content Include="images\home2-5.jpg" />
+    <Content Include="images\hot-icon2.png" />
+    <Content Include="images\kingsland.jpeg" />
+    <Content Include="images\main-logo.png" />
+    <Content Include="images\main-logo10.png" />
+    <Content Include="images\main-logo11.png" />
+    <Content Include="images\main-logo12.png" />
+    <Content Include="images\main-logo13.png" />
+    <Content Include="images\main-logo14.png" />
+    <Content Include="images\main-logo15.png" />
+    <Content Include="images\main-logo16.png" />
+    <Content Include="images\main-logo17.png" />
+    <Content Include="images\main-logo18.png" />
+    <Content Include="images\main-logo19.png" />
+    <Content Include="images\main-logo2.png" />
+    <Content Include="images\main-logo20.png" />
+    <Content Include="images\main-logo21.png" />
+    <Content Include="images\main-logo22.png" />
+    <Content Include="images\main-logo3.png" />
+    <Content Include="images\main-logo4.png" />
+    <Content Include="images\main-logo5.png" />
+    <Content Include="images\main-logo6.png" />
+    <Content Include="images\main-logo7.png" />
+    <Content Include="images\main-logo8.png" />
+    <Content Include="images\main-logo9.png" />
+    <Content Include="images\map1.jpg" />
+    <Content Include="images\my_logo.png" />
+    <Content Include="images\my_logo2.png" />
+    <Content Include="images\my_logo3.png" />
+    <Content Include="images\p-blog1.jpg" />
+    <Content Include="images\p-blog10.jpg" />
+    <Content Include="images\p-blog11.jpg" />
+    <Content Include="images\p-blog12.jpg" />
+    <Content Include="images\p-blog2.jpg" />
+    <Content Include="images\p-blog3.jpg" />
+    <Content Include="images\p-blog4.jpg" />
+    <Content Include="images\p-blog5.jpg" />
+    <Content Include="images\p-blog6.jpg" />
+    <Content Include="images\p-blog7.jpg" />
+    <Content Include="images\p-blog8.jpg" />
+    <Content Include="images\p-blog9.jpg" />
+    <Content Include="images\page1.jpg" />
+    <Content Include="images\payment1.png" />
+    <Content Include="images\payment2.png" />
+    <Content Include="images\payment3.png" />
+    <Content Include="images\payment4.png" />
+    <Content Include="images\payment5.png" />
+    <Content Include="images\product-details1.jpg" />
+    <Content Include="images\product1.jpg" />
+    <Content Include="images\product10.jpg" />
+    <Content Include="images\product11.jpg" />
+    <Content Include="images\product12.jpg" />
+    <Content Include="images\product13.jpg" />
+    <Content Include="images\product14.jpg" />
+    <Content Include="images\product15.jpg" />
+    <Content Include="images\product16.jpg" />
+    <Content Include="images\product17.jpg" />
+    <Content Include="images\product18.jpg" />
+    <Content Include="images\product19.jpg" />
+    <Content Include="images\product2.jpg" />
+    <Content Include="images\product20.jpg" />
+    <Content Include="images\product21.jpg" />
+    <Content Include="images\product22.jpg" />
+    <Content Include="images\product23.jpg" />
+    <Content Include="images\product24.jpg" />
+    <Content Include="images\product25.jpg" />
+    <Content Include="images\product26.jpg" />
+    <Content Include="images\product27.jpg" />
+    <Content Include="images\product28.jpg" />
+    <Content Include="images\product29.jpg" />
+    <Content Include="images\product3.jpg" />
+    <Content Include="images\product30.jpg" />
+    <Content Include="images\product31.jpg" />
+    <Content Include="images\product32.jpg" />
+    <Content Include="images\product33.jpg" />
+    <Content Include="images\product34.jpg" />
+    <Content Include="images\product35.jpg" />
+    <Content Include="images\product36.jpg" />
+    <Content Include="images\product37.jpg" />
+    <Content Include="images\product38.jpg" />
+    <Content Include="images\product39.jpg" />
+    <Content Include="images\product4.jpg" />
+    <Content Include="images\product40.jpg" />
+    <Content Include="images\product41.jpg" />
+    <Content Include="images\product42.jpg" />
+    <Content Include="images\product43.jpg" />
+    <Content Include="images\product44.jpg" />
+    <Content Include="images\product45.jpg" />
+    <Content Include="images\product46.jpg" />
+    <Content Include="images\product47.jpg" />
+    <Content Include="images\product48.jpg" />
+    <Content Include="images\product49.jpg" />
+    <Content Include="images\product5.jpg" />
+    <Content Include="images\product50.jpg" />
+    <Content Include="images\product51.jpg" />
+    <Content Include="images\product52.jpg" />
+    <Content Include="images\product53.jpg" />
+    <Content Include="images\product54.jpg" />
+    <Content Include="images\product55.jpg" />
+    <Content Include="images\product56.jpg" />
+    <Content Include="images\product57.jpg" />
+    <Content Include="images\product58.jpg" />
+    <Content Include="images\product59.jpg" />
+    <Content Include="images\product6.jpg" />
+    <Content Include="images\product60.jpg" />
+    <Content Include="images\product61.jpg" />
+    <Content Include="images\product62.jpg" />
+    <Content Include="images\product63.jpg" />
+    <Content Include="images\product64.jpg" />
+    <Content Include="images\product65.jpg" />
+    <Content Include="images\product66.jpg" />
+    <Content Include="images\product67.jpg" />
+    <Content Include="images\product68.jpg" />
+    <Content Include="images\product69.jpg" />
+    <Content Include="images\product7.jpg" />
+    <Content Include="images\product70.jpg" />
+    <Content Include="images\product71.jpg" />
+    <Content Include="images\product72.jpg" />
+    <Content Include="images\product73.jpg" />
+    <Content Include="images\product74.jpg" />
+    <Content Include="images\product75.jpg" />
+    <Content Include="images\product76.jpg" />
+    <Content Include="images\product77.jpg" />
+    <Content Include="images\product78.jpg" />
+    <Content Include="images\product79.jpg" />
+    <Content Include="images\product8.jpg" />
+    <Content Include="images\product80.jpg" />
+    <Content Include="images\product81.jpg" />
+    <Content Include="images\product82.jpg" />
+    <Content Include="images\product83.jpg" />
+    <Content Include="images\product84.jpg" />
+    <Content Include="images\product85.jpg" />
+    <Content Include="images\product86.jpg" />
+    <Content Include="images\product87.jpg" />
+    <Content Include="images\product88.jpg" />
+    <Content Include="images\product89.jpg" />
+    <Content Include="images\product9.jpg" />
+    <Content Include="images\product90.jpg" />
+    <Content Include="images\q1.jpg" />
+    <Content Include="images\q2.jpg" />
+    <Content Include="images\q3.jpg" />
+    <Content Include="images\qMain.jpg" />
+    <Content Include="images\r1.jpg" />
+    <Content Include="images\r2.jpg" />
+    <Content Include="images\r3.jpg" />
+    <Content Include="images\r4.jpg" />
+    <Content Include="images\rider.jpg" />
+    <Content Include="images\s1.jpg" />
+    <Content Include="images\s2.jpg" />
+    <Content Include="images\s3.jpg" />
+    <Content Include="images\size-chart-2.jpg" />
+    <Content Include="images\slide1.jpg" />
+    <Content Include="images\slide10.jpg" />
+    <Content Include="images\slide11.jpg" />
+    <Content Include="images\slide12.jpg" />
+    <Content Include="images\slide13.jpg" />
+    <Content Include="images\slide14.jpg" />
+    <Content Include="images\slide15.jpg" />
+    <Content Include="images\slide16.jpg" />
+    <Content Include="images\slide17.jpg" />
+    <Content Include="images\slide18.jpg" />
+    <Content Include="images\slide19.jpg" />
+    <Content Include="images\slide2.jpg" />
+    <Content Include="images\slide20.jpg" />
+    <Content Include="images\slide21.jpg" />
+    <Content Include="images\slide22.jpg" />
+    <Content Include="images\slide23.jpg" />
+    <Content Include="images\slide24.jpg" />
+    <Content Include="images\slide25.jpg" />
+    <Content Include="images\slide26.jpg" />
+    <Content Include="images\slide27.jpg" />
+    <Content Include="images\slide28-1.jpg" />
+    <Content Include="images\slide28.jpg" />
+    <Content Include="images\slide29-1.jpg" />
+    <Content Include="images\slide29.jpg" />
+    <Content Include="images\slide3.jpg" />
+    <Content Include="images\slide30-1.jpg" />
+    <Content Include="images\slide30.jpg" />
+    <Content Include="images\slide31-1.jpg" />
+    <Content Include="images\slide31.jpg" />
+    <Content Include="images\slide32.jpg" />
+    <Content Include="images\slide33.jpg" />
+    <Content Include="images\slide34.jpg" />
+    <Content Include="images\slide4.jpg" />
+    <Content Include="images\slide5.jpg" />
+    <Content Include="images\slide6.jpg" />
+    <Content Include="images\slide7.jpg" />
+    <Content Include="images\slide8.jpg" />
+    <Content Include="images\slide9.jpg" />
+    <Content Include="images\small-product1.jpg" />
+    <Content Include="images\small-product10.jpg" />
+    <Content Include="images\small-product11.jpg" />
+    <Content Include="images\small-product12.jpg" />
+    <Content Include="images\small-product2.jpg" />
+    <Content Include="images\small-product3.jpg" />
+    <Content Include="images\small-product4.jpg" />
+    <Content Include="images\small-product5.jpg" />
+    <Content Include="images\small-product6.jpg" />
+    <Content Include="images\small-product7.jpg" />
+    <Content Include="images\small-product8.jpg" />
+    <Content Include="images\small-product9.jpg" />
+    <Content Include="images\ss.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chosen.min.js" />
@@ -289,6 +659,8 @@
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.plugin-countdown.min.js" />
     <Content Include="Scripts\jquery.scrollbar.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -300,10 +672,15 @@
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\owl.thumbs.min.js" />
     <Content Include="Scripts\packery.min.js" />
+    <Content Include="Scripts\product-add.js" />
+    <Content Include="Scripts\product-edit.js" />
+    <Content Include="Scripts\product-list-admin.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\timecircles.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -327,16 +704,17 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\_AddressFormPartial.cshtml" />
+    <Content Include="Views\Product\Add.cshtml" />
+    <Content Include="Views\Product\List.cshtml" />
+    <Content Include="Views\Product\ProductViewList.cshtml" />
+    <Content Include="Views\Product\_ProductListForAdmin.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\_ProductListSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -346,21 +724,21 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ArticoleCalarie.BLL\ArticoleCalarie.Logic.csproj">
-      <Project>{FA33BB89-E77F-40AF-AA46-6F8544E4B7C7}</Project>
-      <Name>ArticoleCalarie.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ArticoleCalarie.DAL\ArticoleCalarie.Repository.csproj">
-      <Project>{F7AD96BC-82B6-4B5B-B4F0-CD7F61BA35FE}</Project>
-      <Name>ArticoleCalarie.Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ArticoleCalarie.Infrastructure\ArticoleCalarie.Infrastructure.csproj">
       <Project>{70B700E8-A2D3-4713-8347-87168CB81214}</Project>
       <Name>ArticoleCalarie.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ArticoleCalarie.Logic\ArticoleCalarie.Logic.csproj">
+      <Project>{fa33bb89-e77f-40af-aa46-6f8544e4b7c7}</Project>
+      <Name>ArticoleCalarie.Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ArticoleCalarie.Models\ArticoleCalarie.Models.csproj">
       <Project>{9BDC5DFC-0A6A-4E4C-BB41-A803BFCC45E7}</Project>
       <Name>ArticoleCalarie.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArticoleCalarie.Repository\ArticoleCalarie.Repository.csproj">
+      <Project>{f7ad96bc-82b6-4b5b-b4f0-cd7f61ba35fe}</Project>
+      <Name>ArticoleCalarie.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -381,7 +759,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49909</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61909/</IISUrl>
+          <IISUrl>http://localhost:61911/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -48,10 +48,23 @@ namespace ArticoleCalarie.Web
 
             //Logic
             container.RegisterType<IAccountLogic, AccountLogic>();
+            container.RegisterType<IProductLogic, ProductLogic>();
+            container.RegisterType<ICategoryLogic, CategoryLogic>();
+            container.RegisterType<ISizeChartLogic, SizeChartLogic>();
+            container.RegisterType<IColorLogic, ColorLogic>();
+            container.RegisterType<IBrandLogic, BrandLogic>();
+            container.RegisterType<ISubcategoryLogic, SubcategoryLogic>();
 
             //Repository
             container.RegisterType<IAccountRepository, AccountRepository>();
             container.RegisterType<IAddressRepository, AddressRepository>();
+            container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<ICategoryRepository, CategoryRepository>();
+            container.RegisterType<ISizeChartRepository, SizeChartRepository>();
+            container.RegisterType<IColorRepository, ColorRepository>();
+            container.RegisterType<IBrandRepository, BrandRepository>();
+            container.RegisterType<ISubcategoryRepository, SubcategoryRepository>();
+            container.RegisterType<IImageRepository, ImageRepository>();
 
             //Infrastructure
             container.RegisterType<IMailService, MailService>();

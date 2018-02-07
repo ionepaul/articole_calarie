@@ -116,7 +116,7 @@ jQuery(document).ready(function ($) {
       }
     }
 
-     function sticky_menu_run(){
+     /*function sticky_menu_run(){
         if($(window).width() > 1024) {
             if ($(window).scrollTop() > 350) {
                 $('.header .box-sticky').addClass('is-sticky');
@@ -127,12 +127,16 @@ jQuery(document).ready(function ($) {
                 $('.header .this-sticky').removeClass('box-sticky');
             }
         }
-    }
+    }*/
 
     function kt_innit_carousel(){
         //owl has thumbs 
+   
+        // check if there's only 1 time in the thumbs
+        var isMulti = ($('.owl-carousel .item').length > 1) ? true : false;
+   
         $('.owl-carousel.has-thumbs').owlCarousel({
-            loop: true,
+            loop: isMulti,
             items: 1,
             thumbs: true,
             thumbImage: true,
@@ -263,21 +267,6 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    function kt_countdown(){
-      if($('.kt-countdown').length >0){
-        var labels = ['Years', 'Months', 'Weeks', 'Days', 'Hrs', 'Mins', 'Secs'];
-        var layout = '<span class="box-count day"><ul><li class="number">{dnn}</li> <li class="text">Days</li></ul></span><span class="box-count hrs"><ul><li class="number">{hnn}</li> <li class="text">Hours</li></ul></span><span class="box-count min"><ul><li class="number">{mnn}</li> <li class="text">Mins</li></ul></span><span class="box-count secs"><ul><li class="number">{snn}</li> <li class="text">Secs</li></ul></span>';
-        $('.kt-countdown').each(function() {
-          var austDay = new Date($(this).data('y'),$(this).data('m') - 1,$(this).data('d'),$(this).data('h'),$(this).data('i'),$(this).data('s'));
-          $(this).countdown({
-            until: austDay,
-            labels: labels, 
-            layout: layout
-          });
-        });
-      }
-    };
-
     // Price filter
     $('.slider-range-price').each(function(){
       var min             = parseFloat($(this).data('min'));
@@ -292,9 +281,9 @@ jQuery(document).ready(function ($) {
         min: min,
         max: max,
         values: [ value_min, value_max ],
-        slide: function( event, ui ) {
-          var result = '<span class="from">'+ unit + ui.values[ 0 ] +' </span><span class="to"> '+ unit +ui.values[ 1 ]+'</span>';
-          t.closest('.price-filter').find('.amount-range-price').html(result);
+        slide: function (event, ui) {
+            var result = '<span class="from">' + ui.values[0].toFixed(2).replace(".", ",") + ' -' + ' </span><span class="to"> ' + ui.values[1].toFixed(2).replace(".", ",") + '</span>';
+          t.closest('.price-filter').find('.amount-range-price').html('Price: ' + result + ' ' + unit);
         }
       });
     });
@@ -393,23 +382,6 @@ jQuery(document).ready(function ($) {
     //   }
     // }
 
-    function quickview_popup(){
-      var window_size = parseFloat(jQuery('body').innerWidth());
-      window_size += kt_get_scrollbar_width();
-      if(window_size > 992){
-         $(document).on('click','.quickview-button',function(){
-              $.magnificPopup.open({
-                 items: {
-                  src: '<div class="popup-quickview "><div class="about-product"><div class="details-thumb"><div class="owl-carousel has-thumbs" data-autoplay="false" data-nav="false" data-dots="false" data-loop="true" data-slidespeed="800" data-margin="1"><div class="details-item"><div class="main-img"><a href="product-details"><img src="images/q1.jpg" alt=""></a></div></div><div class="details-item"><div class="main-img"><a href="product-details"><img src="images/q2.jpg" alt=""></a></div></div><div class="details-item"><div class="main-img"><a href="product-details"><img src="images/q3.jpg" alt=""></a></div></div></div></div><div class="details-info"><a class="product-name" href="#">Herschel Supply bag </a><div class="price"><span class="ins">245.00 RON</span></div><ul class="list-color"><li><a href="#" class="red"></a></li><li class="current"><a href="#" class="blue-0"></a></li><li><a href="#" class="black"></a></li><li><a href="#" class="green"></a></li></ul><div class="quantity"><input class="input-text qty text" type="text" size="4" title="Qty" value="1" name="quantity"><div class="group-quantity-button"><a class="plus" href="#"><i class="fa fa-sort-asc" aria-hidden="true"></i></a><a class="minus" href="#"><i class="fa fa-sort-desc" aria-hidden="true"></i></a></div></div><a href="#" class="add-to-cart">ADAUGĂ ÎN COȘ</a><a href="product-details.html" class="view-details">Vezi detalii <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></div></div></div>',
-                  type: 'inline'
-               }
-               });
-              kt_innit_carousel();
-              return false;
-           });
-      }
-    }
-
     function compare_popup(){
       var window_size = parseFloat(jQuery('body').innerWidth());
       window_size += kt_get_scrollbar_width();
@@ -436,32 +408,24 @@ jQuery(document).ready(function ($) {
 
     $(".chosen-select").chosen({disable_search_threshold: 10});
     /*newletter_popup(); */
-    kt_countdown();
     kt_tab_fadeeffect();
     kt_resizeMegamenu();
     kt_verticalMegamenu();
     sticky_menu();
     kt_innit_carousel();
     special_banner();
-    quickview_popup();
     compare_popup();
-
-    $(window).scroll(function() {
-      sticky_menu_run();
-    });
 
     $(window).resize(function(){
       kt_resizeMegamenu();
       kt_verticalMegamenu();
       kt_innit_carousel();
-      quickview_popup();
       compare_popup();
     });
     $(window).load(function(){
       kt_scroll();
       kt_innit_carousel();
       //newletter_popup();
-      quickview_popup();
       compare_popup();
     });
 });

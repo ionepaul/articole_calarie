@@ -1,0 +1,98 @@
+﻿@model ArticoleCalarie.Models.ProductViewModel
+@{
+    ViewBag.Title = "Details";
+    bool hasMaterialDetails = !string.IsNullOrEmpty(Model.MaterialDetails);
+    bool hasSizeChart = !string.IsNullOrEmpty(Model.SizeChartImage);
+    var sizes = Model.Size.Split(',');
+}
+
+<div class="main-content product-single-page">
+    <div class="container">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="breadcrumbs">
+                <a href="javascript:void(0)" id="back">Inapoi la listă</a> | @Html.ActionLink("Editează", "Edit", new { id = Model.Id })
+            </div>
+        }
+        else
+        {
+            <div class="breadcrumbs">
+                to be bread crumb
+            </div>
+        }
+
+        <div class="product-single-content">
+            <div class="about-product">
+                <div class="details-thumb">
+                    <div class="owl-carousel has-thumbs" data-autoplay="false" data-nav="false" data-dots="false" data-loop="true" data-slidespeed="800" data-margin="30" data-responsive='{"0":{"items":1}, "640":{"items":1}, "768":{"items":1}, "1024":{"items":1}, "1200":{"items":1}}'>
+                        @foreach (var image in Model.ImagesList)
+                        {
+                            <div class="details-item">
+                                <div class="main-img">
+                                    <img src="~/images/products/@image" alt="@Model.ProductName">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="details-info">
+                    <a class="product-name">@Model.ProductName </a>
+                    @*<div class="rating">
+                        <ul class="list-star">
+                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                        </ul>
+                        <span class="text">( Be the firt person to review this item )</span>
+                    </div>*@
+                    <div>Cod Produs: @Model.ProductCode</div>
+                    <br>
+                    <div class="price"><span class="ins">@Model.Price RON</span></div>
+                    @if (Model.SalePercentage != 0)
+                    {
+                        <div>Reducere: @Model.SalePercentage%</div>
+                    }
+                    <br />
+                    <div> <strong>Mărimi</strong> 
+                        <select>
+                            @foreach (var size in sizes)
+                            {
+                                <option>@size</option>
+                            }
+                        </select> 
+                    </div>
+                    <div class="des">@Model.Description</div>
+                    <ul class="list-color">
+                        @foreach (var color in Model.ColorsViewModel)
+                        {
+                            <li><a data-id="@color.Id" style="background-color: @color.Hex"></a></li>
+                        }
+                    </ul>
+                    <div class="quantity">
+                        <input class="input-text qty text" type="text" size="4" title="Qty" value="1" name="quantity">
+                        <div class="group-quantity-button">
+                            <a class="plus" href="#"><i class="fa fa-sort-asc" aria-hidden="true"></i></a>
+                            <a class="minus" href="#"><i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <a href="#" class="add-to-cart">ADD TO CART</a>
+                    <div class="material-details">
+                        @if (hasMaterialDetails) {
+                          <h4>Detalii Material</h4>
+                          <p>@Model.MaterialDetails</p>   
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-size-chart">
+        @if (hasSizeChart)
+        {
+            <h4>Tabel de marimi</h4>
+            <p><img src="~/images/products/@Model.SizeChartImage" /></p>
+        }
+    </div>
+</div>
