@@ -12,7 +12,7 @@
             <div id="priceFilter" data-label-reasult="price:" data-min="@Model.MinPrice" data-max="@Model.MaxPrice" data-unit="RON" class="slider-range-price" data-value-min="@Model.MinPrice" data-value-max="@Model.MaxPrice"></div>
             @if (savedFilters != null && savedFilters.MinPrice != null && savedFilters.MaxPrice != null)
             {
-                <div class="amount-range-price">Price: <span id="priceFilterMin" class="from">@savedFilters.MinPrice</span> - <span id="priceFilterMax" class="to">@savedFilters.MaxPrice</span> RON</div>
+                <div class="amount-range-price">Price: <span id="priceFilterMin" class="from">@savedFilters.MinPrice.ToString().Replace(".", ",")</span> - <span id="priceFilterMax" class="to">@savedFilters.MaxPrice.ToString().Replace(".", ",")</span> RON</div>
 
             }
             else
