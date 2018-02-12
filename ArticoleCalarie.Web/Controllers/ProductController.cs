@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -113,7 +112,7 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> ProductViewList(int subcategoryId, int pageNumber, decimal? minPrice, decimal? maxPrice, string colors = "", string sizes = "")
+        public async Task<ActionResult> ProductViewList(int subcategoryId, int pageNumber, decimal? minp, decimal? maxp, string cl = "", string sz = "")
         {
             _logger.Info("VIEW > Product List By Subcategory and Search Model");
 
@@ -123,7 +122,7 @@ namespace ArticoleCalarie.Web.Controllers
 
             try
             {
-                if ((sessionSearchModel != null && sessionSearchModel.SubcategoryId == subcategoryId && minPrice == null && maxPrice == null && string.IsNullOrEmpty(colors) && string.IsNullOrEmpty(sizes)))
+                if ((sessionSearchModel != null && sessionSearchModel.SubcategoryId == subcategoryId && minp == null && maxp == null && string.IsNullOrEmpty(cl) && string.IsNullOrEmpty(sz)))
                 {
                     searchViewModel = sessionSearchModel;
                 }
@@ -133,10 +132,10 @@ namespace ArticoleCalarie.Web.Controllers
                     {
                         SubcategoryId = subcategoryId,
                         PageNumber = pageNumber,
-                        MinPrice = minPrice,
-                        MaxPrice = maxPrice,
-                        ColorIds = colors,
-                        Sizes = sizes
+                        MinPrice = minp,
+                        MaxPrice = maxp,
+                        ColorIds = cl,
+                        Sizes = sz
                     };
 
                     Session["SearchModel"] = searchViewModel;
@@ -161,7 +160,7 @@ namespace ArticoleCalarie.Web.Controllers
         [HttpGet]
         public ActionResult Details(string productCode)
         {
-            _logger.Info("VIEW > Product Detail for Admin");
+            _logger.Info("VIEW > Product Detail");
 
             try
             {
@@ -171,7 +170,7 @@ namespace ArticoleCalarie.Web.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error($"Failed to get product by product code: {productCode} for admin. Exception: {ex.Message}.");
+                _logger.Error($"Failed to get product by product code: {productCode}. Exception: {ex.Message}.");
 
                 return View("Error");
             }
@@ -183,6 +182,56 @@ namespace ArticoleCalarie.Web.Controllers
             var searchFilters = _iProductLogic.GetSearchViewFiltersForSubcategory(subcategoryId);
 
             return PartialView("_ProductListSearch", searchFilters);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetProductsByBrand(string brand, int? pageNumber)
+        {
+            _logger.Info("VIEW > Products by brand id");
+
+            try
+            {
+                var page = pageNumber ?? 1;
+
+                var products = await _iProductLogic.GetProductsByBrand(brand, page);
+
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+
+                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
+
+                return View(pagedListModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to get products by brand {brand}. Exception: {ex.Message}.");
+
+                return View("Error");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetProductsOnSale(int? pageNumber)
+        {
+            _logger.Info("VIEW > Products on sale");
+
+            try
+            {
+                var page = pageNumber ?? 1;
+
+                var products = await _iProductLogic.GetProductsOnSale(page);
+
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+
+                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
+
+                return View(pagedListModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to get products on sale. Exception: {ex.Message}.");
+
+                return View("Error");
+            }
         }
 
         #endregion

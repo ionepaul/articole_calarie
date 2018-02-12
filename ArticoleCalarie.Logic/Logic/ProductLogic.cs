@@ -206,6 +206,38 @@ namespace ArticoleCalarie.Logic.Logic
             return searchViewFilters;
         }
 
+        public async Task<ProductSearchViewResult> GetProductsByBrand(string brand, int pageNumber)
+        {
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsToSkip = (pageNumber - 1) * itemsPerPage;
+
+            var productsByBrand = await _iProductRepository.GetProductsByBrand(brand, itemsPerPage, itemsToSkip);
+
+            var productSearchViewResult = new ProductSearchViewResult
+            {
+                TotalCount = productsByBrand.TotalCount,
+                Products = productsByBrand.Products.Select(x => x.ToListViewItemModel())
+            };
+
+            return productSearchViewResult;
+        }
+
+        public async Task<ProductSearchViewResult> GetProductsOnSale(int pageNumber)
+        {
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsToSkip = (pageNumber - 1) * itemsPerPage;
+
+            var productsOnSale = await _iProductRepository.GetProductsOnSale(itemsPerPage, itemsToSkip);
+
+            var productSearchViewResult = new ProductSearchViewResult
+            {
+                TotalCount = productsOnSale.TotalCount,
+                Products = productsOnSale.Products.Select(x => x.ToListViewItemModel())
+            };
+
+            return productSearchViewResult;
+        }
+
         #region Private Methods
 
         private void StoreImages(Product product, ProductViewModel productViewModel)

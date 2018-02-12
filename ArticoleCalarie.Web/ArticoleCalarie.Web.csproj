@@ -675,6 +675,7 @@
     <Content Include="Scripts\product-add.js" />
     <Content Include="Scripts\product-edit.js" />
     <Content Include="Scripts\product-list-admin.js" />
+    <Content Include="Scripts\product-search.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\timecircles.js" />

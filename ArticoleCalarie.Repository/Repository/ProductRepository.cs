@@ -114,7 +114,18 @@ namespace ArticoleCalarie.Repository.Repository
 
             if (searchModel.Sizes != null && searchModel.Sizes.Count > 0)
             {
-                query = query.Where(x => searchModel.Sizes.Intersect(x.Size.Split(',').ToList()).Count() > 0);
+                var sizeQuery = query.Select(x => new { x.Id, x.Size }).ToList();
+                var productIds = new List<int>();
+
+                foreach(var product in sizeQuery)
+                {
+                    if (searchModel.Sizes.Intersect(product.Size.Split(',').ToList()).Count() > 0)
+                    {
+                        productIds.Add(product.Id);
+                    }
+                }
+
+                query = query.Where(x => productIds.Contains(x.Id));
             }
 
             query = query.OrderBy(x => x.DatePosted);
@@ -178,10 +189,36 @@ namespace ArticoleCalarie.Repository.Repository
                     }
                 }
 
-                searchFilters.Sizes = productsSizes.Distinct();
+                searchFilters.Sizes = productsSizes.Distinct().Where(x => !string.IsNullOrEmpty(x));
             }
   
             return searchFilters;
+        }
+
+        public async Task<ProductSearchResult> GetProductsByBrand(string brand, int itemsPerPage, int itemsToSkip)
+        {
+            var query = _dbset.Include(x => x.Brand).Where(x => string.Equals(x.Brand.Name, brand));
+
+            var productResult = new ProductSearchResult
+            {
+                TotalCount = await query.CountAsync(),
+                Products = await query.OrderBy(x => x.SalePercentage).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+            };
+
+            return productResult;
+        }
+
+        public async Task<ProductSearchResult> GetProductsOnSale(int itemsPerPage, int itemsToSkip)
+        {
+            var query = _dbset.Where(x => x.SalePercentage != 0);
+
+            var productResult = new ProductSearchResult
+            {
+                TotalCount = await query.CountAsync(),
+                Products = await query.OrderBy(x => x.SalePercentage).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+            };
+
+            return productResult;
         }
     }
 }

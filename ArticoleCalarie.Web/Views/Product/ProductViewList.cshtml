@@ -85,42 +85,5 @@
 </div>
 
 @section scripts {
-    <script>
-        var subcategoryId = @ViewBag.SubcategoryId;
-        $(document).ready(function () {
-            var colorIds = [];
-            var sizes = 0;
-
-            $("#product-list-page").on("click", "#searchColors li a", function () {
-                let colorId = $(this).parent().attr("id");
-                var colorIndex = colorIds.indexOf(colorId);
-
-                if (colorIndex > -1) {
-                    $(this).parent().removeClass("current");
-                    colorIds.splice(colorIndex, 1);
-                }
-                else {
-                    $(this).parent().addClass("current");
-                    colorIds.push(colorId);
-                }
-            });
-
-            $.each($("#searchColors li"), function (i, el) {
-                if ($(this).hasClass("current")) {
-                    let colorId = $(this).attr("id");
-                    colorIds.push(colorId);
-                }
-            });
-
-            $("#product-list-page").on('click', '#search', function () {
-                let minPrice = $(".amount-range-price .from").text().replace(/\s/g, '').replace(/-/g, '').replace(',','.');
-                let maxPrice = $(".amount-range-price .to").text().replace(/\s/g, '').replace(/-/g, '').replace(',', '.');
-
-                showLoader();
-
-                window.location.href = '/Product/ProductViewList?subcategoryId=' + subcategoryId + '&pageNumber=1&minPrice=' + minPrice + '&maxPrice=' + maxPrice + '&colors=' + colorIds;                
-            });
-        });
-    </script>
-
+    <script src="~/Scripts/product-search.js"></script>
 }

@@ -14,5 +14,7 @@ namespace ArticoleCalarie.Repository.IRepository
         void UpdateProduct(Product product);
         Product GetProductByProductCode(string productCode);
         SearchFilters GetSearchFiltersForSubcategory(int subcategoryId);
+        Task<ProductSearchResult> GetProductsByBrand(string brand, int itemsPerPage, int itemsToSkip);
+        Task<ProductSearchResult> GetProductsOnSale(int itemsPerPage, int itemsToSkip);
     }
 }

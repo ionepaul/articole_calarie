@@ -163,6 +163,18 @@ body{
   line-height: 24px;
 }
 
+#searchSizes li {
+    background-color: #f2f2f2;
+    padding: 5px 10px;
+    border-radius: 2px;
+    cursor: pointer
+}
+
+    #searchSizes li.active {
+        background-color: #324a76;
+        color: #ffffff;
+    }
+
 .search-filters {
     width: 100%;
     background: #324a76;

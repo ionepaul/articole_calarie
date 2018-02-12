@@ -13,5 +13,7 @@ namespace ArticoleCalarie.Logic.ILogic
         void DeleteProduct(int productId);
         ProductViewModel GetProductByProductCode(string productCode);
         SearchViewFilters GetSearchViewFiltersForSubcategory(int subcategoryId);
+        Task<ProductSearchViewResult> GetProductsByBrand(string brand, int pageNumber);
+        Task<ProductSearchViewResult> GetProductsOnSale(int pageNumber);
     }
 }

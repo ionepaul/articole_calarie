@@ -42,7 +42,14 @@
         <ul id="searchSizes" class="list-size">
             @foreach (var size in Model.Sizes)
             {
-                <li id="@size">@size</li>
+                if (savedFilters?.Sizes != null && savedFilters.Sizes.Contains(size))
+                {
+                    <li class="active" id="@size">@size</li>
+                }
+                else
+                {
+                    <li id="@size">@size</li>
+                }
             }
          </ul>
     </div>
