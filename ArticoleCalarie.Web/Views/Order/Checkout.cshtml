@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<div class="main-content checkout-page">
+    <div class="container">
+        <div class="breadcrumbs">
+            <a href="#">Home</a> / <span class="current">Checkout</span>
+        </div>
+        <div class="checkout-content">
+            <div class="row">
+                <div class="col-ss-12 col-xs-12 col-sm-12 col-lg-9">
+                    <div class="checkout-choosen">
+                        <ul class="list-choosen">
+                            <li class="parent-content">
+                                <a href="#" class="show-content"> <span class="number">01</span> CHECKOUT METHOD</a>
+                                <div class="hidden-content checkout-choosen-content">
+                                    <div class="row ">
+                                        <div class="checkout-form col-xs-12 col-sm-6">
+                                            <h3 class="title">Checkout as a Guest or Register</h3>
+                                            <h4 class="subtitle">Register with us for future convenience:</h4>
+                                            <div class="list-check">
+                                                <div class="checked">
+                                                    <input type="radio" name="checked" class="radio" id="checkoutasguest"> <label for="checkoutasguest" class="text-label">Checkout as Guest</label>
+                                                </div>
+                                                <div class="checked">
+                                                    <input type="radio" name="checked" class="radio" id="registers"> <label for="registers" class="text-label">Register</label>
+                                                </div>
+                                            </div>
+                                            <h3 class="text-label">Register and save time!</h3>
+                                            <h3 class="text-label">Register with us for future convenience:</h3>
+                                            <ul class="list-tick">
+                                                <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span> Fast and easy check out</li>
+                                                <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span>Easy access to your order history and status</li>
+                                            </ul>
+                                            <a href="#" class="submit continue">CONTINUE</a>
+                                        </div>
+                                        <div class="login-form col-xs-12 col-sm-6">
+                                            <h3 class="title">Login</h3>
+                                            <h4 class="subtitle">Please Login below:</h4>
+                                            <h3 class="text-label">Email address *</h3>
+                                            <input type="text" class="input-info">
+                                            <h3 class="text-label">Password *</h3>
+                                            <input type="password" class="input-info">
+
+                                            <a href="#" class="submit login">LOGIN</a>
+                                            <div class="note">
+                                                <h3 class="text-label">* Required Fields</h3>
+                                                <a href="#" class="forgot-pass">Forgot your password?</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="parent-content">
+                                <a href="#" class="show-content"> <span class="number">02</span> BILLING INFORMATION</a>
+                                <div class="hidden-content checkout-choosen-content">
+                                    <div class="checkout-form content-form">
+                                        <h4 class="main-title">Biiling Address</h4>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                <span class="label-text">First Name <span>*</span></span>
+                                                <input type="text" class="input-info">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                <span class="label-text">Last Name <span>*</span></span>
+                                                <input type="text" class="input-info">
+                                            </div>
+                                        </div>
+                                        <span class="label-text">Company Name</span>
+                                        <input type="text" class="input-info">
+                                        <span class="label-text">Address <span>*</span></span>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                <input type="text" class="input-info">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                <input type="text" class="input-info">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                                <span class="label-text">Email Address <span>*</span></span>
+                                                <input type="text" class="input-info">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                                <span class="label-text">Postcode / Zip <span>*</span></span>
+                                                <input type="text" class="input-info">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                                <span class="label-text">Number Phone <span>*</span></span>
+                                                <input type="text" class="input-info">
+                                            </div>
+                                        </div>
+                                        <div class="group-button">
+                                            <a href="#" class="submit">SUBMIT</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="parent-content">
+                                <a href="#" class="show-content"> <span class="number">03</span>SHIPPING INFROMATION</a>
+                                <div class="hidden-content checkout-choosen-content">
+                                    <div class="shipping-form">
+                                        <h5 class="title">Shipping Information</h5>
+                                        <span class="label-text">Address <span>*</span></span>
+                                        <input type="text" class="input-info">
+                                        <span class="label-text">Number Phone <span>*</span></span>
+                                        <input type="text" class="input-info">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="parent-content">
+                                <a href="#" class="show-content"> <span class="number">04</span> SHIPPING METHOD</a>
+                                <div class="hidden-content checkout-choosen-content">
+                                    <div class="shipping-form">
+                                        <h5 class="title">Shipping method</h5>
+                                        <div class="info-shipping">
+                                            <span class="item">Check / Money order</span>
+                                            <span class="item">Credit Cart (saved)</span>
+                                        </div>
+                                        <h4 class="subtitle">Discount Codes</h4>
+                                        <span class="label-text">Enter Your Coupon code:</span>
+                                        <input type="text" class="input-info">
+                                        <div class="group-button">
+                                            <a href="#" class="button submit">Apply</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="parent-content">
+                                <a href="#" class="show-content"> <span class="number">05</span> PAYMENT INFORMATION</a>
+                                <div class="hidden-content checkout-choosen-content">
+                                    <div class="payment-form">
+                                        <h5 class="main-title">Payment Information</h5>
+                                        <div class="info-checkout">
+                                            <span class="item">Check / Money order</span>
+                                            <span class="item">Credit Cart (saved)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="parent-content">
+                                <a href="#" class="show-content"> <span class="number">06</span> ORDER REVIEW</a>
+                                <div class="hidden-content checkout-choosen-content">
+                                    <div class="total-checkout">
+                                        <span class="text">Grand Total </span><span class="price"> $100.00</span>
+                                    </div>
+                                    <div class="group-button">
+                                        <a href="#" class="button submit">Place Order Now</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-ss-12 col-xs-12 col-sm-12 col-lg-3">
+                    <h4 class="main-title">CHECKOUT PROGRESS</h4>
+                    <ul class="list-progress">
+                        <li><a href="#"><span class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>Billing Address</a></li>
+                        <li><a href="#"><span class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>Shipping Address</a></li>
+                        <li><a href="#"><span class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>Shipping Method</a></li>
+                        <li><a href="#"><span class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>Payment Method</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="newsletter layout1 box-has-content">
+        <div class="newsletter-inner">
+            <h3 class="title"> SIGN UP NOW <span>Yahoo!!</span></h3>
+            <p class="des">Get 25% off on your first purchase and get more news & promotions from us.</p>
+            <div class="newsletter-block">
+                <input type="text" class="input-info"><a href="#" class="submit button">Subscribe!</a>
+            </div>
+        </div>
+    </div> -->
+</div>
+

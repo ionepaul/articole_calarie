@@ -15,6 +15,18 @@ namespace ArticoleCalarie.Web.Controllers
             _logger = LogManager.GetLogger("Order");
         }
 
+        [HttpGet]
+        public ActionResult ShoppingCartDetails()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult AddToCart(ShoppingCartItem shoppingCartItem)
         {

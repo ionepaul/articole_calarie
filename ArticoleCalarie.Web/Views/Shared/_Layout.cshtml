@@ -77,8 +77,8 @@
                                             <h3 class="widgettitle">Accesorii</h3>
                                             <ul>
                                                 @*<li><a href="home8.html">Cămăși</a></li>
-                                                <li><a href="home9.html">Mănuși</a></li>
-                                                <li><a href="home10.html">Accesorii</a></li>*@
+                                                    <li><a href="home9.html">Mănuși</a></li>
+                                                    <li><a href="home10.html">Accesorii</a></li>*@
                                             </ul>
                                         </div>
                                     </div>
@@ -290,7 +290,10 @@
             });
 
             $(window).load(function () {
-                hideLoader();
+                setTimeout(function () {
+                    hideLoader();
+                }, 200);
+
             });
         });
 

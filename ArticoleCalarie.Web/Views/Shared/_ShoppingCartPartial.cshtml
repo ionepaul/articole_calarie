@@ -22,9 +22,9 @@
                     <p>@product.Price</p>
                     <a onclick="deleteFromCart('@product.ProductCode')" title="Șterge produs"><i class="glyphicon glyphicon-trash"></i></a>
                 </div>
-                                                    <hr />
+                <hr />
             }
-            <button>finalizeaza comanda</button>
+            <a href="@Url.Action("ShoppingCartDetails", "Order")">finalizeaza comanda</a>
         </div>
     }
     else
