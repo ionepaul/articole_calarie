@@ -52,7 +52,11 @@ function deleteFromCart(productCode) {
         url: url,
         success: function (data) {
             $("#shopping-cart").html(data);
-            hideLoader();
+            if (window.location.href.indexOf("ShoppingCartDetails") > -1) {
+                window.location.reload();
+            } else {
+                hideLoader();
+            }
         },
         error: function (error) {
             hideLoader();
