@@ -233,6 +233,7 @@
     <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SizeChartController.cs" />
     <Compile Include="Controllers\SubcategoryController.cs" />
@@ -678,6 +679,7 @@
     <Content Include="Scripts\product-search.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\shopping-cart.js" />
     <Content Include="Scripts\timecircles.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -716,9 +718,11 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\_ProductListSearch.cshtml" />
+    <Content Include="Views\Shared\_ShoppingCartPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

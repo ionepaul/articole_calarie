@@ -171,16 +171,8 @@
                             </ul>
                             <ul class="top-links">
                                 @Html.Partial("_LoginPartial")
-                                <li class="box-minicart">
-                                    <div class="minicart">
-                                        <div class="cart-block">
-                                            <a href="shopping-cart.html" class="cart-icon"><span class="flaticon-cart"></span></a>
-                                            <span class="count">0</span>
-                                        </div>
-                                        <div class="cart-inner cart-empty">
-                                            <p class="content">You have no item(s) in your shopping Cart</p>
-                                        </div>
-                                    </div>
+                                <li id="shopping-cart" class="box-minicart">
+                                    @Html.Partial("_ShoppingCartPartial")
                                 </li>
                             </ul>
                         </div>
@@ -311,12 +303,11 @@
         }
 
     </script>
+    <script src="~/Scripts/shopping-cart.js"></script>
 
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/external")
     @Scripts.Render("~/bundles/modernizr")
-
-
 </body>
 </html>

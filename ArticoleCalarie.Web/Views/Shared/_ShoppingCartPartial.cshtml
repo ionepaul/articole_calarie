@@ -1,0 +1,37 @@
+﻿@using ArticoleCalarie.Models
+
+@{
+    var shoppingCart = Session["ShoppingCart"] as ShoppingCartModel;
+    var totalCartItems = shoppingCart?.ShoppingItems?.Sum(x => x.Quantity) ?? 0;
+}
+
+<div class="minicart">
+    <div class="cart-block">
+        <a href="shopping-cart.html" class="cart-icon"><span class="flaticon-cart"></span></a>
+        <span class="count">@totalCartItems</span>
+    </div>
+    @if (totalCartItems > 0)
+    {
+        <div class="cart-inner">
+            @foreach (var product in shoppingCart.ShoppingItems)
+            {
+                <div id="cart-product-details">
+                    <img onclick="viewProduct('@product.ProductCode')" src="~/images/products/@product.ImageName" />
+                    <p onclick="viewProduct('@product.ProductCode')" id="cart-product-title"><strong>@product.Quantity x</strong> @product.ProductName</p>
+                    <small>@product.Color, @product.Size</small>
+                    <p>@product.Price</p>
+                    <a onclick="deleteFromCart('@product.ProductCode')" title="Șterge produs"><i class="glyphicon glyphicon-trash"></i></a>
+                </div>
+                                                    <hr />
+            }
+            <button>finalizeaza comanda</button>
+        </div>
+    }
+    else
+    {
+        <div class="cart-inner cart-empty">
+            <p class="content">Coșul de cumpărături este gol.</p>
+        </div>
+    }
+</div>
+
