@@ -1,6 +1,16 @@
-﻿
+﻿@model ArticoleCalarie.Models.UserViewModel
+
 @{
     ViewBag.Title = "Checkout";
+
+    var fullName = Model?.FullName;
+    var deliveryPhoneNumber = Model?.DeliveryAddress?.PhoneNumber;
+    var deliveryAddressLine1 = Model?.DeliveryAddress?.AddressLine1;
+    var deliveryAddressLine2 = Model?.DeliveryAddress?.AddressLine2;
+    var deliveryPostalCode = Model?.DeliveryAddress?.PostalCode;
+    var deliveryCountry = Model?.DeliveryAddress?.Country;
+    var deliveryCounty = Model?.DeliveryAddress?.County;
+    var deliveryCity = Model?.DeliveryAddress?.City;
 }
 
 <div class="main-content checkout-page">
@@ -10,122 +20,130 @@
         </div>
         <div class="checkout-content">
             <div class="row">
-                <div class="col-ss-12 col-xs-12 col-sm-12 col-lg-9">
+                <div class="col-ss-12 col-xs-12 col-sm-12 col-lg-12">
                     <div class="checkout-choosen">
                         <ul class="list-choosen">
                             <li class="parent-content">
                                 <a href="#" class="show-content"> <span class="number">01</span> CHECKOUT METHOD</a>
-                                <div class="hidden-content checkout-choosen-content">
-                                    <div class="row ">
-                                        <div class="checkout-form col-xs-12 col-sm-6">
-                                            <h3 class="title">Checkout as a Guest or Register</h3>
-                                            <h4 class="subtitle">Register with us for future convenience:</h4>
-                                            <div class="list-check">
-                                                <div class="checked">
-                                                    <input type="radio" name="checked" class="radio" id="checkoutasguest"> <label for="checkoutasguest" class="text-label">Checkout as Guest</label>
-                                                </div>
-                                                <div class="checked">
-                                                    <input type="radio" name="checked" class="radio" id="registers"> <label for="registers" class="text-label">Register</label>
-                                                </div>
+                                @if (Model == null)
+                                {
+                                    <div class="hidden-content checkout-choosen-content show">
+                                        <div class="row">
+                                            <div class="checkout-form col-xs-12 col-sm-4">
+                                                <h3 class="title">Confirma comanda ca si vizitator</h3>
+                                                <br />
+                                                <span class="label-text">Introduce-ti adresa de email <span>*</span></span>     
+                                                <input type="text" class="input-info"/>
+                            
+                                                <a href="#" class="submit continue">CONTINUE</a>
                                             </div>
-                                            <h3 class="text-label">Register and save time!</h3>
-                                            <h3 class="text-label">Register with us for future convenience:</h3>
-                                            <ul class="list-tick">
-                                                <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span> Fast and easy check out</li>
-                                                <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span>Easy access to your order history and status</li>
-                                            </ul>
-                                            <a href="#" class="submit continue">CONTINUE</a>
-                                        </div>
-                                        <div class="login-form col-xs-12 col-sm-6">
-                                            <h3 class="title">Login</h3>
-                                            <h4 class="subtitle">Please Login below:</h4>
-                                            <h3 class="text-label">Email address *</h3>
-                                            <input type="text" class="input-info">
-                                            <h3 class="text-label">Password *</h3>
-                                            <input type="password" class="input-info">
+                                            <div class="checkout-form col-xs-12 col-sm-4">
+            
+                                                <h3 class="title">Register</h3>
+                                                <h4 class="subtitle">Please Login below:</h4>
+                                                <h3 class="text-label">Email address *</h3>
+                                                <input type="text" class="input-info">
+                                                <h3 class="text-label">Password *</h3>
+                                                <input type="password" class="input-info">
+                                                <h4 class="subtitle">Register with us for future convenience:</h4>
 
-                                            <a href="#" class="submit login">LOGIN</a>
-                                            <div class="note">
-                                                <h3 class="text-label">* Required Fields</h3>
-                                                <a href="#" class="forgot-pass">Forgot your password?</a>
+                                                <h3 class="text-label">Register and save time!</h3>
+                                                <h3 class="text-label">Register with us for future convenience:</h3>
+                                                <ul class="list-tick">
+                                                    <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span> Fast and easy check out</li>
+                                                    <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span>Easy access to your order history and status</li>
+                                                </ul>
+
+                                                <a href="#" class="submit login">INREGISTREAZA-TE</a>
+                                            </div>
+                                            <div class="login-form col-xs-12 col-sm-4">
+                                                <h3 class="title">Login</h3>
+                                                <h4 class="subtitle">Please Login below:</h4>
+                                                <h3 class="text-label">Email address *</h3>
+                                                <input type="text" class="input-info">
+                                                <h3 class="text-label">Password *</h3>
+                                                <input type="password" class="input-info">
+
+                                                <a href="#" class="submit login">LOGIN</a>
+                                                <div class="note">
+                                                    <h3 class="text-label">* Required Fields</h3>
+                                                    <a href="#" class="forgot-pass">Forgot your password?</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
+                                else
+                                {
+                                    <div class="hidden-content checkout-choosen-content">
+                                        <p>Esti deja logat.</p>
+                                    </div>
+                                }
                             </li>
                             <li class="parent-content">
-                                <a href="#" class="show-content"> <span class="number">02</span> BILLING INFORMATION</a>
-                                <div class="hidden-content checkout-choosen-content">
+                                <a href="#" class="show-content"> <span class="number">02</span> DETALII LIVRARE</a>
+                                @{ 
+                                    var isHidden = Model == null ? "hidden-content" : "";
+                                }
+                                <div class="@isHidden checkout-choosen-content">
                                     <div class="checkout-form content-form">
-                                        <h4 class="main-title">Biiling Address</h4>
+                                        <h4 class="main-title">Adresa de livrare</h4>
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                                <span class="label-text">First Name <span>*</span></span>
-                                                <input type="text" class="input-info">
+                                                <span class="label-text">Nume Complet <span>*</span></span>                
+                                                <input type="text" value="@fullName" class="input-info">
                                             </div>
                                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                                <span class="label-text">Last Name <span>*</span></span>
-                                                <input type="text" class="input-info">
-                                            </div>
-                                        </div>
-                                        <span class="label-text">Company Name</span>
-                                        <input type="text" class="input-info">
-                                        <span class="label-text">Address <span>*</span></span>
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                                <input type="text" class="input-info">
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                                <input type="text" class="input-info">
+                                                <span class="label-text">Telefon <span>*</span></span>                   
+                                                <input type="text" value="@deliveryPhoneNumber"class="input-info">
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                                                <span class="label-text">Adresa <span>*</span></span>
+                                                <input type="text" value="@deliveryAddressLine1" class="input-info">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                                                <span class="label-text">Detalii Adresa</span>
+                                                <input type="text" value="@deliveryAddressLine2" class="input-info">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                                                <span class="label-text">Cod Postal</span>
+                                                <input type="text" value="@deliveryPostalCode" class="input-info">
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                                <span class="label-text">Email Address <span>*</span></span>
-                                                <input type="text" class="input-info">
+                                                <span class="label-text">Tara <span>*</span></span>
+                                                <input type="text" value="@deliveryCountry" class="input-info">
                                             </div>
                                             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                                <span class="label-text">Postcode / Zip <span>*</span></span>
-                                                <input type="text" class="input-info">
+                                                <span class="label-text">Judet <span>*</span></span>
+                                                <input type="text" value="@deliveryCounty" class="input-info">
                                             </div>
                                             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                                <span class="label-text">Number Phone <span>*</span></span>
-                                                <input type="text" class="input-info">
+                                                <span class="label-text">Oras <span>*</span></span>
+                                                <input type="text" value="@deliveryCity" class="input-info">
                                             </div>
                                         </div>
                                         <div class="group-button">
-                                            <a href="#" class="submit">SUBMIT</a>
+                                            <a href="#" class="submit">Continua</a>
                                         </div>
                                     </div>
                                 </div>
                             </li>
                             <li class="parent-content">
-                                <a href="#" class="show-content"> <span class="number">03</span>SHIPPING INFROMATION</a>
+                                <a href="#" class="show-content"> <span class="number">03</span>DETALII FACTURARE</a>
                                 <div class="hidden-content checkout-choosen-content">
                                     <div class="shipping-form">
-                                        <h5 class="title">Shipping Information</h5>
-                                        <span class="label-text">Address <span>*</span></span>
+                                        <h5 class="title">Adresa de facturare</h5>
+                                        <label><span class="checkbox-checkmark"></span>Identica cu addresa de livrare</label>
+                                        SAU
+                                        <a href="#">Introdu adresa de facturare</a>
+                                        @*<span class="label-text">Address <span>*</span></span>
                                         <input type="text" class="input-info">
                                         <span class="label-text">Number Phone <span>*</span></span>
-                                        <input type="text" class="input-info">
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="parent-content">
-                                <a href="#" class="show-content"> <span class="number">04</span> SHIPPING METHOD</a>
-                                <div class="hidden-content checkout-choosen-content">
-                                    <div class="shipping-form">
-                                        <h5 class="title">Shipping method</h5>
-                                        <div class="info-shipping">
-                                            <span class="item">Check / Money order</span>
-                                            <span class="item">Credit Cart (saved)</span>
-                                        </div>
-                                        <h4 class="subtitle">Discount Codes</h4>
-                                        <span class="label-text">Enter Your Coupon code:</span>
-                                        <input type="text" class="input-info">
-                                        <div class="group-button">
-                                            <a href="#" class="button submit">Apply</a>
-                                        </div>
+                                        <input type="text" class="input-info">*@
                                     </div>
                                 </div>
                             </li>
@@ -155,15 +173,6 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-ss-12 col-xs-12 col-sm-12 col-lg-3">
-                    <h4 class="main-title">CHECKOUT PROGRESS</h4>
-                    <ul class="list-progress">
-                        <li><a href="#"><span class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>Billing Address</a></li>
-                        <li><a href="#"><span class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>Shipping Address</a></li>
-                        <li><a href="#"><span class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>Shipping Method</a></li>
-                        <li><a href="#"><span class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>Payment Method</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
@@ -178,3 +187,13 @@
     </div> -->
 </div>
 
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".continue").on("click", function () {
+                $(this).closest(".hidden-content").removeClass("show");
+                $(this).closest(".parent-content").next(".parent-content").find(".show-content").click();
+            });
+        });
+    </script>   
+}

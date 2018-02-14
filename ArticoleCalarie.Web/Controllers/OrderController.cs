@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
+using Microsoft.AspNet.Identity;
 using NLog;
 
 namespace ArticoleCalarie.Web.Controllers
@@ -9,22 +12,52 @@ namespace ArticoleCalarie.Web.Controllers
     public class OrderController : Controller
     {
         private static Logger _logger;
+        private IAccountLogic _iAccountLogic;
 
-        public OrderController()
+        public OrderController(IAccountLogic iAccountLogic)
         {
             _logger = LogManager.GetLogger("Order");
+            _iAccountLogic = iAccountLogic;
         }
 
         [HttpGet]
         public ActionResult ShoppingCartDetails()
         {
+            _logger.Info("VIEW > Shopping Cart Details");
+
             return View();
         }
 
         [HttpGet]
-        public ActionResult Checkout()
+        public async Task<ActionResult> Checkout()
         {
-            return View();
+            _logger.Info("VIEW > Check out");
+
+            try
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    _logger.Info("User is logged in.");
+
+                    var userId = User.Identity.GetUserId();
+
+                    var userViewModel = await _iAccountLogic.GetUserById(userId);
+
+                    _logger.Info("Successfully retrieved user information.");
+
+                    return View(userViewModel);
+                }
+
+                _logger.Info("User is not logged in.");
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to go to checkout page. Exception {ex.Message}");
+
+                return View("Error");
+            }
         }
 
         [HttpPost]
