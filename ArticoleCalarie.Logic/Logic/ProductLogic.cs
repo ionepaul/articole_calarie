@@ -114,7 +114,7 @@ namespace ArticoleCalarie.Logic.Logic
                 StoreSubcategory(product, productViewModel);
             }
             
-            if (!string.Equals(product.Brand.Name, productViewModel.Brand))
+            if (!string.Equals(product.Brand?.Name, productViewModel.Brand))
             {
                 StoreBrand(product, productViewModel);
             }
