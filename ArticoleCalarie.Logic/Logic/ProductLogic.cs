@@ -102,14 +102,17 @@ namespace ArticoleCalarie.Logic.Logic
             var selectedColors = productViewModel.Colors?.Split(',');
             product.ColorIds = new List<int>();
 
-            foreach (var colorId in selectedColors)
+            if (selectedColors != null)
             {
-                var intColorId = Convert.ToInt32(colorId);
+                foreach (var colorId in selectedColors)
+                {
+                    var intColorId = Convert.ToInt32(colorId);
 
-                product.ColorIds.Add(intColorId);
+                    product.ColorIds.Add(intColorId);
+                }
             }
 
-            if (!string.Equals(product.Subcategory.Name, productViewModel.SubcategoryId))
+            if (!string.Equals(product.Subcategory?.Name, productViewModel.SubcategoryId))
             {
                 StoreSubcategory(product, productViewModel);
             }
