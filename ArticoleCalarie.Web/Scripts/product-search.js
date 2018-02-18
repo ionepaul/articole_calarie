@@ -1,5 +1,4 @@
-﻿var subcategoryId = @ViewBag.SubcategoryId;
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var colorIds = [];
     var sizes = [];
 

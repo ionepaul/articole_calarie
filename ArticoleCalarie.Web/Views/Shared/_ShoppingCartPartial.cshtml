@@ -16,15 +16,24 @@
             @foreach (var product in shoppingCart.ShoppingItems)
             {
                 <div id="cart-product-details">
-                    <img onclick="viewProduct('@product.ProductCode')" src="~/images/products/@product.ImageName" />
-                    <p onclick="viewProduct('@product.ProductCode')" id="cart-product-title"><strong>@product.Quantity x</strong> @product.ProductName</p>
-                    <small>@product.Color, @product.Size</small>
-                    <p>@product.Price</p>
-                    <a onclick="deleteFromCart('@product.ProductCode')" title="Șterge produs"><i class="glyphicon glyphicon-trash"></i></a>
+                    <div class="cart-product-details-img">
+                        <img onclick="viewProduct('@product.ProductCode')" src="~/images/products/@product.ImageName" />
+                    </div>
+                    <div class="cart-product-details-info">
+                        <div class="cart-product-details-info-col1">
+                            <p class="product-title" onclick="viewProduct('@product.ProductCode')" id="cart-product-title"><strong>@product.Quantity x</strong> @product.ProductName</p>
+                            <small>@product.Color, @product.Size</small>
+                        </div>
+                        <div class="cart-product-details-info-col2">
+                            <p>@product.Price</p>
+                            <a class="product-remove" onclick="deleteFromCart('@product.ProductCode')" title="Șterge produs"><i class="glyphicon glyphicon-trash"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <hr />
             }
-            <a href="@Url.Action("ShoppingCartDetails", "Order")">finalizeaza comanda</a>
+            <p class="cart-inner-total"><span>TOTAL: </span> 475,00 RON</p>
+            <a class="complete-order" href="@Url.Action("ShoppingCartDetails", "Order")">finalizeaza comanda</a>
         </div>
     }
     else
