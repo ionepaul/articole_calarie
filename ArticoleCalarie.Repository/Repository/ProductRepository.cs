@@ -70,7 +70,7 @@ namespace ArticoleCalarie.Repository.Repository
                 var productSearchResult = new ProductSearchResult
                 {
                     TotalCount = query.Where(x => x.ProductCode.StartsWith(productCode)).Count(),
-                    Products = query.Where(x => x.ProductCode.StartsWith(productCode))
+                    Products = query.Where(x => x.ProductCode.StartsWith(productCode) || x.ProductName.StartsWith(productCode))
                                     .OrderBy(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).AsEnumerable()
                 };
 

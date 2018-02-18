@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
+using Newtonsoft.Json;
 using NLog;
 using PagedList;
 
@@ -262,7 +263,7 @@ namespace ArticoleCalarie.Web.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error($"Failed to add product {productViewModel.ProductName}. Exception: {ex.Message}.");
+                _logger.Error($"Failed to add product {productViewModel.ProductName}. Object: {JsonConvert.SerializeObject(productViewModel)} --  Exception: {ex.Message}.");
 
                 return View("Error");
             }
@@ -285,14 +286,14 @@ namespace ArticoleCalarie.Web.Controllers
             try
             {
                 _iProductLogic.UpdateProduct(productViewModel.Id, productViewModel);
-
+                
                 _logger.Info($"Successfully updated product {productViewModel.ProductName}.");
 
                 return RedirectToAction(nameof(List));
             }
             catch (Exception ex)
             {
-                _logger.Error($"Failed to update product {productViewModel.ProductName}. Exception: {ex.Message}.");
+                _logger.Error($"Failed to update product {productViewModel.ProductName}. Object: {JsonConvert.SerializeObject(productViewModel)} -- Exception: {ex.Message}.");
 
                 return View("Error");
             }
