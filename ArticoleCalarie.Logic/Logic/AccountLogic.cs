@@ -35,7 +35,7 @@ namespace ArticoleCalarie.Logic.Logic
 
             if (result.Succeeded)
             {
-                await SendWelcomeEmail(model.Email, model.FullName);
+               // await SendWelcomeEmail(model.Email, model.FullName);
             }
 
             return result;

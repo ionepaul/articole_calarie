@@ -7,7 +7,7 @@
 
 <div class="minicart">
     <div class="cart-block">
-        <a href="shopping-cart.html" class="cart-icon"><span class="flaticon-cart"></span></a>
+        <a href="@Url.Action("ShoppingCartDetails", "Order")" class="cart-icon"><span class="flaticon-cart"></span></a>
         <span class="count">@totalCartItems</span>
     </div>
     @if (totalCartItems > 0)

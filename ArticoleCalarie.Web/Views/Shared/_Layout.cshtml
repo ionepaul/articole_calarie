@@ -289,11 +289,14 @@
                 showLoader();
             });
 
+            $("form").on("submit", function () {
+                showLoader();
+            });
+
             $(window).load(function () {
                 setTimeout(function () {
                     hideLoader();
                 }, 200);
-
             });
         });
 

@@ -1,4 +1,5 @@
 ﻿@model ArticoleCalarie.Models.UserViewModel
+@using ArticoleCalarie.Models
 
 @{
     ViewBag.Title = "Checkout";
@@ -39,36 +40,58 @@
                                             </div>
                                             <div class="checkout-form col-xs-12 col-sm-4">
             
-                                                <h3 class="title">Register</h3>
-                                                <h4 class="subtitle">Please Login below:</h4>
-                                                <h3 class="text-label">Email address *</h3>
-                                                <input type="text" class="input-info">
-                                                <h3 class="text-label">Password *</h3>
-                                                <input type="password" class="input-info">
-                                                <h4 class="subtitle">Register with us for future convenience:</h4>
+                                                <h3 class="title">Înregistrează-te</h3>
+                                                <br />
 
-                                                <h3 class="text-label">Register and save time!</h3>
-                                                <h3 class="text-label">Register with us for future convenience:</h3>
-                                                <ul class="list-tick">
-                                                    <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span> Fast and easy check out</li>
-                                                    <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span>Easy access to your order history and status</li>
-                                                </ul>
+                                                <div id="socialLoginForm">
+                                                    @Html.Partial("../Account/_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = "/Order/Checkout" })
+                                                </div>
+                                                <p class="text-in-lines">
+                                                    <span>sau</span>
+                                                </p>
 
-                                                <a href="#" class="submit login">INREGISTREAZA-TE</a>
+                                                @using (Html.BeginForm("Register", "Account", new { ReturnUrl = "/Order/Checkout" }, FormMethod.Post, new { @id="register-form", @class = "form-horizontal", role = "form" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+
+                                                    <h3 class="text-label">Nume complet *</h3>
+                                                    <input type="text" name="fullname" class="input-info">
+
+                                                    <h3 class="text-label">Email *</h3>
+                                                    <input type="text" name="email" class="input-info">
+
+                                                    <h3 class="text-label">Parola *</h3>
+                                                    <input type="password" name="password" class="input-info">
+
+                                                    <h3 class="text-label">Confirmă parola *</h3>
+                                                    <input type="password" name="confirmpassword" class="input-info">
+
+                                                    <ul class="list-tick">
+                                                        <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span> Check-out simplu și rapid</li>
+                                                        <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span> Vizualizează toate comenzile tale</li>
+                                                    </ul>
+                                                    <br />
+
+                                                    <a id="checkout-register-btn" class="submit login">INREGISTREAZA-TE</a>
+                                                }
                                             </div>
                                             <div class="login-form col-xs-12 col-sm-4">
-                                                <h3 class="title">Login</h3>
-                                                <h4 class="subtitle">Please Login below:</h4>
-                                                <h3 class="text-label">Email address *</h3>
-                                                <input type="text" class="input-info">
-                                                <h3 class="text-label">Password *</h3>
-                                                <input type="password" class="input-info">
+                                                <h3 class="title">Conectează-te</h3>
+                                                <br />
+                                                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = "/Order/Checkout" }, FormMethod.Post, new { @id = "login-form", @class = "form-horizontal", role = "form" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
 
-                                                <a href="#" class="submit login">LOGIN</a>
-                                                <div class="note">
-                                                    <h3 class="text-label">* Required Fields</h3>
-                                                    <a href="#" class="forgot-pass">Forgot your password?</a>
-                                                </div>
+                                                    <h3 class="text-label">Email *</h3>
+                                                    <input type="text" name="email" class="input-info">
+                                                    <h3 class="text-label">Parola *</h3>
+                                                    <input type="password" name="password" class="input-info">
+
+                                                    <a id="checkout-login-btn" class="submit login">CONECTEAZĂ-TE</a>
+                                                    <div class="note">
+                                                        @Html.ActionLink("Ți-ai uitat parola?", "ForgotPassword", "Account")
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +102,8 @@
                                         <p>Esti deja logat.</p>
                                     </div>
                                 }
-                            </li>
+                            </li
+>
                             <li class="parent-content">
                                 <a href="#" class="show-content"> <span class="number">02</span> DETALII LIVRARE</a>
                                 @{ 
@@ -193,6 +217,14 @@
             $(".continue").on("click", function () {
                 $(this).closest(".hidden-content").removeClass("show");
                 $(this).closest(".parent-content").next(".parent-content").find(".show-content").click();
+            });
+
+            $("#checkout-login-btn").on("click", function () {
+                $("#login-form").submit();
+            });
+
+            $("#checkout-register-btn").on("click", function () {
+                $("#register-form").submit();
             });
         });
     </script>   
