@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
+using ArticoleCalarie.Models.Enums;
 using Microsoft.AspNet.Identity;
 using NLog;
 
@@ -112,6 +113,23 @@ namespace ArticoleCalarie.Web.Controllers
 
                 return View("Error");
             }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UpdateDeliveryAddress(AddressViewModel address)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Checkout");
+            }
+
+            var userId = User.Identity.GetUserId();
+
+            address.AddressType = AddressTypeViewEnum.Delivery;
+
+            await _iAccountLogic.SaveUserAddress(address, userId);
+
+            return View();
         }
     }
 }
