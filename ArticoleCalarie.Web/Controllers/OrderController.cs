@@ -116,20 +116,42 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> UpdateDeliveryAddress(AddressViewModel address)
+        public async Task UpdateDeliveryAddress(AddressViewModel address)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View("Checkout");
+                var userId = User.Identity.GetUserId();
+
+                address.AddressType = AddressTypeViewEnum.Delivery;
+
+                await _iAccountLogic.SaveUserAddress(address, userId);
             }
+            catch (Exception ex)
+            {
+                
+            }
+        }
 
-            var userId = User.Identity.GetUserId();
+        [HttpPost]
+        public async Task UpdateBillingAddress(AddressViewModel address)
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
 
-            address.AddressType = AddressTypeViewEnum.Delivery;
+                if (address.IsSameAsDelivery)
+                {
+                    //load address saved from session
+                }
 
-            await _iAccountLogic.SaveUserAddress(address, userId);
+                address.AddressType = AddressTypeViewEnum.Billing;
 
-            return View();
+                await _iAccountLogic.SaveUserAddress(address, userId);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

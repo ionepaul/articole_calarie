@@ -93,7 +93,7 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task<UserViewModel> GetUserById(string userId)
         {
-            var userModel = await _iAccountRepository.FindUserByIdAsync(userId);
+            var userModel = await _iAccountRepository.GetUserFullUserInfo(userId);
 
             if (userModel == null)
             {

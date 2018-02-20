@@ -376,7 +376,7 @@ namespace ArticoleCalarie.Web.Controllers
             {
                 var userId = User.Identity.GetUserId();
 
-                UserViewModel userViewModel = await _iAccountLogic.GetUserById(userId);
+                var userViewModel = await _iAccountLogic.GetUserById(userId);
 
                 _logger.Info("Successfully retrieved user information.");
 

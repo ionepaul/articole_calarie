@@ -290,7 +290,9 @@
             });
 
             $("form").on("submit", function () {
-                showLoader();
+                if ($(this).valid()) {
+                    showLoader();
+                }
             });
 
             $(window).load(function () {

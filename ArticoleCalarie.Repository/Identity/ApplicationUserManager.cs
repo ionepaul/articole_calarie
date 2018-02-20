@@ -1,6 +1,7 @@
 ﻿using System;
 using ArticoleCalarie.Repository.Entities;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
@@ -15,7 +16,7 @@ namespace ArticoleCalarie.Repository.Identity
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new ApplicationUserStore(context.Get<ArticoleCalarieDataContext>()));
+            var manager = new ApplicationUserManager(new UserStore<UserModel>(context.Get<ArticoleCalarieDataContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<UserModel>(manager)
             {

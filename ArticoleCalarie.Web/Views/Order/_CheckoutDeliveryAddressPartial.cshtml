@@ -3,17 +3,13 @@
 @using (Ajax.BeginForm("UpdateDeliveryAddress", "Order", new AjaxOptions
 {
     HttpMethod = "post",
-    InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "checkout-delivery-address-container",
-    OnBegin = "altcv",
-    OnSuccess = "ceva",
-    OnFailure = "fail",
-    OnComplete = "ceva"
+    OnFailure = "failure",
+    OnComplete = "formOnComplete",
+    OnSuccess = "deliveryAddressOnSuccess"
 }, new { @id = "delivery-address-form", @class = "form-horizontal", role = "form" }))
 {
-                @Html.AntiForgeryToken()
-
-                <div class="row">
+    @Html.AntiForgeryToken()
+    <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <span class="label-text">Nume Complet <span>*</span></span>
             @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
@@ -59,20 +55,6 @@
         </div>
     </div>
     <div class="group-button">
-        <a id="checkout-save-delivery-address-btn" class="submit">Continua</a>
+        <a id="checkout-save-delivery-address-btn" class="submit">Confirmă</a>
     </div>
 }
-
-<script>
-    function ceva() {
-        console.log("begin");
-    }
-
-    function altcv() {
-        console.log("success");
-    }
-
-    function fail() {
-        console.log("failure");
-    }
-</script>

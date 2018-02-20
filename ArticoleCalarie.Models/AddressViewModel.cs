@@ -38,5 +38,7 @@ namespace ArticoleCalarie.Models
         public string Country { get; set; }
 
         public AddressTypeViewEnum AddressType { get; set; }
+
+        public bool IsSameAsDelivery { get; set; }
     }
 }

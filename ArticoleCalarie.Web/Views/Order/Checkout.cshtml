@@ -102,36 +102,53 @@
                                         <p>Esti deja logat.</p>
                                     </div>
                                 }
-                            </li
->
-                            <li class="parent-content">
+                            </li>
+
+                            @{
+                                var showContainerClass = Model == null ? "" : "show";
+                                var activeParentClass = Model == null ? "" : "active";
+                            }
+
+                            <li class="parent-content @activeParentClass">
                                 <a href="#" class="show-content"> <span class="number">02</span> DETALII LIVRARE</a>
-                                @{ 
-                                    var isHidden = Model == null ? "hidden-content" : "";
-                                }
-                                <div class="@isHidden checkout-choosen-content">
+                                <div class="hidden-content checkout-choosen-content @showContainerClass">
                                     <div class="checkout-form content-form">
                                         <h4 class="main-title">Adresa de livrare</h4>
 
-                                        <div id="checkout-delivery-address-container">
-                                            @Html.Partial("_CheckoutDeliveryAddressPartial", new AddressViewModel())
-                                        </div>
-                                       
+                                        @if (Model?.DeliveryAddress != null)
+                                        {
+                                            <div id="checkout-delivery-address-container">
+                                                @Html.Partial("_CheckoutDeliveryAddressPartial", Model.DeliveryAddress)
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div id="checkout-delivery-address-container">
+                                                @Html.Partial("_CheckoutDeliveryAddressPartial", new AddressViewModel())
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </li>
                             <li class="parent-content">
                                 <a href="#" class="show-content"> <span class="number">03</span>DETALII FACTURARE</a>
                                 <div class="hidden-content checkout-choosen-content">
-                                    <div class="shipping-form">
-                                        <h5 class="title">Adresa de facturare</h5>
-                                        <label><span class="checkbox-checkmark"></span>Identica cu addresa de livrare</label>
-                                        SAU
-                                        <a href="#">Introdu adresa de facturare</a>
-                                        @*<span class="label-text">Address <span>*</span></span>
-                                        <input type="text" class="input-info">
-                                        <span class="label-text">Number Phone <span>*</span></span>
-                                        <input type="text" class="input-info">*@
+                                    <div class="checkout-form content-form">
+                                        <h4 class="main-title">Adresa de facturare</h4>
+                            
+                                        @if (Model?.BillingAddress != null)
+                                        {
+                                            <div id="checkout-billing-address-container">
+                                                @Html.Partial("_CheckoutBillingAddressPartial", Model.BillingAddress)
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div id="checkout-billing-address-container">
+                                                @Html.Partial("_CheckoutBillingAddressPartial", new AddressViewModel())
+                                            </div>
+                                        }
+
                                     </div>
                                 </div>
                             </li>
@@ -164,19 +181,11 @@
             </div>
         </div>
     </div>
-    <!-- <div class="newsletter layout1 box-has-content">
-        <div class="newsletter-inner">
-            <h3 class="title"> SIGN UP NOW <span>Yahoo!!</span></h3>
-            <p class="des">Get 25% off on your first purchase and get more news & promotions from us.</p>
-            <div class="newsletter-block">
-                <input type="text" class="input-info"><a href="#" class="submit button">Subscribe!</a>
-            </div>
-        </div>
-    </div> -->
 </div>
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script>
         $(document).ready(function () {
             $(".continue").on("click", function () {
@@ -195,6 +204,43 @@
             $("#checkout-save-delivery-address-btn").on("click", function () {
                 $("#delivery-address-form").submit();
             });
+
+            $("#checkout-save-billing-address-btn").on("click", function () {
+                $("#billing-address-form").submit();
+            });
+
+            $("#same-as-delivery-btn").on("change", function () {
+                var isChecked = $(this).prop("checked");
+
+                if (!isChecked) {
+                    $("#billing-form-container").removeClass("hidden");
+                }
+                else {
+                    $("#billing-form-container").addClass("hidden");
+                }
+            })
         });
+
+        function formOnComplete() {
+            hideLoader();
+        }
+
+        function deliveryAddressOnSuccess() {
+            $("#delivery-address-form").closest(".hidden-content").removeClass("show");
+            $("#delivery-address-form").closest(".hidden-content").closest(".parent-content").removeClass("active");
+            $("#delivery-address-form").closest(".parent-content").next(".parent-content").find(".show-content").click();
+        }
+
+        function billingAddressOnSuccess() {
+            $("#billing-address-form").closest(".hidden-content").removeClass("show");
+            $("#billing-address-form").closest(".hidden-content").closest(".parent-content").removeClass("active");
+            $("#billing-address-form").closest(".parent-content").next(".parent-content").find(".show-content").click();
+        }
+
+        function failure() {
+            console.log('failure');
+        }
+
+
     </script>   
 }

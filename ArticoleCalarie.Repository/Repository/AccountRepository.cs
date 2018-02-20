@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using System.Threading.Tasks;
 using ArticoleCalarie.Repository.Constants;
 using ArticoleCalarie.Repository.Entities;
 using ArticoleCalarie.Repository.Identity;
@@ -9,12 +10,12 @@ using Microsoft.Owin.Security.DataProtection;
 
 namespace ArticoleCalarie.Repository.Repository
 {
-    public class AccountRepository : IAccountRepository
+    public class AccountRepository : AbstractRepository<UserModel>, IAccountRepository
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountRepository(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountRepository(ArticoleCalarieDataContext dataContext, ApplicationUserManager userManager, ApplicationSignInManager signInManager) : base(dataContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -105,6 +106,18 @@ namespace ArticoleCalarie.Repository.Repository
         {
             var user = await _userManager.FindByIdAsync(userId);
             
+            if (user == null)
+            {
+                return null;
+            }
+
+            return user;
+        }
+
+        public async Task<UserModel> GetUserFullUserInfo(string userId)
+        {
+            var user = await _ctx.Users.Include(x => x.DeliveryAddress).Include(x => x.BillingAddress).FirstOrDefaultAsync(x => string.Equals(x.Id, userId));
+
             if (user == null)
             {
                 return null;
