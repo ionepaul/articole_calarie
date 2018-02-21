@@ -107,7 +107,7 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task SaveUserAddress(AddressViewModel addressViewModel, string userId)
         {
-            var userModel = await _iAccountRepository.FindUserByIdAsync(userId);
+            var userModel = await _iAccountRepository.GetUserFullUserInfo(userId);
 
             if (userModel == null)
             {

@@ -5,6 +5,7 @@
     var isBilling = Model?.AddressType == AddressTypeViewEnum.Billing;
     var isChecked = isBilling ? "" : "checked";
     var isHidden = isBilling ? "" : "hidden";
+    var checkboxValue = isBilling ? "false" : "true";
 }
 
 @using (Ajax.BeginForm("UpdateBillingAddress", "Order", new AjaxOptions
@@ -17,7 +18,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <input id="same-as-delivery-btn" style="opacity: 1" type="checkbox" name="IsSameAsDelivery" @isChecked /> <span class="label-text"> Adresa de facturare este identitca cu cea de livrare. <span></span></span>
+    <input id="same-as-delivery-btn" style="opacity: 1" type="checkbox" name="IsSameAsDelivery" value="@checkboxValue" @isChecked /> <span class="label-text"> Adresa de facturare este identitca cu cea de livrare. <span></span></span>
     <br />
     <br />
     <div id="billing-form-container" class="@isHidden">

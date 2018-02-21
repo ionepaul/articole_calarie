@@ -723,6 +723,7 @@
     <Content Include="Views\Order\Checkout.cshtml" />
     <Content Include="Views\Order\_CheckoutDeliveryAddressPartial.cshtml" />
     <Content Include="Views\Order\_CheckoutBillingAddressPartial.cshtml" />
+    <Content Include="Views\Order\_CheckoutGuestEmailFormPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

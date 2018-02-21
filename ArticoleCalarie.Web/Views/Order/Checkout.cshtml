@@ -1,10 +1,10 @@
-﻿@model ArticoleCalarie.Models.UserViewModel
+﻿@model ArticoleCalarie.Models.CheckoutViewModel
 @using ArticoleCalarie.Models
 
 @{
     ViewBag.Title = "Checkout";
 
-    var fullName = Model?.FullName;
+    var fullName = Model?.DeliveryAddress?.FullName;
     var deliveryPhoneNumber = Model?.DeliveryAddress?.PhoneNumber;
     var deliveryAddressLine1 = Model?.DeliveryAddress?.AddressLine1;
     var deliveryAddressLine2 = Model?.DeliveryAddress?.AddressLine2;
@@ -12,6 +12,8 @@
     var deliveryCountry = Model?.DeliveryAddress?.Country;
     var deliveryCounty = Model?.DeliveryAddress?.County;
     var deliveryCity = Model?.DeliveryAddress?.City;
+
+    var grandTotal = 0M;
 }
 
 <div class="main-content checkout-page">
@@ -26,17 +28,16 @@
                         <ul class="list-choosen">
                             <li class="parent-content">
                                 <a href="#" class="show-content"> <span class="number">01</span> CHECKOUT METHOD</a>
-                                @if (Model == null)
+                                @if (!Model.UserIsLoggedIn)
                                 {
                                     <div class="hidden-content checkout-choosen-content show">
                                         <div class="row">
                                             <div class="checkout-form col-xs-12 col-sm-4">
-                                                <h3 class="title">Confirma comanda ca si vizitator</h3>
+                                                <h3 class="title">Continuă fără cont</h3>
                                                 <br />
-                                                <span class="label-text">Introduce-ti adresa de email <span>*</span></span>     
-                                                <input type="text" class="input-info"/>
-                            
-                                                <a href="#" class="submit continue">CONTINUE</a>
+
+                                                @Html.Partial("_CheckoutGuestEmailFormPartial", new GuestEmailViewModel())
+                                               
                                             </div>
                                             <div class="checkout-form col-xs-12 col-sm-4">
             
@@ -99,14 +100,14 @@
                                 else
                                 {
                                     <div class="hidden-content checkout-choosen-content">
-                                        <p>Esti deja logat.</p>
+                                        <h4 class="main-title">Sunteti authentificat. Vom folosi detaliile din contul dvs.</h4>
                                     </div>
                                 }
                             </li>
 
                             @{
-                                var showContainerClass = Model == null ? "" : "show";
-                                var activeParentClass = Model == null ? "" : "active";
+                                var showContainerClass = Model.UserIsLoggedIn ? "show" : "";
+                                var activeParentClass = Model.UserIsLoggedIn ? "active" : "";
                             }
 
                             <li class="parent-content @activeParentClass">
@@ -153,25 +154,50 @@
                                 </div>
                             </li>
                             <li class="parent-content">
-                                <a href="#" class="show-content"> <span class="number">05</span> PAYMENT INFORMATION</a>
+                                <a href="#" class="show-content"> <span class="number">04</span> DETALII PLATA</a>
                                 <div class="hidden-content checkout-choosen-content">
                                     <div class="payment-form">
-                                        <h5 class="main-title">Payment Information</h5>
                                         <div class="info-checkout">
-                                            <span class="item">Check / Money order</span>
-                                            <span class="item">Credit Cart (saved)</span>
+                                            <input type="checkbox" style="opacity: 1" checked /> <h5 class="main-title">Ramburs</h5>
                                         </div>
                                     </div>
+
+                                    <a href="#" class="submit continue">CONTINUĂ</a>
                                 </div>
                             </li>
                             <li class="parent-content">
-                                <a href="#" class="show-content"> <span class="number">06</span> ORDER REVIEW</a>
+                                <a href="#" class="show-content"> <span class="number">05</span> ORDER REVIEW</a>
                                 <div class="hidden-content checkout-choosen-content">
                                     <div class="total-checkout">
-                                        <span class="text">Grand Total </span><span class="price"> $100.00</span>
+                                        <table class="shopping-cart-content">
+                                            <tr class="title">
+                                                <td class="product-name">Produs</td>
+                                                <td class="price">Preț</td>
+                                                <td class="total">Total</td>
+                                            </tr>
+                                            @foreach (var product in Model.ShoppingItems)
+                                            {
+                                                <tr class="each-item">
+                                                    <td class="product-name">
+                                                        <a href="@Url.Action("Details", "Product", new { productCode = product.ProductCode })" class="product-name">
+                                                            <strong>@product.Quantity x @product.ProductName</strong>
+                                                        </a>
+                                                        <p>@product.Color, @product.Size</p>
+                                                    </td>
+                                                    <td class="price">@product.Quantity x @product.Price RON</td>
+                                                    @{
+                                                        var totalPrice = product.Quantity * product.Price;
+                                                        grandTotal += totalPrice;
+                                                    }
+                                                    <td class="total">@totalPrice RON</td>
+                                                </tr>
+                                             }
+                                        </table>
+
+                                        <span class="text">Grand Total </span><span class="price"> @grandTotal RON</span>
                                     </div>
                                     <div class="group-button">
-                                        <a href="#" class="button submit">Place Order Now</a>
+                                        <a href="@Url.Action("PlaceOrder", "Order")" class="button submit">Place Order Now</a>
                                     </div>
                                 </div>
                             </li>
@@ -209,8 +235,13 @@
                 $("#billing-address-form").submit();
             });
 
+            $("#guest-email-form-btn").on("click", function () {
+                $("#guest-email-form").submit();
+            });
+
             $("#same-as-delivery-btn").on("change", function () {
                 var isChecked = $(this).prop("checked");
+                $(this).val(isChecked);
 
                 if (!isChecked) {
                     $("#billing-form-container").removeClass("hidden");
@@ -226,21 +257,26 @@
         }
 
         function deliveryAddressOnSuccess() {
-            $("#delivery-address-form").closest(".hidden-content").removeClass("show");
-            $("#delivery-address-form").closest(".hidden-content").closest(".parent-content").removeClass("active");
-            $("#delivery-address-form").closest(".parent-content").next(".parent-content").find(".show-content").click();
+            showNextContainer("#delivery-address-form");
         }
 
         function billingAddressOnSuccess() {
-            $("#billing-address-form").closest(".hidden-content").removeClass("show");
-            $("#billing-address-form").closest(".hidden-content").closest(".parent-content").removeClass("active");
-            $("#billing-address-form").closest(".parent-content").next(".parent-content").find(".show-content").click();
+            showNextContainer("#billing-address-form");
+        }
+
+        function guestEmailFormOnSuccess() {
+            showNextContainer("#guest-email-form");
+        }
+
+        function showNextContainer(id) {
+            $(id).closest(".hidden-content").removeClass("show");
+            $(id).closest(".hidden-content").closest(".parent-content").removeClass("active");
+            $(id).closest(".parent-content").next(".parent-content").find(".show-content").click();
         }
 
         function failure() {
             console.log('failure');
         }
-
 
     </script>   
 }

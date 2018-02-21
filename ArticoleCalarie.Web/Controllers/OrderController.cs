@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using ArticoleCalarie.Logic.ILogic;
@@ -36,6 +37,13 @@ namespace ArticoleCalarie.Web.Controllers
 
             try
             {
+                var shoppingCart = Session["ShoppingCart"] as ShoppingCartModel;
+
+                var checkoutViewModel = new CheckoutViewModel()
+                {
+                    ShoppingItems = shoppingCart.ShoppingItems
+                };
+                
                 if (User.Identity.IsAuthenticated)
                 {
                     _logger.Info("User is logged in.");
@@ -46,12 +54,23 @@ namespace ArticoleCalarie.Web.Controllers
 
                     _logger.Info("Successfully retrieved user information.");
 
-                    return View(userViewModel);
+                    checkoutViewModel.Email = userViewModel.Email;
+                    checkoutViewModel.DeliveryAddress = userViewModel.DeliveryAddress;
+                    checkoutViewModel.BillingAddress = userViewModel.BillingAddress;
+                    checkoutViewModel.UserIsLoggedIn = true;
+
+                    Session["CheckoutModel"] = checkoutViewModel;
+
+                    return View(checkoutViewModel);
                 }
 
                 _logger.Info("User is not logged in.");
 
-                return View();
+                checkoutViewModel.UserIsLoggedIn = false;
+
+                Session["CheckoutModel"] = checkoutViewModel;
+
+                return View(checkoutViewModel);
             }
             catch (Exception ex)
             {
@@ -77,11 +96,20 @@ namespace ArticoleCalarie.Web.Controllers
                         ShoppingItems = new List<ShoppingCartItem> { shoppingCartItem }
                     };
 
+
                     Session["ShoppingCart"] = shoppingCartModel;
                 }
                 else
                 {
-                    sessionShoppingCart.ShoppingItems.Add(shoppingCartItem);
+                    if (sessionShoppingCart.ShoppingItems.Any(x => string.Equals(x.ProductCode, shoppingCartItem.ProductCode) && 
+                        string.Equals(x.Color, shoppingCartItem.Color) && string.Equals(x.Size, shoppingCartItem.Size)))
+                    {
+                        sessionShoppingCart.ShoppingItems.First(x => string.Equals(x.ProductCode, shoppingCartItem.ProductCode)).Quantity += shoppingCartItem.Quantity;
+                    }
+                    else
+                    {
+                        sessionShoppingCart.ShoppingItems.Add(shoppingCartItem);
+                    }
                 }
 
                 return PartialView("_ShoppingCartPartial");
@@ -116,42 +144,84 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public void SaveGuestEmail(GuestEmailViewModel guestEmailModel)
+        {
+            var checkoutViewModel = Session["CheckoutModel"] as CheckoutViewModel;
+
+            checkoutViewModel.Email = guestEmailModel.Email;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task UpdateDeliveryAddress(AddressViewModel address)
         {
+            _logger.Info("POST > Saving Delivery Address for checkout.");
+
             try
             {
-                var userId = User.Identity.GetUserId();
-
                 address.AddressType = AddressTypeViewEnum.Delivery;
 
-                await _iAccountLogic.SaveUserAddress(address, userId);
+                var checkoutViewModel = Session["CheckoutModel"] as CheckoutViewModel;
+                 
+                var userId = User.Identity.GetUserId();
+
+                if (!string.IsNullOrEmpty(userId))
+                {
+                    _logger.Info("User is logged in, updating delivery address on profile.");
+
+                    await _iAccountLogic.SaveUserAddress(address, userId);
+                }
+
+                checkoutViewModel.DeliveryAddress = address;
             }
             catch (Exception ex)
             {
-                
+                _logger.Error($"Failed to update delivery address when checkout. Exception: {ex.Message}");
+
+                throw ex;
             }
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task UpdateBillingAddress(AddressViewModel address)
         {
+            _logger.Info("POST > Saving billing address for checkout.");
+
             try
             {
+                var checkoutViewModel = Session["CheckoutModel"] as CheckoutViewModel;
+
                 var userId = User.Identity.GetUserId();
 
                 if (address.IsSameAsDelivery)
                 {
-                    //load address saved from session
+                    address = checkoutViewModel.DeliveryAddress;
                 }
 
                 address.AddressType = AddressTypeViewEnum.Billing;
 
-                await _iAccountLogic.SaveUserAddress(address, userId);
+                if (!string.IsNullOrEmpty(userId))
+                {
+                    _logger.Info("User is logged in, updating billing address on profile.");
+
+                    await _iAccountLogic.SaveUserAddress(address, userId);
+                }
+
+                checkoutViewModel.BillingAddress = address;
             }
             catch (Exception ex)
             {
+                _logger.Error($"Failed to update billing address when checkout. Exception: {ex.Message}");
 
+                throw ex;
             }
+        }
+
+        public async Task PlaceOrder()
+        {
+            var checkoutViewModel = Session["CheckoutModel"] as CheckoutViewModel;
         }
     }
 }

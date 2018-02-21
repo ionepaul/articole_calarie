@@ -128,7 +128,11 @@ namespace ArticoleCalarie.Repository.Repository
 
         public async Task UpdateUserAsync(UserModel userModel)
         {
-            await _userManager.UpdateAsync(userModel);
+
+            _ctx.Entry(userModel).State = EntityState.Modified;
+
+            await SaveChangesAsync();
+            //await _userManager.UpdateAsync(userModel);
         }
 
         #endregion

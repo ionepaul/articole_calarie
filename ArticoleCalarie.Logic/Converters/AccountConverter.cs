@@ -44,7 +44,8 @@ namespace ArticoleCalarie.Logic.Converters
                 County = address.County,
                 PostalCode = address.PostalCode,
                 PhoneNumber = address.PhoneNumber,
-                FullName = address.FullName
+                FullName = address.FullName,
+                AddressType = address.AddressType == AddressType.Delivery ? AddressTypeViewEnum.Delivery : AddressTypeViewEnum.Billing
             };
 
             return addressViewModel;
