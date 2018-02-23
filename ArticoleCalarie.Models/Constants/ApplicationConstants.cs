@@ -7,5 +7,6 @@
         public const string HorseCategoryCode = "H";
         public const string RiderCategoryCode = "R";
         public const string StableCategoryCode = "S";
+        public const int StartingOrderNumber = 1000;
     }
 }

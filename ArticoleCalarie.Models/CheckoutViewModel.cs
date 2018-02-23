@@ -15,5 +15,7 @@ namespace ArticoleCalarie.Models
         public AddressViewModel DeliveryAddress { get; set; }
 
         public AddressViewModel BillingAddress { get; set; }
+
+        public decimal TotalAmount { get; set; }
     }
 }

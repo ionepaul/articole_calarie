@@ -15,5 +15,7 @@
         public string Color { get; set; }
 
         public string ProductCode { get; set; }
+
+        public int SalePercentage { get; set; }
     }
 }

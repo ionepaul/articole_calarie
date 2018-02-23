@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Configuration;
 using System.Threading.Tasks;
-using ArticoleCalarie.Infrastructure.MailService;
 using ArticoleCalarie.Logic.Converters;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
-using ArticoleCalarie.Models.Constants;
 using ArticoleCalarie.Repository.Entities;
 using ArticoleCalarie.Repository.Enums;
 using ArticoleCalarie.Repository.IRepository;
@@ -17,12 +14,12 @@ namespace ArticoleCalarie.Logic.Logic
     public class AccountLogic : IAccountLogic
     {
         private IAccountRepository _iAccountRepository;
-        private IMailService _iMailService;
+        private IEmailLogic _iEmailLogic;
 
-        public AccountLogic(IAccountRepository iAccountRepository, IMailService iMailService)
+        public AccountLogic(IAccountRepository iAccountRepository, IEmailLogic iEmailLogic)
         {
             _iAccountRepository = iAccountRepository;
-            _iMailService = iMailService;
+            _iEmailLogic = iEmailLogic;
         }
 
         #region Public Methods
@@ -35,7 +32,7 @@ namespace ArticoleCalarie.Logic.Logic
 
             if (result.Succeeded)
             {
-               // await SendWelcomeEmail(model.Email, model.FullName);
+                await _iEmailLogic.SendWelcomeEmail(model.Email, model.FullName);
             }
 
             return result;
@@ -52,7 +49,7 @@ namespace ArticoleCalarie.Logic.Logic
 
             callbackUrl += "?code=" + code;
 
-            await SendResetEmail(email, callbackUrl);
+            await _iEmailLogic.SendResetEmail(email, callbackUrl);
         }
 
         public async Task<SignInStatus> SignIn(LoginViewModel model)
@@ -85,7 +82,7 @@ namespace ArticoleCalarie.Logic.Logic
 
             if (result.Succeeded)
             {
-                await SendWelcomeEmail(email, fullName);
+                await _iEmailLogic.SendWelcomeEmail(email, fullName);
             }
 
             return result;
@@ -148,42 +145,6 @@ namespace ArticoleCalarie.Logic.Logic
         #endregion 
 
         #region Private Methods
-
-        private async Task SendWelcomeEmail(string email, string fullName)
-        {
-            //var templatePath = MailTemplates.WelcomeEmail;
-
-            //var template = File.ReadAllText(HttpContext.Current.Server.MapPath(templatePath));
-            var body = "<b>salut" + fullName + "</b>";
-
-            var emailModel = new EmailModel
-            {
-                To = email,
-                From = ConfigurationManager.AppSettings["ArticoleCalarieEmail"],
-                Subject = MailSubjects.WelcomeEmail,
-                Body = body
-            };
-
-            await _iMailService.SendMail(emailModel);
-        }
-
-        private async Task SendResetEmail(string email, string callbackUrl)
-        {
-            //var templatePath = MailTemplates.ResetPassword;
-
-            //var template = File.ReadAllText(HttpContext.Current.Server.MapPath(templatePath));
-            var body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>";
-
-            var emailModel = new EmailModel
-            {
-                To = email,
-                From = ConfigurationManager.AppSettings["ArticoleCalarieEmail"],
-                Subject = MailSubjects.ResetPasswrod,
-                Body = body
-            };
-
-            await _iMailService.SendMail(emailModel);
-        }
 
         private void UpdateAddress(Address oldAddress, Address newAddress)
         {

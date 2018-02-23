@@ -51,6 +51,10 @@ namespace ArticoleCalarie.Models
         [Display(Name = "Cod produs")]
         public string ProductCode { get; set; }
 
+        public decimal PriceAfterSaleApplied { get; set; }
+
+        public bool IsOnSale { get; set; }
+
         public List<string> ImagesList { get; set; }
 
         public List<string> ColorsList { get; set; }

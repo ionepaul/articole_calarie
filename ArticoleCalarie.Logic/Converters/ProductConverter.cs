@@ -38,14 +38,27 @@ namespace ArticoleCalarie.Logic.Converters
                 MaterialDetails = product.MaterialDetails,
                 Size = product.Size,
                 Price = product.Price.ToString("F"),
-                SalePercentage = product.SalePercentage,
                 SizeChartImage = product.SizeChart?.FileName,
                 CategoryId = product.Subcategory?.CategoryId ?? 0,
                 Brand = product.Brand?.Name,
                 SubcategoryId = product.Subcategory?.Name,
                 ImagesList = product.Images.Select(x => x.FileName).ToList(),
-                ColorsList = product.AvailableColors.Select(x => x.Name).ToList()
+                ColorsList = product.AvailableColors.Select(x => x.Name).ToList(),
+                IsOnSale = product.SalePercentage != 0
             };
+
+            if (productViewModel.IsOnSale)
+            {
+                var saleValue = product.SalePercentage > 0 ? product.SalePercentage : (-1) * product.SalePercentage;
+
+                productViewModel.SalePercentage = saleValue;
+
+                var salePercentage = (decimal)saleValue / 100;
+
+                var saleAmount = product.Price * salePercentage;
+
+                productViewModel.PriceAfterSaleApplied = Math.Round(product.Price - saleAmount, 2);
+            }
 
             return productViewModel;
         }

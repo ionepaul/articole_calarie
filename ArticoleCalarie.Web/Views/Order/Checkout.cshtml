@@ -197,7 +197,7 @@
                                         <span class="text">Grand Total </span><span class="price"> @grandTotal RON</span>
                                     </div>
                                     <div class="group-button">
-                                        <a href="@Url.Action("PlaceOrder", "Order")" class="button submit">Place Order Now</a>
+                                        <a id="place-order-btn" href="@Url.Action("PlaceOrder", "Order", new { totalAmount = grandTotal })" class="button submit">Comandă</a>
                                     </div>
                                 </div>
                             </li>
@@ -237,6 +237,10 @@
 
             $("#guest-email-form-btn").on("click", function () {
                 $("#guest-email-form").submit();
+            });
+
+            $("#place-order-btn").on("click", function () {
+                showLoader();
             });
 
             $("#same-as-delivery-btn").on("change", function () {

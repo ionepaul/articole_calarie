@@ -7,6 +7,7 @@ using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
 using ArticoleCalarie.Models.Enums;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using NLog;
 
 namespace ArticoleCalarie.Web.Controllers
@@ -15,11 +16,13 @@ namespace ArticoleCalarie.Web.Controllers
     {
         private static Logger _logger;
         private IAccountLogic _iAccountLogic;
+        private IOrderLogic _iOrderLogic;
 
-        public OrderController(IAccountLogic iAccountLogic)
+        public OrderController(IAccountLogic iAccountLogic, IOrderLogic iOrderLogic)
         {
             _logger = LogManager.GetLogger("Order");
             _iAccountLogic = iAccountLogic;
+            _iOrderLogic = iOrderLogic;
         }
 
         [HttpGet]
@@ -174,6 +177,7 @@ namespace ArticoleCalarie.Web.Controllers
                 }
 
                 checkoutViewModel.DeliveryAddress = address;
+                checkoutViewModel.DeliveryAddress.AddressType = AddressTypeViewEnum.Delivery;
             }
             catch (Exception ex)
             {
@@ -210,6 +214,7 @@ namespace ArticoleCalarie.Web.Controllers
                 }
 
                 checkoutViewModel.BillingAddress = address;
+                checkoutViewModel.BillingAddress.AddressType = AddressTypeViewEnum.Billing;
             }
             catch (Exception ex)
             {
@@ -219,9 +224,43 @@ namespace ArticoleCalarie.Web.Controllers
             }
         }
 
-        public async Task PlaceOrder()
+        public async Task<ActionResult> PlaceOrder(decimal totalAmount)
         {
-            var checkoutViewModel = Session["CheckoutModel"] as CheckoutViewModel;
+            _logger.Info("POST > Place Order");
+
+            try
+            {
+                var checkoutViewModel = Session["CheckoutModel"] as CheckoutViewModel;
+
+                checkoutViewModel.TotalAmount = totalAmount;
+
+                var userId = User.Identity.GetUserId();
+
+                _logger.Info($"Saving order...Object: {JsonConvert.SerializeObject(checkoutViewModel)}");
+
+                var orderNumber = await _iOrderLogic.PlaceOrder(checkoutViewModel, userId);
+
+                Session["CheckoutModel"] = null;
+                Session["ShoppingCart"] = null;
+
+                _logger.Info("Successfully saved order");
+
+                return RedirectToAction(nameof(CheckoutDone), orderNumber);
+            }
+            catch (Exception ex)
+            {
+                _logger.Info($"Failed to save order. Exception: {ex.Message}");
+
+                return View("Error");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult CheckoutDone(int orderNumber)
+        {
+            _logger.Info("VIEW > Checkout Done");
+
+            return View(orderNumber);
         }
     }
 }

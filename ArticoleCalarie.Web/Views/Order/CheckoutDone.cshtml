@@ -1,0 +1,14 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "CheckoutDone";
+}
+
+<h1> Comanda: #@Model a fost inregistrată cu succes.</h1>
+<h2>Vei primi un email cand comanda va fi confirmata.</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h2>Poti urmari statusul comenzii tale in contul tau: <a href="#">click aici</a></h2>
+}
+

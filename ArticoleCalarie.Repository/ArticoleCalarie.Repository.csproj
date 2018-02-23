@@ -81,6 +81,8 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Color.cs" />
     <Compile Include="Entities\Image.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderItem.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\SizeChart.cs" />
     <Compile Include="Entities\Subcategory.cs" />
@@ -93,9 +95,15 @@
     <Compile Include="IRepository\ICategoryRepository.cs" />
     <Compile Include="IRepository\IColorRepository.cs" />
     <Compile Include="IRepository\IImageRepository.cs" />
+    <Compile Include="IRepository\IOrderRepository.cs" />
     <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\ISizeChartRepository.cs" />
     <Compile Include="IRepository\ISubcategoryRepository.cs" />
+    <Compile Include="Migrations\201802230522594_Orders.cs" />
+    <Compile Include="Migrations\201802230522594_Orders.Designer.cs">
+      <DependentUpon>201802230522594_Orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ColorDTO.cs" />
     <Compile Include="Models\ProductSearchResult.cs" />
     <Compile Include="Models\SearchFilters.cs" />
@@ -110,6 +118,7 @@
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\ColorRepository.cs" />
     <Compile Include="Repository\ImageRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\SizeChartRepository.cs" />
     <Compile Include="Repository\SubcategoryRepository.cs" />
@@ -119,6 +128,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802230522594_Orders.resx">
+      <DependentUpon>201802230522594_Orders.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

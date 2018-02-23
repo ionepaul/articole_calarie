@@ -14,7 +14,11 @@ namespace ArticoleCalarie.Infrastructure.MailService
             message.Subject = emailModel.Subject;
             message.IsBodyHtml = true;
             message.Body = emailModel.Body;
-            message.To.Add(emailModel.To);
+
+            foreach(var email in emailModel.To)
+            {
+                message.To.Add(email);
+            }
 
             using (var smtpClient = new SmtpClient())
             {
