@@ -1,0 +1,49 @@
+﻿@model PagedList.IPagedList<ArticoleCalarie.Models.OrderSummaryModel>
+@using PagedList.Mvc;
+
+<div id="orders-content">
+    <table class="table">
+        <tr>
+            <th>
+                Comanda #
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                Actiuni
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td></td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderStatus)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div id="content-pager">
+        Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("OrderListPartial", new { pageNumber = page, status = ViewBag.OrderStatus }))
+    </div>
+</div>

@@ -2,10 +2,10 @@
 
 namespace ArticoleCalarie.Models
 {
-    public class ProductSearchViewResult
+    public class OrderSearchViewResult
     {
         public int TotalCount { get; set; }
 
-        public IEnumerable<ProductListViewItemModel> Products { get; set; }
+        public IEnumerable<OrderSummaryModel> Orders { get; set; }
     }
 }

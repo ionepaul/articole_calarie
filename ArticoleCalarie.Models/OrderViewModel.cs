@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ArticoleCalarie.Models.Enums;
 
 namespace ArticoleCalarie.Models
 {
-    public class CheckoutViewModel
+    public class OrderViewModel
     {
         [Required]
         public string Email { get; set; }
@@ -17,5 +18,7 @@ namespace ArticoleCalarie.Models
         public AddressViewModel BillingAddress { get; set; }
 
         public decimal TotalAmount { get; set; }
+
+        public OrderStatusViewEnum OrderStatus { get; set; }
     }
 }

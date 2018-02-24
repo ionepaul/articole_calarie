@@ -11,7 +11,7 @@
                 <li class="welcome-user">@Html.ActionLink(User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
                 <li>@Html.ActionLink("Adaugă produs", "Add", "Product", routeValues: null, htmlAttributes: new { title = "Adaugă produs" })</li>
                 <li>@Html.ActionLink("Listă produse", "List", "Product", routeValues: new { pageNumber = 1 }, htmlAttributes: new { title = "Adaugă produs" })</li>
-                @*<li>@Html.ActionLink("Vezi comenzi", "Index", "Orders", routeValues: null, htmlAttributes: new { title = "Vezi comenzi" })</li>*@
+                <li>@Html.ActionLink("Vezi comenzile", "OrderList", "Order", routeValues: new { pageNumber = 1 }, htmlAttributes: new { title = "Vezi comenzile" })</li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
             </ul>
         </li>

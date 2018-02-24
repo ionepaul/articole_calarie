@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ArticoleCalarie.Repository.Enums;
 
 namespace ArticoleCalarie.Repository.Entities
 {
@@ -23,6 +25,10 @@ namespace ArticoleCalarie.Repository.Entities
         public int BillingAddressId { get; set; }
 
         public decimal TotalAmount { get; set; }
+
+        public OrderStatus OrderStatus { get; set; }
+
+        public DateTime OrderRegistrationDate { get; set; }
 
         [ForeignKey("UserId")]
         public virtual UserModel User { get; set; }

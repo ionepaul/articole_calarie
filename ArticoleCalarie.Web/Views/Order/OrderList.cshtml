@@ -1,0 +1,23 @@
+﻿@model PagedList.IPagedList<ArticoleCalarie.Models.OrderSummaryModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Listă produse";
+}
+
+<div class="page-wrapper">
+    <div class="product-list-header">
+        <h3 class="form-title">Comenzi</h3>
+        <button id="all-orders-btn">Toate</button>
+        <button id="completed-orders-btn">Complete</button>
+        <button id="registred-orders-btn">Noi</button>
+        <button id="shipped-orders-btn">Trimise</button>
+        <button id="confirmed-orders-btn">Confirmate</button>
+    </div>
+    @Html.Partial("_OrderListPartial", Model)
+</div>
+
+@section scripts {
+    <script src="~/Scripts/order-list-admin.js"></script>
+}

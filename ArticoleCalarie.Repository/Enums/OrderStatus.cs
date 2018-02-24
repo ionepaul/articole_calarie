@@ -1,8 +1,7 @@
-﻿namespace ArticoleCalarie.Models.Enums
+﻿namespace ArticoleCalarie.Repository.Enums
 {
-    public enum OrderStatusViewEnum
+    public enum OrderStatus
     {
-        ALL,
         REGISTRED,
         CONFIRMED,
         SHIPPED,

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -9,6 +10,7 @@ using ArticoleCalarie.Models.Enums;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using NLog;
+using PagedList;
 
 namespace ArticoleCalarie.Web.Controllers
 {
@@ -42,7 +44,7 @@ namespace ArticoleCalarie.Web.Controllers
             {
                 var shoppingCart = Session["ShoppingCart"] as ShoppingCartModel;
 
-                var checkoutViewModel = new CheckoutViewModel()
+                var orderViewModel = new OrderViewModel()
                 {
                     ShoppingItems = shoppingCart.ShoppingItems
                 };
@@ -57,23 +59,23 @@ namespace ArticoleCalarie.Web.Controllers
 
                     _logger.Info("Successfully retrieved user information.");
 
-                    checkoutViewModel.Email = userViewModel.Email;
-                    checkoutViewModel.DeliveryAddress = userViewModel.DeliveryAddress;
-                    checkoutViewModel.BillingAddress = userViewModel.BillingAddress;
-                    checkoutViewModel.UserIsLoggedIn = true;
+                    orderViewModel.Email = userViewModel.Email;
+                    orderViewModel.DeliveryAddress = userViewModel.DeliveryAddress;
+                    orderViewModel.BillingAddress = userViewModel.BillingAddress;
+                    orderViewModel.UserIsLoggedIn = true;
 
-                    Session["CheckoutModel"] = checkoutViewModel;
+                    Session["OrderModel"] = orderViewModel;
 
-                    return View(checkoutViewModel);
+                    return View(orderViewModel);
                 }
 
                 _logger.Info("User is not logged in.");
 
-                checkoutViewModel.UserIsLoggedIn = false;
+                orderViewModel.UserIsLoggedIn = false;
 
-                Session["CheckoutModel"] = checkoutViewModel;
+                Session["OrderModel"] = orderViewModel;
 
-                return View(checkoutViewModel);
+                return View(orderViewModel);
             }
             catch (Exception ex)
             {
@@ -150,9 +152,9 @@ namespace ArticoleCalarie.Web.Controllers
         [ValidateAntiForgeryToken]
         public void SaveGuestEmail(GuestEmailViewModel guestEmailModel)
         {
-            var checkoutViewModel = Session["CheckoutModel"] as CheckoutViewModel;
+            var orderViewModel = Session["OrderModel"] as OrderViewModel;
 
-            checkoutViewModel.Email = guestEmailModel.Email;
+            orderViewModel.Email = guestEmailModel.Email;
         }
 
         [HttpPost]
@@ -165,7 +167,7 @@ namespace ArticoleCalarie.Web.Controllers
             {
                 address.AddressType = AddressTypeViewEnum.Delivery;
 
-                var checkoutViewModel = Session["CheckoutModel"] as CheckoutViewModel;
+                var orderViewModel = Session["OrderModel"] as OrderViewModel;
                  
                 var userId = User.Identity.GetUserId();
 
@@ -176,8 +178,8 @@ namespace ArticoleCalarie.Web.Controllers
                     await _iAccountLogic.SaveUserAddress(address, userId);
                 }
 
-                checkoutViewModel.DeliveryAddress = address;
-                checkoutViewModel.DeliveryAddress.AddressType = AddressTypeViewEnum.Delivery;
+                orderViewModel.DeliveryAddress = address;
+                orderViewModel.DeliveryAddress.AddressType = AddressTypeViewEnum.Delivery;
             }
             catch (Exception ex)
             {
@@ -195,13 +197,13 @@ namespace ArticoleCalarie.Web.Controllers
 
             try
             {
-                var checkoutViewModel = Session["CheckoutModel"] as CheckoutViewModel;
+                var orderViewModel = Session["OrderModel"] as OrderViewModel;
 
                 var userId = User.Identity.GetUserId();
 
                 if (address.IsSameAsDelivery)
                 {
-                    address = checkoutViewModel.DeliveryAddress;
+                    address = orderViewModel.DeliveryAddress;
                 }
 
                 address.AddressType = AddressTypeViewEnum.Billing;
@@ -213,8 +215,8 @@ namespace ArticoleCalarie.Web.Controllers
                     await _iAccountLogic.SaveUserAddress(address, userId);
                 }
 
-                checkoutViewModel.BillingAddress = address;
-                checkoutViewModel.BillingAddress.AddressType = AddressTypeViewEnum.Billing;
+                orderViewModel.BillingAddress = address;
+                orderViewModel.BillingAddress.AddressType = AddressTypeViewEnum.Billing;
             }
             catch (Exception ex)
             {
@@ -230,17 +232,17 @@ namespace ArticoleCalarie.Web.Controllers
 
             try
             {
-                var checkoutViewModel = Session["CheckoutModel"] as CheckoutViewModel;
+                var orderViewModel = Session["OrderModel"] as OrderViewModel;
 
-                checkoutViewModel.TotalAmount = totalAmount;
+                orderViewModel.TotalAmount = totalAmount;
 
                 var userId = User.Identity.GetUserId();
 
-                _logger.Info($"Saving order...Object: {JsonConvert.SerializeObject(checkoutViewModel)}");
+                _logger.Info($"Saving order...Object: {JsonConvert.SerializeObject(orderViewModel)}");
 
-                var orderNumber = await _iOrderLogic.PlaceOrder(checkoutViewModel, userId);
+                var orderNumber = await _iOrderLogic.PlaceOrder(orderViewModel, userId);
 
-                Session["CheckoutModel"] = null;
+                Session["OrderModel"] = null;
                 Session["ShoppingCart"] = null;
 
                 _logger.Info("Successfully saved order");
@@ -261,6 +263,66 @@ namespace ArticoleCalarie.Web.Controllers
             _logger.Info("VIEW > Checkout Done");
 
             return View(orderNumber);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> OrderList(int? pageNumber, OrderStatusViewEnum status = OrderStatusViewEnum.ALL)
+        {
+            _logger.Info("VIEW > Admin > All orders");
+
+            ViewBag.OrderStatus = status;
+
+            try
+            {
+                var page = pageNumber ?? 1;
+
+                var ordersModel = await _iOrderLogic.GetOrders(page, status);
+
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+
+                var pagedListModel = new StaticPagedList<OrderSummaryModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
+
+                _logger.Info("Successfully got orders list for admin.");
+
+                return View(pagedListModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to retrive orders for status {status.ToString()}. Exception: {ex.Message}");
+
+                return View("Error");
+            }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> OrderListPartial(int? pageNumber, OrderStatusViewEnum status = OrderStatusViewEnum.ALL)
+        {
+            _logger.Info("PARTIAL VIEW > Orders List");
+
+            ViewBag.OrderStatus = status;
+
+            try
+            {
+                var page = pageNumber ?? 1;
+
+                var ordersModel = await _iOrderLogic.GetOrders(page, status);
+
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+
+                var pagedListModel = new StaticPagedList<OrderSummaryModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
+
+                _logger.Info("Successfully got orders list for admin.");
+
+                return PartialView("_OrderListPartial", pagedListModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to retrive orders for status {status.ToString()}. Exception: {ex.Message}");
+
+                return View("Error");
+            }
         }
     }
 }

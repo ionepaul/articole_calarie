@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 using ArticoleCalarie.Logic.Converters;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
 using ArticoleCalarie.Models.Constants;
+using ArticoleCalarie.Models.Enums;
 using ArticoleCalarie.Repository.IRepository;
+using ArticoleCalarie.Repository.Models;
 
 namespace ArticoleCalarie.Logic.Logic
 {
@@ -21,9 +26,40 @@ namespace ArticoleCalarie.Logic.Logic
             _iEmailLogic = iEmailLogic;
         }
 
-        public async Task<int> PlaceOrder(CheckoutViewModel checkoutViewModel, string userId)
+        public async Task<OrderSearchViewResult> GetOrders(int pageNumber, OrderStatusViewEnum status)
         {
-            var orderModel = checkoutViewModel.ToDbModel();
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsToSkip = (pageNumber - 1) * itemsPerPage;
+            var dbStatus = status.ToDbEnum();
+
+            OrderSearchResult result = null;
+
+            if (status == OrderStatusViewEnum.ALL)
+            {
+                result = await _iOrderRepository.GetAllOrders(itemsPerPage, itemsToSkip);
+            }
+            else
+            {
+                result = await _iOrderRepository.GetOrdersByStatus(itemsPerPage, itemsToSkip, dbStatus);
+            }
+
+            if (result != null)
+            {
+                var orderSearchViewResult = new OrderSearchViewResult
+                {
+                    TotalCount = result.TotalCount,
+                    Orders = result.Orders.Select(x => x.ToSummaryModel())
+                };
+
+                return orderSearchViewResult;
+            }
+
+            return null;
+        }
+
+        public async Task<int> PlaceOrder(OrderViewModel orderViewModel, string userId)
+        {
+            var orderModel = orderViewModel.ToDbModel();
 
             if (!string.IsNullOrEmpty(userId))
             {
@@ -33,8 +69,8 @@ namespace ArticoleCalarie.Logic.Logic
 
                 if (user == null)
                 {
-                    orderModel.DeliveryAddress = checkoutViewModel.DeliveryAddress.ToDbAddress();
-                    orderModel.BillingAddress = checkoutViewModel.BillingAddress.ToDbAddress();
+                    orderModel.DeliveryAddress = orderViewModel.DeliveryAddress.ToDbAddress();
+                    orderModel.BillingAddress = orderViewModel.BillingAddress.ToDbAddress();
                 }
                 else
                 {
@@ -45,13 +81,14 @@ namespace ArticoleCalarie.Logic.Logic
             }
             else
             {
-                orderModel.DeliveryAddress = checkoutViewModel.DeliveryAddress.ToDbAddress();
-                orderModel.BillingAddress = checkoutViewModel.BillingAddress.ToDbAddress();
+                orderModel.DeliveryAddress = orderViewModel.DeliveryAddress.ToDbAddress();
+                orderModel.BillingAddress = orderViewModel.BillingAddress.ToDbAddress();
             }
 
             var totalOrders = await _iOrderRepository.CountOrders();
 
             orderModel.OrderNumber = ApplicationConstants.StartingOrderNumber + totalOrders;
+            orderModel.OrderRegistrationDate = DateTime.UtcNow;
 
             var tasks = new List<Task>();
 
