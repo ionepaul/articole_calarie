@@ -18,8 +18,8 @@
             {
                 <table class="shopping-cart-content">
                     <tr class="title">
-                        <td class="product-thumb"></td>
-                        <td class="product-name">Produs</td>
+                        <td class="product-thumb">Produs</td>
+                        <td class="product-name"></td>
                         <td class="price">Preț</td>
                         <td class="total">Total</td>
                     </tr>
@@ -31,8 +31,9 @@
                                 <a href="@Url.Action("Details", "Product", new { productCode = product.ProductCode })" class="product-name">
                                     <strong>@product.Quantity x @product.ProductName</strong>
                                 </a>
-                                <p>@product.Color, @product.Size</p>
-                                <a onclick="deleteFromCart('@product.ProductCode')"><i class="glyphicon glyphicon-trash"></i>Sterge</a>
+                                <p class="color">Culoare: @product.Color</p>
+                                <p>Marime: @product.Size</p>
+                                <a class="delete-product" onclick="deleteFromCart('@product.ProductCode')">X Sterge</a>
                             </td>
                             <td class="price">@product.Quantity x @product.Price RON</td>
                             @{
@@ -43,18 +44,14 @@
                         </tr>
                                 }
                 </table>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <a id="back" class="continue-shopping submit">Continua cumparaturile</a>
+                <div class="continue-shopping">
+                    <div class="subtotal">
+                        <h3 class="subtitle">
+                            Total: @grandTotal RON
+                        </h3>
+                        <a href="@Url.Action("Checkout", "Order")" class="submit checkout">Comanda</a>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="subtotal">
-                            <h3 class="subtitle">
-                                Total: @grandTotal RON
-                            </h3>
-                            <a href="@Url.Action("Checkout", "Order")" class="submit checkout">Comanda</a>
-                        </div>
-                    </div>
+                    <a id="back" class="continue-shopping submit">Continua cumparaturile</a>
                 </div>
              }
              else
