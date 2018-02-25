@@ -101,13 +101,19 @@ function changeOrderStatus(orderNumber, newStatus) {
     let url = window.location.origin + '/Order/ChangeOrderStatus';
 
     showLoader();
+    var deliveryTime = "";
+
+    if (newStatus == "SHIPPED") {
+        deliveryTime = $("#order-time").val();
+    }
 
     $.ajax({
         url: url,
         type: 'POST',
         data: {
             orderNumber: orderNumber,
-            newOrderStatus: newStatus
+            newOrderStatus: newStatus,
+            deliveryTime: deliveryTime
         },
         cache: false,
         success: function () {

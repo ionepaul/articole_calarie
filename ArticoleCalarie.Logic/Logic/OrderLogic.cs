@@ -26,7 +26,7 @@ namespace ArticoleCalarie.Logic.Logic
             _iEmailLogic = iEmailLogic;
         }
 
-        public async Task ChangeOrderStatus(int orderNumber, OrderStatusViewEnum newOrderStatus)
+        public async Task ChangeOrderStatus(int orderNumber, OrderStatusViewEnum newOrderStatus, string deliveryTime)
         {
             var order = await _iOrderRepository.GetOrderByOrderNumber(orderNumber);
 
@@ -45,7 +45,7 @@ namespace ArticoleCalarie.Logic.Logic
                     await _iEmailLogic.SendConfirmationOrderEmail(order);
                     break;
                 case OrderStatusViewEnum.SHIPPED:
-                    await _iEmailLogic.SendShippedOrderEmail(order);
+                    await _iEmailLogic.SendShippedOrderEmail(order, deliveryTime);
                     break;
             }
         }

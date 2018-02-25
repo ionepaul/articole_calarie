@@ -9,6 +9,6 @@ namespace ArticoleCalarie.Logic.ILogic
         Task SendWelcomeEmail(string email, string fullName);
         Task SendResetEmail(string email, string callbackUrl);
         Task SendConfirmationOrderEmail(Order order);
-        Task SendShippedOrderEmail(Order order);
+        Task SendShippedOrderEmail(Order order, string deliveryTime);
     }
 }

@@ -333,7 +333,7 @@ namespace ArticoleCalarie.Web.Controllers
 
             try
             {
-                await _iOrderLogic.ChangeOrderStatus(changeStatusOrderModel.OrderNumber, changeStatusOrderModel.NewOrderStatus);
+                await _iOrderLogic.ChangeOrderStatus(changeStatusOrderModel.OrderNumber, changeStatusOrderModel.NewOrderStatus, changeStatusOrderModel.DeliveryTime);
             }
             catch (Exception ex)
             {

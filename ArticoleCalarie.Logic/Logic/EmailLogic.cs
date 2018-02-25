@@ -89,9 +89,9 @@ namespace ArticoleCalarie.Logic.Logic
             await _iMailService.SendMail(emailModel);
         }
 
-        public async Task SendShippedOrderEmail(Order order)
+        public async Task SendShippedOrderEmail(Order order, string deliveryTime)
         {
-            var body = $"<p>Comanda #{order.OrderNumber} a fost trimisa. Detailii....<br /> Va veni in x zile.<p>";
+            var body = $"<p>Comanda #{order.OrderNumber} a fost trimisa. Detailii....<br /> Timp livrare estimat: {deliveryTime}.<p>";
 
             var emailModel = new EmailModel
             {

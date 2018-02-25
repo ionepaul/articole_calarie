@@ -106,7 +106,14 @@
                         </div>
                         <div class="modal-body">
                             <p>In cat timp va ajunge <b>comanda #@Model.OrderNumber?</b> </p>
-                            <input id="order-time" type="text"/> 
+                            <select id="order-time">
+                                <option>1-2 zile</option>
+                                <option>2-3 zile</option>
+                                <option>3-4 zile</option>
+                                <option>4-5 zile</option>
+                                <option>5-6 zile</option>
+                                <option>6-7 zile</option>
+                            </select>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.SHIPPED')">Confirma</button>
