@@ -20,7 +20,7 @@ Input, textarea: 14px/30px Montserrat, sans-serif;
 HEADER
 HOMES PAGE
 SHOPS PAGE
-BLOGS PAGE
+BLOGS PAGE.cart-content #back
 PRODUCTS PAGE
 FOOTER
 SLIDESHOW
@@ -3060,7 +3060,7 @@ input {
     text-align: center;
     cursor: pointer;
     background: 0;
-    margin-top: 20px;
+    margin: 20px 0 0 0;
 }
 .cart-content .subtotal .title {
   font-size: 14px;
@@ -8966,6 +8966,19 @@ strong.details-section {
 }
 @media(max-width: 991px) {
 
+    .cart-content {
+        display: block;
+    }
+
+    .shopping-cart-content,
+    .continue-shopping {
+        width: 100%;
+    }
+
+    .continue-shopping {
+       margin: 0 0 30px;
+    }
+
     .body-content {
         margin-top: 130px;
     }
@@ -10273,7 +10286,7 @@ strong.details-section {
 }
 .shopping-cart-content td {
   text-align: left;
-  padding:  20px 15px 20px 100px;
+  padding: 15px;
   position: relative;
 }
 .shopping-cart-content td::before {
