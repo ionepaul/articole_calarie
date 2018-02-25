@@ -6,6 +6,7 @@ using ArticoleCalarie.Infrastructure.MailService;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
 using ArticoleCalarie.Models.Constants;
+using ArticoleCalarie.Repository.Entities;
 
 namespace ArticoleCalarie.Logic.Logic
 {
@@ -67,6 +68,36 @@ namespace ArticoleCalarie.Logic.Logic
                 To = new List<string> { email },
                 From = ConfigurationManager.AppSettings["ArticoleCalarieEmail"],
                 Subject = MailSubjects.ResetPasswrod,
+                Body = body
+            };
+
+            await _iMailService.SendMail(emailModel);
+        }
+
+        public async Task SendConfirmationOrderEmail(Order order)
+        {
+            var body = $"<p>Comanda #{order.OrderNumber} a fost confirmata. Detailii....<br /> Veti primi un mail cand va fi livrata.<p>";
+
+            var emailModel = new EmailModel
+            {
+                To = new List<string> { order.Email },
+                From = ConfigurationManager.AppSettings["ArticoleCalarieEmail"],
+                Subject = string.Format(MailSubjects.OrderConfirmed, order.OrderNumber),
+                Body = body
+            };
+
+            await _iMailService.SendMail(emailModel);
+        }
+
+        public async Task SendShippedOrderEmail(Order order)
+        {
+            var body = $"<p>Comanda #{order.OrderNumber} a fost trimisa. Detailii....<br /> Va veni in x zile.<p>";
+
+            var emailModel = new EmailModel
+            {
+                To = new List<string> { order.Email },
+                From = ConfigurationManager.AppSettings["ArticoleCalarieEmail"],
+                Subject = string.Format(MailSubjects.OrderShipped, order.OrderNumber),
                 Body = body
             };
 

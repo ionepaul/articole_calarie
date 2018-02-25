@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<ArticoleCalarie.Models.OrderSummaryModel>
+﻿@model PagedList.IPagedList<ArticoleCalarie.Models.OrderViewModel>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -15,7 +15,9 @@
         <button id="shipped-orders-btn">Trimise</button>
         <button id="confirmed-orders-btn">Confirmate</button>
     </div>
+
     @Html.Partial("_OrderListPartial", Model)
+
 </div>
 
 @section scripts {

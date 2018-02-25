@@ -26,6 +26,30 @@ namespace ArticoleCalarie.Logic.Logic
             _iEmailLogic = iEmailLogic;
         }
 
+        public async Task ChangeOrderStatus(int orderNumber, OrderStatusViewEnum newOrderStatus)
+        {
+            var order = await _iOrderRepository.GetOrderByOrderNumber(orderNumber);
+
+            if (order == null)
+            {
+                throw new Exception("Order could not be found.");
+            }
+
+            order.OrderStatus = newOrderStatus.ToDbEnum();
+
+            await _iOrderRepository.UpdateOrder(order);
+
+            switch (newOrderStatus)
+            {
+                case OrderStatusViewEnum.CONFIRMED:
+                    await _iEmailLogic.SendConfirmationOrderEmail(order);
+                    break;
+                case OrderStatusViewEnum.SHIPPED:
+                    await _iEmailLogic.SendShippedOrderEmail(order);
+                    break;
+            }
+        }
+
         public async Task<OrderSearchViewResult> GetOrders(int pageNumber, OrderStatusViewEnum status)
         {
             var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
@@ -48,7 +72,7 @@ namespace ArticoleCalarie.Logic.Logic
                 var orderSearchViewResult = new OrderSearchViewResult
                 {
                     TotalCount = result.TotalCount,
-                    Orders = result.Orders.Select(x => x.ToSummaryModel())
+                    Orders = result.Orders.Select(x => x.ToViewModel())
                 };
 
                 return orderSearchViewResult;

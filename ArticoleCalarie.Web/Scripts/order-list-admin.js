@@ -29,6 +29,7 @@
             success: function (result) {
                 hideLoader();
                 $('#orders-content').html(result);
+                initDetailsPanel();
             }
         });
     }
@@ -43,6 +44,7 @@
             success: function (result) {
                 hideLoader();
                 $('#orders-content').html(result);
+                initDetailsPanel();
             }
         });
 
@@ -50,20 +52,67 @@
     });
 });
 
-//function openDeleteModal(productCode) {
-//    $('#' + productCode).modal('toggle');
-//}
+$(function () {
+    initDetailsPanel();
+})
 
-//function deleteProduct(productId) {
-//    let url = window.location.origin + '/Product/Delete?productId=' + productId;
+function initDetailsPanel() {
+    $("td[colspan=5]").find(".order-details").hide();
 
-//    $.ajax({
-//        url: url,
-//        type: 'POST',
-//        cache: false,
-//        success: function () {
-//            window.location.href = window.location.origin + '/Product/List?pageNumber=1';
-//        }
-//    });
-//}
+    $(".expand-btn").on("click", function (event) {
+        event.stopPropagation();
+        var $target = $(event.target);
 
+        if ($target.closest("td").attr("colspan") > 1) {
+            if ($(this).hasClass("fa-chevron-up")) {
+                $(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
+            }
+            else {
+                $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
+            }
+
+            $target.slideUp();
+        } else {
+            if ($(this).hasClass("fa-chevron-up")) {
+                $(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
+            }
+            else {
+                $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
+            }
+
+            $target.closest("tr").next().find(".order-details").slideToggle();
+        }
+    });
+}
+
+function openConfirmOrderModal(orderNumber) {
+    $('#confirm-order-model-' + orderNumber).modal('toggle');
+}
+
+function openShipOrderModel(orderNumber) {
+    $('#ship-order-modal-' + orderNumber).modal('toggle');
+}
+
+function openCompleteOrderModal(orderNumber) {
+    $('#complete-order-modal-' + orderNumber).modal('toggle');
+}
+
+function changeOrderStatus(orderNumber, newStatus) {
+    let url = window.location.origin + '/Order/ChangeOrderStatus';
+
+    showLoader();
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            orderNumber: orderNumber,
+            newOrderStatus: newStatus
+        },
+        cache: false,
+        success: function () {
+            hideLoader();
+            window.location.reload();
+        }
+    });
+}

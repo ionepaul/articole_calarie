@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using ArticoleCalarie.Repository.Entities;
 
 namespace ArticoleCalarie.Logic.ILogic
 {
@@ -7,5 +8,7 @@ namespace ArticoleCalarie.Logic.ILogic
         Task SendNewOrderNotification(int orderNumber);
         Task SendWelcomeEmail(string email, string fullName);
         Task SendResetEmail(string email, string callbackUrl);
+        Task SendConfirmationOrderEmail(Order order);
+        Task SendShippedOrderEmail(Order order);
     }
 }

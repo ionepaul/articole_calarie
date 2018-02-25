@@ -281,7 +281,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
 
-                var pagedListModel = new StaticPagedList<OrderSummaryModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
+                var pagedListModel = new StaticPagedList<OrderViewModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
 
                 _logger.Info("Successfully got orders list for admin.");
 
@@ -311,7 +311,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
 
-                var pagedListModel = new StaticPagedList<OrderSummaryModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
+                var pagedListModel = new StaticPagedList<OrderViewModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
 
                 _logger.Info("Successfully got orders list for admin.");
 
@@ -322,6 +322,24 @@ namespace ArticoleCalarie.Web.Controllers
                 _logger.Error($"Failed to retrive orders for status {status.ToString()}. Exception: {ex.Message}");
 
                 return View("Error");
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task ChangeOrderStatus(ChangeOrderStatusModel changeStatusOrderModel)
+        {
+            _logger.Info("POST > Change order status");
+
+            try
+            {
+                await _iOrderLogic.ChangeOrderStatus(changeStatusOrderModel.OrderNumber, changeStatusOrderModel.NewOrderStatus);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to change order #{changeStatusOrderModel.OrderNumber} status to {changeStatusOrderModel.NewOrderStatus}. Exception: {ex.Message}.");
+
+                throw ex;
             }
         }
     }

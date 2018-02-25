@@ -6,6 +6,6 @@ namespace ArticoleCalarie.Models
     {
         public int TotalCount { get; set; }
 
-        public IEnumerable<OrderSummaryModel> Orders { get; set; }
+        public IEnumerable<OrderViewModel> Orders { get; set; }
     }
 }

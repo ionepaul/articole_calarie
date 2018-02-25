@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using ArticoleCalarie.Repository.Entities;
@@ -21,47 +22,58 @@ namespace ArticoleCalarie.Repository.Repository
 
         public async Task<OrderSearchResult> GetAllOrders(int itemsPerPage, int itemsToSkip)
         {
+            var query = _dbset.Include(x => x.DeliveryAddress).Include(x => x.BillingAddress).Include(x => x.OrderItems);
+
             var ordersResult = new OrderSearchResult
             {
-                TotalCount = await _dbset.CountAsync(),
-                Orders = await _dbset.OrderBy(x => x.OrderRegistrationDate).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+                TotalCount = await query.CountAsync(),
+                Orders = await query.OrderBy(x => x.OrderRegistrationDate).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
             };
 
             return ordersResult;
         }
 
+        public async Task<Order> GetOrderByOrderNumber(int orderNumber)
+        {
+            var order = await _dbset.FirstAsync(x => x.OrderNumber == orderNumber);
+
+            return order;
+        }
+
         public async Task<OrderSearchResult> GetOrdersByStatus(int itemsPerPage, int itemsToSkip, OrderStatus status)
         {
-            IQueryable<Order> query = null;
+            var query = _dbset.Include(x => x.DeliveryAddress).Include(x => x.BillingAddress).Include(x => x.OrderItems);
 
             switch (status)
             {
                 case OrderStatus.COMPLETE:
-                    query = _dbset.Where(x => x.OrderStatus == OrderStatus.COMPLETE);
+                    query = query.Where(x => x.OrderStatus == OrderStatus.COMPLETE);
                     break;
                 case OrderStatus.CONFIRMED:
-                    query = _dbset.Where(x => x.OrderStatus == OrderStatus.CONFIRMED);
+                    query = query.Where(x => x.OrderStatus == OrderStatus.CONFIRMED);
                     break;
                 case OrderStatus.REGISTRED:
-                    query = _dbset.Where(x => x.OrderStatus == OrderStatus.REGISTRED);
+                    query = query.Where(x => x.OrderStatus == OrderStatus.REGISTRED);
                     break;
                 case OrderStatus.SHIPPED:
-                    query = _dbset.Where(x => x.OrderStatus == OrderStatus.SHIPPED);
+                    query = query.Where(x => x.OrderStatus == OrderStatus.SHIPPED);
                     break;
             }
 
-            if (query != null)
+            var ordersResult = new OrderSearchResult
             {
-                var ordersResult = new OrderSearchResult
-                {
-                    TotalCount = await query.CountAsync(),
-                    Orders = await query.OrderBy(x => x.OrderRegistrationDate).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
-                };
+                TotalCount = await query.CountAsync(),
+                Orders = await query.OrderBy(x => x.OrderRegistrationDate).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+            };
 
-                return ordersResult;
-            }
+            return ordersResult;
+        }
 
-            return null;
+        public async Task UpdateOrder(Order order)
+        {
+            _ctx.Entry(order).State = EntityState.Modified;
+
+            await SaveChangesAsync();
         }
     }
 }

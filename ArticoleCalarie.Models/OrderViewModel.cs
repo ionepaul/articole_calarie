@@ -6,7 +6,8 @@ namespace ArticoleCalarie.Models
 {
     public class OrderViewModel
     {
-        [Required]
+        public int OrderNumber { get; set; }
+
         public string Email { get; set; }
 
         public bool UserIsLoggedIn { get; set; }

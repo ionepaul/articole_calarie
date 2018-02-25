@@ -36,19 +36,37 @@ namespace ArticoleCalarie.Logic.Converters
 
             return orderItem;
         }
-
-        public static OrderSummaryModel ToSummaryModel(this Order order)
+        
+        public static ShoppingCartItem ToShoppingCartItem(this OrderItem orderItem)
         {
-            var orderSummaryModel = new OrderSummaryModel
+            var shoppingCartItem = new ShoppingCartItem
+            {
+                ProductCode = orderItem.ProductCode,
+                ProductName = orderItem.ProductName,
+                Price = orderItem.Price,
+                SalePercentage = orderItem.SalePercentage,
+                Quantity = orderItem.Quantity,
+                Size = orderItem.Size,
+                Color = orderItem.Color
+            };
+
+            return shoppingCartItem;
+        }
+
+        public static OrderViewModel ToViewModel(this Order order)
+        {
+            var orderViewModel = new OrderViewModel
             {
                 OrderNumber = order.OrderNumber,
                 Email = order.Email,
-                OrderStatus = order.OrderStatus.ToViewEnum(),
                 TotalAmount = order.TotalAmount,
-                //Products = string.Join(", ", order.OrderItems.Select(x => x.ProductName))
+                OrderStatus = order.OrderStatus.ToViewEnum(),
+                DeliveryAddress = order.DeliveryAddress.ToViewModel(),
+                BillingAddress = order.BillingAddress.ToViewModel(),
+                ShoppingItems = order.OrderItems.Select(x => x.ToShoppingCartItem()).ToList()
             };
 
-            return orderSummaryModel;
+            return orderViewModel;
         }
 
         public static OrderStatusViewEnum ToViewEnum(this OrderStatus orderStatus)
