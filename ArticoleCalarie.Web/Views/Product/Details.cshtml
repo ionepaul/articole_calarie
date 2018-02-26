@@ -47,18 +47,9 @@
                         <a class="product-name">@Model.ProductName </a>
                     }
 
-                    @*<div class="rating">
-                            <ul class="list-star">
-                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-                            </ul>
-                            <span class="text">( Be the firt person to review this item )</span>
-                        </div>*@
                     <div>Cod Produs: @Model.ProductCode</div>
                     <br>
+
                     <div class="price">
                         @if (Model.IsOnSale)
                         {
@@ -70,13 +61,9 @@
                             <span class="ins">@Model.Price RON</span>
                         }
                     </div>
-                    @if (Model.SalePercentage != 0)
-                    {
-                        <div>Reducere: @Model.SalePercentage%</div>
-                    }
                     <br />
-                    <div>
-                        <strong>Mărimi</strong>
+
+                    <div><strong class="details-section">Mărimi</strong> 
                         <select id="size">
                             @foreach (var size in sizes)
                             {
@@ -84,7 +71,8 @@
                             }
                         </select>
                     </div>
-                    <div class="des">@Model.Description</div>
+                    <div class="des"><strong class="details-section">Descriere</strong> @Model.Description</div>
+                    <strong class="details-section">Culori</strong>
                     <ul class="list-color">
                         @foreach (var color in Model.ColorsViewModel)
                         {

@@ -14,7 +14,7 @@
     $("#addToCardBtn").on("click", function () {
         let cartModel = {
             productName: productName,
-            imageName: productName,
+            imageName: productImage,
             quantity: $("#quantity").val(),
             size: $("#size").val(),
             price: price,
