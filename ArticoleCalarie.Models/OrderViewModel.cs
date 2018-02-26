@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 using ArticoleCalarie.Models.Enums;
 
 namespace ArticoleCalarie.Models
@@ -21,5 +21,7 @@ namespace ArticoleCalarie.Models
         public decimal TotalAmount { get; set; }
 
         public OrderStatusViewEnum OrderStatus { get; set; }
+
+        public DateTime OrderRegistrationDate { get; set; }
     }
 }

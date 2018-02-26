@@ -81,6 +81,22 @@ namespace ArticoleCalarie.Logic.Logic
             return null;
         }
 
+        public async Task<OrderSearchViewResult> GetUserOrders(int pageNumber, string userId)
+        {
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsToSkip = (pageNumber - 1) * itemsPerPage;
+
+            var userOrders = await _iOrderRepository.GetUserOrders(itemsPerPage, itemsToSkip, userId);
+
+            var orderSearchViewResult = new OrderSearchViewResult
+            {
+                TotalCount = userOrders.TotalCount,
+                Orders = userOrders.Orders.Select(x => x.ToViewModel())
+            };
+
+            return orderSearchViewResult;
+        }
+
         public async Task<int> PlaceOrder(OrderViewModel orderViewModel, string userId)
         {
             var orderModel = orderViewModel.ToDbModel();

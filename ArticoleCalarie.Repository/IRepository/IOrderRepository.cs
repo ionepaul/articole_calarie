@@ -12,5 +12,6 @@ namespace ArticoleCalarie.Repository.IRepository
         Task<OrderSearchResult> GetOrdersByStatus(int itemsPerPage, int itemsToSkip, OrderStatus status);
         Task UpdateOrder(Order order);
         Task<Order> GetOrderByOrderNumber(int orderNumber);
+        Task<OrderSearchResult> GetUserOrders(int itemsPerPage, int itemsToSkip, string userId);
     }
 }

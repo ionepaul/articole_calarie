@@ -682,6 +682,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\shopping-cart.js" />
     <Content Include="Scripts\timecircles.js" />
+    <Content Include="Scripts\user-orders.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -729,6 +730,8 @@
     <Content Include="Views\Order\OrderList.cshtml" />
     <Content Include="Views\Order\_OrderListPartial.cshtml" />
     <Content Include="Views\Order\_OrderDetailsPartial.cshtml" />
+    <Content Include="Views\Order\UserOrderList.cshtml" />
+    <Content Include="Views\Order\_UserOrderListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

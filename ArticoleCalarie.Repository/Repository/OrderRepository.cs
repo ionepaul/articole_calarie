@@ -63,7 +63,21 @@ namespace ArticoleCalarie.Repository.Repository
             var ordersResult = new OrderSearchResult
             {
                 TotalCount = await query.CountAsync(),
-                Orders = await query.OrderBy(x => x.OrderRegistrationDate).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+                Orders = await query.OrderByDescending(x => x.OrderRegistrationDate).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+            };
+
+            return ordersResult;
+        }
+
+        public async Task<OrderSearchResult> GetUserOrders(int itemsPerPage, int itemsToSkip, string userId)
+        {
+            var query = _dbset.Include(x => x.DeliveryAddress).Include(x => x.BillingAddress).Include(x => x.OrderItems)
+                              .Where(x => string.Equals(x.UserId, userId));
+
+            var ordersResult = new OrderSearchResult
+            {
+                TotalCount = await query.CountAsync(),
+                Orders = await query.OrderByDescending(x => x.OrderRegistrationDate).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
             };
 
             return ordersResult;

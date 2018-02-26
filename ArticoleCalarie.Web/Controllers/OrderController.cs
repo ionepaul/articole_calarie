@@ -277,6 +277,8 @@ namespace ArticoleCalarie.Web.Controllers
             {
                 var page = pageNumber ?? 1;
 
+                _logger.Info($"Getting orders for admin, page {page}, status {status.ToString()}.");
+
                 var ordersModel = await _iOrderLogic.GetOrders(page, status);
 
                 int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
@@ -306,6 +308,8 @@ namespace ArticoleCalarie.Web.Controllers
             try
             {
                 var page = pageNumber ?? 1;
+
+                _logger.Info($"Getting orders for admin, page {page}, status {status.ToString()}.");
 
                 var ordersModel = await _iOrderLogic.GetOrders(page, status);
 
@@ -340,6 +344,70 @@ namespace ArticoleCalarie.Web.Controllers
                 _logger.Error($"Failed to change order #{changeStatusOrderModel.OrderNumber} status to {changeStatusOrderModel.NewOrderStatus}. Exception: {ex.Message}.");
 
                 throw ex;
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> UserOrderList(int? pageNumber)
+        {
+            _logger.Info("VIEW > User order list");
+
+            try
+            {
+                var userId = User.Identity.GetUserId();
+
+                var page = pageNumber ?? 1;
+
+                _logger.Info($"Getting user order list, page {page}.");
+
+                var ordersModel = await _iOrderLogic.GetUserOrders(page, userId);
+
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+
+                var pagedListModel = new StaticPagedList<OrderViewModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
+
+                _logger.Info("Successfully got user order list");
+
+                return View(pagedListModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to get user list. Exception: {ex.Message}");
+
+                return View("Error");
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> UserOrderListPartial(int? pageNumber)
+        {
+            _logger.Info("VIEW > User order list");
+
+            try
+            {
+                var userId = User.Identity.GetUserId();
+
+                var page = pageNumber ?? 1;
+
+                _logger.Info($"Getting user order list, page {page}.");
+
+                var ordersModel = await _iOrderLogic.GetUserOrders(page, userId);
+
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+
+                var pagedListModel = new StaticPagedList<OrderViewModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
+
+                _logger.Info("Successfully got user order list");
+
+                return PartialView("_UserOrderListPartial", pagedListModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to get user list. Exception: {ex.Message}");
+
+                return View("Error");
             }
         }
     }

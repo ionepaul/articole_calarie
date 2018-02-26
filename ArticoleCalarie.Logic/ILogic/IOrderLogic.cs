@@ -9,5 +9,6 @@ namespace ArticoleCalarie.Logic.ILogic
         Task<int> PlaceOrder(OrderViewModel checkoutViewModel, string userId);
         Task<OrderSearchViewResult> GetOrders(int pageNumber, OrderStatusViewEnum status);
         Task ChangeOrderStatus(int orderNumber, OrderStatusViewEnum newOrderStatus, string deliveryTime);
+        Task<OrderSearchViewResult> GetUserOrders(int pageNumber, string userId);
     }
 }

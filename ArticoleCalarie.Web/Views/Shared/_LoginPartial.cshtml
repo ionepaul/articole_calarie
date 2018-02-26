@@ -28,8 +28,8 @@ else if (Request.IsAuthenticated)
             @Html.ActionLink("Salut, " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage", style = "color: #000" })
             <ul class="submenu">
                 <li>@Html.ActionLink("Contul Meu", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
-                <li><a href="shopping-cart.html">Shopping Bag</a></li>
-                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+                <li>@Html.ActionLink("Comenzile Mele", "UserOrderList", "Order", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Deconectează-te</a></li>
             </ul>
         </li>
         }

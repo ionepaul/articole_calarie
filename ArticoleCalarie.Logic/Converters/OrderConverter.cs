@@ -63,7 +63,8 @@ namespace ArticoleCalarie.Logic.Converters
                 OrderStatus = order.OrderStatus.ToViewEnum(),
                 DeliveryAddress = order.DeliveryAddress.ToViewModel(),
                 BillingAddress = order.BillingAddress.ToViewModel(),
-                ShoppingItems = order.OrderItems.Select(x => x.ToShoppingCartItem()).ToList()
+                ShoppingItems = order.OrderItems.Select(x => x.ToShoppingCartItem()).ToList(),
+                OrderRegistrationDate = order.OrderRegistrationDate
             };
 
             return orderViewModel;
