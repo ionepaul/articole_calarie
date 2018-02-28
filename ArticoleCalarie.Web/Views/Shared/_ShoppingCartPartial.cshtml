@@ -3,6 +3,7 @@
 @{
     var shoppingCart = Session["ShoppingCart"] as ShoppingCartModel;
     var totalCartItems = shoppingCart?.ShoppingItems?.Sum(x => x.Quantity) ?? 0;
+    var grandTotal = 0M;
 }
 
 <div class="minicart">
@@ -31,9 +32,13 @@
                     </div>
                 </div>
                 <hr />
+                {
+                    var totalPrice = product.Quantity * product.Price;
+                    grandTotal += totalPrice;
+                }
             }
-            <p class="cart-inner-total"><span>TOTAL: </span> 475,00 RON</p>
-            <a class="complete-order" href="@Url.Action("ShoppingCartDetails", "Order")">finalizeaza comanda</a>
+            <p class="cart-inner-total"><span>TOTAL: </span> @grandTotal RON</p>
+            <a class="complete-order" href="@Url.Action("ShoppingCartDetails", "Order")">FINALIZEAZĂ COMANDA</a>
         </div>
     }
     else

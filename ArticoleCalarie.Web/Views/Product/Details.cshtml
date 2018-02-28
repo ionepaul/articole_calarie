@@ -3,7 +3,7 @@
     ViewBag.Title = "Details";
     bool hasMaterialDetails = !string.IsNullOrEmpty(Model.MaterialDetails);
     bool hasSizeChart = !string.IsNullOrEmpty(Model.SizeChartImage);
-    var sizes = Model.Size.Split(',');
+    var sizes = !string.IsNullOrEmpty(Model.Size) ? Model.Size.Split(',') : new string[0];
 }
 
 <div class="main-content product-single-page">
@@ -63,14 +63,19 @@
                     </div>
                     <br />
 
-                    <div><strong class="details-section">Mărimi</strong> 
-                        <select id="size">
-                            @foreach (var size in sizes)
-                            {
-                                <option>@size</option>
-                            }
-                        </select>
-                    </div>
+                    @if (sizes.Count() > 0)
+                    {
+                        <div>
+                            <strong class="details-section">Mărimi</strong>
+                            <select id="size">
+                                @foreach (var size in sizes)
+                                {
+                                    <option>@size</option>
+                                }
+                            </select>
+                        </div>
+                    }
+              
                     <div class="des"><strong class="details-section">Descriere</strong> @Model.Description</div>
                     <strong class="details-section">Culori</strong>
                     <ul class="list-color">
@@ -86,7 +91,7 @@
                             <a class="minus" href="#"><i class="fa fa-sort-desc" aria-hidden="true"></i></a>
                         </div>
                     </div>
-                    <a id="addToCardBtn" class="add-to-cart">ADD TO CART</a>
+                    <a id="addToCardBtn" class="add-to-cart">ADAUGĂ ÎN COȘ</a>
                     <div class="material-details">
                         @if (hasMaterialDetails)
                         {

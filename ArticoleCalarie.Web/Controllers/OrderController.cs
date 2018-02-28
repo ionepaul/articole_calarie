@@ -247,7 +247,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 _logger.Info("Successfully saved order");
 
-                return RedirectToAction(nameof(CheckoutDone), orderNumber);
+                return RedirectToAction(nameof(CheckoutDone), new { orderNumber = orderNumber });
             }
             catch (Exception ex)
             {

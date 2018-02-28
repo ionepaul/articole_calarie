@@ -105,7 +105,7 @@ namespace ArticoleCalarie.Logic.Logic
             {
                 orderModel.UserId = userId;
 
-                var user = await _iAccountRepository.FindUserByIdAsync(userId);
+                var user = await _iAccountRepository.GetUserFullUserInfo(userId);
 
                 if (user == null)
                 {
@@ -115,7 +115,7 @@ namespace ArticoleCalarie.Logic.Logic
                 else
                 {
                     orderModel.DeliveryAddressId = user.DeliveryAddressId.HasValue ? user.DeliveryAddressId.Value : -1;
-                    orderModel.BillingAddressId = user.BillingAddressId.HasValue ? user.BillingAddressId.Value : -1;
+                    orderModel.BillingAddressId = user.BillingAddressId.HasValue ? user.BillingAddressId.Value : orderModel.DeliveryAddressId;
                     orderModel.Email = user.Email;
                 }
             }
