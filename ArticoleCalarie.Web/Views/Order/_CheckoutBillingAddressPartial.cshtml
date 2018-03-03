@@ -18,57 +18,58 @@
 {
     @Html.AntiForgeryToken()
 
-    <input id="same-as-delivery-btn" style="opacity: 1" type="checkbox" name="IsSameAsDelivery" value="@checkboxValue" @isChecked /> <span class="label-text"> Adresa de facturare este identitca cu cea de livrare. <span></span></span>
-    <br />
-    <br />
+    <label class="checkbox-container">
+        <input id="same-as-delivery-btn" type="checkbox" name="IsSameAsDelivery" value="@checkboxValue" @isChecked /> 
+        <label class="checkbox-label" for="same-as-delivery-btn">Adresa de facturare este identitca cu cea de livrare.</label>
+        <span class="checkbox-checkmark"></span>
+    </label>
     <div id="billing-form-container" class="@isHidden">
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-6">
                 <span class="label-text">Nume Complet <span>*</span></span>
                 @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
                 @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "input-info" } })
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-6">
                 <span class="label-text">Telefon <span>*</span></span>
                 @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                 @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "input-info" } })
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+            <div class="col-sm-4">
                 <span class="label-text">Adresa <span>*</span></span>
                 @Html.ValidationMessageFor(model => model.AddressLine1, "", new { @class = "text-danger" })
                 @Html.EditorFor(model => model.AddressLine1, new { htmlAttributes = new { @class = "input-info" } })
             </div>
-            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+            <div class="col-sm-4">
                 <span class="label-text">Detalii Adresa</span>
                 @Html.EditorFor(model => model.AddressLine2, new { htmlAttributes = new { @class = "input-info" } })
             </div>
-            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <div class="col-sm-4">
                 <span class="label-text">Cod Postal</span>
                 @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
                 @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "input-info" } })
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div class="col-sm-4">
                 <span class="label-text">Tara <span>*</span></span>
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                 @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "input-info" } })
             </div>
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div class="col-sm-4">
                 <span class="label-text">Judet <span>*</span></span>
                 @Html.ValidationMessageFor(model => model.County, "", new { @class = "text-danger" })
                 @Html.EditorFor(model => model.County, new { htmlAttributes = new { @class = "input-info" } })
             </div>
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div class="col-sm-4">
                 <span class="label-text">Oras <span>*</span></span>
                 @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
                 @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "input-info" } })
             </div>
         </div>  
     </div>
-    <br />
     <div class="group-button">
         <a id="checkout-save-billing-address-btn" class="submit">Confirmă</a>
     </div>

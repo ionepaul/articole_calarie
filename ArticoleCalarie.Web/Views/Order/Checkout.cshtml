@@ -113,7 +113,7 @@
                             <li class="parent-content @activeParentClass">
                                 <a href="#" class="show-content"> <span class="number">02</span> DETALII LIVRARE</a>
                                 <div class="hidden-content checkout-choosen-content @showContainerClass">
-                                    <div class="checkout-form content-form">
+                                    <div class="checkout-form content-form delivery-details-form">
                                         <h4 class="main-title">Adresa de livrare</h4>
 
                                         @if (Model?.DeliveryAddress != null)
@@ -134,7 +134,7 @@
                             <li class="parent-content">
                                 <a href="#" class="show-content"> <span class="number">03</span>DETALII FACTURARE</a>
                                 <div class="hidden-content checkout-choosen-content">
-                                    <div class="checkout-form content-form">
+                                    <div class="checkout-form content-form billing-address-form">
                                         <h4 class="main-title">Adresa de facturare</h4>
                             
                                         @if (Model?.BillingAddress != null)
@@ -158,7 +158,12 @@
                                 <div class="hidden-content checkout-choosen-content">
                                     <div class="payment-form">
                                         <div class="info-checkout">
-                                            <input type="checkbox" style="opacity: 1" checked /> <h5 class="main-title">Ramburs</h5>
+                                            <label class="checkbox-container">
+                                                <input id="howToPay" type="checkbox" name="howToPay" value="Ramburs" checked />
+                                                <label class="checkbox-label" for="howToPay">Ramburs</label>
+                                                <span class="checkbox-checkmark"></span>
+                                            </label>
+                                            <p>Produsele vor fi livrate la adresa ta.</p>
                                         </div>
                                     </div>
 
@@ -169,7 +174,7 @@
                                 <a href="#" class="show-content"> <span class="number">05</span> ORDER REVIEW</a>
                                 <div class="hidden-content checkout-choosen-content">
                                     <div class="total-checkout">
-                                        <table class="shopping-cart-content">
+                                        <table class="shopping-cart-content checkout-tabel">
                                             <tr class="title">
                                                 <td class="product-name">Produs</td>
                                                 <td class="price">Preț</td>
@@ -193,10 +198,11 @@
                                                 </tr>
                                              }
                                         </table>
-
-                                        <span class="text">Grand Total </span><span class="price"> @grandTotal RON</span>
                                     </div>
-                                    <div class="group-button">
+                                    <div class="order-group">
+                                        <div>
+                                            <span class="text">Grand Total </span><span class="price"> @grandTotal RON</span>
+                                        </div>
                                         <a id="place-order-btn" href="@Url.Action("PlaceOrder", "Order", new { totalAmount = grandTotal })" class="button submit">Comandă</a>
                                     </div>
                                 </div>

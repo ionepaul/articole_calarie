@@ -1,9 +1,9 @@
 ﻿@model ArticoleCalarie.Models.OrderViewModel
 @using ArticoleCalarie.Models.Enums
 
-<div class="order-details">
+<div class="order-details cf">
     <table class="table">
-        <tr>
+        <tr class="danger-row">
             <th>
                 Produs
             </th>
@@ -43,7 +43,7 @@
         }
     </table>
 
-    <div class="col-md-6">
+    <div class="col-sm-4">
         <h5>Adresa de livrare</h5>
         <div class="address-details-wrapper">
             <p class="name">@Model.DeliveryAddress.FullName</p>
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-sm-4">
         <h5>Adresa de facturare</h5>
         <div class="address-details-wrapper">
             <p class="name">@Model.BillingAddress.FullName</p>
@@ -65,10 +65,10 @@
         </div>
     </div>
 
-    <div class="actions">
+    <div class="col-sm-4 actions">
         @if (Model.OrderStatus == OrderStatusViewEnum.REGISTRED)
         {
-            <button onclick="openConfirmOrderModal('@Model.OrderNumber')">Confirma comanda</button>
+            <button class="cta-button" onclick="openConfirmOrderModal('@Model.OrderNumber')">Confirma comanda</button>
 
             <div id="confirm-order-model-@Model.OrderNumber" class="modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -93,7 +93,7 @@
 
         @if (Model.OrderStatus == OrderStatusViewEnum.CONFIRMED)
         {
-            <button onclick="openShipOrderModel('@Model.OrderNumber')">Comanda a fost trimisa</button>
+            <button class="cta-button" onclick="openShipOrderModel('@Model.OrderNumber')">Comanda a fost trimisa</button>
 
             <div id="ship-order-modal-@Model.OrderNumber" class="modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -126,7 +126,7 @@
 
         @if (Model.OrderStatus == OrderStatusViewEnum.SHIPPED)
         {
-            <button onclick="openCompleteOrderModal('@Model.OrderNumber')">Comanda a fost completa</button>
+            <button class="cta-button" onclick="openCompleteOrderModal('@Model.OrderNumber')">Comanda a fost completa</button>
 
             <div id="complete-order-modal-@Model.OrderNumber" class="modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">

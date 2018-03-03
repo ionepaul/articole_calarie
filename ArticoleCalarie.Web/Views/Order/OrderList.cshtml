@@ -9,11 +9,13 @@
 <div class="page-wrapper">
     <div class="product-list-header">
         <h3 class="form-title">Comenzi</h3>
-        <button id="all-orders-btn">Toate</button>
-        <button id="completed-orders-btn">Complete</button>
-        <button id="registred-orders-btn">Noi</button>
-        <button id="shipped-orders-btn">Trimise</button>
-        <button id="confirmed-orders-btn">Confirmate</button>
+        <div class="special-btns-container">
+            <button id="all-orders-btn" class="orders-special-btn">Toate</button>
+            <button id="completed-orders-btn" class="orders-special-btn">Complete</button>
+            <button id="registred-orders-btn" class="orders-special-btn">Noi</button>
+            <button id="shipped-orders-btn" class="orders-special-btn">Trimise</button>
+            <button id="confirmed-orders-btn" class="orders-special-btn">Confirmate</button>
+        </div>
     </div>
 
     @Html.Partial("_OrderListPartial", Model)

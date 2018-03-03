@@ -10,28 +10,28 @@
 {
     @Html.AntiForgeryToken()
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="col-sm-6">
             <span class="label-text">Nume Complet <span>*</span></span>
-            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger validation-error" })
             @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "input-info" } })
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="col-sm-6">
             <span class="label-text">Telefon <span>*</span></span>
             @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
             @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "input-info" } })
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+        <div class="col-sm-4">
             <span class="label-text">Adresa <span>*</span></span>
             @Html.ValidationMessageFor(model => model.AddressLine1, "", new { @class = "text-danger" })
             @Html.EditorFor(model => model.AddressLine1, new { htmlAttributes = new { @class = "input-info" } })
         </div>
-        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+        <div class="col-sm-4">
             <span class="label-text">Detalii Adresa</span>
             @Html.EditorFor(model => model.AddressLine2, new { htmlAttributes = new { @class = "input-info" } })
         </div>
-        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+        <div class="col-sm-4">
             <span class="label-text">Cod Postal</span>
             @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
             @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "input-info" } })
