@@ -6,23 +6,19 @@
     {
         <div id="user-order-details">
             <h4>Comanda #@item.OrderNumber</h4>
-            <br />
 
-            <p>Plasata pe @item.OrderRegistrationDate | Total: @item.TotalAmount RON<p />
+            <p class="order-placed">Plasata pe @item.OrderRegistrationDate : <span class="total-ammount">Total: @item.TotalAmount RON</span><p />
 
-            <ul class="progress">
-                <li class="progress__circle progress--done progress--active"></li>
-                <li class="progress__bar progress--done"></li>
-                <li class="progress__circle progress--active progress--done"></li>
-                <li class="progress__bar progress--done"></li>
-                <li class="progress__circle progress--active"></li>
-                <li class="progress__bar"></li>
-                <li class="progress__circle"></li>
-                <li class="progress__bar"></li>
-                <li class="progress__circle"></li>
-            </ul>
+            <div>
+                <ul class="progressbar cf">
+                    <li class="active completed">Comanda plasata</li>
+                    <li>Produse in depozitul curierului</li>
+                    <li>Produse in curs de livrare</li>
+                    <li>Produse livrate</li>
+                </ul>
+            </div>
 
-            <h4>@item.OrderStatus</h4>
+            <h4 class="order-status">@item.OrderStatus</h4>
 
             <hr />
 
@@ -55,8 +51,7 @@
                         </tr>
                      }
                 </table>
-                <hr />
-                <p>Total: @item.TotalAmount RON</p>
+                <p class="total-order">Total: @item.TotalAmount RON</p>
             </div>
         </div>
      }

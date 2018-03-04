@@ -396,7 +396,9 @@ ul#colors-list li.selected::after,
 .ui-menu .ui-menu-item:hover {
     padding: 0;
 }
-
+#orders-content .expand-btn {
+    cursor: pointer;
+}
 .product-list-header {
     position: relative;
     margin-bottom: 20px;
@@ -9044,6 +9046,15 @@ strong.details-section {
 }
 @media(max-width: 991px) {
 
+    .user-order-details .total-order {
+        position: static !important;
+        clear: both;
+        background: #324a76;
+        color: #fff;
+        padding: 5px 15px;
+        margin-top: 20px;
+    }
+
     .checkout-choosen-content .order-group {
         position: static;
     }
@@ -9511,6 +9522,13 @@ strong.details-section {
 }
 @media(max-width: 767px) {
 
+    #orders-content {
+        overflow: auto;
+    }
+
+    .user-order-title {
+        padding-top: 0 !important;
+    }
     .order-details {
         padding: 20px 20px 0;
     }
@@ -9843,9 +9861,25 @@ strong.details-section {
 }
 @media(max-width: 639px) {
 
+    #user-order-details .total-ammount {
+        display: block;
+    }
+
+    .progressbar li {
+        font-size: 10px !important;
+        line-height: 12px;
+    }
+
     .special-btns-container {
         position: static;
         margin-top: 15px;
+        transform: translateY(0);
+        padding-bottom: 10px;
+    }
+    .special-btns-container button {
+        display: block;
+        width: 90%;
+        margin: 0 auto 10px;
     }
 
     .minicart .cart-inner {
@@ -10095,7 +10129,7 @@ strong.details-section {
   margin: 10px 0;
 }
 .checkout-choosen-content {
-  padding: 30px 15px;
+  padding: 15px;
 }
 
 .header.layout2 .top-links {
@@ -10674,52 +10708,104 @@ AUTO CLEAR
 }
 /*========================*/
 
-
-
-
-/*STEP BAR*/
-.progress {
-  display: inline-flex;
-  align-items: center;
-  counter-reset: step;
+/* STEP BAR and USER ORDER DETAILS */
+.progressbar {
+  margin: 30px 0;
   padding: 0;
-  margin: 0;
-  width: 100%;
-  color: #F2F2F2;
-  font-family: "Palanquin", sans-serif;
-  list-style: none;
+  counter-reset: step;
+}
+.progressbar li {
+  list-style-type: none;
+  width: 25%;
+  float: left;
+  font-size: 12px;
+  position: relative;
+  text-align: center;
   text-transform: uppercase;
+  color: #7d7d7d;
 }
-.progress__circle {
-  width: 50px;
-  height: 50px;
-  border: 5px solid #F2F2F2;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  flex-flow: column nowrap;
-}
-.progress__circle:before {
-  content: '\f00c';
-  font-family: 'FontAwesome';
-  font-size: 2em;
-  color: #fff;
-  margin-top: 0.3em;
-}
-.progress__circle:after {
+.progressbar li:before {
+  width: 30px;
+  height: 30px;
+  content: counter(step);
   counter-increment: step;
-  content: "Step " counter(step);
-  margin-top: 0.5em;
+  line-height: 26px;
+  border: 2px solid #7d7d7d;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: white;
 }
-.progress__bar {
-  flex: 1;
-  height: 5px;
-  background: #F2F2F2;
+.progressbar li:after {
+  width: 100%;
+  height: 2px;
+  content: '';
+  position: absolute;
+  background-color: #7d7d7d;
+  top: 15px;
+  left: -50%;
+  z-index: -1;
 }
-.progress--done {
-  background: #C9D645;
+.progressbar li:first-child:after {
+  content: none;
 }
-.progress--active {
-  border: 5px solid #C9D645;
-  color: #C9D645;
+.progressbar li.active {
+  color: green;
 }
+.progressbar li.completed::before {
+    background: black;
+    color: #fff;
+}
+.progressbar li.active:before {
+  border-color: #55b776;
+}
+.progressbar li.active + li:after {
+  background-color: #55b776;
+}
+
+#user-orders .order-status {
+    clear: both;
+}
+#user-order-details .total-ammount {
+    font-weight: 700;
+}
+.user-order-details {
+    position: relative;
+}
+
+.user-order-details .total-order {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.user-order-details table {
+    margin-bottom: 0;
+}
+
+.user-order-title {
+    padding-top: 60px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
