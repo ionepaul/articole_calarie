@@ -179,7 +179,6 @@ namespace ArticoleCalarie.Web.Controllers
                 }
 
                 orderViewModel.DeliveryAddress = address;
-                orderViewModel.DeliveryAddress.AddressType = AddressTypeViewEnum.Delivery;
             }
             catch (Exception ex)
             {
@@ -197,16 +196,42 @@ namespace ArticoleCalarie.Web.Controllers
 
             try
             {
+                AddressViewModel billingAddress = new AddressViewModel();
+
                 var orderViewModel = Session["OrderModel"] as OrderViewModel;
 
                 var userId = User.Identity.GetUserId();
 
                 if (address.IsSameAsDelivery)
                 {
-                    address = orderViewModel.DeliveryAddress;
+                    billingAddress = new AddressViewModel()
+                    {
+                        AddressLine1 = orderViewModel?.DeliveryAddress?.AddressLine1,
+                        AddressLine2 = orderViewModel?.DeliveryAddress?.AddressLine2,
+                        City = orderViewModel?.DeliveryAddress?.City,
+                        Country = orderViewModel?.DeliveryAddress?.Country,
+                        County = orderViewModel?.DeliveryAddress?.County,
+                        PostalCode = orderViewModel?.DeliveryAddress?.PostalCode,
+                        PhoneNumber = orderViewModel?.DeliveryAddress?.PhoneNumber,
+                        FullName = orderViewModel?.DeliveryAddress?.FullName
+                    };
+                }
+                else
+                {
+                    billingAddress = new AddressViewModel()
+                    {
+                        AddressLine1 = address.AddressLine1,
+                        AddressLine2 = address.AddressLine2,
+                        City = address.City,
+                        Country = address.Country,
+                        County = address.County,
+                        PostalCode = address.PostalCode,
+                        PhoneNumber = address.PhoneNumber,
+                        FullName = address.FullName
+                    };
                 }
 
-                address.AddressType = AddressTypeViewEnum.Billing;
+                billingAddress.AddressType = AddressTypeViewEnum.Billing;
 
                 if (!string.IsNullOrEmpty(userId))
                 {
@@ -215,8 +240,7 @@ namespace ArticoleCalarie.Web.Controllers
                     await _iAccountLogic.SaveUserAddress(address, userId);
                 }
 
-                orderViewModel.BillingAddress = address;
-                orderViewModel.BillingAddress.AddressType = AddressTypeViewEnum.Billing;
+                orderViewModel.BillingAddress = billingAddress;
             }
             catch (Exception ex)
             {
