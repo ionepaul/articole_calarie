@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ArticoleCalarie.Repository.Entities;
 using ArticoleCalarie.Repository.Models;
 
@@ -16,5 +17,6 @@ namespace ArticoleCalarie.Repository.IRepository
         SearchFilters GetSearchFiltersForSubcategory(int subcategoryId);
         Task<ProductSearchResult> GetProductsByBrand(string brand, int itemsPerPage, int itemsToSkip);
         Task<ProductSearchResult> GetProductsOnSale(int itemsPerPage, int itemsToSkip);
+        Task<IEnumerable<Product>> GetRelatedProducts(string subcategory);
     }
 }

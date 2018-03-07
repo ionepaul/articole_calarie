@@ -39,8 +39,8 @@
                     @if (Model.IsOnSale)
                     {
                         <div class="group-flash">
-                            <a class="product-name">@Model.ProductName </a>  <span class="flash sale">-@Model.SalePercentage%</span> 
-                        </div>           
+                            <a class="product-name">@Model.ProductName </a>  <span class="flash sale">-@Model.SalePercentage%</span>
+                        </div>
                     }
                     else
                     {
@@ -54,7 +54,7 @@
                         @if (Model.IsOnSale)
                         {
                             <span class="del">@Model.Price </span>
-                                    <span class="ins">@Model.PriceAfterSaleApplied RON</span>
+                            <span class="ins">@Model.PriceAfterSaleApplied RON</span>
                         }
                         else
                         {
@@ -75,7 +75,7 @@
                             </select>
                         </div>
                     }
-              
+
                     <div class="des"><strong class="details-section">Descriere</strong> @Model.Description</div>
                     <strong class="details-section">Culori</strong>
                     <ul class="list-color">
@@ -110,9 +110,16 @@
             <p><img src="~/images/products/@Model.SizeChartImage" /></p>
         }
     </div>
+
+    <div class="related-items">
+        <h3 class="title supper-title">ALTE PRODUSE</h3>
+        <div id="details-related-products">
+
+        </div>
+    </div>
 </div>
 
-@{ 
+@{
     var cartPrice = Model.IsOnSale ? Model.PriceAfterSaleApplied : Model.Price.AsDecimal();
 }
 
@@ -122,5 +129,9 @@
         var productImage = '@Model.ImagesList.First()';
         var price = '@cartPrice.ToString()';
         var productCode = '@Model.ProductCode'
+
+        $(document).ready(function () {
+            getRelatedProducts('#details-related-products');
+        });
     </script>
 }

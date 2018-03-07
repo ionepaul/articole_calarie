@@ -310,6 +310,19 @@
             $("#spinner").addClass("hidden");
         }
 
+        function getRelatedProducts(id) {
+            let url = window.location.origin + '/product/getrelatedproducts'
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: url,
+                success: function (result) {
+                    $(id).html(result);
+                }
+            });
+        }
+
     </script>
     <script src="~/Scripts/shopping-cart.js"></script>
 

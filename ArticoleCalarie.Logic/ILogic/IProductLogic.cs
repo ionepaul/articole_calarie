@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ArticoleCalarie.Models;
 
 namespace ArticoleCalarie.Logic.ILogic
@@ -15,5 +16,6 @@ namespace ArticoleCalarie.Logic.ILogic
         SearchViewFilters GetSearchViewFiltersForSubcategory(int subcategoryId);
         Task<ProductSearchViewResult> GetProductsByBrand(string brand, int pageNumber);
         Task<ProductSearchViewResult> GetProductsOnSale(int pageNumber);
+        Task<IEnumerable<ProductListViewItemModel>> GetRelatedProducts(string subcategory);
     }
 }

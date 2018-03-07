@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
@@ -167,6 +169,14 @@ namespace ArticoleCalarie.Web.Controllers
             {
                 var product = _iProductLogic.GetProductByProductCode(productCode);
 
+                var _subcategoryCookie = new HttpCookie("_RelatedProductsIn")
+                {
+                    Value = product.SubcategoryId,
+                    Expires = DateTime.Now.AddDays(10)
+                };
+
+                Response.Cookies.Add(_subcategoryCookie);
+
                 return View(product);
             }
             catch (Exception ex)
@@ -174,6 +184,27 @@ namespace ArticoleCalarie.Web.Controllers
                 _logger.Error($"Failed to get product by product code: {productCode}. Exception: {ex.Message}.");
 
                 return View("Error");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetRelatedProducts()
+        {
+            _logger.Info("PARTIAL VIEW > Related Products");
+
+            try
+            {
+                var subcategory = Request.Cookies["_RelatedProductsIn"]?.Value;
+
+                var relatedProducts = await _iProductLogic.GetRelatedProducts(subcategory);
+
+                return PartialView("_RelatedProductsPartial", relatedProducts);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to retrive related products. Exception: {ex.Message}");
+
+                return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
             }
         }
 

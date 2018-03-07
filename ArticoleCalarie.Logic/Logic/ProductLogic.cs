@@ -397,6 +397,13 @@ namespace ArticoleCalarie.Logic.Logic
             return formmatedProductId;
         }
 
+        public async Task<IEnumerable<ProductListViewItemModel>> GetRelatedProducts(string subcategory)
+        {
+            var relatedProducts = await _iProductRepository.GetRelatedProducts(subcategory);
+
+            return relatedProducts.Select(x => x.ToListViewItemModel());
+        }
+
         #endregion
     }
 }

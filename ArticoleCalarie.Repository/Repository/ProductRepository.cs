@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -219,6 +220,19 @@ namespace ArticoleCalarie.Repository.Repository
             };
 
             return productResult;
+        }
+
+        public async Task<IEnumerable<Product>> GetRelatedProducts(string subcategory)
+        {
+            if (!string.IsNullOrEmpty(subcategory))
+            {
+                var result = await _dbset.Include(x => x.Images).Include(x => x.Subcategory).Where(x => string.Equals(x.Subcategory.Name, subcategory))
+                                         .OrderBy(x => Guid.NewGuid()).Take(4).ToListAsync();
+
+                return result;
+            }
+
+            return await _dbset.Include(x => x.Images).OrderBy(x => Guid.NewGuid()).Take(4).ToListAsync();
         }
     }
 }
