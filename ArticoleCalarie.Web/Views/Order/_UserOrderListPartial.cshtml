@@ -11,7 +11,7 @@
             <p class="order-placed">Plasata pe @item.OrderRegistrationDate.ToShortDateString() @item.OrderRegistrationDate.ToShortTimeString() - <span class="total-ammount">Total: @item.TotalAmount RON</span><p />
 
             @{ 
-                var orderConfirmed = item.OrderStatus == OrderStatusViewEnum.CONFIRMED || item.OrderStatus == OrderStatusViewEnum.SHIPPED ? "active completed" : "";
+                var orderConfirmed = item.OrderStatus == OrderStatusViewEnum.CONFIRMED || item.OrderStatus == OrderStatusViewEnum.SHIPPED || item.OrderStatus == OrderStatusViewEnum.COMPLETE ? "active completed" : "";
                 var orderShipped = item.OrderStatus == OrderStatusViewEnum.SHIPPED || item.OrderStatus == OrderStatusViewEnum.COMPLETE ? "active completed" : "";
                 var orderCompleted = item.OrderStatus == OrderStatusViewEnum.COMPLETE ? "active completed" : "";
             }

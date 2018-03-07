@@ -12,6 +12,9 @@ namespace ArticoleCalarie.Repository.Entities
         [Required]
         public string ProductName { get; set; }
 
+        [Required]
+        public string ImageName { get; set; }
+
         public decimal Price { get; set; }
 
         public int SalePercentage { get; set; }

@@ -31,7 +31,8 @@ namespace ArticoleCalarie.Logic.Converters
                 SalePercentage = shoppingItem.SalePercentage,
                 Quantity = shoppingItem.Quantity,
                 Size = shoppingItem.Size,
-                Color = shoppingItem.Color
+                Color = shoppingItem.Color,
+                ImageName = shoppingItem.ImageName
             };
 
             return orderItem;
@@ -47,7 +48,8 @@ namespace ArticoleCalarie.Logic.Converters
                 SalePercentage = orderItem.SalePercentage,
                 Quantity = orderItem.Quantity,
                 Size = orderItem.Size,
-                Color = orderItem.Color
+                Color = orderItem.Color,
+                ImageName = orderItem.ImageName
             };
 
             return shoppingCartItem;
