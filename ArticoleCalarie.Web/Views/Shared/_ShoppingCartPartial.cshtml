@@ -14,31 +14,35 @@
     @if (totalCartItems > 0)
     {
         <div class="cart-inner">
-            @foreach (var product in shoppingCart.ShoppingItems)
-            {
-                <div id="cart-product-details">
-                    <div class="cart-product-details-img">
-                        <img onclick="viewProduct('@product.ProductCode')" src="~/images/products/@product.ImageName" />
-                    </div>
-                    <div class="cart-product-details-info">
-                        <div class="cart-product-details-info-col1">
-                            <p class="product-title" onclick="viewProduct('@product.ProductCode')" id="cart-product-title"><strong>@product.Quantity x</strong> @product.ProductName</p>
-                            <small>@product.Color, @product.Size</small>
-                        </div>
-                        <div class="cart-product-details-info-col2">
-                            <p>@product.Price</p>
-                            <a class="product-remove" onclick="deleteFromCart('@product.ProductCode')" title="Șterge produs"><i class="glyphicon glyphicon-trash"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <hr />
+            <div class="cart-inner-products">
+                @foreach (var product in shoppingCart.ShoppingItems)
                 {
-                    var totalPrice = product.Quantity * product.Price;
-                    grandTotal += totalPrice;
+                    <div id="cart-product-details">
+                        <div class="cart-product-details-img">
+                            <img onclick="viewProduct('@product.ProductCode')" src="~/images/products/@product.ImageName" />
+                        </div>
+                        <div class="cart-product-details-info">
+                            <div class="cart-product-details-info-col1">
+                                <p style="margin-bottom: 0; font-weight: 700;" class="product-title" onclick="viewProduct('@product.ProductCode')" id="cart-product-title"><strong>@product.Quantity x</strong> @product.ProductName</p>
+                                <p style="margin-bottom: 0;font-size: 13px;">Culoare: @product.Color</p>
+                                <p style="margin-bottom: 0;font-size: 13px;">Marime: @product.Size</p>
+                                <a style="font-size: 13px;" class="delete-product" onclick="deleteFromCart('@product.ProductCode')" title="Șterge produs">X Șterge</a>
+                            </div>
+                            <div class="cart-product-details-info-col2">
+                                <p>@product.Price RON</p>
+                            </div>
+                        </div>
+                    </div>
+                    {
+                        var totalPrice = product.Quantity * product.Price;
+                        grandTotal += totalPrice;
+                    }
                 }
-            }
-            <p class="cart-inner-total"><span>TOTAL: </span> @grandTotal RON</p>
-            <a class="complete-order" href="@Url.Action("ShoppingCartDetails", "Order")">FINALIZEAZĂ COMANDA</a>
+            </div>
+            <div class="cart-inner-price">
+                <p class="cart-inner-total"><span>TOTAL: </span> @grandTotal RON</p>
+                <a class="complete-order" href="@Url.Action("ShoppingCartDetails", "Order")">FINALIZEAZĂ COMANDA</a>
+            </div>
         </div>
     }
     else

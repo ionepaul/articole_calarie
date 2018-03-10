@@ -27,6 +27,10 @@ SLIDESHOW
 REPONSIVE
 /*-------------------------*/
 
+body a {
+    cursor: pointer;
+}
+
 .cf {
     overflow: auto;
 }
@@ -80,7 +84,7 @@ html, body {
     height: 0.2em;
     position: relative;
     width: 100%;
-    top: 9px;
+    top: 8px;
     transform: translateY(-50%);
     margin: auto;
 }
@@ -342,7 +346,7 @@ body{
 }
 
 .main-menu-wapper .logo {
-    flex-basis: 240px;
+    flex-basis: 200px;
 }
 
 .ui-menu .ui-menu-item a {
@@ -762,6 +766,7 @@ input {
 /*Main menu style*/
 .header.layout1 .main-menu {
   text-align: center;
+  margin-right: -110px;
 }
 .header.layout1 .box-header-nav {
   background-color: #fff;
@@ -790,6 +795,7 @@ input {
   font-weight: 500;
 }
 .menu-item .top-flash {
+  display: none;
   position: absolute;
   z-index: 1;
   top: -10px;
@@ -800,7 +806,6 @@ input {
   font-weight: 600;
   line-height: 17px;
   padding: 0 7px;
-  display: inline-block;
 }
 .menu-item .top-flash::after {
   width: 0; 
@@ -839,7 +844,7 @@ input {
   background-color: #ffffff;
   min-width: 265px;
   padding: 20px 0;
-  top: 100%;
+  top: 35px;
   left: -50px;
   visibility: hidden;
   opacity: 0;
@@ -868,12 +873,15 @@ input {
   width: 1480px;
 }
 .menu-item-has-children:last-child .submenu {
-  right: 0;
+  right: -20px;
   left: inherit;
 }
 .submenu li {
   list-style: none;
   display: list-item;
+}
+.submenu li.active > a {
+    color: #324a76;
 }
 .submenu li a {
   font-size: 14px;
@@ -904,6 +912,7 @@ input {
   padding: 15px 15px 45px;
 }
 .main-menu > li.shop .mega-menu {
+  top: 100%;
   max-width: 870px;
   padding: 0 50px;
   background-image: url('../images/rider.jpg');
@@ -920,7 +929,10 @@ input {
   margin-right: 80px;
   clear: none;
 }
-
+#horse-products-list,
+#brands-list {
+    top: 100%;
+}
 /* PANOUL DE COMADNA BUTOANE */
 .special-btns-container {
     position: absolute;
@@ -958,7 +970,7 @@ input {
   padding: 0;
 }
 .main-menu .widget-custom-menu ul li a:hover {
-  color: #d26e4b;
+    color: #324a76;
 }
 .submenu .widgettitle {
   font-size: 14px;
@@ -1067,6 +1079,15 @@ input {
   position: relative;
   float: left;
 }
+.top-links li.account {
+    padding-left: 100px;
+    padding-bottom: 20px;
+    margin-bottom: -20px;
+}
+#loginLink {
+    font-weight: 700;
+    padding-left: 100px;
+}
 .top-links > li:first-child {
   margin-left: 0;
 }
@@ -1087,8 +1108,8 @@ input {
   margin-top: -5px;
 }
 .account .submenu {
-  min-width: 144px;
-  padding: 0 0 10px 0;
+  min-width: 210px;
+  padding: 10px 0;
   left: -20px;
 }
 .top-links > .account .submenu >li >a {
@@ -1100,6 +1121,10 @@ input {
     cursor: pointer;
     position: relative;
     margin-bottom: 0;
+    width: 28px;
+    height: 28px;
+    background: url('../images/user_circle.png') center center no-repeat;
+    background-size: cover;
 }
 
 .hello-user .glyphicon-chevron-down {
@@ -1125,6 +1150,8 @@ input {
 
 .minicart {
   position: relative;
+  padding: 0 0 20px 10px;
+  margin-bottom: -20px;
 }
 .minicart .cart-block .cart-icon,
 .header .wishlist-icon {
@@ -1260,10 +1287,9 @@ input {
   top: 120%;
   right: -20px;
   min-width: 450px;
-  max-height: 300px;
+  max-height: 375px;
   overflow-y: auto;
   box-shadow: 0 0 5px #e5e5e5;
-  padding: 15px;
   -webkit-transition: 0.5s ease 0s;
      -moz-transition: 0.5s ease 0s;
       -ms-transition: 0.5s ease 0s;
@@ -1283,8 +1309,8 @@ input {
 
 #cart-product-details {
     display: flex;
-    border-bottom: 1px solid #ccc;
     margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
 }
 
@@ -1315,7 +1341,9 @@ input {
 .cart-product-details-info-col2 {
     padding: 5px;
 }
-
+.cart-product-details-info-col2 {
+    font-weight: 700;
+}
 .cart-inner .product-title,
 .cart-inner .product-remove {
     cursor: pointer;
@@ -1323,6 +1351,7 @@ input {
 
 .cart-inner-total {
     text-align: right;
+    font-weight: 700;
 }
 
 .cart-inner .complete-order {
@@ -1332,11 +1361,27 @@ input {
     color: #fff;
     padding: 5px;
 }
-
+.cart-inner {
+    display: flex;
+    flex-flow: column;
+}
+.cart-inner-products {
+    flex: 1;
+    overflow: auto;
+    padding: 15px 15px 0;
+}
+.cart-inner-price {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    padding: 15px 0;
+    width: 90%;
+    margin: 10px auto 0;
+}
 .minicart:hover .cart-inner {
   visibility: visible;
   opacity: 1;
-  top: 100%;
+  top: 35px;
   -webkit-transform: translateY(0);
      -moz-transform: translateY(0);
       -ms-transform: translateY(0);
@@ -1345,6 +1390,8 @@ input {
 }
 .minicart .cart-inner.cart-empty {
   text-align: center;
+  padding:50px;
+  font-weight:700;
 }
 .minicart .cart-inner.cart-empty .content {
   margin: 0;
@@ -3020,7 +3067,7 @@ input {
   vertical-align: top;
   text-align: right;
 }
-.shopping-cart-content .delete-product {
+.delete-product {
     font-weight: 700;
     color: red !important;
     cursor: pointer;
