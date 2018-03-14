@@ -362,9 +362,9 @@ jQuery(document).ready(function ($) {
         });
     } 
     function kt_scroll() {
-      if(parseFloat($(window).outerWidth()) > 0) {
-        $('.header .scrollbar').mCustomScrollbar();
-      }
+      //if(parseFloat($(window).outerWidth()) > 0) {
+      //  $('.header .scrollbar').mCustomScrollbar();
+      //}
     }
 
     // function newletter_popup(){
