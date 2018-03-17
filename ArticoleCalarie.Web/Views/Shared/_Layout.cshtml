@@ -47,7 +47,7 @@
                             </a>
                             <div class="logo">
                                 <a href='@Url.Action("Index", "Home")'>
-                                    <img src="~/images/my_logo3.png" alt="Articole Călărie logo">
+                                    <img src="~/images/my_logo3.png" alt="Articole Călărie logo" id="appLogo">
                                 </a>
                             </div>
                             <ul id="menu-main-menu" class="main-menu clone-main-menu">
@@ -300,6 +300,10 @@
                     hideLoader();
                 }, 200);
             });
+
+            if ($(window).width() <= 639) {
+                $('#appLogo').attr("src", '/images/mobile_logo.png');
+            }
         });
 
         function showLoader() {
