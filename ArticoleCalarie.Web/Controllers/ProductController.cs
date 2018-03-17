@@ -61,7 +61,7 @@ namespace ArticoleCalarie.Web.Controllers
         public ViewResult List(int? pageNumber, string productCode = "")
         {
             _logger.Info("VIEW > Admin Product List");
-            
+
             ViewBag.ProductCode = productCode;
 
             try
@@ -83,7 +83,7 @@ namespace ArticoleCalarie.Web.Controllers
                 _logger.Error($"Failed to get product list for admin. Exception: {ex.Message}.");
 
                 return View("Error");
-            }            
+            }
         }
 
         [HttpGet]
@@ -115,11 +115,15 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> ProductViewList(int subcategoryId, int pageNumber, decimal? minp, decimal? maxp, string cl = "", string sz = "")
+        [Route("produse/{categoryName}/{subcategoryId}/{subcategoryName}", Name = "product-list-url")]
+        public async Task<ActionResult> ProductViewList(string categoryName, int subcategoryId, string subcategoryName, int page, decimal? minp, decimal? maxp, string cl = "", string sz = "")
         {
             _logger.Info("VIEW > Product List By Subcategory and Search Model");
 
             ViewBag.SubcategoryId = subcategoryId;
+            ViewBag.CategoryName = categoryName;
+            ViewBag.SubcategoryName = subcategoryName;
+
             var searchViewModel = new SearchViewModel();
             var sessionSearchModel = Session["SearchModel"] as SearchViewModel;
 
@@ -134,7 +138,7 @@ namespace ArticoleCalarie.Web.Controllers
                     searchViewModel = new SearchViewModel
                     {
                         SubcategoryId = subcategoryId,
-                        PageNumber = pageNumber,
+                        PageNumber = page,
                         MinPrice = minp,
                         MaxPrice = maxp,
                         ColorIds = cl,
@@ -148,7 +152,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
 
-                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(productSearchViewResult.Products, pageNumber, pageSize, productSearchViewResult.TotalCount);
+                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(productSearchViewResult.Products, page, pageSize, productSearchViewResult.TotalCount);
 
                 return View(pagedListModel);
             }
@@ -161,9 +165,14 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(string productCode)
+        [Route("produse/{categoryName}/{subcategoryId}/{subcategoryName}/{productCode}/{productName}", Name = "product-details-url")]
+        public ActionResult Details(string categoryName, int subcategoryId, string subcategoryName, string productCode, string productName)
         {
             _logger.Info("VIEW > Product Detail");
+
+            ViewBag.CategoryName = categoryName;
+            ViewBag.SubcategoryName = subcategoryName;
+            ViewBag.SubcategoryId = subcategoryId;
 
             try
             {

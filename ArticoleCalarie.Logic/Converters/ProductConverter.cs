@@ -93,7 +93,10 @@ namespace ArticoleCalarie.Logic.Converters
                 Price = product.Price,
                 ProductImageName = product.Images?.FirstOrDefault()?.FileName,
                 IsNew = product.DatePosted > DateTime.Now.AddDays((-1) * daysToKeepProductMarkedNew),
-                IsOnSale = product.SalePercentage != 0
+                IsOnSale = product.SalePercentage != 0,
+                SubcategoryName = product.Subcategory?.Name,
+                CategoryName = product.Subcategory?.Category?.Name,
+                SubcategoryId = product.Subcategory?.Id
             };
 
             if (productListViewItemModel.IsOnSale)

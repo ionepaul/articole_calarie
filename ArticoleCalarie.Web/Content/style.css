@@ -882,6 +882,7 @@ input {
 }
 .submenu li.active > a {
     color: #324a76;
+    font-weight: 500;
 }
 .submenu li a {
   font-size: 14px;
@@ -971,6 +972,7 @@ input {
 }
 .main-menu .widget-custom-menu ul li a:hover {
     color: #324a76;
+    font-weight: 500;
 }
 .submenu .widgettitle {
   font-size: 14px;
@@ -3202,7 +3204,8 @@ input {
 }
 .breadcrumbs .current {
   font-weight: 400;
-  color: #555
+  color: #555;
+  cursor: pointer;
 }
 
 .list-page li {

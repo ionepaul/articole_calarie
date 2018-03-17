@@ -50,6 +50,6 @@
 
         showLoader();
 
-        window.location.href = '/Product/ProductViewList?subcategoryId=' + subcategoryId + '&pageNumber=1&minp=' + minPrice + '&maxp=' + maxPrice + '&cl=' + colorIds + '&sz=' + sizes;
+        window.location.href = '/produse/' + categoryName + '/' + subcategoryId + '/' + subcategoryName + '?page=1&minp=' + minPrice + '&maxp=' + maxPrice + '&cl=' + colorIds + '&sz=' + sizes;
     });
 });

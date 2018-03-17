@@ -58,7 +58,7 @@
                                         <div class="widget widget-custom-menu">
                                             <h3 class="widgettitle">Antrenament</h3>
                                             <ul>
-                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 2, pageNumber = 1 })">Manusi</a></li>
+                                                <li class="@(ViewContext?.RouteData?.Values["subcategoryName"]?.ToString() == "manusi" ? "active" : "")"><a href="@Url.RouteUrl("product-list-url", new { categoryName = "calaret", subcategoryId = 2, subcategoryName = "manusi", page = 1 })">Manuși</a></li>
                                                 <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 3, pageNumber = 1 })">Cizme</a></li>
                                                 <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 4, pageNumber = 1 })">Ghete</a></li>
                                                 <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 5, pageNumber = 1 })">Tricouri</a></li>

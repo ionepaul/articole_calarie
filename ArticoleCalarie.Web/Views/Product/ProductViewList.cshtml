@@ -1,8 +1,10 @@
 ﻿@model PagedList.IPagedList<ArticoleCalarie.Models.ProductListViewItemModel>
 @using PagedList.Mvc;
+@using ArticoleCalarie.Web.Utils
 
 @{
-    ViewBag.Title = "Produse";
+    ViewBag.Title = "Produse " + ((string)ViewBag.CategoryName).ToFirstUppercase() + " | " + ((string)ViewBag.SubcategoryName).ToFirstUppercase();
+    ViewBag.Description = "";
 }
 
 <div class="main-content grid-category-page inner-page">
@@ -12,7 +14,7 @@
                 <div class="auto-clear">
                     <div class="top-control box-has-content">
                         <div class="breadcrumbs">
-                            <a href="#">Home</a> / <span class="current">Shop</span>
+                            <a href="#">@(((string)ViewBag.CategoryName).ToFirstUppercase())</a> <i class="fa fa-chevron-right"></i> <span class="current">@(((string)ViewBag.SubcategoryName).ToFirstUppercase())</span>
                         </div>
                         <div class="control">
                             <span class="title">Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount</span>
@@ -45,14 +47,12 @@
                                                 </div>
                                             }
                                             <div class="group-button">
-                                                @* <a href="#" class="wishlist-button"></a>*@
-                                                @*<a href="#" class="compare-button"></a>*@
-                                                <a href="@Url.Action("Details", "Product", new { productCode = product.ProductCode})" class="quickview-button"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> Vezi detalii</a>
+                                                <a href="@Url.RouteUrl("product-details-url", new { categoryName = ViewBag.CategoryName, subcategoryId = ViewBag.SubcategoryId, subcategoryName = ViewBag.SubcategoryName, productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})" class="quickview-button"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> Vezi detalii</a>
                                             </div>
-                                            <a href="@Url.Action("Details", "Product", new { productCode = product.ProductCode})"><img src="~/images/products/@product.ProductImageName" alt="@product.ProductName"></a>
+                                            <a href="@Url.RouteUrl("product-details-url", new { categoryName = ViewBag.CategoryName, subcategoryId = ViewBag.SubcategoryId, subcategoryName = ViewBag.SubcategoryName, productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})"><img src="~/images/products/@product.ProductImageName" alt="@product.ProductName"></a>
                                         </div>
                                         <div class="info">
-                                            <a href="@Url.Action("Details", "Product", new { productCode = product.ProductCode})" class="product-name">@product.ProductName</a>
+                                            <a href="@Url.RouteUrl("product-details-url", new { categoryName = ViewBag.CategoryName, subcategoryId = ViewBag.SubcategoryId, subcategoryName = ViewBag.SubcategoryName, productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})" class="product-name">@product.ProductName</a>
                                             <div class="price">
                                                 @if (product.IsOnSale)
                                                 {
@@ -73,7 +73,7 @@
                 </div>
 
                 <div id="content-pager">
-                    @Html.PagedListPager(Model, page => Url.Action("ProductViewList", new { subcategoryId = ViewBag.SubcategoryId, pageNumber = page }))
+                    @Html.PagedListPager(Model, page => Url.RouteUrl("product-list-url", new { categoryName = ViewBag.CategoryName, subcategoryId = ViewBag.SubcategoryId, subcategoryName = ViewBag.SubcategoryName, page = page }))
                 </div>
 
             </div>
@@ -84,6 +84,10 @@
 </div>
 
 @section scripts {
-    <script>var subcategoryId = @ViewBag.SubcategoryId;</script>
+    <script>
+        var categoryName = '@ViewBag.CategoryName';
+        var subcategoryId = '@ViewBag.SubcategoryId';
+        var subcategoryName = '@ViewBag.SubcategoryName';
+    </script>
     <script src="~/Scripts/product-search.js"></script>
 }

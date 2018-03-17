@@ -226,7 +226,7 @@ namespace ArticoleCalarie.Repository.Repository
         {
             if (!string.IsNullOrEmpty(subcategory))
             {
-                var result = await _dbset.Include(x => x.Images).Include(x => x.Subcategory).Where(x => string.Equals(x.Subcategory.Name, subcategory))
+                var result = await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).Where(x => string.Equals(x.Subcategory.Name, subcategory))
                                          .OrderBy(x => Guid.NewGuid()).Take(4).ToListAsync();
 
                 return result;
