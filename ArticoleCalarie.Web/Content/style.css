@@ -454,7 +454,11 @@ body ul {
 }
 
 .page-wrapper {
-    padding: 60px 0;
+    padding: 30px 0;
+}
+
+.account-manage-wrapper {
+    padding: 0 0 60px;
 }
 
 .page-wrapper-small {
@@ -561,7 +565,7 @@ input[type="checkbox"] {
 /* Style the checkmark/indicator */
 .checkbox-container .checkbox-checkmark:after {
     left: 50%;
-    top: 50%;
+    top: 45%;
     width: 5px;
     height: 10px;
     border: 0px solid white;
@@ -586,13 +590,39 @@ input[type="checkbox"] {
     color: #324a76;
 }
 
+/* forgot pass confirmation */
+.pass-confirmation {
+    text-align: center;
+}
+.pass-confirmation .logo {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 35px;
+    padding-bottom: 35px;
+}
+.pass-confirmation img {
+    width: 350px;
+}
+.pass-confirmation p {
+    font-size: 20px;
+    margin-bottom: 35px;
+}
+.reset-pass-conf a {
+    padding: 5px 20px;
+    background: #324a76;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
 /* DELIVERY ADDRESS */
 #deliveryAddressForm form,
 #billingAddressForm form {
     margin-top: 20px;
 }
 .address-details-wrapper {
-    background: url(../images/paper.png) top left repeat;
+    background: #f1f2f4 url(../images/paper.png) top left repeat;
     padding: 15px 40px;
     border-radius: 5px;
     position: relative;
@@ -602,10 +632,15 @@ input[type="checkbox"] {
 .address-details-wrapper .delivery-truck {
     position: absolute;
     left: 15px;
-    bottom: 0px;
-    opacity: .6;
-    width: 100px;
-    transform: rotateZ(-10deg);
+    bottom: 15px;
+    width: 90px;
+}
+
+.address-details-wrapper .billing {
+    position: absolute;
+    left: 35px;
+    bottom: 15px;
+    width: 50px;
 }
 
 .address-details-wrapper .address-details-edit {
@@ -722,6 +757,9 @@ input {
 }
 .midle-content {
   text-align: center;
+}
+.btn:hover, .btn:focus {
+    color: #fff;
 }
 .container,
 .no-padding {
@@ -1152,6 +1190,9 @@ input {
 #loginLink {
     font-weight: 700;
     padding-left: 100px;
+}
+#loginForm .login-errorMessage {
+    padding-left: 15px;
 }
 .top-links > li:first-child {
   margin-left: 0;
@@ -3554,7 +3595,7 @@ input {
     cursor: pointer;
 }
 .field-validation-error {
-    font-size: 11px;
+    font-size: 13px;
 }
 .checkout-choosen-content {
     position: relative;
@@ -9690,7 +9731,7 @@ strong.details-section {
     }
 
     .body-content {
-        margin-top: 150px;
+        margin-top: 130px;
     }
 
 .page-wrapper-small {
@@ -10003,6 +10044,17 @@ strong.details-section {
 }
 @media(max-width: 639px) {
 
+    .pass-confirmation h1 {
+        font-size: 25px;
+        line-height: 32px;
+    }
+    .pass-confirmation p {
+        font-size: 16px;
+    }
+    .pass-confirmation img {
+        width: 250px;
+    }
+
     #loginLink {
         padding-left: 0;
     }
@@ -10047,7 +10099,7 @@ strong.details-section {
     }
 
     .body-content {
-        margin-top: 100px;
+        margin-top: 80px;
     }
 
 .header-nav .special-container {
