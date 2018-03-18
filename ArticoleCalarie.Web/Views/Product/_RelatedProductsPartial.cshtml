@@ -8,7 +8,7 @@
             <div class="product-inner">
                 <div class="thumb">
                     @if (product.IsNew && product.IsOnSale)
-                {
+                    {
                         <div class="group-flash">
                             <span class="flash new">nou</span>
                             <span class="flash sale">-@product.SalePercentage%</span>
@@ -27,12 +27,12 @@
                         </div>
                     }
                     <div class="group-button">
-                        <a href="@Url.RouteUrl("product-details-url", new { categoryName = product.CategoryName, subcategoryId = product.SubcategoryId, subcategoryName = product.SubcategoryName, productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})" class="quickview-button"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> Vezi detalii</a>
+                        <a href="@Url.RouteUrl("product-details-url", new { categoryName = product.CategoryName.ToLower(), subcategoryId = product.SubcategoryId, subcategoryName = product.SubcategoryName.ToLower(), productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})" class="quickview-button"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> Vezi detalii</a>
                     </div>
-                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = product.CategoryName, subcategoryId = product.SubcategoryId, subcategoryName = product.SubcategoryName, productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})"><img src="~/images/products/@product.ProductImageName" alt="@product.ProductName"></a>
+                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = product.CategoryName.ToLower(), subcategoryId = product.SubcategoryId, subcategoryName = product.SubcategoryName.ToLower(), productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})"><img src="~/images/products/@product.ProductImageName" alt="@product.ProductName"></a>
                 </div>
                 <div class="info">
-                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = product.CategoryName, subcategoryId = product.SubcategoryId, subcategoryName = product.SubcategoryName, productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})" class="product-name">@product.ProductName</a>
+                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = product.CategoryName.ToLower(), subcategoryId = product.SubcategoryId, subcategoryName = product.SubcategoryName.ToLower(), productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})" class="product-name">@product.ProductName</a>
                     <div class="price">
                         @if (product.IsOnSale)
                         {

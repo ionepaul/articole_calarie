@@ -25,6 +25,12 @@ namespace ArticoleCalarie.Repository.Entities
 
         public string Color { get; set; }
 
+        public string Category { get; set; }
+
+        public string Subcategory { get; set; }
+
+        public string SubcategoryId { get; set; }
+
         [Required]
         public string ProductCode { get; set; }
 

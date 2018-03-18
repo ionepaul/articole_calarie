@@ -64,7 +64,7 @@ namespace ArticoleCalarie.Repository.Repository
 
         public ProductSearchResult GetProductsForAdmin(int itemsPerPage, int itemsToSkip, string productCode)
         {
-            var query = _dbset.Include(x => x.Subcategory).Include(x => x.Brand);
+            var query = _dbset.Include(x => x.Subcategory).Include(x => x.Subcategory.Category).Include(x => x.Brand);
 
             if (!string.IsNullOrEmpty(productCode))
             {

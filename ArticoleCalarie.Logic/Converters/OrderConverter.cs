@@ -32,7 +32,10 @@ namespace ArticoleCalarie.Logic.Converters
                 Quantity = shoppingItem.Quantity,
                 Size = shoppingItem.Size,
                 Color = shoppingItem.Color,
-                ImageName = shoppingItem.ImageName
+                ImageName = shoppingItem.ImageName,
+                Category = shoppingItem.ProductCategoryName,
+                Subcategory = shoppingItem.ProductSubcategoryName,
+                SubcategoryId = shoppingItem.ProductSubcategoryId
             };
 
             return orderItem;
@@ -49,7 +52,10 @@ namespace ArticoleCalarie.Logic.Converters
                 Quantity = orderItem.Quantity,
                 Size = orderItem.Size,
                 Color = orderItem.Color,
-                ImageName = orderItem.ImageName
+                ImageName = orderItem.ImageName,
+                ProductCategoryName = orderItem.Category,
+                ProductSubcategoryName = orderItem.Subcategory,
+                ProductSubcategoryId = orderItem.SubcategoryId
             };
 
             return shoppingCartItem;

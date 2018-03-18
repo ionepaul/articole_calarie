@@ -19,7 +19,10 @@
             size: $("#size").val(),
             price: price,
             color: color,
-            productCode: productCode
+            productCode: productCode,
+            productCategoryName: productCategoryName,
+            productSubcategoryName: productSubcategoryName,
+            productSubcategoryId: productSubcategoryId
         };
 
         let url = window.location.origin + '/order/addtocart';
@@ -67,7 +70,8 @@ function deleteFromCart(productCode) {
     });
 }
 
-function viewProduct(productCode) {
+function viewProduct(categoryName, subcategoryId, subcategoryName, productCode, productNameUrl) {
     showLoader();
-    window.location.href = window.location.origin + '/product/details?productCode=' + productCode;
+
+    window.location.href = window.location.origin + '/produse/' + categoryName + '/' + subcategoryId + '/' + subcategoryName + '/' + productCode + '/' + productNameUrl;
 }

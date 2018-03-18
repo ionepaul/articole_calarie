@@ -132,6 +132,7 @@ namespace ArticoleCalarie.Web.Controllers
                 if ((sessionSearchModel != null && sessionSearchModel.SubcategoryId == subcategoryId && minp == null && maxp == null && string.IsNullOrEmpty(cl) && string.IsNullOrEmpty(sz)))
                 {
                     searchViewModel = sessionSearchModel;
+                    searchViewModel.PageNumber = page;
                 }
                 else
                 {

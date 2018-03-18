@@ -20,11 +20,9 @@
         {
             
             <div class="breadcrumbs">
-                <br />
-                <br />
                 <a href="#">@(((string)ViewBag.CategoryName).ToFirstUppercase())</a> 
                     <i class="fa fa-angle-right"></i> 
-                        <a href="@Url.RouteUrl("product-list-url", new { categoryName = ViewBag.CategoryName, subcategoryId = ViewBag.SubcategoryId, subcategoryName = ViewBag.SubcateogoryName, page = 1 })">@(((string)ViewBag.SubcategoryName).ToFirstUppercase())</a>
+                        <a href="@Url.RouteUrl("product-list-url", new { categoryName = ViewBag.CategoryName, subcategoryId = ViewBag.SubcategoryId, subcategoryName = ViewBag.SubcategoryName, page = 1 })">@(((string)ViewBag.SubcategoryName).ToFirstUppercase())</a>
                             <i class="fa fa-angle-right"></i>
                                  <span class="current">@Model.ProductName</span>
             </div>
@@ -138,7 +136,10 @@
         var productName = '@Model.ProductName';
         var productImage = '@Model.ImagesList.First()';
         var price = '@cartPrice.ToString()';
-        var productCode = '@Model.ProductCode'
+        var productCode = '@Model.ProductCode';
+        var productCategoryName = '@ViewBag.CategoryName';
+        var productSubcategoryName = '@ViewBag.SubcategoryName';
+        var productSubcategoryId = '@ViewBag.SubcategoryId';
 
         $(document).ready(function () {
             getRelatedProducts('#details-related-products');

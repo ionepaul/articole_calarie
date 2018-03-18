@@ -1,6 +1,7 @@
 ﻿@model PagedList.IPagedList<ArticoleCalarie.Models.OrderViewModel>
 @using PagedList.Mvc;
 @using ArticoleCalarie.Models.Enums;
+@using ArticoleCalarie.Web.Utils
 
 <div id="user-orders">
     @foreach (var item in Model)
@@ -40,7 +41,7 @@
                         <tr class="each-item">
                             <td class="product-thumb"><img src="~/images/products/@product.ImageName"></td>
                             <td class="product-name">
-                                <a href="@Url.Action("Details", "Product", new { productCode = product.ProductCode })" class="product-name">
+                                <a href="@Url.RouteUrl("product-details-url", new { categoryName = product.ProductCategoryName.ToLower(), subcategoryId = product.ProductSubcategoryId, subcategoryName = product.ProductSubcategoryName.ToLower(), productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})" class="product-name">
                                     <strong>@product.Quantity x @product.ProductName</strong>
                                 </a>
                                 <p class="color">Culoare: @product.Color</p>
@@ -61,7 +62,7 @@
         <br />
      }
 
-    <div id="content-pager">
+    <div id="content-pager-orders">
         Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
 
         @Html.PagedListPager(Model, page => Url.Action("UserOrderListPartial", new { pageNumber = page }))

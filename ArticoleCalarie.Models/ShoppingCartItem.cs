@@ -17,5 +17,11 @@
         public string ProductCode { get; set; }
 
         public int SalePercentage { get; set; }
+
+        public string ProductCategoryName { get; set; }
+
+        public string ProductSubcategoryName { get; set; }
+
+        public string ProductSubcategoryId { get; set; }
     }
 }

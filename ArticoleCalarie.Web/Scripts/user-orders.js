@@ -1,4 +1,24 @@
 ﻿$(function () {
+    initViewDetailsEvent();
+});
+
+$(document).on("click", "#content-pager-orders a[href]", function () {
+    showLoader();
+
+    $.ajax({
+        url: $(this).attr("href"),
+        type: 'GET',
+        cache: false,
+        success: function (result) {
+            hideLoader();
+            $('#user-orders').html(result);
+            initViewDetailsEvent();
+        }
+    });
+    return false;
+});
+
+function initViewDetailsEvent() {
     $(".user-order-details").hide();
 
     $("button.expand-order-details").on("click", function (event) {
@@ -25,4 +45,4 @@
             $target.next(".user-order-details").slideToggle();
         }
     });
-})
+}

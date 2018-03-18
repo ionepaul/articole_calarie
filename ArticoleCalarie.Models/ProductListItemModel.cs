@@ -23,5 +23,9 @@ namespace ArticoleCalarie.Models
 
         [Display(Name = "Reducere")]
         public string SalePercentage { get; set; }
+
+        public string CategoryName { get; set; }
+
+        public int? SubcategoryId { get; set; }
     }
 }

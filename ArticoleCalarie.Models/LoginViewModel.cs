@@ -14,7 +14,7 @@ namespace ArticoleCalarie.Models
         [Display(Name = "Parola")]
         public string Password { get; set; }
 
-        [Display(Name = "Ține-mă minte")]
+        [Display(Name = "Ramai conectat")]
         public bool RememberMe { get; set; }
     }
 }

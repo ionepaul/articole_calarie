@@ -116,6 +116,10 @@
     <Compile Include="Migrations\201803070544507_ImageOnOrderItems.Designer.cs">
       <DependentUpon>201803070544507_ImageOnOrderItems.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803181533403_CategoryAndSubcategoryDetailsOrderItem.cs" />
+    <Compile Include="Migrations\201803181533403_CategoryAndSubcategoryDetailsOrderItem.Designer.cs">
+      <DependentUpon>201803181533403_CategoryAndSubcategoryDetailsOrderItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ColorDTO.cs" />
     <Compile Include="Models\OrderSearchResult.cs" />
@@ -155,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803070544507_ImageOnOrderItems.resx">
       <DependentUpon>201803070544507_ImageOnOrderItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803181533403_CategoryAndSubcategoryDetailsOrderItem.resx">
+      <DependentUpon>201803181533403_CategoryAndSubcategoryDetailsOrderItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
