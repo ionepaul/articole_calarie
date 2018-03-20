@@ -18,7 +18,7 @@
                     <li>@Html.ActionLink("Vezi comenzile", "OrderList", "Order", routeValues: new { pageNumber = 1 }, htmlAttributes: new { title = "Vezi comenzile" })</li>
                 }
                 
-                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Deconecteaza-te</a></li>
             </ul>
         </li>
         }
@@ -26,5 +26,5 @@
 }
 else
 {
-    <li>@Html.ActionLink("Conectează-te", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <li>@Html.ActionLink("Conecteaza-te", "login", "account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }

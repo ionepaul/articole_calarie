@@ -232,7 +232,7 @@ namespace ArticoleCalarie.Repository.Repository
                 return result;
             }
 
-            return await _dbset.Include(x => x.Images).OrderBy(x => Guid.NewGuid()).Take(4).ToListAsync();
+            return await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderBy(x => Guid.NewGuid()).Take(4).ToListAsync();
         }
     }
 }

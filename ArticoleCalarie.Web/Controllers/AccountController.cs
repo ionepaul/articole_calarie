@@ -64,7 +64,7 @@ namespace ArticoleCalarie.Web.Controllers
                         return RedirectToLocal(returnUrl);
                     default:
                         _logger.Warn($"Failed to log in user: {model.Email}. Result was unsuccessful. Returning Login view.");
-                        ModelState.AddModelError("", "Invalid login attempt.");
+                        ModelState.AddModelError("", "Conectarea a esuat. Email sau parola invalida.");
                         ViewBag.ReturnUrl = returnUrl;
                         return View(model);
                 }

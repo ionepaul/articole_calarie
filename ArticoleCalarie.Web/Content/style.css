@@ -1043,24 +1043,25 @@ input {
 .manage-account-info .my-account {
     flex-basis: 30%;
 }
-.manage-account-info .my-account ul {
-    padding: 20px 0;
-}
+
 .manage-account-info .my-account a {
     font-size: 16px;
     color: #222;
     display: block;
-    margin-bottom: 8px;
-    padding-left: 30px;
+    padding: 10px 0 10px 30px;
 }
+.manage-account-info .my-account li.active a,
 .manage-account-info .my-account a:hover {
     color: #fff;
     background: #324a76;
 }
-.manage-account-info .my-account a:hover .fa,
-.manage-account-info .my-account a:hover .flaticon-cart {
-    color: #fff;
-}
+
+    .manage-account-info .my-account li.active .fa,
+    .manage-account-info .my-account a:hover .fa,
+    .manage-account-info .my-account li.active .flaticon-cart,
+    .manage-account-info .my-account a:hover .flaticon-cart {
+        color: #fff;
+    }
 .order-details .cta-button {
     border: 0;
     color: #fff;
