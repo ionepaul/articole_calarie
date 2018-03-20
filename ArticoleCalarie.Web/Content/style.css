@@ -450,11 +450,15 @@ body ul {
 
 .body-content {
     min-height: 100%;
-    margin-top: 90px;
+    margin-top: 140px;
 }
 
 .page-wrapper {
-    padding: 60px 0;
+    padding: 30px 0;
+}
+
+.account-manage-wrapper {
+    padding: 0 0 60px;
 }
 
 .page-wrapper-small {
@@ -561,7 +565,7 @@ input[type="checkbox"] {
 /* Style the checkmark/indicator */
 .checkbox-container .checkbox-checkmark:after {
     left: 50%;
-    top: 50%;
+    top: 45%;
     width: 5px;
     height: 10px;
     border: 0px solid white;
@@ -586,13 +590,39 @@ input[type="checkbox"] {
     color: #324a76;
 }
 
+/* forgot pass confirmation */
+.pass-confirmation {
+    text-align: center;
+}
+.pass-confirmation .logo {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 35px;
+    padding-bottom: 35px;
+}
+.pass-confirmation img {
+    width: 350px;
+}
+.pass-confirmation p {
+    font-size: 20px;
+    margin-bottom: 35px;
+}
+.reset-pass-conf a {
+    padding: 5px 20px;
+    background: #324a76;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
 /* DELIVERY ADDRESS */
 #deliveryAddressForm form,
 #billingAddressForm form {
     margin-top: 20px;
 }
 .address-details-wrapper {
-    background: url(../images/paper.png) top left repeat;
+    background: #f1f2f4 url(../images/paper.png) top left repeat;
     padding: 15px 40px;
     border-radius: 5px;
     position: relative;
@@ -602,10 +632,15 @@ input[type="checkbox"] {
 .address-details-wrapper .delivery-truck {
     position: absolute;
     left: 15px;
-    bottom: 0px;
-    opacity: .6;
-    width: 100px;
-    transform: rotateZ(-10deg);
+    bottom: 15px;
+    width: 90px;
+}
+
+.address-details-wrapper .billing {
+    position: absolute;
+    left: 35px;
+    bottom: 15px;
+    width: 50px;
 }
 
 .address-details-wrapper .address-details-edit {
@@ -722,6 +757,9 @@ input {
 }
 .midle-content {
   text-align: center;
+}
+.btn:hover, .btn:focus {
+    color: #fff;
 }
 .container,
 .no-padding {
@@ -958,6 +996,71 @@ input {
 .order-details .danger-row {
     background: #efefef;
 }
+
+.manage-account-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+.manage-account-info .fa,
+.manage-account-info .flaticon-cart {
+    font-size: 17px;
+    color: #550000;
+    display: inline-block;
+    margin-right: 3px;
+}
+.manage-account-info .flaticon-cart {
+    position: relative;
+    right: 3px;
+}
+.manage-account-info .my-account,
+.manage-account-info .user-info {
+    background: #f1f2f4;
+}
+.manage-account-info .user-info {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    flex: 1 0 0;
+    margin-left: 30px;
+    padding-left: 30px;
+}
+.manage-account-info .user-info .name {
+    text-transform: uppercase;
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.manage-account-info .user-info .email {
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 0;
+}
+.manage-account-info .user-info .email a {
+    color: #222;
+}
+.manage-account-info .my-account {
+    flex-basis: 30%;
+}
+.manage-account-info .my-account ul {
+    padding: 20px 0;
+}
+.manage-account-info .my-account a {
+    font-size: 16px;
+    color: #222;
+    display: block;
+    margin-bottom: 8px;
+    padding-left: 30px;
+}
+.manage-account-info .my-account a:hover {
+    color: #fff;
+    background: #324a76;
+}
+.manage-account-info .my-account a:hover .fa,
+.manage-account-info .my-account a:hover .flaticon-cart {
+    color: #fff;
+}
 .order-details .cta-button {
     border: 0;
     color: #fff;
@@ -1089,6 +1192,9 @@ input {
 #loginLink {
     font-weight: 700;
     padding-left: 100px;
+}
+#loginForm .login-errorMessage {
+    padding-left: 15px;
 }
 .top-links > li:first-child {
   margin-left: 0;
@@ -1431,7 +1537,7 @@ input {
 .kt-clone-wrap{
   position: fixed;
   top: 0;
-  left: -100%;
+  left: -300%;
   width: 320px;
   height: 100vh;
   background-color: #fff;
@@ -3492,7 +3598,7 @@ input {
     cursor: pointer;
 }
 .field-validation-error {
-    font-size: 11px;
+    font-size: 13px;
 }
 .checkout-choosen-content {
     position: relative;
@@ -8850,6 +8956,19 @@ strong.details-section {
 }
 @media(max-width: 1024px) {
 
+    .special-container > .row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .header .topbar .top-contact {
+        text-align: left !important;
+    }
+
+    .header .topbar .right-content {
+        text-align: right !important;
+    }
+
 .progress-container {
     top: 105px;
 }
@@ -9123,7 +9242,7 @@ strong.details-section {
     }
 
     .body-content {
-        margin-top: 130px;
+        margin-top: 140px;
     }
 
     .product-list-header input {
@@ -9142,10 +9261,6 @@ strong.details-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-.top-links {
-    top: 95px;
 }
 
 .form-wrapper {
@@ -9572,6 +9687,27 @@ strong.details-section {
 }
 @media(max-width: 767px) {
 
+    .manage-account-info {
+        flex-wrap: wrap;
+    }
+
+    .manage-account-info .user-info .name {
+        font-size: 20px;
+    }
+
+    .manage-account-info .my-account {
+        flex-basis: 100%;
+    }
+    .manage-account-info .user-info {
+        padding: 15px 30px;
+        margin: 0 0 15px;;
+        flex: 1 0 100%;
+        order: -1;
+    }
+    .manage-account-info .user-info a {
+        color: #222;
+    }
+
     #orders-content {
         overflow: auto;
     }
@@ -9598,7 +9734,7 @@ strong.details-section {
     }
 
     .body-content {
-        margin-top: 170px;
+        margin-top: 130px;
     }
 
 .page-wrapper-small {
@@ -9911,6 +10047,21 @@ strong.details-section {
 }
 @media(max-width: 639px) {
 
+    .pass-confirmation h1 {
+        font-size: 25px;
+        line-height: 32px;
+    }
+    .pass-confirmation p {
+        font-size: 16px;
+    }
+    .pass-confirmation img {
+        width: 250px;
+    }
+
+    #loginLink {
+        padding-left: 0;
+    }
+
     #user-order-details .total-ammount {
         display: block;
     }
@@ -9951,11 +10102,11 @@ strong.details-section {
     }
 
     .body-content {
-        margin-top: 150px;
+        margin-top: 80px;
     }
 
 .header-nav .special-container {
-    padding: 0 12px;
+    padding: 10px 12px;
 }
 
 .progress-container {
@@ -9964,15 +10115,18 @@ strong.details-section {
 
 .main-menu-wapper {
     flex-wrap: wrap;
+    justify-content: initial;
 }
 
 .header .logo {
-    flex-basis: 100%;
-    margin-top: 10px;
+    flex-basis: auto;
+    flex: 1 0 0;
+    text-align: left;
 }
 
 .header .logo img {
-    width: 300px;
+    width: auto;
+    height: 45px;
 }
 
 .top-links {
@@ -9984,7 +10138,16 @@ strong.details-section {
 }
 
 .menu-bar.mobile-navigation {
-    padding: 20px 0 5px;
+    padding: 10px 0 5px;
+    margin-left: 35px;
+}
+
+.header.layout1 .top-links {
+    margin-top: 0;
+}
+
+.top-links li.account {
+    padding-left: 0;
 }
 
 .main-menu-wapper {
@@ -9993,7 +10156,7 @@ strong.details-section {
 
 .menu-item-has-children:last-child .submenu {
     right: auto;
-    left: auto;
+    left: -80px;
 }
 
 .back-to-top {
