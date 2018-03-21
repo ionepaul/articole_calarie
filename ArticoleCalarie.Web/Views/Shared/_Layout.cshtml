@@ -289,7 +289,7 @@
                 showLoader();
             });
 
-            $("form").on("submit", function () {
+            $("form").not("#logoutForm").on("submit", function () {
                 if ($(this).valid()) {
                     showLoader();
                 }
@@ -304,6 +304,10 @@
             if ($(window).width() <= 639) {
                 $('#appLogo').attr("src", '/images/mobile_logo.png');
             }
+
+            $("#log-out-btn").on("click", function () {
+                $("#logoutForm").submit();
+            });
         });
 
         function showLoader() {

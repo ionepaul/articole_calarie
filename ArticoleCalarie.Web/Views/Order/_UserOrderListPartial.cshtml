@@ -4,67 +4,74 @@
 @using ArticoleCalarie.Web.Utils
 
 <div id="user-orders">
-    @foreach (var item in Model)
+    @if (Model.PageCount > 0)
     {
-        <div id="user-order-details">
-            <h4>Comanda #@item.OrderNumber</h4>
+        foreach (var item in Model)
+        {
+            <div id="user-order-details">
+                <h4>Comanda #@item.OrderNumber</h4>
 
-            <p class="order-placed">Plasata pe @item.OrderRegistrationDate.ToShortDateString() @item.OrderRegistrationDate.ToShortTimeString() - <span class="total-ammount">Total: @item.TotalAmount RON</span><p />
+                <p class="order-placed">Plasata pe @item.OrderRegistrationDate.ToShortDateString() @item.OrderRegistrationDate.ToShortTimeString() - <span class="total-ammount">Total: @item.TotalAmount RON</span><p />
 
-            @{ 
-                var orderConfirmed = item.OrderStatus == OrderStatusViewEnum.CONFIRMED || item.OrderStatus == OrderStatusViewEnum.SHIPPED || item.OrderStatus == OrderStatusViewEnum.COMPLETE ? "active completed" : "";
-                var orderShipped = item.OrderStatus == OrderStatusViewEnum.SHIPPED || item.OrderStatus == OrderStatusViewEnum.COMPLETE ? "active completed" : "";
-                var orderCompleted = item.OrderStatus == OrderStatusViewEnum.COMPLETE ? "active completed" : "";
-            }
+                @{
+                    var orderConfirmed = item.OrderStatus == OrderStatusViewEnum.CONFIRMED || item.OrderStatus == OrderStatusViewEnum.SHIPPED || item.OrderStatus == OrderStatusViewEnum.COMPLETE ? "active completed" : "";
+                    var orderShipped = item.OrderStatus == OrderStatusViewEnum.SHIPPED || item.OrderStatus == OrderStatusViewEnum.COMPLETE ? "active completed" : "";
+                    var orderCompleted = item.OrderStatus == OrderStatusViewEnum.COMPLETE ? "active completed" : "";
+                }
 
-            <div>
-                <ul class="progressbar cf">
-                    <li class="active completed">Comanda plasata</li>
-                    <li class="@orderConfirmed">Produse in depozitul curierului</li>
-                    <li class="@orderShipped">Produse in curs de livrare</li>
-                    <li class="@orderCompleted">Produse livrate</li>
-                </ul>
-            </div>
+                <div>
+                    <ul class="progressbar cf">
+                        <li class="active completed">Comanda plasata</li>
+                        <li class="@orderConfirmed">Produse in depozitul curierului</li>
+                        <li class="@orderShipped">Produse in curs de livrare</li>
+                        <li class="@orderCompleted">Produse livrate</li>
+                    </ul>
+                </div>
 
-            <button class="expand-order-details">Vezi detalii <i class="fa fa-angle-down"></i></button>
-      
-            <div class="cart-content user-order-details">
-                <table class="shopping-cart-content">
-                    <tr class="title">
-                        <td class="product-thumb">Produs</td>
-                        <td class="product-name"></td>
-                        <td class="price">Preț</td>
-                        <td class="total">Total</td>
-                    </tr>
-                    @foreach (var product in item.ShoppingItems)
-                    {
-                        <tr class="each-item">
-                            <td class="product-thumb"><img src="~/images/products/@product.ImageName"></td>
-                            <td class="product-name">
-                                <a href="@Url.RouteUrl("product-details-url", new { categoryName = product.ProductCategoryName.ToLower(), subcategoryId = product.ProductSubcategoryId, subcategoryName = product.ProductSubcategoryName.ToLower(), productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})" class="product-name">
-                                    <strong>@product.Quantity x @product.ProductName</strong>
-                                </a>
-                                <p class="color">Culoare: @product.Color</p>
-                                <p>Marime: @product.Size</p>
-                            </td>
-                            <td class="price">@product.Quantity x @product.Price RON</td>
-                            @{
-                                var totalPrice = product.Quantity * product.Price;
-                            }
-                            <td class="total">@totalPrice RON</td>
+                <button class="expand-order-details">Vezi detalii <i class="fa fa-angle-down"></i></button>
+
+                <div class="cart-content user-order-details">
+                    <table class="shopping-cart-content">
+                        <tr class="title">
+                            <td class="product-thumb">Produs</td>
+                            <td class="product-name"></td>
+                            <td class="price">Preț</td>
+                            <td class="total">Total</td>
                         </tr>
-                     }
-                </table>
-                <p class="total-order">Total: @item.TotalAmount RON</p>
+                        @foreach (var product in item.ShoppingItems)
+                        {
+                            <tr class="each-item">
+                                <td class="product-thumb"><img src="~/images/products/@product.ImageName"></td>
+                                <td class="product-name">
+                                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = product.ProductCategoryName.ToLower(), subcategoryId = product.ProductSubcategoryId, subcategoryName = product.ProductSubcategoryName.ToLower(), productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})" class="product-name">
+                                        <strong>@product.Quantity x @product.ProductName</strong>
+                                    </a>
+                                    <p class="color">Culoare: @product.Color</p>
+                                    <p>Marime: @product.Size</p>
+                                </td>
+                                <td class="price">@product.Quantity x @product.Price RON</td>
+                                @{
+                                    var totalPrice = product.Quantity * product.Price;
+                                }
+                                <td class="total">@totalPrice RON</td>
+                            </tr>
+                         }
+                    </table>
+                    <p class="total-order">Total: @item.TotalAmount RON</p>
+                </div>
             </div>
-        </div>
-        <br />
-        <br />
+            <br />
+            <br />
+         }
+
+         <div id="content-pager-orders">
+            Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("UserOrderListPartial", new { pageNumber = page }))
+         </div>
      }
-
-    <div id="content-pager-orders">
-        Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
-
-        @Html.PagedListPager(Model, page => Url.Action("UserOrderListPartial", new { pageNumber = page }))
-    </div>
+     else
+     {
+        <h3>Nu ai nici o comanda activa click aici.</h3>
+     }
 </div>

@@ -242,6 +242,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\IdentityExtensions.cs" />
     <Compile Include="Utils\StringUppercaseExtension.cs" />
   </ItemGroup>
   <ItemGroup>
