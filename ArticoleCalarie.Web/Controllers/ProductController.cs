@@ -227,7 +227,8 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetProductsByBrand(string brand, int? pageNumber)
+        [Route("produse/brand/{brand}", Name = "products-by-brand-url")]
+        public async Task<ActionResult> ProductsByBrand(string brand, int? pageNumber)
         {
             _logger.Info("VIEW > Products by brand id");
 

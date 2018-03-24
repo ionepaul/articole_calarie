@@ -100,7 +100,9 @@
                                 </li>
                                 <li class="menu-item menu-item-has-children">
                                     <a id="brands-section" class="kt-item-title" title="Brands">BRANDS</a>
-                                    <ul id="brands-list" class="submenu"></ul>
+                                    <ul id="brands-list" class="submenu">
+                                        <li class="@(ViewContext?.RouteData?.Values["brand"]?.ToString() == "equick" ? "active" : "")"><a href="@Url.RouteUrl("products-by-brand-url", new { brand = "equick", pageNumber = 1 })">eQuick</a></li>
+                                    </ul>
                                 </li>
                                 <!-- <li class="menu-item menu-item-has-children categories">
                                     <span class="top-flash hot">hot</span>

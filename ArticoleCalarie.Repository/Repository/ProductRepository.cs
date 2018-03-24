@@ -198,12 +198,12 @@ namespace ArticoleCalarie.Repository.Repository
 
         public async Task<ProductSearchResult> GetProductsByBrand(string brand, int itemsPerPage, int itemsToSkip)
         {
-            var query = _dbset.Include(x => x.Brand).Where(x => string.Equals(x.Brand.Name, brand));
+            var query = _dbset.Include(x => x.Brand).Include(x => x.Images).Include(x => x.Subcategory).Include(x => x.Subcategory.Category).Where(x => x.Brand != null && string.Equals(x.Brand.Name, brand));
 
             var productResult = new ProductSearchResult
             {
                 TotalCount = await query.CountAsync(),
-                Products = await query.OrderBy(x => x.SalePercentage).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+                Products = await query.OrderBy(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
             };
 
             return productResult;
