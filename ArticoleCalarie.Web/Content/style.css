@@ -4155,15 +4155,18 @@ input {
   display: inline-block;
   margin-right:  12px;
 }
-.list-color li a {
+.list-color li a,
+.list-color li {
   display: inline-block;
   width: 30px;
   height: 30px;
   border-radius: 100%;
   position: relative;
+  cursor: pointer;
 }
 .list-color li a:hover::before,
-.list-color li.current a::before {
+.list-color li.current a::before,
+.list-color li.current::before {
   content: "\f00c";
   font-family: "FontAwesome";
   position: absolute;

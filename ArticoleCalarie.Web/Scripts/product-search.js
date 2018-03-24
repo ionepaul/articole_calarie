@@ -2,18 +2,20 @@
     var colorIds = [];
     var sizes = [];
 
-    $("#product-list-page").on("click", "#searchColors li a", function () {
-        let colorId = $(this).parent().attr("id");
+    $("#product-list-page").on("click", "#searchColors li", function () {
+        let colorId = $(this).attr("id");
         var colorIndex = colorIds.indexOf(colorId);
 
         if (colorIndex > -1) {
-            $(this).parent().removeClass("current");
+            $(this).removeClass("current");
             colorIds.splice(colorIndex, 1);
         }
         else {
-            $(this).parent().addClass("current");
+            $(this).addClass("current");
             colorIds.push(colorId);
         }
+
+        console.log(colorIds);
     });
 
     $("#product-list-page").on("click", "#searchSizes li", function () {

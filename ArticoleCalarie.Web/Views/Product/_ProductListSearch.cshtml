@@ -28,11 +28,11 @@
             {
                 if (savedFilters?.ColorIds != null && savedFilters.ColorIds.Contains(color.Id.ToString()))
                 {
-                    <li class="current" id="@color.Id"><a href="javascript:void(0)" style="background-color: @color.Hex"></a></li>
+                    <li class="current" id="@color.Id" style="background-color: @color.Hex"></li>
                 }
                 else
                 {
-                    <li id="@color.Id"><a style="background-color: @color.Hex"></a></li>
+                    <li id="@color.Id" style="background-color: @color.Hex"></li>
                 }
             }
         </ul>
