@@ -252,7 +252,8 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetProductsOnSale(int? pageNumber)
+        [Route("produse/oferte", Name = "products-on-sale-url")]
+        public async Task<ActionResult> ProductsOnSale(int? pageNumber)
         {
             _logger.Info("VIEW > Products on sale");
 

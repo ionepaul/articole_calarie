@@ -211,7 +211,7 @@ namespace ArticoleCalarie.Repository.Repository
 
         public async Task<ProductSearchResult> GetProductsOnSale(int itemsPerPage, int itemsToSkip)
         {
-            var query = _dbset.Where(x => x.SalePercentage != 0);
+            var query = _dbset.Where(x => x.SalePercentage != 0).Include(x => x.Images).Include(x => x.Subcategory).Include(x => x.Subcategory.Category);
 
             var productResult = new ProductSearchResult
             {
