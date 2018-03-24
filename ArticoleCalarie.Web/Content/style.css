@@ -403,6 +403,9 @@ ul#colors-list li.selected::after,
 #orders-content .expand-btn {
     cursor: pointer;
 }
+.orders-list .address-details-wrapper {
+    background: 0;
+}
 .product-list-header {
     position: relative;
     margin-bottom: 20px;
@@ -590,7 +593,34 @@ input[type="checkbox"] {
     color: #324a76;
 }
 
+.form-register .form-group {
+    margin-bottom: 0;
+}
+
+.list-tick {
+    margin-bottom: 20px;
+}
+.list-tick .fa {
+    position: relative;
+    top: 5px;
+    left: 0;
+}
+
 /* forgot pass confirmation */
+.externalLogin input {
+    border: 0;
+    padding: 5px 20px;
+    background: #324a76;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 3px;
+    text-transform: uppercase;
+    position: relative;
+    top: 10px;
+}
+
 .pass-confirmation {
     text-align: center;
 }
@@ -603,6 +633,8 @@ input[type="checkbox"] {
     width: 350px;
 }
 .pass-confirmation p {
+    position: relative;
+    top: 20px;
     font-size: 20px;
     margin-bottom: 35px;
 }
@@ -1000,8 +1032,8 @@ input {
 .manage-account-info {
     display: flex;
     justify-content: space-between;
-    padding: 0 15px;
-    margin-bottom: 30px;
+    padding: 30px 15px;
+    margin-bottom: 10px;
 }
 .manage-account-info .fa,
 .manage-account-info .flaticon-cart {
@@ -9688,6 +9720,10 @@ strong.details-section {
 }
 @media(max-width: 767px) {
 
+    .account-manage-wrapper {
+        padding: 0 !important;
+    }
+
     .manage-account-info {
         flex-wrap: wrap;
     }
@@ -10473,6 +10509,14 @@ strong.details-section {
 }
 @media(max-width: 479px) {
 
+    .user-order-details .shopping-cart-content tr td.price {
+        padding-bottom: 0;
+    }
+
+    .user-order-details .shopping-cart-content tr td.total {
+        padding-top: 0;
+    }
+
     .product-list-header .product-list-add-btn {
         position: static;
     }
@@ -10922,10 +10966,18 @@ AUTO CLEAR
 }
 /*========================*/
 
+#user-orders {
+    padding: 0 15px;
+}
+
+.user-order-pagination {
+    display: flex;
+    justify-content: center;
+}
+
 /* STEP BAR and USER ORDER DETAILS */
 #user-order-details {
     padding: 20px;
-    border-radius: 10px;
     border: 1px solid #ccc;
 }
 
