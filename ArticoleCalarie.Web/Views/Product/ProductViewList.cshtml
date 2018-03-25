@@ -14,10 +14,7 @@
                 <div class="auto-clear">
                     <div class="top-control box-has-content">
                         <div class="breadcrumbs">
-                            <a href="#">@(((string)ViewBag.CategoryName).ToFirstUppercase())</a> <i class="fa fa-chevron-right"></i> <span class="current">@(((string)ViewBag.SubcategoryName).ToFirstUppercase())</span>
-                        </div>
-                        <div class="control">
-                            <span class="title">Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount</span>
+                            <a href="#">@(((string)ViewBag.CategoryName).ToFirstUppercase())</a> <i class="fa fa-angle-right"></i> <span class="current">@(((string)ViewBag.SubcategoryName).ToFirstUppercase())</span>
                         </div>
                     </div>
                     <div class="row product-grid">
