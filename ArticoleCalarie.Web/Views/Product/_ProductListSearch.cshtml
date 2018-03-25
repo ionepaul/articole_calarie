@@ -9,14 +9,14 @@
     <div class="widget widget_filter_price box-has-content">
         <h3 class="widgettitle">Preţ</h3>
         <div class="price-filter">
-            <div id="priceFilter" data-label-reasult="price:" data-min="@Model.MinPrice" data-max="@Model.MaxPrice" data-unit="RON" class="slider-range-price" data-value-min="@Model.MinPrice" data-value-max="@Model.MaxPrice"></div>
             @if (savedFilters != null && savedFilters.MinPrice != null && savedFilters.MaxPrice != null)
             {
+                <div id="priceFilter" data-label-reasult="price:" data-min="@Model.MinPrice" data-max="@Model.MaxPrice" data-unit="RON" class="slider-range-price" data-value-min="@savedFilters.MinPrice.ToString().Replace(".", ",")" data-value-max="@savedFilters.MaxPrice.ToString().Replace(".", ",")"></div>
                 <div class="amount-range-price">Price: <span id="priceFilterMin" class="from">@savedFilters.MinPrice.ToString().Replace(".", ",")</span> - <span id="priceFilterMax" class="to">@savedFilters.MaxPrice.ToString().Replace(".", ",")</span> RON</div>
-
             }
             else
             {
+                <div id="priceFilter" data-label-reasult="price:" data-min="@Model.MinPrice" data-max="@Model.MaxPrice" data-unit="RON" class="slider-range-price" data-value-min="@Model.MinPrice" data-value-max="@Model.MaxPrice"></div>
                 <div class="amount-range-price">Price: <span id="priceFilterMin" class="from">@Model.MinPrice</span> - <span id="priceFilterMax" class="to">@Model.MaxPrice</span> RON</div>
             }
         </div>
