@@ -241,6 +241,27 @@ namespace ArticoleCalarie.Logic.Logic
             return productSearchViewResult;
         }
 
+        public async Task<IEnumerable<ProductListViewItemModel>> GetRelatedProducts(string subcategory)
+        {
+            var relatedProducts = await _iProductRepository.GetRelatedProducts(subcategory);
+
+            return relatedProducts.Select(x => x.ToListViewItemModel());
+        }
+
+        public async Task<IEnumerable<ProductListViewItemModel>> GetTheNewestProductsForHome()
+        {
+            var newestProductsForHome = await _iProductRepository.GetTheNewestProductsForHome();
+
+            return newestProductsForHome.Select(x => x.ToListViewItemModel());
+        }
+
+        public async Task<IEnumerable<ProductListViewItemModel>> GetProductsOnSaleForHome()
+        {
+            var productsOnSaleForHome = await _iProductRepository.GetProducstOnSaleForHome();
+
+            return productsOnSaleForHome.Select(x => x.ToListViewItemModel());
+        }
+
         #region Private Methods
 
         private void StoreImages(Product product, ProductViewModel productViewModel)
@@ -395,13 +416,6 @@ namespace ArticoleCalarie.Logic.Logic
             }
 
             return formmatedProductId;
-        }
-
-        public async Task<IEnumerable<ProductListViewItemModel>> GetRelatedProducts(string subcategory)
-        {
-            var relatedProducts = await _iProductRepository.GetRelatedProducts(subcategory);
-
-            return relatedProducts.Select(x => x.ToListViewItemModel());
         }
 
         #endregion

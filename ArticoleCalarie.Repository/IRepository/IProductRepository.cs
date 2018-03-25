@@ -18,5 +18,7 @@ namespace ArticoleCalarie.Repository.IRepository
         Task<ProductSearchResult> GetProductsByBrand(string brand, int itemsPerPage, int itemsToSkip);
         Task<ProductSearchResult> GetProductsOnSale(int itemsPerPage, int itemsToSkip);
         Task<IEnumerable<Product>> GetRelatedProducts(string subcategory);
+        Task<IEnumerable<Product>> GetTheNewestProductsForHome();
+        Task<IEnumerable<Product>> GetProducstOnSaleForHome();
     }
 }

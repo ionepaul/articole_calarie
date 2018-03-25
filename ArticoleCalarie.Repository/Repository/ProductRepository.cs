@@ -129,7 +129,7 @@ namespace ArticoleCalarie.Repository.Repository
                 query = query.Where(x => productIds.Contains(x.Id));
             }
 
-            query = query.OrderBy(x => x.DatePosted);
+            query = query.OrderByDescending(x => x.DatePosted);
 
             var productSearchResult = new ProductSearchResult
             {
@@ -203,7 +203,7 @@ namespace ArticoleCalarie.Repository.Repository
             var productResult = new ProductSearchResult
             {
                 TotalCount = await query.CountAsync(),
-                Products = await query.OrderBy(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+                Products = await query.OrderByDescending(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
             };
 
             return productResult;
@@ -233,6 +233,20 @@ namespace ArticoleCalarie.Repository.Repository
             }
 
             return await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderBy(x => Guid.NewGuid()).Take(4).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetTheNewestProductsForHome()
+        {
+            var products = await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
+
+            return products;
+        }
+
+        public async Task<IEnumerable<Product>> GetProducstOnSaleForHome()
+        {
+            var products = await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).Where(x => x.SalePercentage != 0).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
+
+            return products;
         }
     }
 }
