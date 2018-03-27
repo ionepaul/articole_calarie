@@ -8,142 +8,75 @@
     var grandTotal = 0M;
 }
 
-<div class="main-content checkout-page">
-    <div class="container">
-        <div class="breadcrumbs">
-            Cosul de cumparaturi
-        </div>
-
-        <div class="cart-content">
-            @if (totalCartItems > 0)
-            {
-                <table class="shopping-cart-content">
-                    <tr class="title">
-                        <td class="product-thumb">Produs</td>
-                        <td class="product-name"></td>
-                        <td class="price">Preț</td>
-                        <td class="total">Total</td>
-                    </tr>
-                    @foreach (var product in shoppingCart.ShoppingItems)
-                    {
-                        <tr class="each-item">
-                            <td class="product-thumb"><img src="~/images/products/@product.ImageName"></td>
-                            <td class="product-name">
-                                <a href="@Url.RouteUrl("product-details-url", new { categoryName = product.ProductCategoryName.ToLower(), subcategoryId = product.ProductSubcategoryId, subcategoryName = product.ProductSubcategoryName.ToLower(), productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})" class="product-name">
-                                    <strong>@product.Quantity x @product.ProductName</strong>
-                                </a>
-                                <p class="color">Culoare: @product.Color</p>
-                                <p>Marime: @product.Size</p>
-                                <a class="delete-product" onclick="deleteFromCart('@product.ProductCode')">X Sterge</a>
-                            </td>
-                            <td class="price">@product.Quantity x @product.Price RON</td>
-                            @{
-                                var totalPrice = product.Quantity * product.Price;
-                                grandTotal += totalPrice;
-                            }
-                            <td class="total">@totalPrice RON</td>
-                        </tr>
-                     }
-                </table>
-                <div class="continue-shopping">
-                    <div class="subtotal">
-                        <h3 class="subtitle">
-                            Total: @grandTotal RON
-                        </h3>
-                        <a href="@Url.Action("Checkout", "Order")" class="submit checkout">Comanda</a>
-                    </div>
-                    <a id="back" class="continue-shopping submit">Continua cumparaturile</a>
-                </div>
-             }
-             else
-             {
-                 <p>Nici un produs in cosul de cumparaturi</p>
-             }
-
-            <!-- RELATED ITEMS -->
-            <div class="related-items">
-                <h3 class="title supper-title">ALTE PRODUSE INTERESANTE</h3>
-                <div class="owl-carousel nav-style1" data-autoplay="false" data-nav="true" data-dots="true" data-loop="true" data-slidespeed="800" data-margin="30" data-responsive='{"0":{"items":1}, "640":{"items":2}, "768":{"items":3}, "1024":{"items":4}, "1200":{"items":4}}'>
-                    <div class="product-item layout1">
-                        <div class="product-inner">
-                            <div class="thumb">
-                                <div class="group-button">
-                                    <a href="#" class="wishlist-button"></a>
-                                    <a href="#" class="compare-button"></a>
-                                    <a href="#" class="quickview-button"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> Quick View</a>
-                                </div>
-                                <a href="#"><img src="images/6.jpg" alt=""></a>
-                            </div>
-                            <div class="info">
-                                <a href="#" class="product-name">Classic T-Shirt in Blue</a>
-                                <a href="#" class="add-to-cart">+ ADD TO CART</a>
-                                <div class="price">
-                                    <span class="ins">$75</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-item layout1">
-                        <div class="product-inner">
-                            <div class="thumb">
-                                <div class="group-button">
-                                    <a href="#" class="wishlist-button"></a>
-                                    <a href="#" class="compare-button"></a>
-                                    <a href="#" class="quickview-button"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> Quick View</a>
-                                </div>
-                                <a href="#"><img src="images/7.jpg" alt=""></a>
-                            </div>
-                            <div class="info">
-                                <a href="#" class="product-name">Classic T-Shirt in Blue</a>
-                                <a href="#" class="add-to-cart">+ ADD TO CART</a>
-                                <div class="price">
-                                    <span class="ins">$75</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-item layout1">
-                        <div class="product-inner">
-                            <div class="thumb">
-                                <div class="group-button">
-                                    <a href="#" class="wishlist-button"></a>
-                                    <a href="#" class="compare-button"></a>
-                                    <a href="#" class="quickview-button"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> Quick View</a>
-                                </div>
-                                <a href="#"><img src="images/8.jpg" alt=""></a>
-                            </div>
-                            <div class="info">
-                                <a href="#" class="product-name">Classic T-Shirt in Blue</a>
-                                <a href="#" class="add-to-cart">+ ADD TO CART</a>
-                                <div class="price">
-                                    <span class="ins">$75</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-item layout1">
-                        <div class="product-inner">
-                            <div class="thumb">
-                                <div class="group-button">
-                                    <a href="#" class="wishlist-button"></a>
-                                    <a href="#" class="compare-button"></a>
-                                    <a href="#" class="quickview-button"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> Quick View</a>
-                                </div>
-                                <a href="#"><img src="images/9.jpg" alt=""></a>
-                            </div>
-                            <div class="info">
-                                <a href="#" class="product-name">Classic T-Shirt in Blue</a>
-                                <a href="#" class="add-to-cart">+ ADD TO CART</a>
-                                <div class="price">
-                                    <span class="ins">$75</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="page-wrapper">
+    <div class="main-content checkout-page">
+        <div class="container">
+            <div class="cart-page-title">
+                <p>Cosul de cumparaturi</p>
             </div>
 
+            <div class="cart-content">
+                @if (totalCartItems > 0)
+            {
+                    <table class="shopping-cart-content">
+                        <tr class="title">
+                            <td class="product-thumb">Produs</td>
+                            <td class="product-name"></td>
+                            <td class="price">Preț</td>
+                            <td class="total">Total</td>
+                        </tr>
+                        @foreach (var product in shoppingCart.ShoppingItems)
+                        {
+                            <tr class="each-item">
+                                <td class="product-thumb"><img src="~/images/products/@product.ImageName"></td>
+                                <td class="product-name">
+                                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = product.ProductCategoryName.ToLower(), subcategoryId = product.ProductSubcategoryId, subcategoryName = product.ProductSubcategoryName.ToLower(), productCode = product.ProductCode.ToLower(), productName = product.ProductName.ToUrlProductName()})" class="product-name">
+                                        <strong>@product.Quantity x @product.ProductName</strong>
+                                    </a>
+                                    <p class="color">Culoare: @product.Color</p>
+                                    <p>Marime: @product.Size</p>
+                                    <a class="delete-product" onclick="deleteFromCart('@product.ProductCode')">X Sterge</a>
+                                </td>
+                                <td class="price">@product.Quantity x @product.Price RON</td>
+                                @{
+                                    var totalPrice = product.Quantity * product.Price;
+                                    grandTotal += totalPrice;
+                                }
+                                <td class="total">@totalPrice RON</td>
+                            </tr>
+                                    }
+                    </table>
+                    <div class="continue-shopping">
+                        <div class="subtotal">
+                            <h3 class="subtitle">
+                                Total: @grandTotal RON
+                            </h3>
+                            <a href="@Url.Action("Checkout", "Order")" class="submit checkout">Comanda</a>
+                        </div>
+                        <a id="back" class="continue-shopping submit">Continua cumparaturile</a>
+                    </div>
+                                    }
+                                    else
+                                    {
+                                        <p class="empty-cart">Nici un produs in cosul de cumparaturi</p>
+                                    }
+
+            </div>
+
+            <div class="related-items">
+                <h3 class="title supper-title">ALTE PRODUSE</h3>
+                <div id="cart-related-products"></div>
+            </div>
         </div>
     </div>
 </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/carousel")
+    <script>
+        $(document).ready(function () {
+            getRelatedProducts('#cart-related-products');
+        });
+    </script>
+}
 
