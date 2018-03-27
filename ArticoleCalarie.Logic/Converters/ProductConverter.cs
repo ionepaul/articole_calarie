@@ -43,7 +43,7 @@ namespace ArticoleCalarie.Logic.Converters
                 Brand = product.Brand?.Name,
                 SubcategoryId = product.Subcategory?.Name,
                 ImagesList = product.Images.Select(x => x.FileName).ToList(),
-                ColorsList = product.AvailableColors.Select(x => x.Name).ToList(),
+                ColorsList = product.AvailableColors?.Select(x => x.Name).ToList(),
                 IsOnSale = product.SalePercentage != 0
             };
 

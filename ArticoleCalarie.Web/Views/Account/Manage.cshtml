@@ -11,7 +11,11 @@
     <div class="col-sm-6">
         <h4 class="form-title">Adresa de livrare</h4>
         <div id="deliveryAddressForm" class="contact-content @(Model.DeliveryAddress == null ? "" : "hidden")">
-            @using (Html.BeginForm("SaveDeliveryAddress", "Account"))
+            @using (Ajax.BeginForm("SaveDeliveryAddress", "Account", new AjaxOptions
+            {
+                HttpMethod = "post",
+                OnComplete = "acccounEditAddressOnComplete"
+            }))
             {
                 @Html.AntiForgeryToken()
 
@@ -48,8 +52,11 @@
     <div class="col-sm-6">
         <h4 class="form-title">Adresa de facturare</h4>
         <div id="billingAddressForm" class="contact-content @(Model.BillingAddress == null ? "" : "hidden")">
-            @using (Html.BeginForm("SaveBillingAddress", "Account"))
+            @using (Ajax.BeginForm("SaveBillingAddress", "Account", new AjaxOptions
             {
+                HttpMethod = "post",
+                OnComplete = "acccounEditAddressOnComplete"
+            }))            {
                 @Html.AntiForgeryToken()
 
                 @Html.Partial("_AddressFormPartial", Model.BillingAddress, new ViewDataDictionary()
@@ -84,6 +91,8 @@
 </div>
 
 @section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#editDeliveryAddressBtn').on('click', function () {
@@ -96,5 +105,9 @@
                 $('#billingAddressForm').removeClass('hidden');
             });
         });
+
+        function acccounEditAddressOnComplete() {
+            window.location.href = '/account/manage';
+        }
     </script>   
 }
