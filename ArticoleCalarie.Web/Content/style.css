@@ -2143,6 +2143,10 @@ input {
 .search-form.layout2 .search-inner .search-info {
   color: #aaa;
 }
+.checkout-done-link {
+    color: #333;
+    text-decoration: underline;
+}
 .header.layout4  .top-links {
   padding: 20px 0 0;
 }
@@ -3272,7 +3276,7 @@ input {
   text-align: center;
 }
 .cart-content .submit:hover {
-  background-color: #d26e4b;
+  background-color: #444242;
 }
 .cart-content .continue-shopping:hover,
 .cart-content .update:hover {
@@ -3652,7 +3656,6 @@ input {
 .delivery-details-form,
 .billing-address-form {
     width: 60%;
-    margin: auto;
 }
 .checkout-content .checkout-tabel {
     margin-bottom: 0;
@@ -10577,6 +10580,10 @@ strong.details-section {
 }
 }
 @media(max-width: 479px) {
+
+    .checkout-done-title {
+        font-size: 27px;
+    }
 
     .checkout-page td.price,
     .checkout-page td.total {
