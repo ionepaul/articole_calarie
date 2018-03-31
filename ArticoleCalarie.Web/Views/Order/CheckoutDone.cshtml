@@ -4,7 +4,7 @@
     ViewBag.Title = "CheckoutDone";
 }
 
-<div class="page-wrapper">
+<div class="page-wrapper container">
     <div class="checkout-done">
         <div class="pass-confirmation">
             <div class="logo">
@@ -15,18 +15,25 @@
 
             @if (User.Identity.IsAuthenticated)
             {
-                <p style="margin-top: -15px;">Poti urmari statusul comenzii tale in contul tau: <a href="#" class="checkout-done-link">click aici</a></p>
+                <p style="margin-top: -15px;">Poti urmari statusul comenzii tale in contul tau: <a href="@Url.Action("UserOrderList", "Order")" class="checkout-done-link">click aici</a></p>
             }
+
+            <div>
+                <p class="reset-pass-conf">
+                    <a href="/">Continua cumparaturile</a>
+                </p>
+            </div>
+
             <div class="related-items">
-                <h3 class="title supper-title">ALTE PRODUSE</h3>
+                <h3 class="title supper-title"></h3>
+                <br />
                 <div id="checkoutDone-related-products"></div>
             </div>
         </div>
     </div>
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 
+@section Scripts {
     <script>
         $(document).ready(function () {
             getRelatedProducts('#checkoutDone-related-products');

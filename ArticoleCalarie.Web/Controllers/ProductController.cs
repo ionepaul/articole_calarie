@@ -240,24 +240,27 @@ namespace ArticoleCalarie.Web.Controllers
                 }
             }
 
-            try
-            {
-                var page = pageNumber ?? 1;
 
-                var products = await _iProductLogic.GetTheNewestPoducts(page);
+            return View("Error");
 
-                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            //try
+            //{
+            //    var page = pageNumber ?? 1;
 
-                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
+            //    var products = await _iProductLogic.GetTheNewestPoducts(page);
 
-                return View(pagedListModel);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error($"Failed to get products on sale. Exception: {ex.Message}.");
+            //    int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
 
-                return View("Error");
-            }
+            //    var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
+
+            //    return View(pagedListModel);
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.Error($"Failed to get products on sale. Exception: {ex.Message}.");
+
+            //    return View("Error");
+            //}
         }
 
         [HttpGet]

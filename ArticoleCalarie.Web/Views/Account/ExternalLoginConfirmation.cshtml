@@ -4,7 +4,7 @@
     ViewBag.Title = "Register";
 }
 
-<div class="page-wrapper">
+<div class="page-wrapper container">
     <div class="pass-confirmation">
         <div class="logo">
             <img src="~/images/my_logo3.png" alt="Articole Călărie logo" id="appLogo">
@@ -18,25 +18,14 @@
             <p>
                 Te-ai autentificat cu succes folosind contul tau de Facebook.
             </p>
-            <div class="form-group hidden">
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group hidden">
-                @Html.LabelFor(m => m.FullName, new { @class = "col-md-2 control-label" })
-                @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
-            </div>
             <div class="form-group">
                 <div class="externalLogin">
-                    <input type="submit" value="Register" />
+                    <input type="submit" value="Continua" />
                 </div>
             </div>
             <div class="related-items">
-                <h3 class="title supper-title">ALTE PRODUSE</h3>
+                <h3 class="title supper-title"></h3>
+                <br />
                 <div id="externalLogin-related-products"></div>
             </div>
         }
