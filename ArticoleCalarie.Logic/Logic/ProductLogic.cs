@@ -241,6 +241,23 @@ namespace ArticoleCalarie.Logic.Logic
             return productSearchViewResult;
         }
 
+        public async Task<ProductSearchViewResult> GetTheNewestPoducts(int pageNumber)
+        {
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var daysToKeepProductMarkedNew = Convert.ToInt32(ConfigurationManager.AppSettings["DaysToKeepProductMarkedNew"]);
+            var itemsToSkip = (pageNumber - 1) * itemsPerPage;
+
+            var theNewestProducts = await _iProductRepository.GetTheNewestProducts(itemsPerPage, itemsToSkip, daysToKeepProductMarkedNew);
+
+            var productSearchViewResult = new ProductSearchViewResult
+            {
+                TotalCount = theNewestProducts.TotalCount,
+                Products = theNewestProducts.Products.Select(x => x.ToListViewItemModel())
+            };
+
+            return productSearchViewResult;
+        }
+
         public async Task<IEnumerable<ProductListViewItemModel>> GetRelatedProducts(string subcategory)
         {
             var relatedProducts = await _iProductRepository.GetRelatedProducts(subcategory);
@@ -250,7 +267,9 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task<IEnumerable<ProductListViewItemModel>> GetTheNewestProductsForHome()
         {
-            var newestProductsForHome = await _iProductRepository.GetTheNewestProductsForHome();
+            var daysToKeepProductMarkedNew = Convert.ToInt32(ConfigurationManager.AppSettings["DaysToKeepProductMarkedNew"]);
+
+            var newestProductsForHome = await _iProductRepository.GetTheNewestProductsForHome(daysToKeepProductMarkedNew);
 
             return newestProductsForHome.Select(x => x.ToListViewItemModel());
         }

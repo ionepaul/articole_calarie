@@ -738,6 +738,7 @@
     <Content Include="Views\Shared\_AccountHeaderPartial.cshtml" />
     <Content Include="Views\Product\ProductsOnSale.cshtml" />
     <Content Include="Views\Product\ProductsByBrand.cshtml" />
+    <Content Include="Views\Product\NewestProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

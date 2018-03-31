@@ -19,5 +19,6 @@ namespace ArticoleCalarie.Logic.ILogic
         Task<IEnumerable<ProductListViewItemModel>> GetRelatedProducts(string subcategory);
         Task<IEnumerable<ProductListViewItemModel>> GetTheNewestProductsForHome();
         Task<IEnumerable<ProductListViewItemModel>> GetProductsOnSaleForHome();
+        Task<ProductSearchViewResult> GetTheNewestPoducts(int pageNumber);
     }
 }

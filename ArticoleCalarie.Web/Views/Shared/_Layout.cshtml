@@ -159,8 +159,8 @@
                                     </ul>
                                 </li> -->
 
-                                <li class="menu-item">
-                                    <a href="#" class="kt-item-title" title="PAGES">NOUTĂȚI</a>
+                                <li class="menu-item @(ViewContext?.RouteData?.Values["action"]?.ToString() == "NewestProducts" ? "active" : "")"">
+                                    <a href="@Url.RouteUrl("newest-products-url", new { pageNumber = 1 })" class="kt-item-title">NOUTĂȚI</a>
                                 </li>
                                 <li class="menu-item @(ViewContext?.RouteData?.Values["action"]?.ToString() == "ProductsOnSale" ? "active" : "")"><span class="top-flash hot">hot</span>
                                     <a href="@Url.RouteUrl("products-on-sale-url", new { pageNumber = 1 })">OFERTE</a>
@@ -168,10 +168,10 @@
                                 
 
                                 <li class="menu-item">
-                                    <a href="blog.html">DESPRE</a>
+                                    <a href="@Url.RouteUrl("about-us-url")"> DESPRE NOI</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="blog.html">CONTACT</a>
+                                    <a href="@Url.RouteUrl("contact-url")">CONTACT</a>
                                 </li>
                             </ul>
                             <ul class="top-links">

@@ -235,18 +235,35 @@ namespace ArticoleCalarie.Repository.Repository
             return await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderBy(x => Guid.NewGuid()).Take(4).ToListAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetTheNewestProductsForHome()
+        public async Task<IEnumerable<Product>> GetTheNewestProductsForHome(int daysToKeepProductNew)
         {
-            var products = await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
+            var comparisonDate = DateTime.Now.AddDays((-1) * daysToKeepProductNew);
+
+            var products = await _dbset.Where(x => x.DatePosted > comparisonDate).Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
 
             return products;
         }
 
         public async Task<IEnumerable<Product>> GetProducstOnSaleForHome()
         {
-            var products = await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).Where(x => x.SalePercentage != 0).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
+            var products = await _dbset.Where(x => x.SalePercentage != 0).Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).Where(x => x.SalePercentage != 0).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
 
             return products;
+        }
+
+        public async Task<ProductSearchResult> GetTheNewestProducts(int itemsPerPage, int itemsToSkip, int daysToKeepProductNew)
+        {
+            var comparisonDate = DateTime.Now.AddDays((-1) * daysToKeepProductNew);
+
+            var query = _dbset.Where(x => x.DatePosted > comparisonDate).Include(x => x.Images).Include(x => x.Subcategory).Include(x => x.Subcategory.Category);
+
+            var productResult = new ProductSearchResult
+            {
+                TotalCount = await query.CountAsync(),
+                Products = await query.OrderBy(x => x.SalePercentage).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+            };
+
+            return productResult;
         }
     }
 }

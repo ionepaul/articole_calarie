@@ -9,6 +9,7 @@ namespace ArticoleCalarie.Web.Controllers
             return View();
         }
 
+        [Route("despre-noi", Name = "about-us-url")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -16,6 +17,7 @@ namespace ArticoleCalarie.Web.Controllers
             return View();
         }
 
+        [Route("contact", Name = "contact-url")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
