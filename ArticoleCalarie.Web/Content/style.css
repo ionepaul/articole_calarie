@@ -275,6 +275,10 @@ body{
     text-align: center;
 }
 
+.main-slideshow {
+    margin-top: -32px;
+}
+
 .add-product-form #imgDirectory {
     display: flex;
     flex-wrap: wrap;
@@ -6645,6 +6649,55 @@ strong.details-section {
 
 .main-content-home1 .main-banner {
   margin: 30px -15px;
+  display: flex;
+}
+.main-content-home1 .main-banner .col {
+    display: flex;
+}
+.main-content-home1 .main-banner .banner-1 {
+    flex-basis: 50%;
+    margin-right: 30px;
+    padding: 0 20px;
+}
+.main-content-home1 .main-banner .banner-1 .button {
+    font-size: 12px;
+    color: #222;
+    font-weight: 700;
+    padding: 0 15px;
+    line-height: 35px;
+    text-transform: uppercase;
+    display: inline-block;
+    border-radius: 3px;
+    background-color: #fff;
+}
+.main-content-home1 .main-banner .banner-1 .button:hover {
+    background: #324a76;
+    color: #fff;
+}
+.main-content-home1 .main-banner .banner-2 .button {
+    background: #324a76;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 3px;
+}
+.main-content-home1 .main-banner .banner-2 {
+    flex-basis: 50%;
+}
+.main-content-home1 .main-banner .banner-2 .banner-image {
+    text-align: center;
+    background: #fff;
+}
+.main-content-home1 .main-banner .banner-2 .banner-content {
+    padding: 0 40px;
+    color: #fff;
+    background: #324a76;
+    text-align: center;
+}
+.main-content-home1 .main-banner .banner-2 img {
+    width: 55%;
+    display: block;
+    margin: auto;
 }
 .main-banner .banner {
   position: relative;
