@@ -55,7 +55,6 @@
                     }
 
                     <div>Cod Produs: @Model.ProductCode</div>
-                    <br>
 
                     <div class="price">
                         @if (Model.IsOnSale)
@@ -68,11 +67,10 @@
                             <span class="ins">@Model.Price RON</span>
                         }
                     </div>
-                    <br />
 
                     @if (sizes.Count() > 0)
                     {
-                        <div>
+                        <div class="size margin-top">
                             <strong class="details-section">Mărimi</strong>
                             <select id="size">
                                 @foreach (var size in sizes)
@@ -106,7 +104,7 @@
                     <div class="material-details">
                         @if (hasMaterialDetails)
                         {
-                            <h4>Detalii Material</h4>
+                            <strong class="details-section">Detalii Material</strong>
                             <p>@Model.MaterialDetails</p>
                         }
                     </div>

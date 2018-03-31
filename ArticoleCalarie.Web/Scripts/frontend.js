@@ -140,6 +140,7 @@ jQuery(document).ready(function ($) {
             items: 1,
             thumbs: true,
             thumbImage: true,
+            autoHeight: true,
             thumbContainerClass: 'owl-thumbs',
             thumbItemClass: 'owl-thumb-item'
         });

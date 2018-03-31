@@ -4,11 +4,32 @@
     ViewBag.Title = "CheckoutDone";
 }
 
-<h1> Comanda: #@Model a fost inregistrată cu succes.</h1>
-<h2>Vei primi un email cand comanda va fi confirmata.</h2>
+<div class="page-wrapper">
+    <div class="checkout-done">
+        <div class="pass-confirmation">
+            <div class="logo">
+                <img src="~/images/my_logo3.png" alt="Articole Călărie logo" id="appLogo">
+            </div>
+            <h2 class="checkout-done-title"> Comanda: #@Model a fost inregistrată cu succes.</h2>
+            <h3 style="margin-top: 5px;">Vei primi un email cand comanda va fi confirmata.</h3>
 
-@if (User.Identity.IsAuthenticated)
-{
-    <h2>Poti urmari statusul comenzii tale in contul tau: <a href="#">click aici</a></h2>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p style="margin-top: -15px;">Poti urmari statusul comenzii tale in contul tau: <a href="#" class="checkout-done-link">click aici</a></p>
+            }
+            <div class="related-items">
+                <h3 class="title supper-title">ALTE PRODUSE</h3>
+                <div id="checkoutDone-related-products"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            getRelatedProducts('#checkoutDone-related-products');
+        });
+    </script>
 }
-

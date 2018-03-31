@@ -6,7 +6,7 @@
 
 <div class="page-wrapper">
     <div class="register-wrapper contact-content">
-        @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-register", role = "form" }))
         {
             @Html.AntiForgeryToken()
             <h3 class="form-title">Înregistrează-te</h3>
@@ -22,32 +22,32 @@
                         <i class="fa fa-user" aria-hidden="true"></i>
                         @Html.TextBoxFor(m => m.FullName, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.FullName) })
                     </div>
-                    @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger login-errorMessage" })
                 </div>
+                @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger login-errorMessage" })
                 <br />
                 <div class="form-group">
                     <div class="col-md-12">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
                         @Html.TextBoxFor(m => m.Email, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Email) })
                     </div>
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger login-errorMessage" })
                 </div>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger login-errorMessage" })
                 <br />
                 <div class="form-group">
                     <div class="col-md-12">
                         <i class="fa fa-lock" aria-hidden="true"></i>
                         @Html.PasswordFor(m => m.Password, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Password) })
                     </div>
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger login-errorMessage" })
                 </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger login-errorMessage" })
                 <br />
                 <div class="form-group">
                     <div class="col-md-12">
                         <i class="fa fa-lock" aria-hidden="true"></i>
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.ConfirmPassword) })
                     </div>
-                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger login-errorMessage" })
                 </div>
+                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger login-errorMessage" })
                 <br />
                 <div class="form-group">
                     <div class="col-md-12">

@@ -64,14 +64,20 @@
             <br />
          }
 
-         <div id="content-pager-orders">
-            Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
-
+         <div id="content-pager-orders" class="user-order-pagination">
             @Html.PagedListPager(Model, page => Url.Action("UserOrderListPartial", new { pageNumber = page }))
          </div>
      }
      else
      {
-        <h3>Nu ai nici o comanda activa click aici.</h3>
+        <h3 style="text-align: center;">Momentan nu ai efectuat nicio comanda.</h3>
+       
      }
+    <div class="related-items">
+        <h3 class="title supper-title">ALTE PRODUSE</h3>
+        <div id="orderList-related-products"></div>
+    </div>
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
