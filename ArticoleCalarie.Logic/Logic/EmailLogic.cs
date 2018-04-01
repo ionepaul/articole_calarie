@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
+using ArticoleCalarie.Infrastructure;
 using ArticoleCalarie.Infrastructure.MailService;
+using ArticoleCalarie.Logic.Converters;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
 using ArticoleCalarie.Models.Constants;
@@ -40,17 +44,21 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task SendWelcomeEmail(string email, string fullName)
         {
-            //var templatePath = MailTemplates.WelcomeEmail;
+            var template = GetEmailTemplate(MailTemplates.WelcomeEmail);
 
-            //var template = File.ReadAllText(HttpContext.Current.Server.MapPath(templatePath));
-            var body = $"<b>salut {fullName}</b>";
+            var dictionary = new Dictionary<string, string>
+            {
+                [EmailParametersEnum.Fullname.ToString().ToLower()] = fullName
+            };
+
+            template = MapTemplateDetails(template, dictionary);
 
             var emailModel = new EmailModel
             {
                 To = new List<string> { email },
                 From = ConfigurationManager.AppSettings["ArticoleCalarieEmail"],
                 Subject = MailSubjects.WelcomeEmail,
-                Body = body
+                Body = template
             };
 
             await _iMailService.SendMail(emailModel);
@@ -58,17 +66,21 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task SendResetEmail(string email, string callbackUrl)
         {
-            //var templatePath = MailTemplates.ResetPassword;
+            var template = GetEmailTemplate(MailTemplates.ResetPassword);
 
-            //var template = File.ReadAllText(HttpContext.Current.Server.MapPath(templatePath));
-            var body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>";
+            var dictionary = new Dictionary<string, string>
+            {
+                [EmailParametersEnum.ResetPasswordUrl.ToString().ToLower()] = callbackUrl
+            };
+
+            template = MapTemplateDetails(template, dictionary);
 
             var emailModel = new EmailModel
             {
                 To = new List<string> { email },
                 From = ConfigurationManager.AppSettings["ArticoleCalarieEmail"],
                 Subject = MailSubjects.ResetPasswrod,
-                Body = body
+                Body = template
             };
 
             await _iMailService.SendMail(emailModel);
@@ -76,14 +88,14 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task SendConfirmationOrderEmail(Order order)
         {
-            var body = $"<p>Comanda #{order.OrderNumber} a fost confirmata. Detailii....<br /> Veti primi un mail cand va fi livrata.<p>";
+            var template = BuildOrderConfiramtionTemplate(order);
 
             var emailModel = new EmailModel
             {
                 To = new List<string> { order.Email },
                 From = ConfigurationManager.AppSettings["ArticoleCalarieEmail"],
                 Subject = string.Format(MailSubjects.OrderConfirmed, order.OrderNumber),
-                Body = body
+                Body = template
             };
 
             await _iMailService.SendMail(emailModel);
@@ -103,5 +115,55 @@ namespace ArticoleCalarie.Logic.Logic
 
             await _iMailService.SendMail(emailModel);
         }
+
+        #region Private Methods
+
+        private string MapTemplateDetails(string template, Dictionary<string, string> dictionary)
+        {
+            foreach (KeyValuePair<string, string> entry in dictionary)
+            {
+                template = template.Replace($"{{{entry.Key}}}", entry.Value);
+            }
+
+            return template;
+        }
+
+        private string GetEmailTemplate(string templatePath)
+        {
+            var template = File.ReadAllText(HttpContext.Current.Server.MapPath(templatePath));
+
+            return template;
+        }
+
+        private string BuildOrderConfiramtionTemplate(Order order)
+        {
+            var template = GetEmailTemplate(MailTemplates.OrderConfirmation);
+
+            var orderParametersDictionary = order.ToOrderParametersDictionary();
+
+            template = MapTemplateDetails(template, orderParametersDictionary);
+
+            string orderItemPart = string.Empty;
+
+            foreach (var orderItem in order.OrderItems)
+            {
+                var orderItemTemplate = GetEmailTemplate(MailTemplates.OrderItem);
+
+                var orderItemParametersDictionary = orderItem.ToOrderItemParametersDictionary();
+
+                orderItemPart += MapTemplateDetails(orderItemTemplate, orderItemParametersDictionary);
+            }
+
+            var dic = new Dictionary<string, string>
+            {
+                [EmailParametersEnum.OrderItemsPart.ToString().ToLower()] = orderItemPart
+            };
+
+            template = MapTemplateDetails(template, dic);
+
+            return template;
+        }
+
+        #endregion
     }
 }

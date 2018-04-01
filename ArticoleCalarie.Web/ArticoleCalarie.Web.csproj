@@ -741,6 +741,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="EmailTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
