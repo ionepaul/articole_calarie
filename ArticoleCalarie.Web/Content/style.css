@@ -6651,7 +6651,7 @@ strong.details-section {
 }
 
 .main-content-home1 .main-banner {
-  margin: 30px -15px;
+  margin: 30px 0px;
   display: flex;
 }
 .main-content-home1 .main-banner .col {
@@ -9369,6 +9369,29 @@ strong.details-section {
         margin-top: 0;
     }
 
+    .main-content-home1 .main-banner {
+        flex-flow: column;
+        padding: 0 15px;
+    }
+    .main-content-home1 .main-banner .banner-1,
+    .main-content-home1 .main-banner .banner-2 {
+        flex-basis: auto;
+    }
+
+    .main-content-home1 .main-banner .banner-2 img {
+        width: 30%;
+    }
+    .main-content-home1 .main-banner .banner-1 {
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+    .main-content-home1 .main-banner .banner-1 .banner-image {
+        text-align: center;
+    }
+    .main-content-home1 .main-banner .banner-1 img {
+        width: 50%;
+    }
+
     .user-order-details .total-order {
         position: static !important;
         clear: both;
@@ -9840,6 +9863,25 @@ strong.details-section {
 }
 }
 @media(max-width: 767px) {
+
+    .main-content-home1 .main-banner .banner-1 img {
+        width: 200px;
+    }
+
+    .main-content-home1 .main-banner .col {
+        flex-flow: column;
+    }
+
+    .main-content-home1 .main-banner .banner-1 {
+        text-align: center;
+    }
+    .main-content-home1 .main-banner .banner-1 .banner-image {
+        margin-top: 10px;
+    }
+    .main-content-home1 .main-banner .banner-2 img {
+        width: 100px;
+        margin-bottom: 10px;
+    }
 
     .cart-page-title {
         padding: 15px;
