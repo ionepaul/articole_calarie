@@ -25,6 +25,7 @@
         Price,
         ProductDealsPart,
         ProductDescription,
-        ProductUrl
+        ProductUrl,
+        EstimatedOrderTime
     }
 }

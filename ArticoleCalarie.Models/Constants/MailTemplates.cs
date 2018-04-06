@@ -7,5 +7,7 @@
         public const string OrderConfirmation = "~/EmailTemplates/order-confirmation-email.html";
         public const string OrderItem = "~/EmailTemplates/order-item-template.html";
         public const string ProductDealsPart = "~/EmailTemplates/product-deal-template.html";
+        public const string OrderShipped = "~/EmailTemplates/order-shipped-email.html";
+        public const string NewOrder = "~/EmailTemplates/new-order-email.html";
     }
 }

@@ -17,9 +17,9 @@ namespace ArticoleCalarie.Logic.Converters
                 [EmailParametersEnum.DeliveryAddressCity.ToString().ToLower()] = order.DeliveryAddress?.City ?? string.Empty,
                 [EmailParametersEnum.DeliveryAddressCounty.ToString().ToLower()] = order.DeliveryAddress?.County ?? string.Empty,
                 [EmailParametersEnum.DeliveryAddressCountry.ToString().ToLower()] = order.DeliveryAddress?.Country ?? string.Empty,
-                [EmailParametersEnum.ViewOrderLink.ToString().ToLower()] = "/order/userorderlist",
+                [EmailParametersEnum.ViewOrderLink.ToString().ToLower()] = "order/userorderlist",
                 [EmailParametersEnum.OrderNumber.ToString().ToLower()] = order.OrderNumber.ToString(),
-                [EmailParametersEnum.OrderDate.ToString().ToLower()] = order.OrderRegistrationDate.ToString(),
+                [EmailParametersEnum.OrderDate.ToString().ToLower()] = order.OrderRegistrationDate.ToString("MM/dd/yyyy hh:mm"),
                 [EmailParametersEnum.TotalAmount.ToString().ToLower()] = order.TotalAmount.ToString("F")
             };
 

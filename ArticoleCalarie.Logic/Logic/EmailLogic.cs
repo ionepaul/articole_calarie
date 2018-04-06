@@ -32,14 +32,14 @@ namespace ArticoleCalarie.Logic.Logic
 
             var sendTo = adminEmails.Split(';').ToList();
 
-            var body = $"<b>Confirma comanda noua. </b> <br/> <h3>Comanda: #{orderNumber}</h3>";
+            var template = GetEmailTemplate(MailTemplates.NewOrder);
 
             var emailModel = new EmailModel
             {
                 To = sendTo,
                 From = ConfigurationManager.AppSettings["ArticoleCalarieEmail"],
                 Subject = string.Format(MailSubjects.NewOrder, orderNumber),
-                Body = body
+                Body = template
             };
 
             await _iMailService.SendMail(emailModel);
@@ -86,7 +86,7 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task SendConfirmationOrderEmail(Order order)
         {
-            var template = BuildOrderConfiramtionTemplate(order);
+            var template = BuildOrderTemplate(order, MailTemplates.OrderConfirmation);
 
             var emailModel = new EmailModel
             {
@@ -101,14 +101,14 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task SendShippedOrderEmail(Order order, string deliveryTime)
         {
-            var body = $"<p>Comanda #{order.OrderNumber} a fost trimisa. Detailii....<br /> Timp livrare estimat: {deliveryTime}.<p>";
+            var template = BuildOrderTemplate(order, MailTemplates.OrderShipped, deliveryTime);
 
             var emailModel = new EmailModel
             {
                 To = new List<string> { order.Email },
                 From = ConfigurationManager.AppSettings["ArticoleCalarieEmail"],
                 Subject = string.Format(MailSubjects.OrderShipped, order.OrderNumber),
-                Body = body
+                Body = template
             };
 
             await _iMailService.SendMail(emailModel);
@@ -133,9 +133,9 @@ namespace ArticoleCalarie.Logic.Logic
             return template;
         }
 
-        private string BuildOrderConfiramtionTemplate(Order order)
+        private string BuildOrderTemplate(Order order, string templateName, string deliveryTime = "")
         {
-            var template = GetEmailTemplate(MailTemplates.OrderConfirmation);
+            var template = GetEmailTemplate(templateName);
 
             var orderParametersDictionary = order.ToOrderParametersDictionary();
 
@@ -154,7 +154,8 @@ namespace ArticoleCalarie.Logic.Logic
 
             var orderDictionary = new Dictionary<string, string>
             {
-                [EmailParametersEnum.OrderItemsPart.ToString().ToLower()] = orderItemPart
+                [EmailParametersEnum.OrderItemsPart.ToString().ToLower()] = orderItemPart,
+                [EmailParametersEnum.EstimatedOrderTime.ToString().ToLower()] = deliveryTime
             };
 
             template = MapTemplateDetails(template, orderDictionary);
