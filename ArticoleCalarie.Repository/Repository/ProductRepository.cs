@@ -246,7 +246,7 @@ namespace ArticoleCalarie.Repository.Repository
 
         public async Task<IEnumerable<Product>> GetProducstOnSaleForHome()
         {
-            var products = await _dbset.Where(x => x.SalePercentage != 0).Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).Where(x => x.SalePercentage != 0).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
+            var products = await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).Where(x => x.SalePercentage != 0).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
 
             return products;
         }
@@ -264,6 +264,13 @@ namespace ArticoleCalarie.Repository.Repository
             };
 
             return productResult;
+        }
+
+        public async Task<IEnumerable<Product>> GetTheLatestTwoProductsForWelcomeEmail()
+        {
+            var products = await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderByDescending(x => x.DatePosted).Take(2).ToListAsync();
+
+            return products;
         }
     }
 }

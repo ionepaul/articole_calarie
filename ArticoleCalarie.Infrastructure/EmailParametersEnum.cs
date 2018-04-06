@@ -22,6 +22,9 @@
         ProductName,
         ProductColor,
         ProductSize,
-        Price
+        Price,
+        ProductDealsPart,
+        ProductDescription,
+        ProductUrl
     }
 }

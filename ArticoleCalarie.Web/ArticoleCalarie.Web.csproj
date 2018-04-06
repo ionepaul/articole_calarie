@@ -262,6 +262,12 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\timecircles.css" />
+    <Content Include="EmailTemplates\order-confirmation-email.html" />
+    <Content Include="EmailTemplates\order-item-template.html" />
+    <Content Include="EmailTemplates\order-shipped-email.html" />
+    <Content Include="EmailTemplates\reset-password-email.html" />
+    <Content Include="EmailTemplates\welcome-email.html" />
+    <Content Include="EmailTemplates\welcome-latest-sales.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\flaticon.html" />
     <Content Include="fonts\Flaticon.svg" />
@@ -741,7 +747,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="EmailTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
