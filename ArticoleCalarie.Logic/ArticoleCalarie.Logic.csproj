@@ -82,6 +82,7 @@
     <Compile Include="Converters\BrandConverter.cs" />
     <Compile Include="Converters\CategoryConverter.cs" />
     <Compile Include="Converters\ColorConverter.cs" />
+    <Compile Include="Converters\EmailConverter.cs" />
     <Compile Include="Converters\OrderConverter.cs" />
     <Compile Include="Converters\ProductConverter.cs" />
     <Compile Include="Converters\SearchConverter.cs" />

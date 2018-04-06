@@ -35,7 +35,7 @@ namespace ArticoleCalarie.Repository.Repository
 
         public async Task<Order> GetOrderByOrderNumber(int orderNumber)
         {
-            var order = await _dbset.FirstAsync(x => x.OrderNumber == orderNumber);
+            var order = await _dbset.Include(x => x.OrderItems).Include(x => x.DeliveryAddress).FirstAsync(x => x.OrderNumber == orderNumber);
 
             return order;
         }

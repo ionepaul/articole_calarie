@@ -21,5 +21,6 @@ namespace ArticoleCalarie.Repository.IRepository
         Task<IEnumerable<Product>> GetTheNewestProductsForHome(int daysToKeepProductNew);
         Task<IEnumerable<Product>> GetProducstOnSaleForHome();
         Task<ProductSearchResult> GetTheNewestProducts(int itemsPerPage, int itemsToSkip, int daysToKeepProductMarkedNew);
+        Task<IEnumerable<Product>> GetTheLatestTwoProductsForWelcomeEmail();
     }
 }
