@@ -616,6 +616,11 @@ input[type="checkbox"] {
     color: #324a76;
 }
 
+.forgot-password .text-danger {
+    margin-left: 15px;
+    clear: both;
+}
+
 .form-register .form-group {
     margin-bottom: 0;
 }
@@ -627,6 +632,30 @@ input[type="checkbox"] {
     position: relative;
     top: 5px;
     left: 0;
+}
+
+.banner-logo {
+    display: flex;
+    align-items: center;
+    background: #f2f2f2;
+    padding: 0 20px;
+    max-height: 150px;
+    margin-bottom: 30px;
+}
+.banner-logo img {
+    height: 100%;
+}
+.banner-logo .brand-name {
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-left: 25px;
+}
+.banner-logo .description {
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: none;
+    margin-top: 10px;
 }
 
 /* forgot pass confirmation */
@@ -9874,6 +9903,12 @@ strong.details-section {
 }
 }
 @media(max-width: 767px) {
+
+    .banner-logo {
+        flex-flow: column;
+        max-height: none;
+        padding-bottom: 20px
+    }
 
     .main-slideshow {
         margin-top: 0;
