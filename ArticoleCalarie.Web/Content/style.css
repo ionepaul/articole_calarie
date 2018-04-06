@@ -6678,11 +6678,14 @@ strong.details-section {
     color: #fff;
 }
 .main-content-home1 .main-banner .banner-2 .button {
-    background: #324a76;
+     background: #324a76;
     color: #fff;
     font-size: 12px;
-    padding: 10px;
+    padding: 5px 25px;
     border-radius: 3px;
+    font-weight: 700;
+    margin-top: 10px;
+    display: inline-block;
 }
 .main-content-home1 .main-banner .banner-2 {
     flex-basis: 50%;
@@ -6692,13 +6695,14 @@ strong.details-section {
     background: #fff;
 }
 .main-content-home1 .main-banner .banner-2 .banner-content {
+    flex-basis: 100%;
     padding: 0 40px;
     color: #fff;
     background: #324a76;
     text-align: center;
 }
 .main-content-home1 .main-banner .banner-2 img {
-    width: 55%;
+    width: 50%;
     display: block;
     margin: auto;
 }
@@ -6767,16 +6771,16 @@ strong.details-section {
 .main-banner .banner.layout3 .banner-content .button:hover {
   color: #fff;
 }
-.main-banner .banner.layout2 .banner-content .title {
+.main-banner .banner-2 .banner-content .title {
   font-size: 30px;
   color: #fff;
   text-transform: uppercase;
   padding-bottom: 15px;
-  margin: 0 0 25px;
+  margin: 25px 0 25px;
   position: relative;
   text-align: center;
 }
-.main-banner .banner.layout2 .banner-content .title::after {
+.main-banner .banner-2 .banner-content .title::after {
   background-color: #798ca7;
   height: 2px;
   width: 50px;
@@ -9102,6 +9106,14 @@ strong.details-section {
 }
 @media(max-width: 1024px) {
 
+    .main-slideshow {
+        margin-top: -25px;
+    }
+
+    .main-content-home1 .main-banner {
+        margin: 30px -15px;
+    }
+
     .about-product .details-info #addToCardBtn {
         margin-top: 5px;
     }
@@ -9371,7 +9383,6 @@ strong.details-section {
 
     .main-content-home1 .main-banner {
         flex-flow: column;
-        padding: 0 15px;
     }
     .main-content-home1 .main-banner .banner-1,
     .main-content-home1 .main-banner .banner-2 {
@@ -9863,6 +9874,10 @@ strong.details-section {
 }
 }
 @media(max-width: 767px) {
+
+    .main-slideshow {
+        margin-top: 0;
+    }
 
     .main-content-home1 .main-banner .banner-1 img {
         width: 200px;
