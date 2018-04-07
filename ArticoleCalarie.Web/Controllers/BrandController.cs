@@ -19,5 +19,13 @@ namespace ArticoleCalarie.Web.Controllers
 
             return Json(brands, JsonRequestBehavior.AllowGet);
         }
+
+        [ChildActionOnly]
+        public PartialViewResult GetNavbarBrands()
+        {
+            var brands = _iBrandLogic.GetAllBrands();
+
+            return PartialView("_NavbarBrands", brands);
+        }
     }
 }

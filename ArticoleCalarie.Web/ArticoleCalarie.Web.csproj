@@ -744,6 +744,8 @@
     <Content Include="Views\Product\ProductsOnSale.cshtml" />
     <Content Include="Views\Product\ProductsByBrand.cshtml" />
     <Content Include="Views\Product\NewestProducts.cshtml" />
+    <Content Include="Views\Shared\_NavbarBrands.cshtml" />
+    <Content Include="Views\Shared\_NavbarHorseSubcategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

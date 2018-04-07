@@ -1,0 +1,9 @@
+﻿@using ArticoleCalarie.Models
+@model IEnumerable<SubcategoryViewModel>
+
+@foreach (var subcategory in Model)
+{
+    <li class="@(ViewContext?.RouteData?.Values["subcategoryName"]?.ToString() == subcategory.Name.ToLower().Replace(" ", "-") ? "active" : "")">
+        <a href="@Url.RouteUrl("product-list-url", new { categoryName = subcategory.CategoryName.ToLower(), subcategoryId = subcategory.Id, subcategoryName = subcategory.Name.ToLower().Replace(" ", "-"), page = 1 })">@subcategory.Name</a>
+    </li>
+}

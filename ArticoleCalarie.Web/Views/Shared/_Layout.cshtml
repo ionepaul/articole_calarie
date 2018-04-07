@@ -86,78 +86,15 @@
                                 <li class="menu-item menu-item-has-children">
                                     <a class="kt-item-title" title="Cal">CAL</a>
                                     <ul id="horse-products-list" class="submenu">
-                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 10, pageNumber = 1 })">Pinteni</a></li>
-                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 11, pageNumber = 1 })">Frau</a></li>
-                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 12, pageNumber = 1 })">Fraie</a></li>
-                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 13, pageNumber = 1 })">Darlogi</a></li>
-                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 14, pageNumber = 1 })">Accesorii frau</a></li>
-                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 15, pageNumber = 1 })">Martingala</a></li>
-                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 16, pageNumber = 1 })">Valtrap</a></li>
-                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 17, pageNumber = 1 })">Reflex</a></li>
-                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 18, pageNumber = 1 })">Coarda</a></li>
-                                        <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 19, pageNumber = 1 })">Accesorii zabalute</a></li>
+                                        @Html.Action("GetHorseNavbarSubcategories", "Subcategory", null)
                                     </ul>
                                 </li>
                                 <li class="menu-item menu-item-has-children">
                                     <a id="brands-section" class="kt-item-title" title="Brands">BRANDS</a>
                                     <ul id="brands-list" class="submenu">
-                                        <li class="@(ViewContext?.RouteData?.Values["brand"]?.ToString() == "equick" ? "active" : "")"><a href="@Url.RouteUrl("products-by-brand-url", new { brand = "equick", pageNumber = 1 })">eQuick</a></li>
+                                        @Html.Action("GetNavbarBrands", "Brand", null)
                                     </ul>
                                 </li>
-                                <!-- <li class="menu-item menu-item-has-children categories">
-                                    <span class="top-flash hot">hot</span>
-                                    <a href="#" class="kt-item-title" title="Hot Categories">BRANDS</a>
-                                    <ul class="submenu mega-menu">
-                                        <li class="col-md-3 col-lg-3">
-                                            <div class="category layout1">
-                                                <div class="thumb">
-                                                    <div class="info">
-                                                        <h3 class="name">Backpacks</h3>
-                                                        <span class="count-item">( 38 items )</span>
-                                                    </div>
-                                                    <img src="images/category1.jpg" alt="">
-                                                </div>
-                                                <a class="shop-button" href="#">SHOP CATEGORY</a>
-                                            </div>
-                                        </li>
-                                        <li class="col-md-3 col-lg-3">
-                                            <div class="category layout2">
-                                            <a class="shop-button" href="#">SHOP CATEGORY</a>
-                                                <div class="thumb">
-                                                    <div class="info">
-                                                        <h3 class="name">Shoes & Boots</h3>
-                                                        <span class="count-item">( 58 items )</span>
-                                                    </div>
-                                                    <img src="images/category2.jpg" alt="">
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="col-md-3 col-lg-3">
-                                            <div class="category layout1">
-                                                <div class="thumb">
-                                                    <div class="info">
-                                                        <h3 class="name">T-Shirts & Top</h3>
-                                                        <span class="count-item">( 135 items )</span>
-                                                    </div>
-                                                    <img src="images/category3.jpg" alt="">
-                                                </div>
-                                                <a class="shop-button" href="#">SHOP CATEGORY</a>
-                                            </div>
-                                        </li>
-                                        <li class="col-md-3 col-lg-3">
-                                            <div class="category layout2">
-                                                <a class="shop-button" href="#">SHOP CATEGORY</a>
-                                                <div class="thumb">
-                                                    <div class="info">
-                                                        <h3 class="name">Sunglasses</h3>
-                                                        <span class="count-item">( 63 items )</span>
-                                                    </div>
-                                                    <img src="images/category4.jpg" alt="">
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li> -->
 
                                 <li class="menu-item @(ViewContext?.RouteData?.Values["action"]?.ToString() == "NewestProducts" ? "active" : "")"">
                                     <a href="@Url.RouteUrl("newest-products-url", new { pageNumber = 1 })" class="kt-item-title">NOUTĂȚI</a>
@@ -166,9 +103,8 @@
                                     <a href="@Url.RouteUrl("products-on-sale-url", new { pageNumber = 1 })">OFERTE</a>
                                 </li>
                                 
-
                                 <li class="menu-item">
-                                    <a href="@Url.RouteUrl("about-us-url")"> DESPRE NOI</a>
+                                    <a href="@Url.RouteUrl("about-us-url")">DESPRE NOI</a>
                                 </li>
                                 <li class="menu-item">
                                     <a href="@Url.RouteUrl("contact-url")">CONTACT</a>

@@ -2,5 +2,6 @@
 {
     public class SubcategoryViewModel : CategoryViewModel
     {
+        public string CategoryName { get; set; }
     }
 }
