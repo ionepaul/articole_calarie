@@ -2,17 +2,21 @@
 @using PagedList.Mvc;
 @using ArticoleCalarie.Web.Utils
 
+@{ 
+    var brandImage = ViewBag.BrandName + ".png";
+    var brandName = ViewBag.BrandName;
+}
 <div class="page-wrapper">
     <div class="main-content">
         <div class="container">
             <div class="row">
                 <div class="banner-logo">
                     <div class="main-banner">
-                        <img src="~/images/equiline.png" alt="">
+                        <img src="~/images/@brandImage" alt="@brandName">
                     </div>
                     <div class="brand-name">
-                        <span>Equiline</span>
-                        <p class="description">Do to be agreeable conveying oh assurance. Wicket longer admire do barton vanity itself do in it. Preferred to sportsmen it engrossed listening</p>
+                        <span>@brandName</span>
+                      @*  <p class="description">Today Waldhausen is being run by Klaus Reinken and Michael Manefeld. With its own brands ELT, SWING and Waldhausen, as well as distributor for famous brands such as Bates, Wintec, Nathe and Likit, Waldhausen is one of the largest wholesale retailers in the equestrian market. More than 12.000 products are available in more than 60 countries all over the world. Until today the company is faithful to Anton Waldhausen’s statement: Offering premium quality products at an excellent price-performance ratio.</p>*@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 right-content">

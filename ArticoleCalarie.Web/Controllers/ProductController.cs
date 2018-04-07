@@ -276,6 +276,8 @@ namespace ArticoleCalarie.Web.Controllers
         {
             _logger.Info("VIEW > Products by brand id");
 
+            ViewBag.BrandName = brand;
+
             try
             {
                 var page = pageNumber ?? 1;

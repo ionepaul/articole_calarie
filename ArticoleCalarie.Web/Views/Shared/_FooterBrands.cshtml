@@ -1,0 +1,24 @@
+﻿@using ArticoleCalarie.Models
+@model IEnumerable<BrandViewModel>
+
+@{ 
+    var itemsPerColumn = Model.Count() / 2;
+}
+
+<ul class="col-xs-6 col-ss-12">
+    @foreach (var brand in Model.Take(itemsPerColumn))
+    {
+        <li>
+            <a href="@Url.RouteUrl("products-by-brand-url", new { brand = brand.Name.ToLower(), pageNumber = 1 })">@brand.Name</a>
+        </li>
+    }
+</ul>
+
+<ul class="col-xs-6 col-ss-12">
+    @foreach (var brand in Model.Skip(itemsPerColumn))
+    {
+        <li>
+            <a href="@Url.RouteUrl("products-by-brand-url", new { brand = brand.Name.ToLower(), pageNumber = 1 })">@brand.Name</a>
+        </li>
+    }
+</ul>

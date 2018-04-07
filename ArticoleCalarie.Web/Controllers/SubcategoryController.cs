@@ -22,11 +22,11 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [ChildActionOnly]
-        public PartialViewResult GetHorseNavbarSubcategories()
+        public PartialViewResult GetNavbarSubcategories(int categoryId)
         {
-            var horseSubcategories = _iSubcategoryLogic.GetAllSubcategories((int)CategoryViewEnum.Cal);
+            var subcategories = _iSubcategoryLogic.GetAllSubcategories(categoryId);
 
-            return PartialView("_NavbarHorseSubcategories", horseSubcategories);
+            return PartialView("_NavbarSubcategories", subcategories);
         }
     }
 }

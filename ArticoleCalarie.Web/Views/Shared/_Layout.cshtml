@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using ArticoleCalarie.Models.Enums
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -55,44 +57,19 @@
                                     <!-- <span class="top-flash new"> new</span> -->
                                     <a class="kt-item-title" title="SHOP">CĂLĂREȚ</a>
                                     <div class="mega-menu submenu">
-                                        <div class="widget widget-custom-menu">
-                                            <h3 class="widgettitle">Antrenament</h3>
-                                            <ul>
-                                                <li class="@(ViewContext?.RouteData?.Values["subcategoryName"]?.ToString() == "manusi" ? "active" : "")"><a href="@Url.RouteUrl("product-list-url", new { categoryName = "calaret", subcategoryId = 2, subcategoryName = "manusi", page = 1 })">Manuși</a></li>
-                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 3, pageNumber = 1 })">Cizme</a></li>
-                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 4, pageNumber = 1 })">Ghete</a></li>
-                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 5, pageNumber = 1 })">Tricouri</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="widget widget-custom-menu">
-                                            <h3 class="widgettitle">Concurs</h3>
-                                            <ul>
-                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 6, pageNumber = 1 })">Echipament protectie</a></li>
-                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 7, pageNumber = 1 })">Accesorii</a></li>
-                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 8, pageNumber = 1 })">Accesorii</a></li>
-                                                <li><a href="@Url.Action("ProductViewList", "Product", new { subcategoryId = 9, pageNumber = 1 })">Pinteni</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="widget widget-custom-menu">
-                                            <h3 class="widgettitle">Accesorii</h3>
-                                            <ul>
-                                                @*<li><a href="home8.html">Cămăși</a></li>
-                                                    <li><a href="home9.html">Mănuși</a></li>
-                                                    <li><a href="home10.html">Accesorii</a></li>*@
-                                            </ul>
-                                        </div>
+                                        @Html.Action("GetNavbarSubcategories", "Subcategory", new { categoryId = (int)CategoryViewEnum.Calaret })
                                     </div>
                                 </li>
-                                <li class="menu-item menu-item-has-children">
+                                <li class="menu-item menu-item-has-children shop">
                                     <a class="kt-item-title" title="Cal">CAL</a>
-                                    <ul id="horse-products-list" class="submenu">
-                                        @Html.Action("GetHorseNavbarSubcategories", "Subcategory", null)
-                                    </ul>
+                                    <div id="horse-products-list" class="mega-menu submenu">
+                                        @Html.Action("GetNavbarSubcategories", "Subcategory", new { categoryId = (int)CategoryViewEnum.Cal })
+                                    </div>
                                 </li>
                                 <li class="menu-item menu-item-has-children">
                                     <a id="brands-section" class="kt-item-title" title="Brands">BRANDS</a>
                                     <ul id="brands-list" class="submenu">
-                                        @Html.Action("GetNavbarBrands", "Brand", null)
+                                        @Html.Action("GetLayoutBrands", "Brand", new { isNavbar = true })
                                     </ul>
                                 </li>
 
@@ -134,62 +111,44 @@
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-lg-4 col-ss-12">
                             <div class="widget widget-text">
-                                <h3 class="widgettitle">Welcome to Maxstore</h3>
+                                <h3 class="widgettitle">ARTICOLE CALARIE</h3>
                                 <p class="des">Maecenas lorem nibh, scelerisque nec justo gravida, commodo facilisis ipsum nulla ut porttitor.</p>
                             </div>
                             <ul class="list-socials">
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                         <div class="col-xs-6 col-sm-6  col-lg-2 col-ss-12">
                             <div class="widget custom-menu">
-                                <h3 class="widgettitle">Our Store</h3>
+                                <h3 class="widgettitle">UTILE</h3>
                                 <ul>
-                                    <li><a href="#">New York</a></li>
-                                    <li><a href="#">London</a></li>
-                                    <li><a href="#">Bevelly Hill</a></li>
-                                    <li><a href="#">Tokyo</a></li>
-                                    <li><a href="#">Los Angeles</a></li>
-                                    <li><a href="#">Chicago</a></li>
+                                    <li><a href="/produse/oferte?pageNumber=1">Oferte</a></li>
+                                    <li><a href="/produse/noutati?pageNumber=1">Noutati</a></li>
+                                    <li><a href="/contact">Contact</a></li>
+                                    <li><a href="/despre-noi">Despre noi</a></li>
+                                    <li><a href="/account/login">Conecteaza-te</a></li>
+                                    <li><a href="/account/register">Inregistreaza-te</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-lg-4 col-ss-12">
                             <div class="widget custom-menu">
-                                <h3 class="widgettitle">EXPLORE</h3>
+                                <h3 class="widgettitle">BRANDS</h3>
                                 <div class="row">
-                                    <ul class="col-xs-6 col-ss-12">
-                                        <li><a href="#">Men</a></li>
-                                        <li><a href="#">Women</a></li>
-                                        <li><a href="#">Backpacks</a></li>
-                                        <li><a href="#">Boots</a></li>
-                                        <li><a href="#">Accessories</a></li>
-                                        <li><a href="#">Gifts</a></li>
-                                    </ul>
-                                    <ul class="col-xs-6 col-ss-12">
-                                        <li><a href="#">About Us</a></li>
-                                        <li><a href="#">Services</a></li>
-                                        <li><a href="#">Delivery</a></li>
-                                        <li><a href="#">Returns</a></li>
-                                        <li><a href="#">FAQs</a></li>
-                                        <li><a href="#">Contact</a></li>
-                                    </ul>
+                                    @Html.Action("GetLayoutBrands", "Brand", new { isNavbar = false })
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-lg-2 col-ss-12">
                             <div class="widget custom-menu">
-                                <h3 class="widgettitle">INFORMATION</h3>
+                                <h3 class="widgettitle">INFORMATII</h3>
                                 <ul>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Returns</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Contact Us</a></li>
-                                    <li><a href="#">Latest News</a></li>
-                                    <li><a href="#">Our Sitemap</a></li>
+                                    <li><a href="#">Politica de confidentialitate</a></li>
+                                    <li><a href="#">Politica de retur</a></li>
+                                    <li><a href="#">Termeni si Conditii</a></li>
+                                    <li><a href="/contact">Contacteaza-ne</a></li>
+                                    <li><a href="#">Sitemap</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -198,11 +157,8 @@
                 <div class="footer-note">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 left-content">
-                            <div class="logo logo-footer">
-                                <img src="~/images/my_logo3.png" alt="">
-                            </div>
                             <div class="coppy-right">
-                                <h3 class="content">© 2017<span class="text"> Articole Călărie</span> All rights reserved</h3>
+                                <h3 class="content">© @DateTime.UtcNow.Year<span class="text"> Articole Călărie</span> Toate drepturile rezervate.</h3>
                             </div>
                         </div>
                     </div>
