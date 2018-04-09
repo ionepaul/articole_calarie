@@ -5,68 +5,54 @@
     ViewBag.Title = "Contact";
 }
 
-<div class="main-content contact-page">
-    <div class="container">
-        <div class="contact-content">
-            <div class="info-contact">
-                <div class="row">
-                    <div class="col-ss-12 col-xs-4 col-lg-4">
+<div class="page-wrapper">
+    <div class="main-content contact-page">
+        <div class="container">
+            <h1 class="contact-title">Contact</h1>
+            <div class="contact-content">
+                <div class="info-contact">
+                    <div class="form">
+                            @using (Html.BeginRouteForm("contact-form-url", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                        @Html.AntiForgeryToken();
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Name) })
+
+                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger login-errorMessage" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Email) })
+
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger login-errorMessage" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextAreaFor(model => model.Message, new { htmlAttributes = new { @class = "input-info form-control", @placeholder = Html.DisplayNameFor(m => m.Message) } })
+
+                            @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger login-errorMessage" })
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" style="border: none; width: 100%" value="Trimite mesajul" class="submit send" />
+                        </div>
+                    }
+                    </div>
+                    <div class="contact-details">
                         <div class="box-contact">
                             <h4 class="title"><span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span>Hotline</h4>
                             <h5 class="subtitle">(+100) 123 456 7890 - (+100) 123 456 7899</h5>
                         </div>
-                    </div>
-                    <div class="col-ss-12 col-xs-4 col-lg-4">
                         <div class="box-contact">
                             <h4 class="title"><span class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>Email Us</h4>
                             <h5 class="subtitle">Support@maxstore.com</h5>
                         </div>
-                    </div>
 
-                    <div class="col-ss-12 col-xs-4 col-lg-4">
                         <div class="box-contact">
                             <h4 class="title"><span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>Store Location</h4>
                             <h5 class="subtitle">608 Fifth Avenue, New York, NY 10020</h5>
                         </div>
                     </div>
                 </div>
-
-                @using (Html.BeginRouteForm("contact-form-url", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                    @Html.AntiForgeryToken();
-
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-xs-12 col-sm-6">
-                                @Html.TextBoxFor(m => m.Name, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Name) })
-
-                                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger login-errorMessage" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12 col-sm-6">
-                                @Html.TextBoxFor(m => m.Email, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Email) })
-
-                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger login-errorMessage" })
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12 col-sm-6">
-                                @Html.TextAreaFor(model => model.Message, new { htmlAttributes = new { @class = "input-info form-control", @placeholder = Html.DisplayNameFor(m => m.Message) } })
-
-                                @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger login-errorMessage" })
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-12 col-sm-12">
-                                <input type="submit" style="border: none; width: 100%" value="Trimite mesajul" class="submit send" />
-                            </div>
-                        </div>
-                    </div>
-                }
             </div>
         </div>
     </div>
