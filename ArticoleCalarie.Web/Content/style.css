@@ -946,7 +946,12 @@ input {
 }
 .menu-item .top-flash.hot::after {
   border-top-color: #d26e4b;
-} 
+}
+
+.news-banner,
+.offers-banner {
+    margin-bottom: 30px;
+}
 
 .menu-item-has-children {
   position: relative;
@@ -9406,6 +9411,10 @@ strong.details-section {
 }
 @media(max-width: 991px) {
 
+    .delivery-details-form, .billing-address-form {
+        width: 100%;
+    }
+
     .about-product .details-info #addToCardBtn {
         margin-top: 0;
     }
@@ -9982,9 +9991,7 @@ strong.details-section {
         padding: 20px 20px 0;
     }
 
-    .delivery-details-form, .billing-address-form {
-        width: 100%;
-    }
+
     .delivery-details-form .col-sm-6, .billing-address-form .col-sm-6 {
         margin-bottom: 0;
     }
