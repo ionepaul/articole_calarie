@@ -111,10 +111,11 @@
                             @{
                                 var showContainerClass = Model.UserIsLoggedIn ? "show" : "";
                                 var activeParentClass = Model.UserIsLoggedIn ? "active" : "";
+                                var hasNoClick = Model.UserIsLoggedIn ? "" : "noClick";
                             }
 
                             <li class="parent-content @activeParentClass">
-                                <a href="#" class="show-content"> <span class="number">02</span> DETALII LIVRARE</a>
+                                <a href="#" class="show-content @hasNoClick"> <span class="number">02</span> DETALII LIVRARE</a>
                                 <div class="hidden-content checkout-choosen-content @showContainerClass">
                                     <div class="checkout-form content-form delivery-details-form">
                                         <h4 class="main-title">Adresa de livrare</h4>
@@ -135,7 +136,7 @@
                                 </div>
                             </li>
                             <li class="parent-content">
-                                <a href="#" class="show-content"> <span class="number">03</span>DETALII FACTURARE</a>
+                                <a href="#" class="show-content noClick"> <span class="number">03</span>DETALII FACTURARE</a>
                                 <div class="hidden-content checkout-choosen-content">
                                     <div class="checkout-form content-form billing-address-form">
                                         <h4 class="main-title">Adresa de facturare</h4>
@@ -157,9 +158,9 @@
                                 </div>
                             </li>
                             <li class="parent-content">
-                                <a href="#" class="show-content"> <span class="number">04</span> DETALII PLATA</a>
+                                <a href="#" class="show-content noClick"> <span class="number">04</span> DETALII PLATA</a>
                                 <div class="hidden-content checkout-choosen-content">
-                                    <div class="payment-form">
+                                    <div id="delivery-method" class="payment-form">
                                         <div class="info-checkout">
                                             <label class="checkbox-container">
                                                 <input id="howToPay" type="checkbox" name="howToPay" value="Ramburs" checked />
@@ -170,11 +171,11 @@
                                         </div>
                                     </div>
 
-                                    <a href="#" class="submit continue">CONTINUĂ</a>
+                                    <a id="ramburs-btn" class="submit continue">CONTINUĂ</a>
                                 </div>
                             </li>
                             <li class="parent-content">
-                                <a href="#" class="show-content"> <span class="number">05</span> ORDER REVIEW</a>
+                                <a href="#" class="show-content noClick"> <span class="number">05</span> ORDER REVIEW</a>
                                 <div class="hidden-content checkout-choosen-content">
                                     <div class="total-checkout">
                                         <table class="shopping-cart-content checkout-tabel">
@@ -262,7 +263,15 @@
                 else {
                     $("#billing-form-container").addClass("hidden");
                 }
-            })
+            });
+
+            $("#ramburs-btn").on("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                showNextContainer('#delivery-method');
+            });
+
+            noClick();
         });
 
         function formOnComplete() {
@@ -284,7 +293,26 @@
         function showNextContainer(id) {
             $(id).closest(".hidden-content").removeClass("show");
             $(id).closest(".hidden-content").closest(".parent-content").removeClass("active");
+            $(id).closest(".parent-content").next(".parent-content").find("a.show-content").removeClass("noClick");
             $(id).closest(".parent-content").next(".parent-content").find(".show-content").click();
+        }
+
+        function noClick() {
+
+            var list = $('.list-choosen');
+            var noClickLink = $('a.noClick');
+            var links = list.find(noClickLink);
+
+            links.each(function () {
+                $(this).click(function (e) {
+                    if ($(this).hasClass('noClick')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+                });
+            });
+
         }
 
         function failure() {
