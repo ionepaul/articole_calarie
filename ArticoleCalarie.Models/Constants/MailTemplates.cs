@@ -9,5 +9,6 @@
         public const string ProductDealsPart = "~/EmailTemplates/product-deal-template.html";
         public const string OrderShipped = "~/EmailTemplates/order-shipped-email.html";
         public const string NewOrder = "~/EmailTemplates/new-order-email.html";
+        public const string ContactEmail = "~/EmailTemplates/contact-email.html";
     }
 }

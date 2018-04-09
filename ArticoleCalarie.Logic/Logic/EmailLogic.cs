@@ -114,6 +114,28 @@ namespace ArticoleCalarie.Logic.Logic
             await _iMailService.SendMail(emailModel);
         }
 
+        public async Task SendContactFromEmail(ContactPageModel contactModel)
+        {
+            var adminEmails = ConfigurationManager.AppSettings["ArticoleCalarieAdminEmails"];
+
+            var sendTo = adminEmails.Split(';').ToList();
+
+            var template = GetEmailTemplate(MailTemplates.ContactEmail);
+
+            template = MapTemplateDetails(template, contactModel.ToContactParamDictionaryModel());
+
+            var emailModel = new EmailModel
+            {
+                To = sendTo,
+                From = ConfigurationManager.AppSettings["ArticoleCalarieEmail"],
+                Subject = string.Format(MailSubjects.NewMessage),
+                Body = template,
+                ReplyTo = contactModel.Email
+            };
+
+            await _iMailService.SendMail(emailModel);
+        }
+
         #region Private Methods
 
         private string MapTemplateDetails(string template, Dictionary<string, string> dictionary)

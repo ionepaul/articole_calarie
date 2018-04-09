@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ArticoleCalarie.Infrastructure;
+using ArticoleCalarie.Models;
 using ArticoleCalarie.Repository.Entities;
 
 namespace ArticoleCalarie.Logic.Converters
@@ -55,6 +56,18 @@ namespace ArticoleCalarie.Logic.Converters
             };
 
             return productParamDictionary;
+        }
+
+        public static Dictionary<string, string> ToContactParamDictionaryModel(this ContactPageModel contactModel)
+        {
+            var contactParamDictionary = new Dictionary<string, string>
+            {
+                [EmailParametersEnum.From.ToString().ToLower()] = contactModel.Name,
+                [EmailParametersEnum.Email.ToString().ToLower()] = contactModel.Email,
+                [EmailParametersEnum.Message.ToString().ToLower()] = contactModel.Message
+            };
+
+            return contactParamDictionary;
         }
 
         #region Private Methods

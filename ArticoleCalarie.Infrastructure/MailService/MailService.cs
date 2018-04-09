@@ -20,6 +20,11 @@ namespace ArticoleCalarie.Infrastructure.MailService
                 message.To.Add(email);
             }
 
+            if (!string.IsNullOrEmpty(emailModel.ReplyTo))
+            {
+                message.ReplyToList.Add(emailModel.ReplyTo);
+            }
+
             using (var smtpClient = new SmtpClient())
             {
                 smtpClient.EnableSsl = true;

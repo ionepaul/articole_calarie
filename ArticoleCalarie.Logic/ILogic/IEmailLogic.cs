@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using ArticoleCalarie.Models;
 using ArticoleCalarie.Repository.Entities;
 
 namespace ArticoleCalarie.Logic.ILogic
@@ -10,5 +11,6 @@ namespace ArticoleCalarie.Logic.ILogic
         Task SendResetEmail(string email, string callbackUrl);
         Task SendConfirmationOrderEmail(Order order);
         Task SendShippedOrderEmail(Order order, string deliveryTime);
+        Task SendContactFromEmail(ContactPageModel contactModel);
     }
 }

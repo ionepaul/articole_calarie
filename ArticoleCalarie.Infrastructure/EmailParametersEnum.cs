@@ -26,6 +26,10 @@
         ProductDealsPart,
         ProductDescription,
         ProductUrl,
-        EstimatedOrderTime
+        EstimatedOrderTime,
+        //Contact Form,
+        From,
+        Email,
+        Message
     }
 }

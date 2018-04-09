@@ -262,12 +262,14 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\timecircles.css" />
+    <Content Include="EmailTemplates\contact-email.html" />
+    <Content Include="EmailTemplates\new-order-email.html" />
     <Content Include="EmailTemplates\order-confirmation-email.html" />
     <Content Include="EmailTemplates\order-item-template.html" />
     <Content Include="EmailTemplates\order-shipped-email.html" />
+    <Content Include="EmailTemplates\product-deal-template.html" />
     <Content Include="EmailTemplates\reset-password-email.html" />
     <Content Include="EmailTemplates\welcome-email.html" />
-    <Content Include="EmailTemplates\welcome-latest-sales.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\flaticon.html" />
     <Content Include="fonts\Flaticon.svg" />
@@ -747,6 +749,7 @@
     <Content Include="Views\Shared\_NavbarBrands.cshtml" />
     <Content Include="Views\Shared\_NavbarSubcategories.cshtml" />
     <Content Include="Views\Shared\_FooterBrands.cshtml" />
+    <Content Include="Views\Home\ContactMessageSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

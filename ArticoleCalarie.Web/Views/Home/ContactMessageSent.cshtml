@@ -1,0 +1,31 @@
+﻿<div class="page-wrapper container">
+    <div class="checkout-done">
+        <div class="pass-confirmation">
+            <div class="logo">
+                <img src="~/images/my_logo3.png" alt="Articole Călărie logo" id="appLogo">
+            </div>
+            <h2 class="checkout-done-title">Mesajul tau a fost trimis cu succes.</h2>
+            <h3 style="margin-top: 5px;">Facem toate eforturile sa primesti un raspuns cat mai prompt si precis. Multumim pentru intelegere.</h3>
+
+            <div>
+                <p class="reset-pass-conf">
+                    <a href="/">Continua cumparaturile</a>
+                </p>
+            </div>
+
+            <div class="related-items">
+                <h3 class="title supper-title"></h3>
+                <br />
+                <div id="contact-sent-related-products"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            getRelatedProducts('#contact-sent-related-products');
+        });
+    </script>
+}
