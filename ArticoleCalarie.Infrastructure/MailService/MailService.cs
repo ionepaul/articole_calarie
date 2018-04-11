@@ -27,7 +27,7 @@ namespace ArticoleCalarie.Infrastructure.MailService
 
             using (var smtpClient = new SmtpClient())
             {
-                smtpClient.EnableSsl = true;
+                //smtpClient.EnableSsl = true;
 
                 smtpClient.SendCompleted += (s, e) =>
                 {
