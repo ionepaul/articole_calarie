@@ -1,0 +1,18 @@
+﻿@model ArticoleCalarie.Models.GuestEmailViewModel
+
+@using (Ajax.BeginForm("SaveGuestEmail", "Order", new AjaxOptions
+{
+    HttpMethod = "post",
+    OnFailure = "failure",
+    OnComplete = "formOnComplete",
+    OnSuccess = "guestEmailFormOnSuccess"
+}, new { @id = "guest-email-form", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <span class="label-text">Email <span>*</span></span>    
+    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input-info" } })
+
+    <a id="guest-email-form-btn" class="submit">CONTINUĂ</a>
+}

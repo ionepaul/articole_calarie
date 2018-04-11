@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using ArticoleCalarie.Logic.ILogic;
+using ArticoleCalarie.Models.Enums;
 
 namespace ArticoleCalarie.Web.Controllers
 {
@@ -18,6 +19,14 @@ namespace ArticoleCalarie.Web.Controllers
             var subcategories = _iSubcategoryLogic.GetAllSubcategories(categoryId, searchTerm);
 
             return Json(subcategories, JsonRequestBehavior.AllowGet);
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult GetNavbarSubcategories(int categoryId)
+        {
+            var subcategories = _iSubcategoryLogic.GetAllSubcategories(categoryId);
+
+            return PartialView("_NavbarSubcategories", subcategories);
         }
     }
 }

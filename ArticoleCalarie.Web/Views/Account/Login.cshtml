@@ -9,7 +9,7 @@
         <div class="login-col contact-content">
             <h4 class="form-title">@ViewBag.Title</h4>
             <section class="form-wrapper" id="loginForm">
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                @using (Html.BeginForm("login", "account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                     @Html.AntiForgeryToken()
 
@@ -18,15 +18,15 @@
                         <div class="col-md-12">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             @Html.TextBoxFor(m => m.Email, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Email) })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger login-errorMessage" })
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             @Html.PasswordFor(m => m.Password, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Password) })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                         </div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger login-errorMessage" })
                     </div>
                     <div class="form-group">
                         <div class="col-sm-6">
@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-sm-6 text-right">
                             <p>
-                                @Html.ActionLink("Ți-ai uitat parola?", "ForgotPassword")
+                                @Html.ActionLink("Ti-ai uitat parola?", "ForgotPassword")
                             </p>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                 </p>
                 <div class="form-group">
                     <p class="register-now">
-                        @Html.ActionLink("Înregistrează-te acum", "Register", new { @class = "submit send" })
+                        @Html.ActionLink("Inregistreaza-te acum", "Register", new { @class = "submit send" })
                     </p>
                 </div>
             </section>

@@ -4,20 +4,20 @@ namespace ArticoleCalarie.Models
 {
     public class ResetPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Email-ul este obligatoriu.")]
         [Display(Name = "Email")]
+        [EmailAddress(ErrorMessage = "Email-ul introdus este invalid.")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} trebuie sa aiba cel putin {2} caractere.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parola")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirma parola")]
+        [Compare("Password", ErrorMessage = "Parola si confirmarea parolei nu se potrivesc.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

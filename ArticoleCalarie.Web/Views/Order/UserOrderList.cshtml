@@ -1,0 +1,18 @@
+﻿@model PagedList.IPagedList<ArticoleCalarie.Models.OrderViewModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@Html.Partial("_AccountHeaderPartial")
+
+@Html.Partial("_UserOrderListPartial", Model)
+
+
+@section scripts {
+    <script src="~/Scripts/user-orders.js"></script>
+    <script>
+            $(document).ready(function () {
+                getRelatedProducts('#orderList-related-products');
+            });
+    </script>
+}
+

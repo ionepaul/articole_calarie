@@ -1,11 +1,9 @@
 ﻿using System;
-using ArticoleCalarie.Repository;
 using ArticoleCalarie.Repository.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.DataProtection;
 
 namespace ArticoleCalarie.Repository.Identity
 {

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
+using Newtonsoft.Json;
 using NLog;
 using PagedList;
 
@@ -59,7 +61,7 @@ namespace ArticoleCalarie.Web.Controllers
         public ViewResult List(int? pageNumber, string productCode = "")
         {
             _logger.Info("VIEW > Admin Product List");
-            
+
             ViewBag.ProductCode = productCode;
 
             try
@@ -68,7 +70,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 var productsForAdmin = _iProductLogic.GetProductsForAdmin(page, productCode);
 
-                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["AdminProductsPerPage"]);
 
                 var pagedListModel = new StaticPagedList<ProductListItemModel>(productsForAdmin.Products, page, pageSize, productsForAdmin.TotalCount);
 
@@ -81,7 +83,7 @@ namespace ArticoleCalarie.Web.Controllers
                 _logger.Error($"Failed to get product list for admin. Exception: {ex.Message}.");
 
                 return View("Error");
-            }            
+            }
         }
 
         [HttpGet]
@@ -98,7 +100,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 var productsForAdmin = _iProductLogic.GetProductsForAdmin(page, productCode);
 
-                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["AdminProductsPerPage"]);
 
                 var pagedListModel = new StaticPagedList<ProductListItemModel>(productsForAdmin.Products, page, pageSize, productsForAdmin.TotalCount);
 
@@ -113,30 +115,35 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> ProductViewList(int subcategoryId, int pageNumber, decimal? minPrice, decimal? maxPrice, string colors = "", string sizes = "")
+        [Route("produse/{categoryName}/{subcategoryId}/{subcategoryName}", Name = "product-list-url")]
+        public async Task<ActionResult> ProductViewList(string categoryName, int subcategoryId, string subcategoryName, int page, decimal? minp, decimal? maxp, string cl = "", string sz = "")
         {
             _logger.Info("VIEW > Product List By Subcategory and Search Model");
 
             ViewBag.SubcategoryId = subcategoryId;
+            ViewBag.CategoryName = categoryName;
+            ViewBag.SubcategoryName = subcategoryName;
+
             var searchViewModel = new SearchViewModel();
             var sessionSearchModel = Session["SearchModel"] as SearchViewModel;
 
             try
             {
-                if ((sessionSearchModel != null && sessionSearchModel.SubcategoryId == subcategoryId && minPrice == null && maxPrice == null && string.IsNullOrEmpty(colors) && string.IsNullOrEmpty(sizes)))
+                if ((sessionSearchModel != null && sessionSearchModel.SubcategoryId == subcategoryId && minp == null && maxp == null && string.IsNullOrEmpty(cl) && string.IsNullOrEmpty(sz)))
                 {
                     searchViewModel = sessionSearchModel;
+                    searchViewModel.PageNumber = page;
                 }
                 else
                 {
                     searchViewModel = new SearchViewModel
                     {
                         SubcategoryId = subcategoryId,
-                        PageNumber = pageNumber,
-                        MinPrice = minPrice,
-                        MaxPrice = maxPrice,
-                        ColorIds = colors,
-                        Sizes = sizes
+                        PageNumber = page,
+                        MinPrice = minp,
+                        MaxPrice = maxp,
+                        ColorIds = cl,
+                        Sizes = sz
                     };
 
                     Session["SearchModel"] = searchViewModel;
@@ -146,7 +153,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
 
-                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(productSearchViewResult.Products, pageNumber, pageSize, productSearchViewResult.TotalCount);
+                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(productSearchViewResult.Products, page, pageSize, productSearchViewResult.TotalCount);
 
                 return View(pagedListModel);
             }
@@ -159,19 +166,97 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(string productCode)
+        [Route("produse/{categoryName}/{subcategoryId}/{subcategoryName}/{productCode}/{productName}", Name = "product-details-url")]
+        public ActionResult Details(string categoryName, int subcategoryId, string subcategoryName, string productCode, string productName)
         {
-            _logger.Info("VIEW > Product Detail for Admin");
+            _logger.Info("VIEW > Product Detail");
+
+            ViewBag.CategoryName = categoryName;
+            ViewBag.SubcategoryName = subcategoryName;
+            ViewBag.SubcategoryId = subcategoryId;
 
             try
             {
                 var product = _iProductLogic.GetProductByProductCode(productCode);
 
+                var _subcategoryCookie = new HttpCookie("_RelatedProductsIn")
+                {
+                    Value = product.SubcategoryId,
+                    Expires = DateTime.Now.AddDays(10)
+                };
+
+                Response.Cookies.Add(_subcategoryCookie);
+
                 return View(product);
             }
             catch (Exception ex)
             {
-                _logger.Error($"Failed to get product by product code: {productCode} for admin. Exception: {ex.Message}.");
+                _logger.Error($"Failed to get product by product code: {productCode}. Exception: {ex.Message}.");
+
+                return View("Error");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetRelatedProducts()
+        {
+            _logger.Info("PARTIAL VIEW > Related Products");
+
+            try
+            {
+                var subcategory = Request.Cookies["_RelatedProductsIn"]?.Value;
+
+                var relatedProducts = await _iProductLogic.GetRelatedProducts(subcategory);
+
+                return PartialView("_RelatedProductsPartial", relatedProducts);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to retrive related products. Exception: {ex.Message}");
+
+                return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
+            }
+        }
+
+        [HttpGet]
+        [Route("produse/noutati", Name = "newest-products-url")]
+        public async Task<ActionResult> NewestProducts(int? pageNumber, bool isForHomePage = false)
+        {
+            if (isForHomePage)
+            {
+                _logger.Info("PARTIAL VIEW > The newest four products for home page.");
+
+                try
+                {
+                    var newestProductsForHome = await _iProductLogic.GetTheNewestProductsForHome();
+
+                    return PartialView("_RelatedProductsPartial", newestProductsForHome);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error($"Failed to get the newest four products for home page. Exception: {ex.Message}");
+
+                    return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
+                }
+            }
+
+            try
+            {
+                _logger.Info("VIEW > The newest products page.");
+
+                var page = pageNumber ?? 1;
+
+                var products = await _iProductLogic.GetTheNewestPoducts(page);
+
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
+
+                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
+
+                return View(pagedListModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to get products on sale. Exception: {ex.Message}.");
 
                 return View("Error");
             }
@@ -183,6 +268,78 @@ namespace ArticoleCalarie.Web.Controllers
             var searchFilters = _iProductLogic.GetSearchViewFiltersForSubcategory(subcategoryId);
 
             return PartialView("_ProductListSearch", searchFilters);
+        }
+
+        [HttpGet]
+        [Route("produse/brand/{brand}", Name = "products-by-brand-url")]
+        public async Task<ActionResult> ProductsByBrand(string brand, int? pageNumber)
+        {
+            _logger.Info("VIEW > Products by brand id");
+
+            ViewBag.BrandName = brand;
+
+            try
+            {
+                var page = pageNumber ?? 1;
+
+                var products = await _iProductLogic.GetProductsByBrand(brand, page);
+
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
+
+                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
+
+                return View(pagedListModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to get products by brand {brand}. Exception: {ex.Message}.");
+
+                return View("Error");
+            }
+        }
+
+        [HttpGet]
+        [Route("produse/oferte", Name = "products-on-sale-url")]
+        public async Task<ActionResult> ProductsOnSale(int? pageNumber, bool isForHomePage = false)
+        {
+            if (!isForHomePage)
+            {
+                _logger.Info("VIEW > Products on sale");
+
+                try
+                {
+                    var page = pageNumber ?? 1;
+
+                    var products = await _iProductLogic.GetProductsOnSale(page);
+
+                    int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
+
+                    var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
+
+                    return View(pagedListModel);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error($"Failed to get products on sale. Exception: {ex.Message}.");
+
+                    return View("Error");
+                }
+            } 
+
+            _logger.Info("PARTIAL VIEW > The latest four products on sale products for home page.");
+
+            try
+            {
+                var productsOnSaleForHome = await _iProductLogic.GetProductsOnSaleForHome();
+
+                return PartialView("_RelatedProductsPartial", productsOnSaleForHome);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to get the lates four products on sale for home page. Exception: {ex.Message}");
+
+                return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
+            }
         }
 
         #endregion
@@ -213,7 +370,7 @@ namespace ArticoleCalarie.Web.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error($"Failed to add product {productViewModel.ProductName}. Exception: {ex.Message}.");
+                _logger.Error($"Failed to add product {productViewModel.ProductName}. Object: {JsonConvert.SerializeObject(productViewModel)} --  Exception: {ex.Message}.");
 
                 return View("Error");
             }
@@ -236,14 +393,14 @@ namespace ArticoleCalarie.Web.Controllers
             try
             {
                 _iProductLogic.UpdateProduct(productViewModel.Id, productViewModel);
-
+                
                 _logger.Info($"Successfully updated product {productViewModel.ProductName}.");
 
                 return RedirectToAction(nameof(List));
             }
             catch (Exception ex)
             {
-                _logger.Error($"Failed to update product {productViewModel.ProductName}. Exception: {ex.Message}.");
+                _logger.Error($"Failed to update product {productViewModel.ProductName}. Object: {JsonConvert.SerializeObject(productViewModel)} -- Exception: {ex.Message}.");
 
                 return View("Error");
             }

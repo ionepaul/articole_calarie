@@ -10,7 +10,8 @@ namespace ArticoleCalarie.Logic.Converters
             var subcategoryViewModel = new SubcategoryViewModel
             {
                 Id = subcategory.Id,
-                Name = subcategory.Name
+                Name = subcategory.Name,
+                CategoryName = subcategory.Category?.Name
             };
 
             return subcategoryViewModel;

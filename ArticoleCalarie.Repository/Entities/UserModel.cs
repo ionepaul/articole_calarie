@@ -24,6 +24,9 @@ namespace ArticoleCalarie.Repository.Entities
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+
+            userIdentity.AddClaim(new Claim("FullName", this.FullName));
+
             // Add custom user claims here
             return userIdentity;
         }

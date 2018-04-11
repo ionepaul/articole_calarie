@@ -1,35 +1,24 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+@if (Request.IsAuthenticated)
 {
-    <li>
+    <li class="user-link-item">
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
         {
             @Html.AntiForgeryToken()
             <li class="menu-item-has-children account">
-                <p class="hello-user"><i class="glyphicon glyphicon-user"></i> Salut <i class="glyphicon glyphicon-chevron-down"></i></p>
-            <ul class="submenu">
-                <li class="welcome-user">@Html.ActionLink(User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
-                <li>@Html.ActionLink("Adaugă produs", "Add", "Product", routeValues: null, htmlAttributes: new { title = "Adaugă produs" })</li>
-                <li>@Html.ActionLink("Listă produse", "List", "Product", routeValues: new { pageNumber = 1 }, htmlAttributes: new { title = "Adaugă produs" })</li>
-                @*<li>@Html.ActionLink("Vezi comenzi", "Index", "Orders", routeValues: null, htmlAttributes: new { title = "Vezi comenzi" })</li>*@
-                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
-            </ul>
-        </li>
-        }
-   </li>
-}
-else if (Request.IsAuthenticated)
-{
-    <li>
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-        {
-            @Html.AntiForgeryToken()
-            <li class="menu-item-has-children account">
-            @Html.ActionLink("Salut, " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage", style = "color: #000" })
+                <p class="hello-user"></p>
             <ul class="submenu">
                 <li>@Html.ActionLink("Contul Meu", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
-                <li><a href="shopping-cart.html">Shopping Bag</a></li>
-                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+                <li>@Html.ActionLink("Comenzile Mele", "UserOrderList", "Order", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
+                
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("Adaugă produs", "Add", "Product", routeValues: null, htmlAttributes: new { title = "Adaugă produs" })</li>
+                    <li>@Html.ActionLink("Listă produse", "List", "Product", routeValues: new { pageNumber = 1 }, htmlAttributes: new { title = "Adaugă produs" })</li>
+                    <li>@Html.ActionLink("Vezi comenzile", "OrderList", "Order", routeValues: new { pageNumber = 1 }, htmlAttributes: new { title = "Vezi comenzile" })</li>
+                }
+                
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Deconecteaza-te</a></li>
             </ul>
         </li>
         }
@@ -37,5 +26,5 @@ else if (Request.IsAuthenticated)
 }
 else
 {
-    <li><i class="glyphicon glyphicon-user"></i> @Html.ActionLink("Conectează-te", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <li>@Html.ActionLink("Conecteaza-te", "login", "account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }

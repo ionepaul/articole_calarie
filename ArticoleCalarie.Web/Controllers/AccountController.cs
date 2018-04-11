@@ -59,11 +59,13 @@ namespace ArticoleCalarie.Web.Controllers
                 switch (result)
                 {
                     case SignInStatus.Success:
+                        ViewBag.ReturnUrl = "/home/index";
                         _logger.Info("Successfully logged user in.");
                         return RedirectToLocal(returnUrl);
                     default:
                         _logger.Warn($"Failed to log in user: {model.Email}. Result was unsuccessful. Returning Login view.");
-                        ModelState.AddModelError("", "Invalid login attempt.");
+                        ModelState.AddModelError("", "Conectarea a esuat. Email sau parola invalida.");
+                        ViewBag.ReturnUrl = returnUrl;
                         return View(model);
                 }
             }
@@ -91,7 +93,7 @@ namespace ArticoleCalarie.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, string returnUrl)
         {
             _logger.Info("POST > Register");
 
@@ -105,7 +107,9 @@ namespace ArticoleCalarie.Web.Controllers
                     {
                         _logger.Info($"Successfully registred user: {model.Email}.");
 
-                        return RedirectToAction("Index", "Home");
+                        ViewBag.ReturnUrl = "/home/index";
+
+                        return RedirectToLocal(returnUrl);
                     }
 
                     AddErrors(result);
@@ -119,6 +123,8 @@ namespace ArticoleCalarie.Web.Controllers
             }
 
             _logger.Warn($"Failed to register user: {model.Email}. Result was unsuccessful. Returning register view.");
+
+            ViewBag.ReturnUrl = returnUrl;
 
             return View(model);
         }
@@ -370,7 +376,7 @@ namespace ArticoleCalarie.Web.Controllers
             {
                 var userId = User.Identity.GetUserId();
 
-                UserViewModel userViewModel = await _iAccountLogic.GetUserById(userId);
+                var userViewModel = await _iAccountLogic.GetUserById(userId);
 
                 _logger.Info("Successfully retrieved user information.");
 

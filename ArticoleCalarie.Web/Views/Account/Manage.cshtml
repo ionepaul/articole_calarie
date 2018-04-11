@@ -4,11 +4,18 @@
     ViewBag.Title = "Contul Meu";
 }
 
-<div class="page-wrapper">
+<div class="page-wrapper account-manage-wrapper cf">
+
+    @Html.Partial("_AccountHeaderPartial")
+
     <div class="col-sm-6">
         <h4 class="form-title">Adresa de livrare</h4>
         <div id="deliveryAddressForm" class="contact-content @(Model.DeliveryAddress == null ? "" : "hidden")">
-            @using (Html.BeginForm("SaveDeliveryAddress", "Account"))
+            @using (Ajax.BeginForm("SaveDeliveryAddress", "Account", new AjaxOptions
+            {
+                HttpMethod = "post",
+                OnComplete = "acccounEditAddressOnComplete"
+            }))
             {
                 @Html.AntiForgeryToken()
 
@@ -45,8 +52,11 @@
     <div class="col-sm-6">
         <h4 class="form-title">Adresa de facturare</h4>
         <div id="billingAddressForm" class="contact-content @(Model.BillingAddress == null ? "" : "hidden")">
-            @using (Html.BeginForm("SaveBillingAddress", "Account"))
+            @using (Ajax.BeginForm("SaveBillingAddress", "Account", new AjaxOptions
             {
+                HttpMethod = "post",
+                OnComplete = "acccounEditAddressOnComplete"
+            }))            {
                 @Html.AntiForgeryToken()
 
                 @Html.Partial("_AddressFormPartial", Model.BillingAddress, new ViewDataDictionary()
@@ -73,23 +83,31 @@
                     <p>@Model.BillingAddress.PostalCode<span>, </span>@Model.BillingAddress.City</p>
                     <p>@Model.BillingAddress.County<span>, </span>@Model.BillingAddress.Country</p>
                     <a class="address-details-edit" id="editBillingAddressBtn" title="Edit">Edit</a>
-                    <img class="delivery-truck" src="../images/delivery.png" alt="Delivery Truck" />
+                    <img class="billing" src="../images/billing.png" alt="Delivery Truck" />
                 </div>
             }
         </div>
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $('#editDeliveryAddressBtn').on('click', function () {
-            $('#deliveryAddress').addClass('hidden');
-            $('#deliveryAddressForm').removeClass('hidden');
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#editDeliveryAddressBtn').on('click', function () {
+                $('#deliveryAddress').addClass('hidden');
+                $('#deliveryAddressForm').removeClass('hidden');
+            });
+
+            $('#editBillingAddressBtn').on('click', function () {
+                $('#billingAddress').addClass('hidden');
+                $('#billingAddressForm').removeClass('hidden');
+            });
         });
 
-        $('#editBillingAddressBtn').on('click', function () {
-            $('#billingAddress').addClass('hidden');
-            $('#billingAddressForm').removeClass('hidden');
-        });
-    });
-</script>
+        function acccounEditAddressOnComplete() {
+            window.location.href = '/account/manage';
+        }
+    </script>   
+}

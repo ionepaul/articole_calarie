@@ -14,11 +14,20 @@ namespace ArticoleCalarie.Infrastructure.MailService
             message.Subject = emailModel.Subject;
             message.IsBodyHtml = true;
             message.Body = emailModel.Body;
-            message.To.Add(emailModel.To);
+
+            foreach(var email in emailModel.To)
+            {
+                message.To.Add(email);
+            }
+
+            if (!string.IsNullOrEmpty(emailModel.ReplyTo))
+            {
+                message.ReplyToList.Add(emailModel.ReplyTo);
+            }
 
             using (var smtpClient = new SmtpClient())
             {
-                smtpClient.EnableSsl = true;
+                //smtpClient.EnableSsl = true;
 
                 smtpClient.SendCompleted += (s, e) =>
                 {

@@ -25,14 +25,14 @@ $(document).ready(function () {
         },
         minLength: 2,
         focus: function (event, ui) {
-            var categoryName = ui.item.label;
-            $(this).val(categoryName);
+            var subcategory = ui.item.label;
+            $(this).val(subcategory);
             event.preventDefault();
         },
         select: function (event, ui) {
             event.preventDefault();
-            var categoryName = ui.item.label;
-            $(this).val(categoryName);
+            var subcategory = ui.item.label;
+            $(this).val(subcategory);
             $('#SubcategoryId').val(ui.item.value);
         }
     });
@@ -53,14 +53,14 @@ $(document).ready(function () {
         },
         minLength: 2,
         focus: function (event, ui) {
-            var categoryName = ui.item.label;
-            $(this).val(categoryName);
+            var brandName = ui.item.label;
+            $(this).val(brandName);
             event.preventDefault();
         },
         select: function (event, ui) {
             event.preventDefault();
-            var categoryName = ui.item.label;
-            $(this).val(categoryName);
+            var brandName = ui.item.label;
+            $(this).val(brandName);
             $('#Brand').val(ui.item.value);
         }
     });
@@ -197,10 +197,9 @@ function loadCategories() {
                 let index = $('#CategoryId').attr('value') - 1;
                 $('#categories-select > option').eq(index).attr('selected', 'selected')
             }
-            else {
-                selectedCategoryId = $('#categories-select option:selected')[0].value;
-                $('#CategoryId').val(selectedCategoryId);
-            }
+
+            selectedCategoryId = $('#categories-select option:selected')[0].value;
+            $('#CategoryId').val(selectedCategoryId);
         },
         error: function (error) {
             alert("Eroare la incarcarea categoriilor. Faceti un refresh la pagina.");

@@ -4,6 +4,37 @@
     ViewBag.Title = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div class="page-wrapper container">
+    <div class="pass-confirmation">
+        <div class="logo">
+            <img src="~/images/my_logo3.png" alt="Articole Călărie logo" id="appLogo">
+        </div>
+        <hgroup class="title text-danger">
+            <h1>Oops. :(</h1>
+        </hgroup>
+        <div>
+            <p class="text-danger">
+                Din pacate a intervenit o eroare in timpul operatiunii dvs.
+            </p>
+        </div>
+        <div>
+            <p class="reset-pass-conf">
+                <a href="/">PAGINA PRINCIPALA</a>
+            </p>
+        </div>
+    </div>
+    <div class="related-items">
+        <h3 class="title supper-title"></h3>
+        <br />
+        <div id="error-page-related-products"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            getRelatedProducts('#error-page-related-products');
+        });
+    </script>
+}
 

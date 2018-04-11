@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ArticoleCalarie.Models;
 
 namespace ArticoleCalarie.Logic.ILogic
@@ -13,5 +14,11 @@ namespace ArticoleCalarie.Logic.ILogic
         void DeleteProduct(int productId);
         ProductViewModel GetProductByProductCode(string productCode);
         SearchViewFilters GetSearchViewFiltersForSubcategory(int subcategoryId);
+        Task<ProductSearchViewResult> GetProductsByBrand(string brand, int pageNumber);
+        Task<ProductSearchViewResult> GetProductsOnSale(int pageNumber);
+        Task<IEnumerable<ProductListViewItemModel>> GetRelatedProducts(string subcategory);
+        Task<IEnumerable<ProductListViewItemModel>> GetTheNewestProductsForHome();
+        Task<IEnumerable<ProductListViewItemModel>> GetProductsOnSaleForHome();
+        Task<ProductSearchViewResult> GetTheNewestPoducts(int pageNumber);
     }
 }

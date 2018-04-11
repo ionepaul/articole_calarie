@@ -38,14 +38,27 @@ namespace ArticoleCalarie.Logic.Converters
                 MaterialDetails = product.MaterialDetails,
                 Size = product.Size,
                 Price = product.Price.ToString("F"),
-                SalePercentage = product.SalePercentage,
                 SizeChartImage = product.SizeChart?.FileName,
                 CategoryId = product.Subcategory?.CategoryId ?? 0,
                 Brand = product.Brand?.Name,
                 SubcategoryId = product.Subcategory?.Name,
                 ImagesList = product.Images.Select(x => x.FileName).ToList(),
-                ColorsList = product.AvailableColors.Select(x => x.Name).ToList()
+                ColorsList = product.AvailableColors?.Select(x => x.Name).ToList(),
+                IsOnSale = product.SalePercentage != 0
             };
+
+            if (productViewModel.IsOnSale)
+            {
+                var saleValue = product.SalePercentage > 0 ? product.SalePercentage : (-1) * product.SalePercentage;
+
+                productViewModel.SalePercentage = saleValue;
+
+                var salePercentage = (decimal)saleValue / 100;
+
+                var saleAmount = product.Price * salePercentage;
+
+                productViewModel.PriceAfterSaleApplied = Math.Round(product.Price - saleAmount, 2);
+            }
 
             return productViewModel;
         }
@@ -57,11 +70,12 @@ namespace ArticoleCalarie.Logic.Converters
                 Id = product.Id,
                 ProductCode = product.ProductCode,
                 ProductName = product.ProductName,
-                SubcategoryName = product.Subcategory.Name,
+                SubcategoryName = product.Subcategory?.Name,
                 Brand = product.Brand?.Name,
                 Price = product.Price,
-                SalePercentage = product.SalePercentage.ToString() + "%"
-                   
+                SalePercentage = product.SalePercentage.ToString() + "%",
+                CategoryName = product.Subcategory?.Category?.Name,
+                SubcategoryId = product.Subcategory?.Id
             };
 
             return productListItemModel;
@@ -80,7 +94,10 @@ namespace ArticoleCalarie.Logic.Converters
                 Price = product.Price,
                 ProductImageName = product.Images?.FirstOrDefault()?.FileName,
                 IsNew = product.DatePosted > DateTime.Now.AddDays((-1) * daysToKeepProductMarkedNew),
-                IsOnSale = product.SalePercentage != 0
+                IsOnSale = product.SalePercentage != 0,
+                SubcategoryName = product.Subcategory?.Name,
+                CategoryName = product.Subcategory?.Category?.Name,
+                SubcategoryId = product.Subcategory?.Id
             };
 
             if (productListViewItemModel.IsOnSale)

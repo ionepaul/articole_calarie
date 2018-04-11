@@ -82,6 +82,8 @@
     <Compile Include="Converters\BrandConverter.cs" />
     <Compile Include="Converters\CategoryConverter.cs" />
     <Compile Include="Converters\ColorConverter.cs" />
+    <Compile Include="Converters\EmailConverter.cs" />
+    <Compile Include="Converters\OrderConverter.cs" />
     <Compile Include="Converters\ProductConverter.cs" />
     <Compile Include="Converters\SearchConverter.cs" />
     <Compile Include="Converters\SizeChartConverter.cs" />
@@ -90,6 +92,8 @@
     <Compile Include="ILogic\IBrandLogic.cs" />
     <Compile Include="ILogic\ICategoryLogic.cs" />
     <Compile Include="ILogic\IColorLogic.cs" />
+    <Compile Include="ILogic\IEmailLogic.cs" />
+    <Compile Include="ILogic\IOrderLogic.cs" />
     <Compile Include="ILogic\IProductLogic.cs" />
     <Compile Include="ILogic\ISizeChartLogic.cs" />
     <Compile Include="ILogic\ISubcategoryLogic.cs" />
@@ -97,6 +101,8 @@
     <Compile Include="Logic\BrandLogic.cs" />
     <Compile Include="Logic\CategoryLogic.cs" />
     <Compile Include="Logic\ColorLogic.cs" />
+    <Compile Include="Logic\EmailLogic.cs" />
+    <Compile Include="Logic\OrderLogic.cs" />
     <Compile Include="Logic\ProductLogic.cs" />
     <Compile Include="Logic\SizeChartLogic.cs" />
     <Compile Include="Logic\SubcategoryLogic.cs" />

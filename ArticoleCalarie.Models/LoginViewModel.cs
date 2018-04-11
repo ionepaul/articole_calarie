@@ -6,7 +6,7 @@ namespace ArticoleCalarie.Models
     {
         [Required(ErrorMessage = "Email-ul este obligatoriu.")]
         [Display(Name = "Email")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email-ul introdus este invalid.")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Parola este obligatorie.")]
@@ -14,7 +14,7 @@ namespace ArticoleCalarie.Models
         [Display(Name = "Parola")]
         public string Password { get; set; }
 
-        [Display(Name = "Ține-mă minte")]
+        [Display(Name = "Ramai conectat")]
         public bool RememberMe { get; set; }
     }
 }

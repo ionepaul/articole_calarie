@@ -102,19 +102,22 @@ namespace ArticoleCalarie.Logic.Logic
             var selectedColors = productViewModel.Colors?.Split(',');
             product.ColorIds = new List<int>();
 
-            foreach (var colorId in selectedColors)
+            if (selectedColors != null)
             {
-                var intColorId = Convert.ToInt32(colorId);
+                foreach (var colorId in selectedColors)
+                {
+                    var intColorId = Convert.ToInt32(colorId);
 
-                product.ColorIds.Add(intColorId);
+                    product.ColorIds.Add(intColorId);
+                }
             }
 
-            if (!string.Equals(product.Subcategory.Name, productViewModel.SubcategoryId))
+            if (!string.Equals(product.Subcategory?.Name, productViewModel.SubcategoryId))
             {
                 StoreSubcategory(product, productViewModel);
             }
             
-            if (!string.Equals(product.Brand.Name, productViewModel.Brand))
+            if (!string.Equals(product.Brand?.Name, productViewModel.Brand))
             {
                 StoreBrand(product, productViewModel);
             }
@@ -143,7 +146,7 @@ namespace ArticoleCalarie.Logic.Logic
 
         public ProductListAdminViewModel GetProductsForAdmin(int pageNumber, string productCode)
         {
-            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["AdminProductsPerPage"]);
             var itemsToSkip = (pageNumber - 1) * itemsPerPage;
 
             var productsForAdmin = _iProductRepository.GetProductsForAdmin(itemsPerPage, itemsToSkip, productCode);
@@ -204,6 +207,78 @@ namespace ArticoleCalarie.Logic.Logic
             var searchViewFilters = searchFilters.ToViewModel();
 
             return searchViewFilters;
+        }
+
+        public async Task<ProductSearchViewResult> GetProductsByBrand(string brand, int pageNumber)
+        {
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
+            var itemsToSkip = (pageNumber - 1) * itemsPerPage;
+
+            var productsByBrand = await _iProductRepository.GetProductsByBrand(brand, itemsPerPage, itemsToSkip);
+
+            var productSearchViewResult = new ProductSearchViewResult
+            {
+                TotalCount = productsByBrand.TotalCount,
+                Products = productsByBrand.Products.Select(x => x.ToListViewItemModel())
+            };
+
+            return productSearchViewResult;
+        }
+
+        public async Task<ProductSearchViewResult> GetProductsOnSale(int pageNumber)
+        {
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
+            var itemsToSkip = (pageNumber - 1) * itemsPerPage;
+
+            var productsOnSale = await _iProductRepository.GetProductsOnSale(itemsPerPage, itemsToSkip);
+
+            var productSearchViewResult = new ProductSearchViewResult
+            {
+                TotalCount = productsOnSale.TotalCount,
+                Products = productsOnSale.Products.Select(x => x.ToListViewItemModel())
+            };
+
+            return productSearchViewResult;
+        }
+
+        public async Task<ProductSearchViewResult> GetTheNewestPoducts(int pageNumber)
+        {
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
+            var daysToKeepProductMarkedNew = Convert.ToInt32(ConfigurationManager.AppSettings["DaysToKeepProductMarkedNew"]);
+            var itemsToSkip = (pageNumber - 1) * itemsPerPage;
+
+            var theNewestProducts = await _iProductRepository.GetTheNewestProducts(itemsPerPage, itemsToSkip, daysToKeepProductMarkedNew);
+
+            var productSearchViewResult = new ProductSearchViewResult
+            {
+                TotalCount = theNewestProducts.TotalCount,
+                Products = theNewestProducts.Products.Select(x => x.ToListViewItemModel())
+            };
+
+            return productSearchViewResult;
+        }
+
+        public async Task<IEnumerable<ProductListViewItemModel>> GetRelatedProducts(string subcategory)
+        {
+            var relatedProducts = await _iProductRepository.GetRelatedProducts(subcategory);
+
+            return relatedProducts.Select(x => x.ToListViewItemModel());
+        }
+
+        public async Task<IEnumerable<ProductListViewItemModel>> GetTheNewestProductsForHome()
+        {
+            var daysToKeepProductMarkedNew = Convert.ToInt32(ConfigurationManager.AppSettings["DaysToKeepProductMarkedNew"]);
+
+            var newestProductsForHome = await _iProductRepository.GetTheNewestProductsForHome(daysToKeepProductMarkedNew);
+
+            return newestProductsForHome.Select(x => x.ToListViewItemModel());
+        }
+
+        public async Task<IEnumerable<ProductListViewItemModel>> GetProductsOnSaleForHome()
+        {
+            var productsOnSaleForHome = await _iProductRepository.GetProducstOnSaleForHome();
+
+            return productsOnSaleForHome.Select(x => x.ToListViewItemModel());
         }
 
         #region Private Methods

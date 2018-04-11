@@ -5,18 +5,18 @@
     var savedFilters = Session["SearchModel"] as SearchViewModel;
 }
 
-<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 left-sidebar">
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 left-sidebar search-products-sidebar">
     <div class="widget widget_filter_price box-has-content">
         <h3 class="widgettitle">Preţ</h3>
         <div class="price-filter">
-            <div id="priceFilter" data-label-reasult="price:" data-min="@Model.MinPrice" data-max="@Model.MaxPrice" data-unit="RON" class="slider-range-price" data-value-min="@Model.MinPrice" data-value-max="@Model.MaxPrice"></div>
             @if (savedFilters != null && savedFilters.MinPrice != null && savedFilters.MaxPrice != null)
             {
+                <div id="priceFilter" data-label-reasult="price:" data-min="@Model.MinPrice" data-max="@Model.MaxPrice" data-unit="RON" class="slider-range-price" data-value-min="@savedFilters.MinPrice.ToString().Replace(".", ",")" data-value-max="@savedFilters.MaxPrice.ToString().Replace(".", ",")"></div>
                 <div class="amount-range-price">Price: <span id="priceFilterMin" class="from">@savedFilters.MinPrice.ToString().Replace(".", ",")</span> - <span id="priceFilterMax" class="to">@savedFilters.MaxPrice.ToString().Replace(".", ",")</span> RON</div>
-
             }
             else
             {
+                <div id="priceFilter" data-label-reasult="price:" data-min="@Model.MinPrice" data-max="@Model.MaxPrice" data-unit="RON" class="slider-range-price" data-value-min="@Model.MinPrice" data-value-max="@Model.MaxPrice"></div>
                 <div class="amount-range-price">Price: <span id="priceFilterMin" class="from">@Model.MinPrice</span> - <span id="priceFilterMax" class="to">@Model.MaxPrice</span> RON</div>
             }
         </div>
@@ -28,11 +28,11 @@
             {
                 if (savedFilters?.ColorIds != null && savedFilters.ColorIds.Contains(color.Id.ToString()))
                 {
-                    <li class="current" id="@color.Id"><a href="javascript:void(0)" style="background-color: @color.Hex"></a></li>
+                    <li class="current" id="@color.Id" style="background-color: @color.Hex"></li>
                 }
                 else
                 {
-                    <li id="@color.Id"><a href="javascript:void(0)" style="background-color: @color.Hex"></a></li>
+                    <li id="@color.Id" style="background-color: @color.Hex"></li>
                 }
             }
         </ul>
@@ -42,27 +42,18 @@
         <ul id="searchSizes" class="list-size">
             @foreach (var size in Model.Sizes)
             {
-                <li id="@size">@size</li>
+                if (savedFilters?.Sizes != null && savedFilters.Sizes.Contains(size))
+                {
+                    <li class="active" id="@size">@size</li>
+                }
+                else
+                {
+                    <li id="@size">@size</li>
+                }
             }
          </ul>
     </div>
     <div class="widget widget_filter_size">
         <button id="search" class="search-filters"><i class="glyphicon glyphicon-search"></i>search</button>
     </div>
-    @*<div class="widget widget_tags">
-            <h3 class="widgettitle">TAGS</h3>
-            <ul class="list-tags">
-                <li><a href="#">Clothing</a></li>
-                <li><a href="#">Fashion</a></li>
-                <li><a href="#">T-Shirt</a></li>
-                <li><a href="#">Beautiful</a></li>
-                <li><a href="#">Shoes & Boots</a></li>
-                <li><a href="#">Blue</a></li>
-                <li><a href="#">Sweaters</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">Hats</a></li>
-                <li><a href="#">Denims</a></li>
-                <li><a href="#">Clearances</a></li>
-            </ul>
-        </div>*@
 </div>

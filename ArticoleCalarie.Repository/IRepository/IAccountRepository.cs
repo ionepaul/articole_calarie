@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace ArticoleCalarie.Repository.IRepository
 {
-    public interface IAccountRepository
+    public interface IAccountRepository : IAbstractRepository<UserModel>
     {
         Task<SignInStatus> SignIn(string email, string password, bool rememberMe);
         Task<IdentityResult> Register(UserModel userModel, string password);
@@ -15,5 +15,6 @@ namespace ArticoleCalarie.Repository.IRepository
         Task<IdentityResult> CreateExternalAccountAndSignIn(UserModel user, UserLoginInfo loginInfo);
         Task<UserModel> FindUserByIdAsync(string userId);
         Task UpdateUserAsync(UserModel userModel);
+        Task<UserModel> GetUserFullUserInfo(string userId);
     }
 }

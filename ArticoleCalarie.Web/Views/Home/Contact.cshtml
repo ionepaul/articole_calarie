@@ -1,17 +1,63 @@
-﻿@{
+﻿@using ArticoleCalarie.Models
+@model ContactPageModel
+
+@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="page-wrapper">
+    <div class="main-content contact-page">
+        <div class="container">
+            <h1 class="contact-title">Contact</h1>
+            <div class="contact-content">
+                <div class="info-contact">
+                    <div class="form">
+                            @using (Html.BeginRouteForm("contact-form-url", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                        @Html.AntiForgeryToken();
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Name) })
+
+                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger login-errorMessage" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Email) })
+
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger login-errorMessage" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextAreaFor(model => model.Message, new { htmlAttributes = new { @class = "input-info form-control", @placeholder = Html.DisplayNameFor(m => m.Message) } })
+
+                            @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger login-errorMessage" })
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" style="border: none; width: 100%" value="Trimite mesajul" class="submit send" />
+                        </div>
+                    }
+                    </div>
+                    <div class="contact-details">
+                        <div class="box-contact">
+                            <h4 class="title"><span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span>Hotline</h4>
+                            <h5 class="subtitle">(+100) 123 456 7890 - (+100) 123 456 7899</h5>
+                        </div>
+                        <div class="box-contact">
+                            <h4 class="title"><span class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>Email Us</h4>
+                            <h5 class="subtitle">Support@maxstore.com</h5>
+                        </div>
+
+                        <div class="box-contact">
+                            <h4 class="title"><span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>Store Location</h4>
+                            <h5 class="subtitle">608 Fifth Avenue, New York, NY 10020</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

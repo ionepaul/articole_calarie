@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<ArticoleCalarie.Models.ProductListItemModel>
 @using PagedList.Mvc;
+@using ArticoleCalarie.Web.Utils
 
 <div id="products-content">
     <table class="table">
@@ -48,8 +49,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Editează", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detalii", "Details", new { productCode = item.ProductCode  }) |
-                    <a href="javascript:void(0)" onclick="openDeleteModal('@item.ProductCode')">Delete</a>
+                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = item.CategoryName.ToLower(), subcategoryId = item.SubcategoryId, subcategoryName = item.SubcategoryName.ToLower(), productCode = item.ProductCode.ToLower(), productName = item.ProductName.ToUrlProductName()})">Detalii</a> |
+                    <a onclick="openDeleteModal('@item.ProductCode')">Șterge</a>
 
                     <div id="@item.ProductCode" class="modal" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">

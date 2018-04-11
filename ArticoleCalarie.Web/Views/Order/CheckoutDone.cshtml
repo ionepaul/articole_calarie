@@ -1,0 +1,42 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "CheckoutDone";
+}
+
+<div class="page-wrapper container">
+    <div class="checkout-done">
+        <div class="pass-confirmation">
+            <div class="logo">
+                <img src="~/images/my_logo3.png" alt="Articole Călărie logo" id="appLogo">
+            </div>
+            <h2 class="checkout-done-title"> Comanda: #@Model a fost inregistrată cu succes.</h2>
+            <h3 style="margin-top: 5px;">Vei primi un email cand comanda va fi confirmata.</h3>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p style="margin-top: -15px;">Poti urmari statusul comenzii tale in contul tau: <a href="@Url.Action("UserOrderList", "Order")" class="checkout-done-link">click aici</a></p>
+            }
+
+            <div>
+                <p class="reset-pass-conf">
+                    <a href="/">Continua cumparaturile</a>
+                </p>
+            </div>
+
+            <div class="related-items">
+                <h3 class="title supper-title"></h3>
+                <br />
+                <div id="checkoutDone-related-products"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            getRelatedProducts('#checkoutDone-related-products');
+        });
+    </script>
+}

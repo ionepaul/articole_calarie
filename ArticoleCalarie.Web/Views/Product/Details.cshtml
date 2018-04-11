@@ -1,9 +1,11 @@
 ﻿@model ArticoleCalarie.Models.ProductViewModel
+@using ArticoleCalarie.Web.Utils
+
 @{
     ViewBag.Title = "Details";
     bool hasMaterialDetails = !string.IsNullOrEmpty(Model.MaterialDetails);
     bool hasSizeChart = !string.IsNullOrEmpty(Model.SizeChartImage);
-    var sizes = Model.Size.Split(',');
+    var sizes = !string.IsNullOrEmpty(Model.Size) ? Model.Size.Split(',') : new string[0];
 }
 
 <div class="main-content product-single-page">
@@ -11,13 +13,18 @@
         @if (User.IsInRole("Admin"))
         {
             <div class="breadcrumbs">
-                <a href="javascript:void(0)" id="back">Inapoi la listă</a> | @Html.ActionLink("Editează", "Edit", new { id = Model.Id })
+                <a id="back">Inapoi la listă</a> | @Html.ActionLink("Editează", "Edit", new { id = Model.Id })
             </div>
         }
         else
         {
+            
             <div class="breadcrumbs">
-                to be bread crumb
+                <a href="#">@(((string)ViewBag.CategoryName).ToFirstUppercase())</a> 
+                    <i class="fa fa-angle-right"></i> 
+                        <a href="@Url.RouteUrl("product-list-url", new { categoryName = ViewBag.CategoryName, subcategoryId = ViewBag.SubcategoryId, subcategoryName = ViewBag.SubcategoryName, page = 1 })">@(((string)ViewBag.SubcategoryName).ToFirstUppercase())</a>
+                            <i class="fa fa-angle-right"></i>
+                                 <span class="current">@Model.ProductName</span>
             </div>
         }
 
@@ -36,63 +43,110 @@
                     </div>
                 </div>
                 <div class="details-info">
-                    <a class="product-name">@Model.ProductName </a>
-                    @*<div class="rating">
-                        <ul class="list-star">
-                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-                        </ul>
-                        <span class="text">( Be the firt person to review this item )</span>
-                    </div>*@
-                    <div>Cod Produs: @Model.ProductCode</div>
-                    <br>
-                    <div class="price"><span class="ins">@Model.Price RON</span></div>
-                    @if (Model.SalePercentage != 0)
+                    @if (Model.IsOnSale)
                     {
-                        <div>Reducere: @Model.SalePercentage%</div>
+                        <div class="group-flash">
+                            <a class="product-name">@Model.ProductName </a>  <span class="flash sale">-@Model.SalePercentage%</span>
+                        </div>
                     }
-                    <br />
-                    <div> <strong>Mărimi</strong> 
-                        <select>
-                            @foreach (var size in sizes)
-                            {
-                                <option>@size</option>
-                            }
-                        </select> 
-                    </div>
-                    <div class="des">@Model.Description</div>
-                    <ul class="list-color">
-                        @foreach (var color in Model.ColorsViewModel)
+                    else
+                    {
+                        <a class="product-name">@Model.ProductName </a>
+                    }
+
+                    <div>Cod Produs: @Model.ProductCode</div>
+
+                    <div class="price">
+                        @if (Model.IsOnSale)
                         {
-                            <li><a data-id="@color.Id" style="background-color: @color.Hex"></a></li>
+                            <span class="del">@Model.Price </span>
+                            <span class="ins">@Model.PriceAfterSaleApplied RON</span>
                         }
-                    </ul>
+                        else
+                        {
+                            <span class="ins">@Model.Price RON</span>
+                        }
+                    </div>
+
+                    @if (sizes.Count() > 0)
+                    {
+                        <div class="size margin-top">
+                            <strong class="details-section">Mărimi</strong>
+                            <select id="size">
+                                @foreach (var size in sizes)
+                                {
+                                    <option>@size</option>
+                                }
+                            </select>
+                        </div>
+                    }
+
+                    <div class="des"><strong class="details-section">Descriere</strong> @Model.Description</div>
+                    @if (Model.ColorsViewModel?.Count > 0)
+                    {
+                        <strong class="details-section">Culori</strong>
+                        <ul class="list-color">
+                        @foreach (var color in Model.ColorsViewModel)
+                         {
+                            <li><a id="@color.Name" title="@color.Name" style="background-color: @color.Hex"></a></li>
+                         }
+                       </ul>
+                    }
+
                     <div class="quantity">
-                        <input class="input-text qty text" type="text" size="4" title="Qty" value="1" name="quantity">
+                        <input id="quantity" class="input-text qty text" type="text" size="4" title="Qty" value="1" name="quantity">
                         <div class="group-quantity-button">
                             <a class="plus" href="#"><i class="fa fa-sort-asc" aria-hidden="true"></i></a>
                             <a class="minus" href="#"><i class="fa fa-sort-desc" aria-hidden="true"></i></a>
                         </div>
                     </div>
-                    <a href="#" class="add-to-cart">ADD TO CART</a>
+                    <a id="addToCardBtn" class="add-to-cart">ADAUGĂ ÎN COȘ</a>
                     <div class="material-details">
-                        @if (hasMaterialDetails) {
-                          <h4>Detalii Material</h4>
-                          <p>@Model.MaterialDetails</p>   
+                        @if (hasMaterialDetails)
+                        {
+                            <strong class="details-section">Detalii Material</strong>
+                            <p>@Model.MaterialDetails</p>
                         }
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="product-size-chart">
-        @if (hasSizeChart)
-        {
-            <h4>Tabel de marimi</h4>
-            <p><img src="~/images/products/@Model.SizeChartImage" /></p>
-        }
+
+        <div class="product-size-chart">
+            @if (hasSizeChart)
+            {
+                <h4>Tabel de marimi</h4>
+                <p><img src="~/images/products/@Model.SizeChartImage" /></p>
+            }
+        </div>
+
+        <div class="related-items">
+            <h3 class="title supper-title">PRODUSE ASEMANATOARE</h3>
+            <div id="details-related-products">
+
+            </div>
+        </div>
+
     </div>
 </div>
+
+@{
+    var cartPrice = Model.IsOnSale ? Model.PriceAfterSaleApplied : Model.Price.AsDecimal();
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/carousel")
+    <script>
+        var productName = '@Model.ProductName';
+        var productImage = '@Model.ImagesList.First()';
+        var price = '@cartPrice.ToString()';
+        var productCode = '@Model.ProductCode';
+        var productCategoryName = '@ViewBag.CategoryName';
+        var productSubcategoryName = '@ViewBag.SubcategoryName';
+        var productSubcategoryId = '@ViewBag.SubcategoryId';
+
+        $(document).ready(function () {
+            getRelatedProducts('#details-related-products');
+        });
+    </script>
+}

@@ -1,0 +1,56 @@
+﻿@using ArticoleCalarie.Models
+@using ArticoleCalarie.Web.Utils
+
+@{
+    var shoppingCart = Session["ShoppingCart"] as ShoppingCartModel;
+    var totalCartItems = shoppingCart?.ShoppingItems?.Sum(x => x.Quantity) ?? 0;
+    var grandTotal = 0M;
+}
+
+<div class="minicart">
+    <div class="cart-block">
+        <a href="@Url.Action("ShoppingCartDetails", "Order")" class="cart-icon"><span class="flaticon-cart"></span></a>
+        <span class="count">@totalCartItems</span>
+    </div>
+    @if (totalCartItems > 0)
+    {
+        <div class="cart-inner">
+            <div class="cart-inner-products">
+                @foreach (var product in shoppingCart.ShoppingItems)
+                {
+                    <div id="cart-product-details">
+                        <div class="cart-product-details-img">
+                            <img onclick="viewProduct('@product.ProductCategoryName.ToLower()', '@product.ProductSubcategoryId', '@product.ProductSubcategoryName.ToLower()', '@product.ProductCode', '@product.ProductName.ToUrlProductName()')" src="~/images/products/@product.ImageName" />
+                        </div>
+                        <div class="cart-product-details-info">
+                            <div class="cart-product-details-info-col1">
+                                <p style="margin-bottom: 0; font-weight: 700;" class="product-title" onclick="viewProduct('@product.ProductCategoryName.ToLower()', '@product.ProductSubcategoryId', '@product.ProductSubcategoryName.ToLower()', '@product.ProductCode', '@product.ProductName.ToUrlProductName()')" id="cart-product-title"><strong>@product.Quantity x</strong> @product.ProductName</p>
+                                <p style="margin-bottom: 0;font-size: 13px;">Culoare: @product.Color</p>
+                                <p style="margin-bottom: 0;font-size: 13px;">Marime: @product.Size</p>
+                                <a style="font-size: 13px;" class="delete-product" onclick="deleteFromCart('@product.ProductCode')" title="Șterge produs">X Șterge</a>
+                            </div>
+                            <div class="cart-product-details-info-col2">
+                                <p>@product.Price RON</p>
+                            </div>
+                        </div>
+                    </div>
+                    {
+                        var totalPrice = product.Quantity * product.Price;
+                        grandTotal += totalPrice;
+                    }
+                }
+            </div>
+            <div class="cart-inner-price">
+                <p class="cart-inner-total"><span>TOTAL: </span> @grandTotal RON</p>
+                <a class="complete-order" href="@Url.Action("ShoppingCartDetails", "Order")">FINALIZEAZĂ COMANDA</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="cart-inner cart-empty">
+            <p class="content">Coșul de cumpărături este gol.</p>
+        </div>
+    }
+</div>
+

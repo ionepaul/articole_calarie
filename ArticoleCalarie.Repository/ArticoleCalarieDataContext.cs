@@ -27,6 +27,10 @@ namespace ArticoleCalarie.Repository
 
         public DbSet<Brand> Brands { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+
         public static ArticoleCalarieDataContext Create()
         {
             return new ArticoleCalarieDataContext();

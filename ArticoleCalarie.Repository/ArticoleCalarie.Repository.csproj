@@ -81,10 +81,13 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Color.cs" />
     <Compile Include="Entities\Image.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderItem.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\SizeChart.cs" />
     <Compile Include="Entities\Subcategory.cs" />
     <Compile Include="Enums\AddressType.cs" />
+    <Compile Include="Enums\OrderStatus.cs" />
     <Compile Include="Identity\ApplicationSignInManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="IRepository\IAccountRepository.cs" />
@@ -93,10 +96,33 @@
     <Compile Include="IRepository\ICategoryRepository.cs" />
     <Compile Include="IRepository\IColorRepository.cs" />
     <Compile Include="IRepository\IImageRepository.cs" />
+    <Compile Include="IRepository\IOrderRepository.cs" />
     <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\ISizeChartRepository.cs" />
     <Compile Include="IRepository\ISubcategoryRepository.cs" />
+    <Compile Include="Migrations\201802230522594_Orders.cs" />
+    <Compile Include="Migrations\201802230522594_Orders.Designer.cs">
+      <DependentUpon>201802230522594_Orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802241409402_OrderStatus.cs" />
+    <Compile Include="Migrations\201802241409402_OrderStatus.Designer.cs">
+      <DependentUpon>201802241409402_OrderStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802241539271_OrderDate.cs" />
+    <Compile Include="Migrations\201802241539271_OrderDate.Designer.cs">
+      <DependentUpon>201802241539271_OrderDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803070544507_ImageOnOrderItems.cs" />
+    <Compile Include="Migrations\201803070544507_ImageOnOrderItems.Designer.cs">
+      <DependentUpon>201803070544507_ImageOnOrderItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803181533403_CategoryAndSubcategoryDetailsOrderItem.cs" />
+    <Compile Include="Migrations\201803181533403_CategoryAndSubcategoryDetailsOrderItem.Designer.cs">
+      <DependentUpon>201803181533403_CategoryAndSubcategoryDetailsOrderItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ColorDTO.cs" />
+    <Compile Include="Models\OrderSearchResult.cs" />
     <Compile Include="Models\ProductSearchResult.cs" />
     <Compile Include="Models\SearchFilters.cs" />
     <Compile Include="Models\SearchModel.cs" />
@@ -110,6 +136,7 @@
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\ColorRepository.cs" />
     <Compile Include="Repository\ImageRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\SizeChartRepository.cs" />
     <Compile Include="Repository\SubcategoryRepository.cs" />
@@ -119,6 +146,23 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802230522594_Orders.resx">
+      <DependentUpon>201802230522594_Orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802241409402_OrderStatus.resx">
+      <DependentUpon>201802241409402_OrderStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802241539271_OrderDate.resx">
+      <DependentUpon>201802241539271_OrderDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803070544507_ImageOnOrderItems.resx">
+      <DependentUpon>201803070544507_ImageOnOrderItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803181533403_CategoryAndSubcategoryDetailsOrderItem.resx">
+      <DependentUpon>201803181533403_CategoryAndSubcategoryDetailsOrderItem.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

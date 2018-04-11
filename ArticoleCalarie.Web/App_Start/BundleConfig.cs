@@ -27,37 +27,36 @@ namespace ArticoleCalarie.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/style.css",
-                      "~/Content/animate.min.css",
-                      "~/Content/chosen.min.css",
+                      "~/Content/style.css",                   
                       "~/Content/customs-css.css",
                       "~/Content/flaticon.min.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/jquery-ui.min.css",
-                      "~/Content/jquery.scrollbar.min.css",
-                      "~/Content/magnific-popup.min.css",
-                      "~/Content/owl.carousel.min.css",
-                      "~/Content/timecircles.css"));
+                      "~/Content/animate.min.css",
+                      "~/Content/chosen.min.css",
+                      "~/Content/owl.carousel.min.css"));
+            //"~/Content/jquery.scrollbar.min.css",
+            //"~/Content/magnific-popup.min.css", 
+            //"~/Content/timecircles.css"
 
             bundles.Add(new StyleBundle("~/bundles/external").Include(
                       "~/Scripts/owl.carousel.min.js",
                       "~/Scripts/owl.thumbs.min.js",
-                      "~/Scripts/magnific-popup.min.js",
-                      "~/Scripts/mobilemenu.min.js",
                       "~/Scripts/imagesloaded.pkgd.min.js",
                       "~/Scripts/isotope.pkgd.min.js",
-                      "~/Scripts/masonry.min.js",
-                      "~/Scripts/jquery.plugin-countdown.min.js",
-                      //"~/Scripts/jquery-countdown.min.js",
+                      "~/Scripts/mobilemenu.min.js",
                       "~/Scripts/jquery-ui.min.js",
                       "~/Scripts/chosen.min.js",
                       "~/Scripts/timecircles.js",
-                      "~/Scripts/jquery.scrollbar.min.js",
                       "~/Scripts/frontend.js"));
+            //"~/Scripts/masonry.min.js",
+            //"~/Scripts/jquery.plugin-countdown.min.js",
+            //"~/Scripts/jquery-countdown.min.js",
+            //"~/Scripts/jquery.scrollbar.min.js"
+            //"~/Scripts/magnific-popup.min.js",
 
-            //custom made scripts
-            bundles.Add(new ScriptBundle("~/bundles/product-add").Include(
-                    "~/Scripts/product-add.js"));
+            bundles.Add(new StyleBundle("~/bundles/carousel").Include(              
+                    ));
         }
     }
 }

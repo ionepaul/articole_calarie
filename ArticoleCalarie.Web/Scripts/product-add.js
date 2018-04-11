@@ -24,14 +24,14 @@ $(document).ready(function () {
         },
         minLength: 2,
         focus: function (event, ui) {
-            var categoryName = ui.item.label;
-            $(this).val(categoryName);
+            var subcategory = ui.item.label;
+            $(this).val(subcategory);
             event.preventDefault();
         },
         select: function (event, ui) {
             event.preventDefault();
-            var categoryName = ui.item.label;
-            $(this).val(categoryName);
+            var subcategory = ui.item.label;
+            $(this).val(subcategory);
             $('#SubcategoryId').val(ui.item.value);
         }
     });
@@ -52,14 +52,14 @@ $(document).ready(function () {
         },
         minLength: 2,
         focus: function (event, ui) {
-            var categoryName = ui.item.label;
-            $(this).val(categoryName);
+            var brandName = ui.item.label;
+            $(this).val(brandName);
             event.preventDefault();
         },
         select: function (event, ui) {
             event.preventDefault();
-            var categoryName = ui.item.label;
-            $(this).val(categoryName);
+            var brandName = ui.item.label;
+            $(this).val(brandName);
             $('#Brand').val(ui.item.value);
         }
     });

@@ -140,6 +140,7 @@ jQuery(document).ready(function ($) {
             items: 1,
             thumbs: true,
             thumbImage: true,
+            autoHeight: true,
             thumbContainerClass: 'owl-thumbs',
             thumbItemClass: 'owl-thumb-item'
         });
@@ -362,9 +363,9 @@ jQuery(document).ready(function ($) {
         });
     } 
     function kt_scroll() {
-      if(parseFloat($(window).outerWidth()) > 0) {
-        $('.header .scrollbar').mCustomScrollbar();
-      }
+      //if(parseFloat($(window).outerWidth()) > 0) {
+      //  $('.header .scrollbar').mCustomScrollbar();
+      //}
     }
 
     // function newletter_popup(){

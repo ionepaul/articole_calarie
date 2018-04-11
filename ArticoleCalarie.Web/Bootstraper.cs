@@ -54,6 +54,8 @@ namespace ArticoleCalarie.Web
             container.RegisterType<IColorLogic, ColorLogic>();
             container.RegisterType<IBrandLogic, BrandLogic>();
             container.RegisterType<ISubcategoryLogic, SubcategoryLogic>();
+            container.RegisterType<IOrderLogic, OrderLogic>();
+            container.RegisterType<IEmailLogic, EmailLogic>();
 
             //Repository
             container.RegisterType<IAccountRepository, AccountRepository>();
@@ -65,6 +67,7 @@ namespace ArticoleCalarie.Web
             container.RegisterType<IBrandRepository, BrandRepository>();
             container.RegisterType<ISubcategoryRepository, SubcategoryRepository>();
             container.RegisterType<IImageRepository, ImageRepository>();
+            container.RegisterType<IOrderRepository, OrderRepository>();
 
             //Infrastructure
             container.RegisterType<IMailService, MailService>();

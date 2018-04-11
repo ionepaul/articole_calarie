@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using ArticoleCalarie.Repository.Entities;
 using ArticoleCalarie.Repository.IRepository;
@@ -13,7 +14,7 @@ namespace ArticoleCalarie.Repository.Repository
 
         public IEnumerable<Subcategory> GetAllByCategoryId(int categoryId)
         {
-            var subcategories = _dbset.Where(x => x.CategoryId == categoryId).AsEnumerable();
+            var subcategories = _dbset.Where(x => x.CategoryId == categoryId).Include(x => x.Category).AsEnumerable();
 
             return subcategories;
         }

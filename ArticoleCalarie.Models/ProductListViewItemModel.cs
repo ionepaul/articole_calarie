@@ -21,5 +21,11 @@
         public string ProductImageName { get; set; }
 
         public int SalePercentage { get; set; }
+
+        public string SubcategoryName { get; set; }
+
+        public string CategoryName { get; set; }
+
+        public int? SubcategoryId { get; set; }
     }
 }
