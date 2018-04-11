@@ -315,7 +315,6 @@
     <Content Include="images\s2.jpg" />
     <Content Include="images\s3.jpg" />
     <Content Include="images\size-chart-2.jpg" />
-    <Content Include="images\ss.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chosen.min.js" />
