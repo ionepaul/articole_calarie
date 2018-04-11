@@ -52,7 +52,7 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task<OrderSearchViewResult> GetOrders(int pageNumber, OrderStatusViewEnum status)
         {
-            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["AdminOrdersPerPage"]);
             var itemsToSkip = (pageNumber - 1) * itemsPerPage;
             var dbStatus = status.ToDbEnum();
 
@@ -83,7 +83,7 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task<OrderSearchViewResult> GetUserOrders(int pageNumber, string userId)
         {
-            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["UserOrdersPerPage"]);
             var itemsToSkip = (pageNumber - 1) * itemsPerPage;
 
             var userOrders = await _iOrderRepository.GetUserOrders(itemsPerPage, itemsToSkip, userId);

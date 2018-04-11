@@ -305,7 +305,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 var ordersModel = await _iOrderLogic.GetOrders(page, status);
 
-                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["AdminOrdersPerPage"]);
 
                 var pagedListModel = new StaticPagedList<OrderViewModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
 
@@ -337,7 +337,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 var ordersModel = await _iOrderLogic.GetOrders(page, status);
 
-                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["AdminOrdersPerPage"]);
 
                 var pagedListModel = new StaticPagedList<OrderViewModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
 
@@ -387,7 +387,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 var ordersModel = await _iOrderLogic.GetUserOrders(page, userId);
 
-                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["UserOrdersPerPage"]);
 
                 var pagedListModel = new StaticPagedList<OrderViewModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
 
@@ -419,7 +419,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 var ordersModel = await _iOrderLogic.GetUserOrders(page, userId);
 
-                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["UserOrdersPerPage"]);
 
                 var pagedListModel = new StaticPagedList<OrderViewModel>(ordersModel.Orders, page, pageSize, ordersModel.TotalCount);
 

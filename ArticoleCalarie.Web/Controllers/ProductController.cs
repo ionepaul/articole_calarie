@@ -70,7 +70,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 var productsForAdmin = _iProductLogic.GetProductsForAdmin(page, productCode);
 
-                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["AdminProductsPerPage"]);
 
                 var pagedListModel = new StaticPagedList<ProductListItemModel>(productsForAdmin.Products, page, pageSize, productsForAdmin.TotalCount);
 
@@ -100,7 +100,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 var productsForAdmin = _iProductLogic.GetProductsForAdmin(page, productCode);
 
-                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["AdminProductsPerPage"]);
 
                 var pagedListModel = new StaticPagedList<ProductListItemModel>(productsForAdmin.Products, page, pageSize, productsForAdmin.TotalCount);
 
@@ -248,7 +248,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 var products = await _iProductLogic.GetTheNewestPoducts(page);
 
-                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
 
                 var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
 
@@ -284,7 +284,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 var products = await _iProductLogic.GetProductsByBrand(brand, page);
 
-                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
 
                 var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
 
@@ -312,7 +312,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                     var products = await _iProductLogic.GetProductsOnSale(page);
 
-                    int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+                    int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
 
                     var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
 

@@ -146,7 +146,7 @@ namespace ArticoleCalarie.Logic.Logic
 
         public ProductListAdminViewModel GetProductsForAdmin(int pageNumber, string productCode)
         {
-            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["AdminProductsPerPage"]);
             var itemsToSkip = (pageNumber - 1) * itemsPerPage;
 
             var productsForAdmin = _iProductRepository.GetProductsForAdmin(itemsPerPage, itemsToSkip, productCode);
@@ -211,7 +211,7 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task<ProductSearchViewResult> GetProductsByBrand(string brand, int pageNumber)
         {
-            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
             var itemsToSkip = (pageNumber - 1) * itemsPerPage;
 
             var productsByBrand = await _iProductRepository.GetProductsByBrand(brand, itemsPerPage, itemsToSkip);
@@ -227,7 +227,7 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task<ProductSearchViewResult> GetProductsOnSale(int pageNumber)
         {
-            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
             var itemsToSkip = (pageNumber - 1) * itemsPerPage;
 
             var productsOnSale = await _iProductRepository.GetProductsOnSale(itemsPerPage, itemsToSkip);
@@ -243,7 +243,7 @@ namespace ArticoleCalarie.Logic.Logic
 
         public async Task<ProductSearchViewResult> GetTheNewestPoducts(int pageNumber)
         {
-            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
+            var itemsPerPage = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
             var daysToKeepProductMarkedNew = Convert.ToInt32(ConfigurationManager.AppSettings["DaysToKeepProductMarkedNew"]);
             var itemsToSkip = (pageNumber - 1) * itemsPerPage;
 
