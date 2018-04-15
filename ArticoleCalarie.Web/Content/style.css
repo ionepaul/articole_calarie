@@ -414,6 +414,8 @@ ul#colors-list li.selected::after,
     position: relative;
     margin-bottom: 20px;
     background: #393D40;
+    display: flex;
+    align-items: center;
 }
 
     .product-list-header .product-list-add-btn {
@@ -1061,12 +1063,16 @@ input {
 #brands-list {
     top: 100%;
 }
+
+.order-details-cols-wrapper {
+    position: relative;
+}
+
+
 /* PANOUL DE COMADNA BUTOANE */
 .special-btns-container {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 15px;
+    height: 67px;
+    margin-left: auto;
 }
 .special-btns-container button {
     background: #324a76;
@@ -1074,6 +1080,10 @@ input {
     border: 0;
     padding: 10px;
     margin-left: 10px;
+    height: 100%;
+}
+.special-btns-container button.active {
+    background: lightblue;
 }
 .order-details {
     padding: 20px 50px 0;
@@ -1715,6 +1725,39 @@ input {
   top: 0;
   right: 0;
   z-index: 10;
+}
+
+.register-form-wrapper {
+    background: 0;
+    border: 1px solid #ccc;
+}
+.termsAndCondLink {
+    text-decoration: underline;
+    color: #333;
+}
+.cookies-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    text-align: center;
+    bottom: 0;
+    padding: 10px;
+    font-weight: 700;
+}
+.cookies-bar a {
+    color: #fff;
+    text-decoration: underline;
+}
+.cookies-bar span {
+    display: inline-block;
+    background: #324a76;
+    text-transform: uppercase;
+    padding: 10px 6px;
+    margin: 0 5px;
+    cursor: pointer;
 }
 
 .kt-next-panel:before{
@@ -6774,14 +6817,14 @@ strong.details-section {
     background: #fff;
 }
 .main-content-home1 .main-banner .banner-2 .banner-content {
-    flex-basis: 100%;
+    flex-basis: 75%;
     padding: 0 40px;
     color: #fff;
     background: #324a76;
     text-align: center;
 }
 .main-content-home1 .main-banner .banner-2 img {
-    width: 50%;
+    width: 55%;
     display: block;
     margin: auto;
 }
@@ -9459,6 +9502,13 @@ strong.details-section {
 /*---*/
 }
 @media(max-width: 991px) {
+    .special-btns-container {
+        padding: 0 0 20px 30px;
+        height: auto;
+    }
+    .product-list-header {
+        display: block;
+    }
     .delivery-details-form, .billing-address-form {
         width: 100%;
     }
@@ -9553,6 +9603,8 @@ strong.details-section {
 .form-wrapper {
     padding: 20px;
 }
+
+
 
 .add-product-wrapper .form-wrapper {
     flex-flow: row;
@@ -9973,6 +10025,15 @@ strong.details-section {
 }
 }
 @media(max-width: 767px) {
+
+    .order-details-cols-wrapper .actions {
+        position: absolute;
+        bottom: 110px;
+    }
+
+    .special-btns-container {
+        padding: 0 0 20px 10px;
+    }
 
     .banner-logo {
         flex-flow: column;
@@ -10404,13 +10465,11 @@ strong.details-section {
 
     .special-btns-container {
         position: static;
-        margin-top: 15px;
-        transform: translateY(0);
-        padding-bottom: 10px;
+        padding: 0 20px 10px;
     }
     .special-btns-container button {
         display: block;
-        width: 90%;
+        width: 100%;
         margin: 0 auto 10px;
     }
 
