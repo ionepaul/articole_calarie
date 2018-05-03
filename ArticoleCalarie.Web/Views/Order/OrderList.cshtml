@@ -10,7 +10,7 @@
     <div class="product-list-header">
         <h3 class="form-title">Comenzi</h3>
         <div class="special-btns-container">
-            <button id="all-orders-btn" class="orders-special-btn">Toate</button>
+            <button id="all-orders-btn" class="orders-special-btn active">Toate</button>
             <button id="completed-orders-btn" class="orders-special-btn">Complete</button>
             <button id="registred-orders-btn" class="orders-special-btn">Noi</button>
             <button id="shipped-orders-btn" class="orders-special-btn">Trimise</button>
@@ -24,4 +24,13 @@
 
 @section scripts {
     <script src="~/Scripts/order-list-admin.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.special-btns-container button').click(function () {
+                $(this).siblings().removeClass('active')
+                $(this).addClass('active');
+            });
+        });
+    </script>
 }

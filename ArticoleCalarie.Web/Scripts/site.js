@@ -30,7 +30,19 @@
     $("#log-out-btn").on("click", function () {
         $("#logoutForm").submit();
     });
+
+    hideCookiesBar();
 });
+
+function hideCookiesBar() {
+    var cookiesBar = $('.cookies-bar');
+    var acceptCookies = $('.acceptCookies');
+
+    acceptCookies.click(function () {
+        alert('Cati cai pot fi inhamati la o caruta?');
+        cookiesBar.css('display', 'none');
+    });
+}
 
 function showLoader() {
     $("#spinner").removeClass("hidden");
