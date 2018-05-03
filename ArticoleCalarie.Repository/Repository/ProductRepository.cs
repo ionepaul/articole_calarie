@@ -239,7 +239,7 @@ namespace ArticoleCalarie.Repository.Repository
         {
             var comparisonDate = DateTime.Now.AddDays((-1) * daysToKeepProductNew);
 
-            var products = await _dbset.Where(x => x.DatePosted > comparisonDate).Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
+            var products = await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
 
             return products;
         }
@@ -255,12 +255,12 @@ namespace ArticoleCalarie.Repository.Repository
         {
             var comparisonDate = DateTime.Now.AddDays((-1) * daysToKeepProductNew);
 
-            var query = _dbset.Where(x => x.DatePosted > comparisonDate).Include(x => x.Images).Include(x => x.Subcategory).Include(x => x.Subcategory.Category);
+            var query = _dbset.Include(x => x.Images).Include(x => x.Subcategory).Include(x => x.Subcategory.Category);
 
             var productResult = new ProductSearchResult
             {
                 TotalCount = await query.CountAsync(),
-                Products = await query.OrderBy(x => x.SalePercentage).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+                Products = await query.OrderByDescending(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
             };
 
             return productResult;
