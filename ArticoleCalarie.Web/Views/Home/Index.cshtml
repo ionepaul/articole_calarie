@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Magazin echitație";
+    ViewBag.MetaDescription = "";
 }
 
 <div class="main-content home-page main-content-home1">
@@ -7,27 +8,27 @@
     <div class="main-slideshow">
         <div class="owl-carousel dots-style1 nav-style2" data-autoplay="true" data-autoplayTimeout="1000" data-nav="true" data-dots="true" data-loop="true" data-slidespeed="800" data-margin="30" data-responsive='{"0":{"items":1}, "640":{"items":1}, "768":{"items":1}, "1024":{"items":1}, "1200":{"items":1}}' data-height="400">
             <div class="slide-item item-background">
-                <div class="slide-img"><img src="images/s8.jpg" alt=""></div>
+                <div class="slide-img"><img src="images/s8.jpg" alt="echipament echitatie"></div>
                 <div class="slide-content-1">
-                    <h4 class="subtitle">Get a new look!</h4>
-                    <h3 class="title">WOMen’s SUNGLASSES COLLECTION 2017</h3>
-                    <a href="#" class="button">Shop Now</a>
+                    <h4 class="subtitle">Calareste in stil!</h4>
+                    <h3 class="title">Echipament competitie pentru tine si calul tau</h3>
+                    <a href="#" class="button">Vezi detalii</a>
                 </div>
             </div>
             <div class="slide-item item-background">
-                <div class="slide-img"><img src="images/s3.jpg" alt=""></div>
+                <div class="slide-img"><img src="images/s3.jpg" alt="jambiere cal"></div>
                 <div class="slide-content-1">
-                    <h4 class="subtitle">Get a new look!</h4>
-                    <h3 class="title">WOMen’s SUNGLASSES COLLECTION 2017</h3>
-                    <a href="#" class="button">Shop Now</a>
+                    <h4 class="subtitle">Protectie superioara!</h4>
+                    <h3 class="title">Jambiere exclusiviste pentru calul tau</h3>
+                    <a href="@Url.RouteUrl("product-list-url", new { categoryName = "cal", subcategoryId = 24, subcategoryName = "jambiere", page = 1})" class="button">Vezi detalii</a>
                 </div>
             </div>
             <div class="slide-item item-background">
-                <div class="slide-img"><img src="images/s4.jpg" alt=""></div>
+                <div class="slide-img"><img src="images/s4.jpg" alt="echipament echitatie"></div>
                 <div class="slide-content-1">
-                    <h4 class="subtitle">Get a new look!</h4>
-                    <h3 class="title">WOMen’s SUNGLASSES COLLECTION 2017</h3>
-                    <a href="#" class="button">Shop Now</a>
+                    <h4 class="subtitle">Fi invingator!</h4>
+                    <h3 class="title">xxx</h3>
+                    <a href="#" class="button">Vezi detalii</a>
                 </div>
             </div>
         </div>
@@ -49,12 +50,12 @@
             <div class="col banner-2">
                 <div class="banner-content">
                     <h3 class="title">TRANSPORT GRATUIT</h3>
-                    <p class="des">Livrare gratuită la comenzile mai mari de 200 RON</p>
+                    <p class="des">Livrare gratuita la comenzile mai mari de 200 RON</p>
                 </div>
                 <div class="banner-image">
                     <h3 class="title">Jambieri eShock</h3>
                     <img src="images/jambier.png" alt="">
-                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = "cal", subcategoryId = 24, subcategoryName = "jambiere", productCode = "hja-0117", productName = "jambiere-fata-eshock" })" class="button">CUMPARA</a>
+                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = "cal", subcategoryId = 24, subcategoryName = "jambiere", productCode = "hja-0117", productName = "jambiere-fata-eshock" })" class="button">CUMPARA ACUM</a>
                 </div>
             </div>
         </div>

@@ -2,7 +2,9 @@
 @using ArticoleCalarie.Web.Utils
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.ProductName;
+    ViewBag.MetaDescription = Model.Description;
+
     bool hasMaterialDetails = !string.IsNullOrEmpty(Model.MaterialDetails);
     bool hasSizeChart = !string.IsNullOrEmpty(Model.SizeChartImage);
     var sizes = !string.IsNullOrEmpty(Model.Size) ? Model.Size.Split(',') : new string[0];

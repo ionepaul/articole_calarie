@@ -6,7 +6,6 @@
 }
 
 <div class="widget widget-custom-menu">
-    <h3 class="widgettitle">Accesorii</h3>
     <ul>
         @foreach (var subcategory in Model.Take(itemsPerSection))
         {
@@ -18,7 +17,6 @@
 </div>
 
 <div class="widget widget-custom-menu">
-    <h3 class="widgettitle">Concurs</h3>
     <ul>
         @foreach (var subcategory in Model.Skip(itemsPerSection).Take(itemsPerSection))
         {
@@ -30,7 +28,6 @@
 </div>
 
 <div class="widget widget-custom-menu">
-    <h3 class="widgettitle">Antrenament</h3>
     <ul>
         @foreach (var subcategory in Model.Skip(itemsPerSection * 2))
         {
