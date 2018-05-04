@@ -265,18 +265,18 @@ namespace ArticoleCalarie.Logic.Logic
             return relatedProducts.Select(x => x.ToListViewItemModel());
         }
 
-        public async Task<IEnumerable<ProductListViewItemModel>> GetTheNewestProductsForHome()
+        public IEnumerable<ProductListViewItemModel> GetTheNewestProductsForHome()
         {
             var daysToKeepProductMarkedNew = Convert.ToInt32(ConfigurationManager.AppSettings["DaysToKeepProductMarkedNew"]);
 
-            var newestProductsForHome = await _iProductRepository.GetTheNewestProductsForHome(daysToKeepProductMarkedNew);
+            var newestProductsForHome = _iProductRepository.GetTheNewestProductsForHome(daysToKeepProductMarkedNew);
 
             return newestProductsForHome.Select(x => x.ToListViewItemModel());
         }
 
-        public async Task<IEnumerable<ProductListViewItemModel>> GetProductsOnSaleForHome()
+        public IEnumerable<ProductListViewItemModel> GetProductsOnSaleForHome()
         {
-            var productsOnSaleForHome = await _iProductRepository.GetProducstOnSaleForHome();
+            var productsOnSaleForHome = _iProductRepository.GetProducstOnSaleForHome();
 
             return productsOnSaleForHome.Select(x => x.ToListViewItemModel());
         }

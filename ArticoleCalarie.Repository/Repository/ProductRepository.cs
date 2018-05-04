@@ -235,18 +235,24 @@ namespace ArticoleCalarie.Repository.Repository
             return await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderBy(x => Guid.NewGuid()).Take(4).ToListAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetTheNewestProductsForHome(int daysToKeepProductNew)
+        public IEnumerable<Product> GetTheNewestProductsForHome(int daysToKeepProductNew)
         {
             var comparisonDate = DateTime.Now.AddDays((-1) * daysToKeepProductNew);
 
-            var products = await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
+            var products = _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).OrderByDescending(x => x.DatePosted).Take(4).ToList();
 
             return products;
         }
 
-        public async Task<IEnumerable<Product>> GetProducstOnSaleForHome()
+        public IEnumerable<Product> GetProducstOnSaleForHome()
         {
-            var products = await _dbset.Include(x => x.Images).Include(x => x.Subcategory.Category).Include(x => x.Subcategory).Where(x => x.SalePercentage != 0).OrderByDescending(x => x.DatePosted).Take(4).ToListAsync();
+            var products = _dbset.Include(x => x.Images)
+                                 .Include(x => x.Subcategory.Category)
+                                 .Include(x => x.Subcategory)
+                                 .Where(x => x.SalePercentage != 0)
+                                 .OrderByDescending(x => x.DatePosted)
+                                 .Take(4)
+                                 .ToList();
 
             return products;
         }

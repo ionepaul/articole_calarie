@@ -219,27 +219,47 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        [Route("produse/noutati", Name = "newest-products-url")]
-        public async Task<ActionResult> NewestProducts(int? pageNumber, bool isForHomePage = false)
+        public ActionResult NewestProductsHome()
         {
-            if (isForHomePage)
+            _logger.Info("PARTIAL VIEW > The newest four products for home page.");
+
+            try
             {
-                _logger.Info("PARTIAL VIEW > The newest four products for home page.");
+                var newestProductsForHome = _iProductLogic.GetTheNewestProductsForHome();
 
-                try
-                {
-                    var newestProductsForHome = await _iProductLogic.GetTheNewestProductsForHome();
-
-                    return PartialView("_RelatedProductsPartial", newestProductsForHome);
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error($"Failed to get the newest four products for home page. Exception: {ex.Message}");
-
-                    return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
-                }
+                return PartialView("_RelatedProductsPartial", newestProductsForHome);
             }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to get the newest four products for home page. Exception: {ex.Message}");
 
+                return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ProductsOnSaleHome()
+        {
+            _logger.Info("PARTIAL VIEW > The latest four products on sale products for home page.");
+
+            try
+            {
+                var productsOnSaleForHome = _iProductLogic.GetProductsOnSaleForHome();
+
+                return PartialView("_RelatedProductsPartial", productsOnSaleForHome);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to get the lates four products on sale for home page. Exception: {ex.Message}");
+
+                return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
+            }
+        }
+
+        [HttpGet]
+        [Route("produse/noutati", Name = "newest-products-url")]
+        public async Task<ActionResult> NewestProducts(int? pageNumber)
+        {
             try
             {
                 _logger.Info("VIEW > The newest products page.");
@@ -300,45 +320,27 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Route("produse/oferte", Name = "products-on-sale-url")]
-        public async Task<ActionResult> ProductsOnSale(int? pageNumber, bool isForHomePage = false)
+        public async Task<ActionResult> ProductsOnSale(int? pageNumber)
         {
-            if (!isForHomePage)
-            {
-                _logger.Info("VIEW > Products on sale");
-
-                try
-                {
-                    var page = pageNumber ?? 1;
-
-                    var products = await _iProductLogic.GetProductsOnSale(page);
-
-                    int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
-
-                    var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
-
-                    return View(pagedListModel);
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error($"Failed to get products on sale. Exception: {ex.Message}.");
-
-                    return View("Error");
-                }
-            } 
-
-            _logger.Info("PARTIAL VIEW > The latest four products on sale products for home page.");
+            _logger.Info("VIEW > Products on sale");
 
             try
             {
-                var productsOnSaleForHome = await _iProductLogic.GetProductsOnSaleForHome();
+                var page = pageNumber ?? 1;
 
-                return PartialView("_RelatedProductsPartial", productsOnSaleForHome);
+                var products = await _iProductLogic.GetProductsOnSale(page);
+
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
+
+                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
+
+                return View(pagedListModel);
             }
             catch (Exception ex)
             {
-                _logger.Error($"Failed to get the lates four products on sale for home page. Exception: {ex.Message}");
+                _logger.Error($"Failed to get products on sale. Exception: {ex.Message}.");
 
-                return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
+                return View("Error");
             }
         }
 
@@ -359,7 +361,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 return View(productViewModel);
             }
-            
+
             try
             {
                 _iProductLogic.AddProduct(productViewModel);
@@ -393,7 +395,7 @@ namespace ArticoleCalarie.Web.Controllers
             try
             {
                 _iProductLogic.UpdateProduct(productViewModel.Id, productViewModel);
-                
+
                 _logger.Info($"Successfully updated product {productViewModel.ProductName}.");
 
                 return RedirectToAction(nameof(List));

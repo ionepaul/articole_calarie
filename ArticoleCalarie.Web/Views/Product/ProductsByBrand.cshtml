@@ -3,7 +3,7 @@
 @using ArticoleCalarie.Web.Utils
 
 @{ 
-    var brandImage = ViewBag.BrandName + ".png";
+    var brandImage = ViewBag.BrandName.Replace(" ", "-") + ".png";
     var brandName = ViewBag.BrandName;
 }
 <div class="page-wrapper">
