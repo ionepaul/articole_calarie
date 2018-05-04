@@ -1,12 +1,5 @@
 jQuery(document).ready(function ($) {
-  "use strict";
-    //menu onepage
-    $(".each-section .next-section").on( "click", function(e) {
-      var url = $(this).attr("href");
-      var target = parseFloat($(url).offset().top); 
-      $('html,body').animate({scrollTop:target}, 'slow');
-      return false;
-    });
+    "use strict";
 
     $(window).scroll(function(){
         if ($(this).scrollTop() > 300) {
@@ -16,41 +9,13 @@ jQuery(document).ready(function ($) {
             $('.back-to-top').fadeOut();
             $('.back-to-top').removeClass('show');
         }
-    });
+  });
+
     $(document).on('click','.back-to-top',function(){
         $('html, body').animate({scrollTop : 0},800);
         return false;
     });
      
-    function kt_tab_fadeeffect(){
-      // effect click
-      $(document).on('click','.kt-tab-fadeeffect a[data-toggle="pill"]',function(){
-        var item = '.product-item';
-        var tab_id = $(this).attr('href');
-        var tab_animated = $(this).data('animated');
-        tab_animated = ( tab_animated == undefined ) ? 'fadeInUp' : tab_animated;
-
-        if( $(tab_id).find('.owl-carousel').length > 0 ){
-          item = '.owl-item.active';
-        }
-        $(tab_id).find(item).each(function(i){
-          var t = $(this);
-          var style = $(this).attr("style");
-          style = ( style == undefined ) ? '' : style;
-          var delay  = i * 200;
-          t.attr("style", style +
-                    ";-webkit-animation-delay:" + delay + "ms;"
-                  + "-moz-animation-delay:" + delay + "ms;"
-                  + "-o-animation-delay:" + delay + "ms;"
-                  + "animation-delay:" + delay + "ms;"
-          ).addClass(tab_animated+' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-              t.removeClass(tab_animated+' animated');
-              t.attr("style", style);
-          });
-        })
-      })
-    }
-
     function kt_get_scrollbar_width() {
       var $inner = jQuery('<div style="width: 100%; height:200px;">test</div>'),
           $outer = jQuery('<div style="width:200px;height:150px; position: absolute; top: 0; left: 0; visibility: hidden; overflow:hidden;"></div>').append($inner),
@@ -102,36 +67,8 @@ jQuery(document).ready(function ($) {
       }
     }
 
-    function sticky_menu(){
-      if(!$('.header').hasClass('no-sticky')) {
-        if(!$('.header').hasClass('no-prepend-box-sticky')){
-          if (!$('.header .box-sticky').length) {
-              $('.header').prepend('<div class="box-sticky"><div class="row"><div class="col-md-2 col-lg-2"><div class="logo-prepend"></div></div><div class="col-md-8 col-lg-8"><div class="main-menu-prepend"></div></div><div class="col-md-2 col-lg-2"><div class="top-links-prepend"><div class="wishlist-prepend prepend-icon"></div><div class="cart-prepend prepend-icon"></div></div></div></div></div>');
-          }
-        }
-        $('.header').find('.logo').clone().appendTo('.header .logo-prepend');
-        $('.header').find('.main-menu').clone().appendTo('.header .main-menu-prepend');
-        $('.header').find('.wishlist-icon').clone().appendTo('.header .top-links-prepend .wishlist-prepend');
-        $('.header').find('.minicart').clone().appendTo('.header .top-links-prepend .cart-prepend');  
-      }
-    }
-
-     /*function sticky_menu_run(){
-        if($(window).width() > 1024) {
-            if ($(window).scrollTop() > 350) {
-                $('.header .box-sticky').addClass('is-sticky');
-                $('.header .this-sticky').addClass('box-sticky');
-            } 
-            else {
-                $('.header .box-sticky').removeClass('is-sticky');
-                $('.header .this-sticky').removeClass('box-sticky');
-            }
-        }
-    }*/
-
     function kt_innit_carousel(){
-        //owl has thumbs 
-   
+        //owl has thumbs    
         // check if there's only 1 time in the thumbs
         var isMulti = ($('.owl-carousel .item').length > 1) ? true : false;
    
@@ -346,87 +283,24 @@ jQuery(document).ready(function ($) {
       return false;
     });
 
-  /*special banner*/
-    
-    function special_banner() {
-      $(".special-banner .banner-item").each(function(index, el) {
-        var backgroundbanner = $(this).find('.banner-content').data('background');
-         $(this).find('.banner-content').css({'background-image':'url( '+ backgroundbanner + ')'});
-      });
-      $(document).on('click','.banner-item .show-banner',function(){
-        $(this).closest('.banner-item').find('.banner-content').addClass('show');
-          return false;
-        });
-        $(document).on('click','.banner-item .close-banner',function(){
-          $(this).closest('.banner-item').find('.banner-content').removeClass('show');
-          return false;
-        });
-    } 
-    function kt_scroll() {
-      //if(parseFloat($(window).outerWidth()) > 0) {
-      //  $('.header .scrollbar').mCustomScrollbar();
-      //}
-    }
-
-    // function newletter_popup(){
-    //   var window_size = parseFloat(jQuery('body').innerWidth());
-    //   window_size += kt_get_scrollbar_width();
-    //   if(window_size > 767){
-    //     if($('body').hasClass('home')){
-    //           $.magnificPopup.open({
-    //              items: {
-    //               src: '<div class="popup-newsletter "><div class="popup-content"><h4 class="title">SIGN UP NEWSLETTER</h4><h5 class="subtitle">Sign up our Newsletter & Get 25% Off at your first Purchase!</h5><div class="input-block inner-content"><div class="input-inner"><input type="text" class="input-info" placeholder="Enter your email" name="input-info"><a href="#" class="submit">Subscribe</a></div></div></div></div></div>',
-    //               type: 'inline'
-    //            }
-    //            });
-    //        }
-    //   }
-    // }
-
-    function compare_popup(){
-      var window_size = parseFloat(jQuery('body').innerWidth());
-      window_size += kt_get_scrollbar_width();
-      if(window_size > 600){
-         $(document).on('click','.compare-button',function(){
-              $.magnificPopup.open({
-                 items: {
-                  src: '<div class="popup-compare"><h4 class="supper-title">Compare products</h4><table class="compare-content"><tr><td class="product-title" data-title="Product image"><span>Product image</span></td><td class="product-img"><div class="product-item layout1"><div class="product-inner"><div class="thumb"><a href="#"><img src="images/product13.jpg" alt=""></a></div><div class="info"><a href="#" class="product-name">Classic T-Shirt in Blue</a><div class="price"><span class="ins">$75</span></div></div></div></div></td><td class="product-img"><div class="product-item layout1"><div class="product-inner"><div class="thumb"><a href="#"><img src="images/product80.jpg" alt=""></a></div><div class="info"><a href="#" class="product-name">Classic T-Shirt in Blue</a><div class="price"><span class="del">$180</span><span class="ins">$90</span></div></div></div></div></td><td class="product-img"><div class="product-item layout1"><div class="product-inner"><div class="thumb"><a href="#"><img src="images/product1.jpg" alt=""></a></div><div class="info"><a href="#" class="product-name">Classic T-Shirt in Blue</a><div class="price"><span class="ins">$75</span></div></div></div></div></td></tr><tr><td class="product-title" data-title="Descriptions"><span>Descriptions</span></td><td class="product-des"><p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam,feugiat vitae,</p></td><td class="product-des"><p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam,feugiat vitae,</p></td><td class="product-des"><p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam,feugiat vitae,</p></td></tr><tr><td class="product-title" data-title="Availability"><span>Availability</span></td><td class="availability"><span class="stock">In Stock</span></td><td class="availability"><span class="not-stock">Out of Stock</span></td><td class="availability"><span class="not-stock">Out of Stock</span></td></tr><tr><td class="product-title" data-title="Unit Price"><span>Unit Price</span></td><td class="unit-price"><span class="price">$150.00</span></td><td class="unit-price"><span class="price">$90.00</span></td><td class="unit-price"><span class="price">$150.00</span></td></tr></table></div>',
-                  type: 'inline'
-               }
-               });
-              return false;
-           });
-      }
-    }
-
-    $("#datecountdown").TimeCircles();
-    var updateTime = function(){
-      var date = parseInt($("#date").val());
-      var time = parseInt($("#time").val());
-      var datetime = date + ' ' + time + ':00';
-      $("#datecountdown").data('date', datetime).TimeCircles().start();
-    }
-
-    $(".chosen-select").chosen({disable_search_threshold: 10});
-    /*newletter_popup(); */
-    kt_tab_fadeeffect();
     kt_resizeMegamenu();
     kt_verticalMegamenu();
-    sticky_menu();
-    kt_innit_carousel();
-    special_banner();
-    compare_popup();
 
+    if ($('.owl-carousel').length > 0) {
+        kt_innit_carousel();
+    }
+   
     $(window).resize(function(){
       kt_resizeMegamenu();
       kt_verticalMegamenu();
-      kt_innit_carousel();
-      compare_popup();
+      if ($('.owl-carousel').length > 0) {
+          kt_innit_carousel();
+      }    
     });
-    $(window).load(function(){
-      kt_scroll();
-      kt_innit_carousel();
-      //newletter_popup();
-      compare_popup();
+
+    $(window).load(function() {
+        if ($('.owl-carousel').length > 0) {
+            kt_innit_carousel();
+        } 
     });
 });

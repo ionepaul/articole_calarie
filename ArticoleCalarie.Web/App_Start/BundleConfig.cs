@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace ArticoleCalarie.Web
 {
@@ -33,11 +32,11 @@ namespace ArticoleCalarie.Web
                       "~/Content/font-awesome.min.css",
                       "~/Content/jquery-ui.min.css",
                       "~/Content/animate.min.css",
-                      "~/Content/chosen.min.css",
                       "~/Content/owl.carousel.min.css"));
             //"~/Content/jquery.scrollbar.min.css",
             //"~/Content/magnific-popup.min.css", 
             //"~/Content/timecircles.css"
+            //"~/Content/chosen.min.css",
 
             bundles.Add(new StyleBundle("~/bundles/external").Include(
                       "~/Scripts/owl.carousel.min.js",
@@ -46,17 +45,14 @@ namespace ArticoleCalarie.Web
                       "~/Scripts/isotope.pkgd.min.js",
                       "~/Scripts/mobilemenu.min.js",
                       "~/Scripts/jquery-ui.min.js",
-                      "~/Scripts/chosen.min.js",
-                      "~/Scripts/timecircles.js",
                       "~/Scripts/frontend.js"));
             //"~/Scripts/masonry.min.js",
             //"~/Scripts/jquery.plugin-countdown.min.js",
             //"~/Scripts/jquery-countdown.min.js",
             //"~/Scripts/jquery.scrollbar.min.js"
             //"~/Scripts/magnific-popup.min.js",
-
-            bundles.Add(new StyleBundle("~/bundles/carousel").Include(              
-                    ));
+            //"~/Scripts/chosen.min.js",
+            //"~/Scripts/timecircles.js",
         }
     }
 }
