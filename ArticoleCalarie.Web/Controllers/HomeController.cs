@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
@@ -75,6 +77,32 @@ namespace ArticoleCalarie.Web.Controllers
         public ActionResult ContactMessageSent()
         {
             return View();
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public PartialViewResult CookieBar()
+        {
+            if (Request.Cookies["_ACP"]?.Value != null)
+            {
+                return PartialView("CookieBar", false);
+            }
+
+            return PartialView("CookieBar", true);
+        }
+
+        [HttpPost]
+        public ActionResult CookiesAccepted()
+        {
+            var _acp = new HttpCookie("_ACP")
+            {
+                Value = "true",
+                Expires = DateTime.UtcNow.AddDays(30)
+            };
+
+            Response.Cookies.Add(_acp);
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }

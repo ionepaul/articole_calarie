@@ -14,7 +14,7 @@
                 <div class="auto-clear">
                     <div class="top-control box-has-content">
                         <div class="breadcrumbs">
-                            <a href="#">@(((string)ViewBag.CategoryName).ToFirstUppercase())</a> <i class="fa fa-angle-right"></i> <span class="current">@(((string)ViewBag.SubcategoryName).ToFirstUppercase())</span>
+                            <a href="#">@(((string)ViewBag.CategoryName).ToFirstUppercase())</a> <i class="fa fa-angle-right"></i> <span class="current">@(((string)ViewBag.SubcategoryName).Replace("-", " ").ToFirstUppercase())</span>
                         </div>
                     </div>
                     <div class="row product-grid">
@@ -65,14 +65,16 @@
                                     </div>
                                 </div>
                             </div>
-                         }
+                        }
                     </div>
                 </div>
 
-                <div id="content-pager">
-                    @Html.PagedListPager(Model, page => Url.RouteUrl("product-list-url", new { categoryName = ViewBag.CategoryName, subcategoryId = ViewBag.SubcategoryId, subcategoryName = ViewBag.SubcategoryName, page = page }))
-                </div>
-
+                @if (Model.PageCount > 1)
+                {
+                    <div id="content-pager">
+                        @Html.PagedListPager(Model, page => Url.RouteUrl("product-list-url", new { categoryName = ViewBag.CategoryName, subcategoryId = ViewBag.SubcategoryId, subcategoryName = ViewBag.SubcategoryName, page = page }))
+                    </div>
+                }
             </div>
 
             @Html.Action("ProductListSearchPartial", "Product", new { subcategoryId = ViewBag.SubcategoryId });

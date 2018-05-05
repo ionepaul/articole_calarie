@@ -179,7 +179,7 @@ namespace ArticoleCalarie.Web.Controllers
             {
                 var product = _iProductLogic.GetProductByProductCode(productCode);
 
-                var _subcategoryCookie = new HttpCookie("_RelatedProductsIn")
+                var _subcategoryCookie = new HttpCookie("_RPI")
                 {
                     Value = product.SubcategoryId,
                     Expires = DateTime.Now.AddDays(10)
@@ -198,13 +198,13 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetRelatedProducts()
+        public async Task<PartialViewResult> GetRelatedProducts()
         {
             _logger.Info("PARTIAL VIEW > Related Products");
 
             try
             {
-                var subcategory = Request.Cookies["_RelatedProductsIn"]?.Value;
+                var subcategory = Request.Cookies["_RPI"]?.Value;
 
                 var relatedProducts = await _iProductLogic.GetRelatedProducts(subcategory);
 
@@ -219,7 +219,8 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult NewestProductsHome()
+        [ChildActionOnly]
+        public PartialViewResult NewestProductsHome()
         {
             _logger.Info("PARTIAL VIEW > The newest four products for home page.");
 
@@ -238,7 +239,8 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ProductsOnSaleHome()
+        [ChildActionOnly]
+        public PartialViewResult ProductsOnSaleHome()
         {
             _logger.Info("PARTIAL VIEW > The latest four products on sale products for home page.");
 

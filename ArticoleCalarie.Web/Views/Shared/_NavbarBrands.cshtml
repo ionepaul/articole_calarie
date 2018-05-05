@@ -4,7 +4,7 @@
 @foreach (var brand in Model)
 {
     <li class="@(ViewContext?.RouteData?.Values["brand"]?.ToString() == brand.Name.ToLower() ? "active" : "")">
-        <a href="@Url.RouteUrl("products-by-brand-url", new { brand = brand.Name.ToLower(), pageNumber = 1 })">@brand.Name</a>
+        <a href="@Url.RouteUrl("products-by-brand-url", new { brand = brand.Name.ToLower(), pageNumber = 1 })">@brand.Name.ToUpper()</a>
     </li>
 }
 

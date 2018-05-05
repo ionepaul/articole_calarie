@@ -31,16 +31,21 @@
         $("#logoutForm").submit();
     });
 
-    hideCookiesBar();
+    initCookieBar();
 });
 
-function hideCookiesBar() {
-    var cookiesBar = $('.cookies-bar');
-    var acceptCookies = $('.acceptCookies');
+function initCookieBar() {
+    let url = window.location.origin + '/home/cookiesaccepted'
 
-    acceptCookies.click(function () {
-        alert('Cati cai pot fi inhamati la o caruta?');
-        cookiesBar.css('display', 'none');
+    $('#cookie-accept-btn').on("click", function () {
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url: url,
+            success: function (result) {
+                $('.cookies-bar').css('display', 'none');
+            }
+        });
     });
 }
 

@@ -1755,9 +1755,10 @@ input {
     display: inline-block;
     background: #324a76;
     text-transform: uppercase;
-    padding: 10px 6px;
+    padding: 6px 10px;
     margin: 0 5px;
     cursor: pointer;
+    border-radius: 3px;
 }
 
 .kt-next-panel:before{

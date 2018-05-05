@@ -410,6 +410,7 @@
     <Content Include="Views\Shared\_NavbarSubcategories.cshtml" />
     <Content Include="Views\Shared\_FooterBrands.cshtml" />
     <Content Include="Views\Home\ContactMessageSent.cshtml" />
+    <Content Include="Views\Home\CookieBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

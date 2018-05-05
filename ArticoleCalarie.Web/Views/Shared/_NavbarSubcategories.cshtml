@@ -10,7 +10,7 @@
         @foreach (var subcategory in Model.Take(itemsPerSection))
         {
             <li class="@(ViewContext?.RouteData?.Values["subcategoryName"]?.ToString() == subcategory.Name.ToLower().Replace(" ", "-") ? "active" : "")">
-                <a href="@Url.RouteUrl("product-list-url", new { categoryName = subcategory.CategoryName.ToLower(), subcategoryId = subcategory.Id, subcategoryName = subcategory.Name.ToLower().Replace(" ", "-"), page = 1 })">@subcategory.Name</a>
+                <a href="@Url.RouteUrl("product-list-url", new { categoryName = subcategory.CategoryName.ToLower(), subcategoryId = subcategory.Id, subcategoryName = subcategory.Name.ToLower().Replace(" ", "-"), page = 1 })">@subcategory.Name.ToUpper()</a>
             </li>
         }
     </ul>
@@ -21,7 +21,7 @@
         @foreach (var subcategory in Model.Skip(itemsPerSection).Take(itemsPerSection))
         {
             <li class="@(ViewContext?.RouteData?.Values["subcategoryName"]?.ToString() == subcategory.Name.ToLower().Replace(" ", "-") ? "active" : "")">
-                <a href="@Url.RouteUrl("product-list-url", new { categoryName = subcategory.CategoryName.ToLower(), subcategoryId = subcategory.Id, subcategoryName = subcategory.Name.ToLower().Replace(" ", "-"), page = 1 })">@subcategory.Name</a>
+                <a href="@Url.RouteUrl("product-list-url", new { categoryName = subcategory.CategoryName.ToLower(), subcategoryId = subcategory.Id, subcategoryName = subcategory.Name.ToLower().Replace(" ", "-"), page = 1 })">@subcategory.Name.ToUpper()</a>
             </li>
         }
     </ul>
@@ -32,7 +32,7 @@
         @foreach (var subcategory in Model.Skip(itemsPerSection * 2))
         {
             <li class="@(ViewContext?.RouteData?.Values["subcategoryName"]?.ToString() == subcategory.Name.ToLower().Replace(" ", "-") ? "active" : "")">
-                <a href="@Url.RouteUrl("product-list-url", new { categoryName = subcategory.CategoryName.ToLower(), subcategoryId = subcategory.Id, subcategoryName = subcategory.Name.ToLower().Replace(" ", "-"), page = 1 })">@subcategory.Name</a>
+                <a href="@Url.RouteUrl("product-list-url", new { categoryName = subcategory.CategoryName.ToLower(), subcategoryId = subcategory.Id, subcategoryName = subcategory.Name.ToLower().Replace(" ", "-"), page = 1 })">@subcategory.Name.ToUpper()</a>
             </li>
         }
     </ul>
