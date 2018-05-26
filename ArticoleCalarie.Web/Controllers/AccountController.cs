@@ -107,7 +107,7 @@ namespace ArticoleCalarie.Web.Controllers
                     {
                         _logger.Info($"Successfully registred user: {model.Email}.");
 
-                        ViewBag.ReturnUrl = "/home/index";
+                        ViewBag.ReturnUrl = "/account/administrare";
 
                         return RedirectToLocal(returnUrl);
                     }
@@ -367,7 +367,8 @@ namespace ArticoleCalarie.Web.Controllers
 
         #region Account Management
 
-        [HttpGet]
+        [HttpGet]   
+        [Route("account/administrare", Name = "administrare-cont-url")]
         public async Task<ActionResult> Manage()
         {
             _logger.Info("VIEW > Manage");
@@ -406,7 +407,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 _logger.Info($"Successfully saved delivery address for user: {userViewModel.Email}.");
 
-                return RedirectToAction(nameof(Manage));
+                return RedirectToRoute("administrare-cont-url");
             }
             catch (Exception ex)
             {
@@ -432,7 +433,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 _logger.Info($"Successfully saved billing address for user: {userViewModel.Email}.");
 
-                return RedirectToAction(nameof(Manage));
+                return RedirectToRoute("administrare-cont-url");
             }
             catch (Exception ex)
             {

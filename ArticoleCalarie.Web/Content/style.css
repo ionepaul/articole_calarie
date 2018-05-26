@@ -484,7 +484,7 @@ body ul {
 
 .body-content {
     min-height: 100%;
-    margin-top: 140px;
+    margin-top: 120px;
 }
 
 .page-wrapper {
@@ -1105,7 +1105,7 @@ input {
 .manage-account-info {
     display: flex;
     justify-content: space-between;
-    padding: 30px 15px;
+    padding: 0px 15px 30px 15px;
     margin-bottom: 10px;
 }
 .manage-account-info .fa,
@@ -10201,6 +10201,10 @@ strong.details-section {
     margin-bottom: 35px;
 }
 
+#login-related-products {
+    margin-top: 20px !important;
+}
+
 .connect-row .form-wrapper {
     padding: 35px 20px 20px;
 }
@@ -11278,10 +11282,14 @@ strong.details-section {
   text-align: right;
 }
 }
+
+#login-related-products {
+    margin-top: 110px;
+}
 /*----------------
 AUTO CLEAR 
 ----------------*/
-@media (min-width:1200px){
+@media (min-width:1200px) {
     .auto-clear .col-lg-1:nth-child(12n+1){clear:left;}
     .auto-clear .col-lg-2:nth-child(6n+1){clear:left;}
     .auto-clear .col-lg-15:nth-child(5n+1){clear:left;}

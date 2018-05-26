@@ -2,15 +2,17 @@
 @model ArticoleCalarie.Models.LoginViewModel
 
 @{
-    ViewBag.Title = "Conectează-te";
+    ViewBag.Title = "Conecteaza-te";
+    ViewBag.MetaDescription = "Conecteaza-te cu contul tau din magazinul online articole calarie pentru a comanda echipamente de echitatie rapid si ieftin.";
 }
+
 <div class="page-wrapper">
     <div class="row connect-row">
         <div class="login-col contact-content">
             <h4 class="form-title">@ViewBag.Title</h4>
             <section class="form-wrapper" id="loginForm">
                 @using (Html.BeginForm("login", "account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
+                {
                     @Html.AntiForgeryToken()
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -44,10 +46,9 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <input type="submit" style="border: none; width: 100%" value="Log in" class="submit send" />
+                            <input type="submit" style="border: none; width: 100%" value="Conecteaza-te" class="submit send" />
                         </div>
                     </div>
-
                 }
             </section>
         </div>
@@ -62,14 +63,23 @@
                 </p>
                 <div class="form-group">
                     <p class="register-now">
-                        @Html.ActionLink("Inregistreaza-te acum", "Register", new { @class = "submit send" })
+                        @Html.ActionLink("Inregistreaza-te acum", "register")
                     </p>
                 </div>
             </section>
         </div>
     </div>
+    <div class="related-items">
+        <div id="login-related-products"></div>
+    </div>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            getRelatedProducts('#login-related-products');
+        });
+    </script>
 }

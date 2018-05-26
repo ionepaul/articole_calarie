@@ -17,6 +17,10 @@
         }
     });
 
+    $("a").not(".no-loading").on("click", function () {
+        showLoader();
+    });
+
     $(window).load(function () {
         setTimeout(function () {
             hideLoader();

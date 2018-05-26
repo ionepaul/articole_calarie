@@ -79,7 +79,6 @@ namespace ArticoleCalarie.Web.Controllers
             return View();
         }
 
-        [HttpGet]
         [ChildActionOnly]
         public PartialViewResult CookieBar()
         {

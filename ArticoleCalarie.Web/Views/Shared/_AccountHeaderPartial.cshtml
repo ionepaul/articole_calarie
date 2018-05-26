@@ -3,7 +3,7 @@
 <div class="manage-account-info">
     <div class="my-account">
         <ul>
-            <li class="@(ViewContext?.RouteData?.Values["Action"]?.ToString().ToLower() == "manage" ? "active" : "")"><a href="/account/manage"><i class="fa fa-user" aria-hidden="true"></i> Contul meu</a></li>
+            <li class="@(ViewContext?.RouteData?.Values["Action"]?.ToString().ToLower() == "manage" ? "active" : "")"><a href="@Url.RouteUrl("administrare-cont-url")"><i class="fa fa-user" aria-hidden="true"></i> Contul meu</a></li>
             <li class="@(ViewContext?.RouteData?.Values["Action"]?.ToString().ToLower() == "userorderlist" ? "active" : "")"><a href="/order/userorderlist"><span class="flaticon-cart"></span> Comenzile Mele</a></li>
             <li><a id="log-out-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Deconecteaza-te</a></li>
         </ul>

@@ -8,7 +8,7 @@
             <li class="menu-item-has-children account">
                 <p class="hello-user"></p>
             <ul class="submenu">
-                <li>@Html.ActionLink("Contul Meu", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
+                <li><a href="@Url.RouteUrl("administrare-cont-url")" title="Contul Meu">Contul Meu</a>
                 <li>@Html.ActionLink("Comenzile Mele", "UserOrderList", "Order", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
                 
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))

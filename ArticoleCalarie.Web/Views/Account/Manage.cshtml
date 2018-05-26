@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Contul Meu";
+    ViewBag.MetaDescription = "Administreaza contul tau pe articole-calarie.ro";
+    ViewBag.MetaNoFollow = "<meta name='robots' CONTENT='NOINDEX'>";
 }
 
 <div class="page-wrapper account-manage-wrapper cf">
@@ -20,12 +22,12 @@
                 @Html.AntiForgeryToken()
 
                 @Html.Partial("_AddressFormPartial", Model.DeliveryAddress, new ViewDataDictionary()
-       {
-           TemplateInfo = new TemplateInfo()
            {
-               HtmlFieldPrefix = "DeliveryAddress"
-           }
-       })
+               TemplateInfo = new TemplateInfo()
+               {
+                   HtmlFieldPrefix = "DeliveryAddress"
+               }
+           })
 
                 <div class="form-group">
                     <input id="deliveryAddressSaveBtn" type="submit" style="border: none; width: 100%" value="Salvează" class="submit send" />
@@ -42,8 +44,8 @@
                     <p> @Model.DeliveryAddress.AddressLine1<span>, </span>@Model.DeliveryAddress.AddressLine2</p>
                     <p>@Model.DeliveryAddress.PostalCode<span>, </span>@Model.DeliveryAddress.City</p>
                     <p> @Model.DeliveryAddress.County<span>, </span>@Model.DeliveryAddress.Country</p>
-                    <a class="address-details-edit" id="editDeliveryAddressBtn" title="Edit">Edit</a>
-                    <img class="delivery-truck" src="../images/delivery.png" alt="Delivery Truck" />
+                    <a class="address-details-edit no-loading" id="editDeliveryAddressBtn" title="Edit">Editeaza</a>
+                    <img class="delivery-truck" src="../images/delivery.png" alt="imagine adresa de livrare" />
                 </div>
             }
         </div>
@@ -56,16 +58,17 @@
             {
                 HttpMethod = "post",
                 OnComplete = "acccounEditAddressOnComplete"
-            }))            {
+            }))
+            {
                 @Html.AntiForgeryToken()
 
                 @Html.Partial("_AddressFormPartial", Model.BillingAddress, new ViewDataDictionary()
-       {
-           TemplateInfo = new TemplateInfo()
            {
-               HtmlFieldPrefix = "BillingAddress"
-           }
-       })
+               TemplateInfo = new TemplateInfo()
+               {
+                   HtmlFieldPrefix = "BillingAddress"
+               }
+           })
 
                 <div class="form-group">
                     <input id="billingAddressSaveBtn" type="submit" style="border: none; width: 100%" value="Salvează" class="submit send" />
@@ -82,8 +85,8 @@
                     <p>@Model.BillingAddress.AddressLine1<span>, </span>@Model.BillingAddress.AddressLine2</p>
                     <p>@Model.BillingAddress.PostalCode<span>, </span>@Model.BillingAddress.City</p>
                     <p>@Model.BillingAddress.County<span>, </span>@Model.BillingAddress.Country</p>
-                    <a class="address-details-edit" id="editBillingAddressBtn" title="Edit">Edit</a>
-                    <img class="billing" src="../images/billing.png" alt="Delivery Truck" />
+                    <a class="address-details-edit no-loading" id="editBillingAddressBtn" title="Edit">Editeaza</a>
+                    <img class="billing" src="../images/billing.png" alt="imagine adresa de facturare" />
                 </div>
             }
         </div>
@@ -93,21 +96,5 @@
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#editDeliveryAddressBtn').on('click', function () {
-                $('#deliveryAddress').addClass('hidden');
-                $('#deliveryAddressForm').removeClass('hidden');
-            });
-
-            $('#editBillingAddressBtn').on('click', function () {
-                $('#billingAddress').addClass('hidden');
-                $('#billingAddressForm').removeClass('hidden');
-            });
-        });
-
-        function acccounEditAddressOnComplete() {
-            window.location.href = '/account/manage';
-        }
-    </script>   
+    <script src="~/Scripts/account-manage.js"></script>
 }
