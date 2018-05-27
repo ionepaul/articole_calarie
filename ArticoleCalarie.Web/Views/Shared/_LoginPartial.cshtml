@@ -9,7 +9,7 @@
                 <p class="hello-user"></p>
             <ul class="submenu">
                 <li><a href="@Url.RouteUrl("administrare-cont-url")" title="Contul Meu">Contul Meu</a>
-                <li>@Html.ActionLink("Comenzile Mele", "UserOrderList", "Order", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
+                <li><a href="@Url.RouteUrl("user-orders-url")" title="Comenzile Mele">Comenzile Mele</a></li>
                 
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {

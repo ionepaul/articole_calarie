@@ -373,6 +373,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Authorize]
+        [Route("account/comenzile-mele", Name = "user-orders-url")]
         public async Task<ActionResult> UserOrderList(int? pageNumber)
         {
             _logger.Info("VIEW > User order list");
