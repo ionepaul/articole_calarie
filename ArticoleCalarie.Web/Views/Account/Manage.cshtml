@@ -2,8 +2,11 @@
 
 @{
     ViewBag.Title = "Contul Meu";
-    ViewBag.MetaDescription = "Administreaza contul tau pe articole-calarie.ro";
-    ViewBag.MetaNoFollow = "<meta name='robots' CONTENT='NOINDEX'>";
+    ViewBag.MetaDescription = "Administreaza contul tau pe articole-calarie.ro.";
+}
+
+@section MetaNoFollow {
+    <meta name='robots' CONTENT='NOINDEX, NOFOLLOW'>
 }
 
 <div class="page-wrapper account-manage-wrapper cf">

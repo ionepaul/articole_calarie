@@ -69,20 +69,23 @@ namespace ArticoleCalarie.Logic.Logic
             return await _iAccountRepository.ResetPassword(model.Email, code, model.Password);
         }
 
-        public async Task<IdentityResult> CreateExternalAccountLogin(string email, string fullName, UserLoginInfo loginInfo)
+        public async Task<IdentityResult> CreateExternalAccountLogin(ExternalLoginConfirmationViewModel model, UserLoginInfo loginInfo)
         {
             var userModel = new UserModel
             {
-                UserName = email,
-                Email = email,
-                FullName = fullName
+                UserName = model.Email,
+                Email = model.Email,
+                FullName = model.FullName,
+                IsTermsAccepted = model.IsTermsAccepted,
+                IsPrivacyPolicyAccepted = model.IsPrivacyPolicyAccepted,
+                IsNewsletterSubscription = model.IsNewsletterSubscription
             };
 
             var result = await _iAccountRepository.CreateExternalAccountAndSignIn(userModel, loginInfo);
 
             if (result.Succeeded)
             {
-                await _iEmailLogic.SendWelcomeEmail(email, fullName);
+                await _iEmailLogic.SendWelcomeEmail(model.Email, model.FullName);
             }
 
             return result;

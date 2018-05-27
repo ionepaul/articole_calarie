@@ -1,13 +1,18 @@
 ﻿@model ArticoleCalarie.Models.ExternalLoginConfirmationViewModel
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Autentificare externa";
+    ViewBag.Description = string.Empty;
 }
 
-<div class="page-wrapper container">
+@section MetaNoFollow {
+    <meta name='robots' CONTENT='NOINDEX, NOFOLLOW'>
+}
+
+<div class="page-wrapper">
     <div class="pass-confirmation">
         <div class="logo">
-            <img src="~/images/my_logo3.png" alt="Articole Călărie logo" id="appLogo">
+            <img src="~/images/articole-calarie-logo.png" alt="articole calarie logo" id="appLogo">
         </div>
 
         @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -16,13 +21,44 @@
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <p>
-                Te-ai autentificat cu succes folosind contul tau de Facebook.
+                Te-ai autentificat cu succes folosind contul tau de Facebook, pentru a continua te rugam sa consulti <br /> temenii si conditiile site-ului si politica de confidentialitate.
             </p>
-            <div class="form-group">
-                <div class="externalLogin">
-                    <input type="submit" value="Continua" />
+
+            @Html.HiddenFor(m => m.Email)
+            @Html.HiddenFor(m => m.FullName)
+
+            <div style="width: 400px" class="register-wrapper contact-content">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.ValidationMessageFor(m => m.IsTermsAccepted, "", new { @class = "text-danger login-errorMessage" })
+                        <label class="checkbox-container">
+                            @Html.CheckBoxFor(m => m.IsTermsAccepted)
+                            <label class="checkbox-label">Am citit si sunt de acord cu <a href="#0" class="termsAndCondLink">termenii si conditiile.</a></label>
+                            <span class="checkbox-checkmark"></span>
+                        </label>
+
+                        @Html.ValidationMessageFor(m => m.IsPrivacyPolicyAccepted, "", new { @class = "text-danger login-errorMessage" })
+                        <label class="checkbox-container">
+                            @Html.CheckBoxFor(m => m.IsPrivacyPolicyAccepted)
+                            <label class="checkbox-label">Am citit si sunt de acord cu <a href="#0" class="termsAndCondLink">politica de confidentialitate.</a></label>
+                            <span class="checkbox-checkmark"></span>
+                        </label>
+
+                        <label class="checkbox-container">
+                            @Html.CheckBoxFor(m => m.IsNewsletterSubscription)
+                            <label class="checkbox-label" for="newsletter">Vreau sa primesc oferte promotionale prin email.</label>
+                            <span class="checkbox-checkmark"></span>
+                        </label>
+                    </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <div class="externalLogin">
+                    <input type="submit" value="Confirma" />
+                </div>
+            </div>
+
             <div class="related-items">
                 <h3 class="title supper-title"></h3>
                 <br />
