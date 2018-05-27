@@ -1,20 +1,23 @@
 ﻿@model PagedList.IPagedList<ArticoleCalarie.Models.OrderViewModel>
-@using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Listă produse";
+    ViewBag.Title = "Comenzi";
+    ViewBag.MetaDescription = string.Empty;
+}
+
+@section MetaNoFollow {
+    <meta name='robots' CONTENT='NOINDEX, NOFOLLOW'>
 }
 
 <div class="page-wrapper orders-list">
     <div class="product-list-header">
         <h3 class="form-title">Comenzi</h3>
         <div class="special-btns-container">
-            <button id="all-orders-btn" class="orders-special-btn active">Toate</button>
-            <button id="completed-orders-btn" class="orders-special-btn">Complete</button>
-            <button id="registred-orders-btn" class="orders-special-btn">Noi</button>
-            <button id="shipped-orders-btn" class="orders-special-btn">Trimise</button>
+            <button id="registred-orders-btn" class="orders-special-btn active">Noi</button>
             <button id="confirmed-orders-btn" class="orders-special-btn">Confirmate</button>
+            <button id="shipped-orders-btn" class="orders-special-btn">Trimise</button>
+            <button id="completed-orders-btn" class="orders-special-btn">Complete</button>
         </div>
     </div>
 
@@ -24,13 +27,4 @@
 
 @section scripts {
     <script src="~/Scripts/order-list-admin.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('.special-btns-container button').click(function () {
-                $(this).siblings().removeClass('active')
-                $(this).addClass('active');
-            });
-        });
-    </script>
 }

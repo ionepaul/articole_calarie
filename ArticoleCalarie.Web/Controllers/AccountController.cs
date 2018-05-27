@@ -262,6 +262,11 @@ namespace ArticoleCalarie.Web.Controllers
         {
             _logger.Info("GET > External Login Callback");
 
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                returnUrl = "/account/administrare";
+            }
+
             try
             {
                 var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();

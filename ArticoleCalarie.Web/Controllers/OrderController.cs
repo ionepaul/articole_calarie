@@ -291,7 +291,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> OrderList(int? pageNumber, OrderStatusViewEnum status = OrderStatusViewEnum.ALL)
+        public async Task<ActionResult> OrderList(int? pageNumber, OrderStatusViewEnum status = OrderStatusViewEnum.REGISTRED)
         {
             _logger.Info("VIEW > Admin > All orders");
 
@@ -406,6 +406,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Authorize]
+        [Route("account/comenzile-mele-partial", Name = "user-orders-partial-url")]
         public async Task<ActionResult> UserOrderListPartial(int? pageNumber)
         {
             _logger.Info("VIEW > User order list");

@@ -3,9 +3,13 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Listă produse";
+    ViewBag.Title = "Lista produse";
+    ViewBag.MetaDescription = string.Empty;
 }
 
+@section MetaNoFollow {
+    <meta name='robots' CONTENT='NOINDEX, NOFOLLOW'>
+}
 <div class="page-wrapper">
     <div class="product-list-header">
         <h3 class="form-title">Listă produse</h3>

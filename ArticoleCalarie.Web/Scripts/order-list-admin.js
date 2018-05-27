@@ -15,10 +15,6 @@
         searchOrders("COMPLETE");
     });
 
-    $("#all-orders-btn").on("click", function () {
-        searchOrders("ALL");
-    });
-
     function searchOrders(status) {
         showLoader();
 
@@ -49,6 +45,11 @@
         });
 
         return false;
+    });
+
+    $('.special-btns-container button').click(function () {
+        $(this).siblings().removeClass('active')
+        $(this).addClass('active');
     });
 });
 
@@ -97,7 +98,8 @@ function openCompleteOrderModal(orderNumber) {
     $('#complete-order-modal-' + orderNumber).modal('toggle');
 }
 
-function changeOrderStatus(orderNumber, newStatus) {
+function changeOrderStatus(orderNumber, newStatus, id) {
+    $('#' + id).modal('hide');
     let url = window.location.origin + '/Order/ChangeOrderStatus';
 
     showLoader();
@@ -119,6 +121,9 @@ function changeOrderStatus(orderNumber, newStatus) {
         success: function () {
             hideLoader();
             window.location.reload();
+        },
+        error: function () {
+            window.origin.location = "/error";
         }
     });
 }

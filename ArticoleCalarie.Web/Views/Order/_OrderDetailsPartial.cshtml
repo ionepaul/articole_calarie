@@ -84,7 +84,7 @@
                                 <p>Esti sigur ca vrei confirmi <b>comanda #@Model.OrderNumber</b>?</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.CONFIRMED')">Da</button>
+                                <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.CONFIRMED', 'confirm-order-model-@Model.OrderNumber')">Da</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Nu</button>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                                 </select>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.SHIPPED')">Confirma</button>
+                                <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.SHIPPED', 'ship-order-modal-@Model.OrderNumber')">Confirma</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuleaza</button>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
                                 <p>Esti sigur ca vrei sa marchezi <b>comanda #@Model.OrderNumber</b> ca fiind efectuata cu succes?</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.COMPLETE')">Da</button>
+                                <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.COMPLETE', 'complete-order-modal-@Model.OrderNumber')">Da</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Nu</button>
                             </div>
                         </div>

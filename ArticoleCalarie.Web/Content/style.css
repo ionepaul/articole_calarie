@@ -1087,9 +1087,11 @@ input {
     padding: 10px;
     margin-left: 10px;
     height: 100%;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 .special-btns-container button.active {
-    background: lightblue;
+    background: #ba3326;
 }
 .order-details {
     padding: 20px 50px 0;
