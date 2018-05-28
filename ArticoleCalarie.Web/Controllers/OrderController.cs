@@ -273,7 +273,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 _logger.Info("Successfully saved order");
 
-                return RedirectToAction(nameof(CheckoutDone), new { orderNumber = orderNumber });
+                return RedirectToAction(nameof(CheckoutDone), new { nrComanda = orderNumber });
             }
             catch (Exception ex)
             {
@@ -284,11 +284,12 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult CheckoutDone(int orderNumber)
+        [Route("comanda/comanda-inregistrata", Name = "checkout-done-url")]
+        public ActionResult CheckoutDone(int nrComanda)
         {
             _logger.Info("VIEW > Checkout Done");
 
-            return View(orderNumber);
+            return View(nrComanda);
         }
 
         [HttpGet]

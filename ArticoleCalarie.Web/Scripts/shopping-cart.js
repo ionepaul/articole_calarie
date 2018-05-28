@@ -1,11 +1,11 @@
 ﻿$(document).ready(function () {
     var color;
-    if ($(".list-color li").length > 0) {
-        $(".list-color li").first().addClass("current");
-        color = $(".list-color li:first a").attr("id");
+    if ($(".product-single-page .list-color li").length > 0) {
+        $(".product-single-page .list-color li").first().addClass("current");
+        color = $(".product-single-page .list-color li:first a").attr("id");
     }
 
-    $(".list-color li a").on("click", function () {
+    $(".product-single-page .list-color li a").on("click", function () {
         $(".list-color li").removeClass("current");
         $(this).parent().addClass("current");
         color = $(this).attr("id");

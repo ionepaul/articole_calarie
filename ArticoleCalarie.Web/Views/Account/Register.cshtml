@@ -52,14 +52,14 @@
                         @Html.ValidationMessageFor(m => m.IsTermsAccepted, "", new { @class = "text-danger login-errorMessage" })
                         <label class="checkbox-container">
                             @Html.CheckBoxFor(m => m.IsTermsAccepted)
-                            <label class="checkbox-label">Am citit si sunt de acord cu <a href="#0" class="termsAndCondLink">termenii si conditiile.</a></label>
+                            <label class="checkbox-label">Am citit si sunt de acord cu <a href="@Url.RouteUrl("terms-and-conds-url")" target="_blank" class="termsAndCondLink no-loading">termenii si conditiile.</a></label>
                             <span class="checkbox-checkmark"></span>
                         </label>
 
                         @Html.ValidationMessageFor(m => m.IsPrivacyPolicyAccepted, "", new { @class = "text-danger login-errorMessage" })
                         <label class="checkbox-container">
                             @Html.CheckBoxFor(m => m.IsPrivacyPolicyAccepted)
-                            <label class="checkbox-label">Am citit si sunt de acord cu <a href="#0" class="termsAndCondLink">politica de confidentialitate.</a></label>
+                            <label class="checkbox-label">Am citit si sunt de acord cu <a href="@Url.RouteUrl("privacy-policy-url")" target="_blank" class="termsAndCondLink no-loading">politica de confidentialitate.</a></label>
                             <span class="checkbox-checkmark"></span>
                         </label>
 

@@ -7,5 +7,6 @@ namespace ArticoleCalarie.Repository.IRepository
     {
         IEnumerable<Subcategory> GetAllByCategoryId(int categoryId);
         IEnumerable<Subcategory> GetAllByCategoryIdAndSearchTerm(int categoryId, string searchTerm = "");
+        IEnumerable<Subcategory> GetAllByCategoryName(string categoryName);
     }
 }

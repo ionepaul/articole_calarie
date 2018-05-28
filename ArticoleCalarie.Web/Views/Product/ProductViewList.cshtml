@@ -3,8 +3,16 @@
 @using ArticoleCalarie.Web.Utils
 
 @{
-    ViewBag.Title = "Produse " + ((string)ViewBag.CategoryName).ToFirstUppercase() + " | " + ((string)ViewBag.SubcategoryName).ToFirstUppercase();
-    ViewBag.Description = "";
+    ViewBag.Title = ((string)ViewBag.SubcategoryName).ToFirstUppercase() + " | Produse " + ((string)ViewBag.CategoryName).ToFirstUppercase();
+
+    if (string.Equals(ViewBag.CategoryName, "cal", StringComparison.InvariantCultureIgnoreCase))
+    {
+        ViewBag.MetaDescription = ((string)ViewBag.SubcategoryName).ToFirstUppercase() + " pentru calul tau, impreuna cu alte produse, echipamente si accesorii de echitatie sunt disponibile pe >> www.articolecalarie.ro >>";
+    }
+    else
+    {
+        ViewBag.MetaDescription = ((string)ViewBag.SubcategoryName).ToFirstUppercase() + " pentru echitatie si alte produse de calarie pentru tine si calul tau doar pe >> www.articolecalarie.ro >>";
+    }
 }
 
 <div class="main-content grid-category-page inner-page">
@@ -14,7 +22,7 @@
                 <div class="auto-clear">
                     <div class="top-control box-has-content">
                         <div class="breadcrumbs">
-                            <a href="#">@(((string)ViewBag.CategoryName).ToFirstUppercase())</a> <i class="fa fa-angle-right"></i> <span class="current">@(((string)ViewBag.SubcategoryName).Replace("-", " ").ToFirstUppercase())</span>
+                            <a href="@Url.RouteUrl("subcategories-url", new { categoryName = (string)ViewBag.CategoryName})">@(((string)ViewBag.CategoryName).ToFirstUppercase())</a> <i class="fa fa-angle-right"></i> <span class="current">@(((string)ViewBag.SubcategoryName).Replace("-", " ").ToFirstUppercase())</span>
                         </div>
                     </div>
                     <div class="row product-grid">
@@ -77,7 +85,7 @@
                 }
             </div>
 
-            @Html.Action("ProductListSearchPartial", "Product", new { subcategoryId = ViewBag.SubcategoryId });
+            @Html.Action("ProductListSearchPartial", "Product", new { subcategoryId = ViewBag.SubcategoryId })
         </div>
     </div>
 </div>

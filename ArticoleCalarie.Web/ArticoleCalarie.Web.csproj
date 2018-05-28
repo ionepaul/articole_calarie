@@ -412,6 +412,9 @@
     <Content Include="Views\Shared\_FooterBrands.cshtml" />
     <Content Include="Views\Home\ContactMessageSent.cshtml" />
     <Content Include="Views\Home\CookieBar.cshtml" />
+    <Content Include="Views\Subcategory\SubcategoryList.cshtml" />
+    <Content Include="Views\Home\TermsAndConditions.cshtml" />
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -30,5 +30,12 @@ namespace ArticoleCalarie.Logic.Logic
 
             return subcategoriesByTerm;
         }
+
+        public IEnumerable<SubcategoryViewModel> GetAllSubcategoriesByCategoryName(string categoryName)
+        {
+            var subcategories = _iSubcategoryRepository.GetAllByCategoryName(categoryName).Select(x => x.ToViewModel());
+
+            return subcategories;
+        }
     }
 }

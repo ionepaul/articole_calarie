@@ -76,6 +76,26 @@ namespace ArticoleCalarie.Web.Controllers
         [Route("contact/mesaj-trimis", Name = "contact-message-sent-url")]
         public ActionResult ContactMessageSent()
         {
+            _logger.Info("VIEW > Contact Message Sent.");
+
+            return View();
+        }
+
+        [HttpGet]
+        [Route("termeni-si-conditii", Name = "terms-and-conds-url")]
+        public ActionResult TermsAndConditions()
+        {
+            _logger.Info("VIEW > Terms and conditions");
+
+            return View();
+        }
+
+        [HttpGet]
+        [Route("politica-de-confidentialitate", Name = "privacy-policy-url")]
+        public ActionResult PrivacyPolicy()
+        {
+            _logger.Info("VIEW > Privacy Policy");
+
             return View();
         }
 

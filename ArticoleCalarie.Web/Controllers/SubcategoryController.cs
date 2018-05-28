@@ -28,5 +28,14 @@ namespace ArticoleCalarie.Web.Controllers
 
             return PartialView("_NavbarSubcategories", subcategories);
         }
+
+        [HttpGet]
+        [Route("{categoryName}/subcategorii", Name = "subcategories-url")]
+        public ActionResult SubcategoryList(string categoryName)
+        {
+            var subcategories = _iSubcategoryLogic.GetAllSubcategoriesByCategoryName(categoryName);
+
+            return View(subcategories);
+        }
     }
 }

@@ -39,8 +39,8 @@
                             <ul class="topbar-content right-content menu-topbar">
                                 <li class="currencies">
                                     <ul class="list-currencies">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                        <li><a href="https://www.facebook.com/www.articolecalarie.ro/" target="_blank" class="no-loading"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#" class="hidden"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -52,7 +52,7 @@
                 <div class="header-nav-inner">
                     <div class="box-header-nav container-wapper">
                         <div class="special-container main-menu-wapper">
-                            <a class="menu-bar mobile-navigation" href="#">
+                            <a class="menu-bar mobile-navigation no-loading" href="#">
                                 <span class="icon">
                                     <span></span>
                                     <span></span>
@@ -67,19 +67,19 @@
                             <ul id="menu-main-menu" class="main-menu clone-main-menu">
                                 <li class="menu-item menu-item-has-children shop">
                                     <!-- <span class="top-flash new"> new</span> -->
-                                    <a class="kt-item-title" title="SHOP">CĂLĂREȚ</a>
+                                    <a href="@Url.RouteUrl("subcategories-url", new { categoryName = "calaret"})" class="kt-item-title no-loading" title="Produse pentru calaret">CALARET</a>
                                     <div class="mega-menu submenu">
                                         @Html.Action("GetNavbarSubcategories", "Subcategory", new { categoryId = (int)CategoryViewEnum.Calaret })
                                     </div>
                                 </li>
                                 <li class="menu-item menu-item-has-children shop">
-                                    <a class="kt-item-title" title="Cal">CAL</a>
+                                    <a href="@Url.RouteUrl("subcategories-url", new { categoryName = "cal"})" class="kt-item-title no-loading" title="Produse pentru cal">CAL</a>
                                     <div id="horse-products-list" class="mega-menu submenu">
                                         @Html.Action("GetNavbarSubcategories", "Subcategory", new { categoryId = (int)CategoryViewEnum.Cal })
                                     </div>
                                 </li>
                                 <li class="menu-item menu-item-has-children">
-                                    <a id="brands-section" class="kt-item-title" title="Brands">BRANDS</a>
+                                    <a id="brands-section no-loading" class="kt-item-title" title="Branduri disponibile">BRANDS</a>
                                     <ul id="brands-list" class="submenu">
                                         @Html.Action("GetLayoutBrands", "Brand", new { isNavbar = true })
                                     </ul>
@@ -127,8 +127,8 @@
                                 <p class="des">Maecenas lorem nibh, scelerisque nec justo gravida, commodo facilisis ipsum nulla ut porttitor.</p>
                             </div>
                             <ul class="list-socials">
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.facebook.com/www.articolecalarie.ro/" target="_blank" class="no-loading"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="hidden"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                         <div class="col-xs-6 col-sm-6  col-lg-2 col-ss-12">
@@ -156,9 +156,9 @@
                             <div class="widget custom-menu">
                                 <h3 class="widgettitle">INFORMATII</h3>
                                 <ul>
-                                    <li><a href="#">Politica de confidentialitate</a></li>
-                                    <li><a href="#">Politica de retur</a></li>
-                                    <li><a href="#">Termeni si Conditii</a></li>
+                                    <li><a href="@Url.RouteUrl("terms-and-conds-url")">Termeni si Conditii</a></li>
+                                    <li><a href="@Url.RouteUrl("privacy-policy-url")">Politica de confidentialitate</a></li>
+                                    <li><a href="#">Politica de retur</a></li>                
                                     <li><a href="/contact">Contacteaza-ne</a></li>
                                     <li><a href="#">Sitemap</a></li>
                                 </ul>
@@ -179,7 +179,7 @@
         </div>
     </footer>
     <!--/Footer -->
-    <a class="back-to-top" href="#"></a>
+    <a class="back-to-top no-loading" href="#"></a>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
