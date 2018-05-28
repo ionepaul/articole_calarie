@@ -86,7 +86,7 @@
                                 </li>
 
                                 <li class="menu-item @(ViewContext?.RouteData?.Values["action"]?.ToString() == "NewestProducts" ? "active" : "")"">
-                                    <a href="@Url.RouteUrl("newest-products-url", new { pageNumber = 1 })" class="kt-item-title">NOUTĂȚI</a>
+                                    <a href="@Url.RouteUrl("newest-products-url", new { pageNumber = 1 })" class="kt-item-title">NOUTATI</a>
                                 </li>
                                 <li class="menu-item @(ViewContext?.RouteData?.Values["action"]?.ToString() == "ProductsOnSale" ? "active" : "")"><span class="top-flash hot">hot</span>
                                     <a href="@Url.RouteUrl("products-on-sale-url", new { pageNumber = 1 })">OFERTE</a>

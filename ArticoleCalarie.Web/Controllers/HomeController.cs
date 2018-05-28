@@ -91,6 +91,15 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
+        [Route("cum-folosim-cookies", Name = "how-we-use-cookies-url")]
+        public ActionResult CookieUsage()
+        {
+            _logger.Info("VIEW > Cookie Usage");
+
+            return View();
+        }
+
+        [HttpGet]
         [Route("politica-de-confidentialitate", Name = "privacy-policy-url")]
         public ActionResult PrivacyPolicy()
         {
