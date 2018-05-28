@@ -120,6 +120,7 @@ function changeOrderStatus(orderNumber, newStatus, id) {
         cache: false,
         success: function () {
             hideLoader();
+            window.location.origin = window.location.origin + "&status=" + (newStatus - 1)
             window.location.reload();
         },
         error: function () {

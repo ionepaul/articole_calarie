@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Checkout";
-
+    ViewBag.MetaDescription = string.Empty;
     var fullName = Model?.DeliveryAddress?.FullName;
     var deliveryPhoneNumber = Model?.DeliveryAddress?.PhoneNumber;
     var deliveryAddressLine1 = Model?.DeliveryAddress?.AddressLine1;
@@ -16,24 +16,25 @@
     var grandTotal = 0M;
 }
 
+@section MetaNoFollow {
+    <meta name='robots' CONTENT='NOINDEX, NOFOLLOW'>
+}
+
 <div class="main-content checkout-page">
     <div class="container">
-        <div class="breadcrumbs">
-            <a href="#">Home</a> / <span class="current">Checkout</span>
-        </div>
         <div class="checkout-content">
             <div class="row">
                 <div class="col-ss-12 col-xs-12 col-sm-12 col-lg-12">
                     <div class="checkout-choosen">
                         <ul class="list-choosen">
                             <li class="parent-content">
-                                <a href="#" class="show-content"> <span class="number">01</span> CHECKOUT METHOD</a>
+                                <a href="#" class="show-content no-loading"> <span class="number">01</span> AUTENTIFICARE</a>
                                 @if (!Model.UserIsLoggedIn)
                                 {
                                     <div class="hidden-content checkout-choosen-content show">
                                         <div class="row">
                                             <div class="checkout-form col-xs-12 col-sm-4">
-                                                <h3 class="title">Continuă fără cont</h3>
+                                                <h3 class="title">Continua fara cont</h3>
                                                 <br />
 
                                                 @Html.Partial("_CheckoutGuestEmailFormPartial", new GuestEmailViewModel())
@@ -41,48 +42,24 @@
                                             </div>
                                             <div class="checkout-form col-xs-12 col-sm-4">
             
-                                                <h3 class="title">Înregistrează-te</h3>
+                                                <h3 class="title">Inregistreaza-te</h3>
                                                 <br />
 
                                                 <div id="socialLoginForm">
-                                                    @Html.Partial("../Account/_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = "/Order/Checkout" })
+                                                    @Html.Partial("../Account/_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = "/comanda/checkout" })
                                                 </div>
                                                 <p class="text-in-lines">
                                                     <span style="background: #fff">sau</span>
                                                 </p>
 
-                                                @*@using (Html.BeginForm("Register", "Account", new { ReturnUrl = "/Order/Checkout" }, FormMethod.Post, new { @id="register-form", @class = "form-horizontal", role = "form" }))
-                                                {
-                                                    @Html.AntiForgeryToken()
-
-                                                    <h3 class="text-label">Nume complet *</h3>
-                                                    <input type="text" name="fullname" class="input-info">
-
-                                                    <h3 class="text-label">Email *</h3>
-                                                    <input type="text" name="email" class="input-info">
-
-                                                    <h3 class="text-label">Parola *</h3>
-                                                    <input type="password" name="password" class="input-info">
-
-                                                    <h3 class="text-label">Confirmă parola *</h3>
-                                                    <input type="password" name="confirmpassword" class="input-info">
-
-                                                    <ul class="list-tick">
-                                                        <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span> Check-out simplu și rapid</li>
-                                                        <li><span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span> Vizualizează toate comenzile tale</li>
-                                                    </ul>
-                                                    <br />
-
-                                                    <a id="checkout-register-btn" class="submit login">INREGISTREAZA-TE</a>
-                                                }*@
-                                                <a href="@Url.Action("Register", "Account", new { ReturnUrl = "/Order/Checkout"})" style="width: 100%; text-align:center" class="submit send">
-                                                    <strong>Înregistrează-te</strong>
+                                                <a href="@Url.Action("Register", "Account", new { ReturnUrl = "/comanda/checkout"})" style="width: 100%; text-align:center" class="submit send">
+                                                    <strong>Inregistreaza-te</strong>
                                                 </a>
                                             </div>
                                             <div class="login-form col-xs-12 col-sm-4">
-                                                <h3 class="title">Conectează-te</h3>
+                                                <h3 class="title">Conecteaza-te</h3>
                                                 <br />
-                                                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = "/Order/Checkout" }, FormMethod.Post, new { @id = "login-form", @class = "form-horizontal", role = "form" }))
+                                                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = "/comanda/checkout" }, FormMethod.Post, new { @id = "login-form", @class = "form-horizontal", role = "form" }))
                                                 {
                                                     @Html.AntiForgeryToken()
 
@@ -91,10 +68,7 @@
                                                     <h3 class="text-label">Parola *</h3>
                                                     <input type="password" name="password" class="input-info">
 
-                                                    <a id="checkout-login-btn" class="submit login">CONECTEAZĂ-TE</a>
-                                                    <div class="note">
-                                                        @Html.ActionLink("Ți-ai uitat parola?", "ForgotPassword", "Account")
-                                                    </div>
+                                                    <a id="checkout-login-btn" class="submit login">CONECTEAZĂ-TE</a>                                                 
                                                 }
                                             </div>
                                         </div>
@@ -103,7 +77,7 @@
                                 else
                                 {
                                     <div class="hidden-content checkout-choosen-content">
-                                        <h4 class="main-title">Sunteti authentificat. Vom folosi detaliile din contul dvs.</h4>
+                                        <h4 class="main-title">Sunteti deja autentificat cu contul dvs.</h4>
                                     </div>
                                 }
                             </li>
@@ -115,7 +89,7 @@
                             }
 
                             <li class="parent-content @activeParentClass">
-                                <a href="#" class="show-content @hasNoClick"> <span class="number">02</span> DETALII LIVRARE</a>
+                                <a href="#" class="show-content @hasNoClick no-loading"> <span class="number">02</span> DETALII LIVRARE</a>
                                 <div class="hidden-content checkout-choosen-content @showContainerClass">
                                     <div class="checkout-form content-form delivery-details-form">
                                         <h4 class="main-title">Adresa de livrare</h4>
@@ -136,7 +110,7 @@
                                 </div>
                             </li>
                             <li class="parent-content">
-                                <a href="#" class="show-content noClick"> <span class="number">03</span>DETALII FACTURARE</a>
+                                <a href="#" class="show-content noClick no-loading"> <span class="number">03</span>DETALII FACTURARE</a>
                                 <div class="hidden-content checkout-choosen-content">
                                     <div class="checkout-form content-form billing-address-form">
                                         <h4 class="main-title">Adresa de facturare</h4>
@@ -158,12 +132,12 @@
                                 </div>
                             </li>
                             <li class="parent-content">
-                                <a href="#" class="show-content noClick"> <span class="number">04</span> DETALII PLATA</a>
+                                <a href="#" class="show-content noClick no-loading"> <span class="number">04</span> DETALII PLATA</a>
                                 <div class="hidden-content checkout-choosen-content">
                                     <div id="delivery-method" class="payment-form">
                                         <div class="info-checkout">
                                             <label class="checkbox-container">
-                                                <input id="howToPay" type="checkbox" name="howToPay" value="Ramburs" checked />
+                                                <input id="howToPay" type="checkbox" name="howToPay" value="Ramburs" checked disabled />
                                                 <label class="checkbox-label" for="howToPay">Ramburs</label>
                                                 <span class="checkbox-checkmark"></span>
                                             </label>
@@ -171,11 +145,11 @@
                                         </div>
                                     </div>
 
-                                    <a id="ramburs-btn" class="submit continue">CONTINUĂ</a>
+                                    <a id="ramburs-btn" class="submit continue no-loading">CONTINUA</a>
                                 </div>
                             </li>
                             <li class="parent-content">
-                                <a href="#" class="show-content noClick"> <span class="number">05</span> ORDER REVIEW</a>
+                                <a href="#" class="show-content noClick no-loading"> <span class="number">05</span> REVIZUIESTE COMANDA</a>
                                 <div class="hidden-content checkout-choosen-content">
                                     <div class="total-checkout">
                                         <table class="shopping-cart-content checkout-tabel">
@@ -204,10 +178,11 @@
                                         </table>
                                     </div>
                                     <div class="order-group">
-                                        <div>
-                                            <span class="text">Grand Total </span><span class="price"> @grandTotal RON</span>
+                                        <div style="font-weight: 700">
+                                            <span class="text">Total: </span><span class="price"> @grandTotal RON</span> <br />
+                                            <span class="text">Transport: </span> <span class="price"> 0 RON</span>
                                         </div>
-                                        <a id="place-order-btn" href="@Url.Action("PlaceOrder", "Order", new { totalAmount = grandTotal })" class="button submit">Comandă</a>
+                                        <a id="place-order-btn" href="@Url.Action("PlaceOrder", "Order", new { totalAmount = grandTotal })" class="button submit no-loading">Comanda</a>
                                     </div>
                                 </div>
                             </li>

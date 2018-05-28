@@ -2,17 +2,24 @@
 @using ArticoleCalarie.Web.Utils
 
 @{
-    ViewBag.Title = "ShoppingCartDetails";
+    ViewBag.Title = "Cosul tau de cumparaturi";
+    ViewBag.MetaDescription = string.Empty;
     var shoppingCart = Session["ShoppingCart"] as ShoppingCartModel;
     var totalCartItems = shoppingCart?.ShoppingItems?.Sum(x => x.Quantity) ?? 0;
     var grandTotal = 0M;
+    var howManyProducts = shoppingCart.ShoppingItems?.Sum(x => x.Quantity);
+    var produsTag = howManyProducts == 1 ? "produs" : "produse";
+}
+
+@section MetaNoFollow {
+    <meta name='robots' CONTENT='NOINDEX, NOFOLLOW'>
 }
 
 <div class="page-wrapper">
     <div class="main-content checkout-page">
         <div class="container">
             <div class="cart-page-title">
-                <p>Cosul de cumparaturi</p>
+                <p><span class="flaticon-cart"></span> Cosul tau de cumparaturi (@howManyProducts @produsTag)</p>
             </div>
 
             <div class="cart-content">
@@ -51,14 +58,14 @@
                             <h3 class="subtitle">
                                 Total: @grandTotal RON
                             </h3>
-                            <a href="@Url.Action("Checkout", "Order")" class="submit checkout">Comanda</a>
+                            <a href="@Url.RouteUrl("checkout-url")" class="submit checkout">Comanda</a>
                         </div>
                         <a id="back" class="continue-shopping submit">Continua cumparaturile</a>
                     </div>
                                     }
                                     else
                                     {
-                                        <p class="empty-cart">Nici un produs in cosul de cumparaturi</p>
+                                        <p class="empty-cart">Momentan nu ai nici un produs in cosul tau de cumparaturi.</p>
                                     }
 
             </div>

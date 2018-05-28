@@ -28,6 +28,7 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
+        [Route("comanda/produse", Name = "shopping-cart-details-url")]
         public ActionResult ShoppingCartDetails()
         {
             _logger.Info("VIEW > Shopping Cart Details");
@@ -36,6 +37,7 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
+        [Route("comanda/checkout", Name = "checkout-url")]
         public async Task<ActionResult> Checkout()
         {
             _logger.Info("VIEW > Check out");
@@ -237,7 +239,7 @@ namespace ArticoleCalarie.Web.Controllers
                 {
                     _logger.Info("User is logged in, updating billing address on profile.");
 
-                    await _iAccountLogic.SaveUserAddress(address, userId);
+                    await _iAccountLogic.SaveUserAddress(billingAddress, userId);
                 }
 
                 orderViewModel.BillingAddress = billingAddress;

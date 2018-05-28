@@ -83,9 +83,11 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string returnUrl)
         {
             _logger.Info("VIEW > Register");
+
+            ViewBag.ReturnUrl = returnUrl;
 
             return View();
         }

@@ -55,7 +55,7 @@ function deleteFromCart(productCode) {
         url: url,
         success: function (data) {
             $("#shopping-cart").html(data);
-            if (window.location.href.indexOf("ShoppingCartDetails") > -1) {
+            if (window.location.href.indexOf("cos-cumparaturi") > -1) {
                 window.location.reload();
             } else {
                 hideLoader();
