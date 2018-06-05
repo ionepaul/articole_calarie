@@ -13,7 +13,7 @@
     var deliveryCounty = Model?.DeliveryAddress?.County;
     var deliveryCity = Model?.DeliveryAddress?.City;
 
-    var grandTotal = 0M;
+    var grandTotal = Model.DeliveryCost;
 }
 
 @section MetaNoFollow {
@@ -142,6 +142,7 @@
                                                 <span class="checkbox-checkmark"></span>
                                             </label>
                                             <p>Produsele vor fi livrate la adresa ta.</p>
+                                            <p>Vei plati in ramburs valoare proudselor si costul transportului.</p>
                                         </div>
                                     </div>
 
@@ -179,8 +180,8 @@
                                     </div>
                                     <div class="order-group">
                                         <div style="font-weight: 700">
-                                            <span class="text">Total: </span><span class="price"> @grandTotal RON</span> <br />
-                                            <span class="text">Transport: </span> <span class="price"> 0 RON</span>
+                                            <span class="text">Transport: </span> <span class="price"> @Model.DeliveryCost RON</span> <br />
+                                            <span class="text">Total: </span><span class="price"> @grandTotal RON</span>
                                         </div>
                                         <a id="place-order-btn" href="@Url.Action("PlaceOrder", "Order", new { totalAmount = grandTotal })" class="button submit no-loading">Comanda</a>
                                     </div>

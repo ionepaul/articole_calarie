@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ArticoleCalarie.Models.HomeViewModel
+
+@{
     ViewBag.Title = "Echipament de echitatie, Magazin de echitație, Produse pentru echitatie";
     ViewBag.MetaDescription = "Echipamente de echitatie pentru tine si calul tau. De la pantalanoni de calarie, pinteni, cizme de echitatie la valtrape, jambieri sau frau pentru calul tau.";
 }
@@ -41,7 +43,7 @@
                 <div class="banner-content">
                     <h3 class="title">Floral Vintage Tshirt Campaign</h3>
                     <p class="des">Mauris nec porta sapien. Aliquamin est ultricies, fringilla libero vel mattis.</p>
-                    <a href="#" class="button">SHOP NOW</a>
+                    <a href="#" class="button">CUMPARA ACUM</a>
                 </div>
                 <div class="banner-image">
                     <img src="images/sacou-echitatie-dama.png" alt="sacou echitatie dama">
@@ -50,7 +52,7 @@
             <div class="col banner-2">
                 <div class="banner-content">
                     <h3 class="title">TRANSPORT GRATUIT</h3>
-                    <p class="des">Livrare gratuita la comenzile mai mari de 200 RON</p>
+                    <p class="des">Livrare gratuita la comenzile mai mari de @Model.FreeDeliveryCostValue RON</p>
                 </div>
                 <div class="banner-image">
                     <h3 class="title">Jambieri Fata eShock</h3>

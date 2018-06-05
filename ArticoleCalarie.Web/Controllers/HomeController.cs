@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
@@ -22,7 +23,14 @@ namespace ArticoleCalarie.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var freeDeliveryCostValue = (string)ConfigurationManager.AppSettings["FreeDeliveryOrderValue"];
+
+            var homeViewModel = new HomeViewModel
+            {
+                FreeDeliveryCostValue = freeDeliveryCostValue
+            };
+
+            return View(homeViewModel);
         }
 
         [Route("despre-noi", Name = "about-us-url")]

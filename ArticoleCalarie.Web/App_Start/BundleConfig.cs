@@ -33,10 +33,6 @@ namespace ArticoleCalarie.Web
                       "~/Content/jquery-ui.min.css",
                       "~/Content/animate.min.css",
                       "~/Content/owl.carousel.min.css"));
-            //"~/Content/jquery.scrollbar.min.css",
-            //"~/Content/magnific-popup.min.css", 
-            //"~/Content/timecircles.css"
-            //"~/Content/chosen.min.css",
 
             bundles.Add(new StyleBundle("~/bundles/external").Include(
                       "~/Scripts/owl.carousel.min.js",
@@ -46,13 +42,6 @@ namespace ArticoleCalarie.Web
                       "~/Scripts/mobilemenu.min.js",
                       "~/Scripts/jquery-ui.min.js",
                       "~/Scripts/frontend.js"));
-            //"~/Scripts/masonry.min.js",
-            //"~/Scripts/jquery.plugin-countdown.min.js",
-            //"~/Scripts/jquery-countdown.min.js",
-            //"~/Scripts/jquery.scrollbar.min.js"
-            //"~/Scripts/magnific-popup.min.js",
-            //"~/Scripts/chosen.min.js",
-            //"~/Scripts/timecircles.js",
         }
     }
 }

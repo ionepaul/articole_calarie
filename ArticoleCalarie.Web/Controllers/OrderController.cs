@@ -45,10 +45,13 @@ namespace ArticoleCalarie.Web.Controllers
             try
             {
                 var shoppingCart = Session["ShoppingCart"] as ShoppingCartModel;
+                var freeDeliveryCostValue = Convert.ToDecimal(ConfigurationManager.AppSettings["FreeDeliveryOrderValue"]);
+                var deliveryCost = Convert.ToDecimal(ConfigurationManager.AppSettings["DeliveryCost"]);
 
                 var orderViewModel = new OrderViewModel()
                 {
-                    ShoppingItems = shoppingCart.ShoppingItems
+                    ShoppingItems = shoppingCart.ShoppingItems,
+                    DeliveryCost = shoppingCart.ShoppingItems.Sum(x => x.Price) >= freeDeliveryCostValue ? 0 : deliveryCost
                 };
                 
                 if (User.Identity.IsAuthenticated)

@@ -23,5 +23,7 @@ namespace ArticoleCalarie.Models
         public OrderStatusViewEnum OrderStatus { get; set; }
 
         public DateTime OrderRegistrationDate { get; set; }
+
+        public decimal DeliveryCost { get; set; }
     }
 }
