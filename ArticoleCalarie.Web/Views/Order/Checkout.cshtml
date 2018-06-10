@@ -180,10 +180,10 @@
                                     </div>
                                     <div class="order-group">
                                         <div style="font-weight: 700">
-                                            <span class="text">Transport: </span> <span class="price"> @Model.DeliveryCost RON</span> <br />
+                                            <span class="text">Transport: </span> <span class="price"> @Convert.ToDecimal(Model.DeliveryCost).ToString("F") RON</span> <br />
                                             <span class="text">Total: </span><span class="price"> @grandTotal RON</span>
                                         </div>
-                                        <a id="place-order-btn" href="@Url.Action("PlaceOrder", "Order", new { totalAmount = grandTotal })" class="button submit no-loading">Comanda</a>
+                                        <a id="place-order-btn" href="@Url.Action("PlaceOrder", "Order", new { totalAmount = grandTotal - Model.DeliveryCost })" class="button submit no-loading">Comanda</a>
                                     </div>
                                 </div>
                             </li>

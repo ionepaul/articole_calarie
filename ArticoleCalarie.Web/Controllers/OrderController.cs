@@ -301,7 +301,7 @@ namespace ArticoleCalarie.Web.Controllers
         {
             _logger.Info("VIEW > Admin > All orders");
 
-            ViewBag.OrderStatus = status;
+            ViewBag.OrderStatus = (int)status;
 
             try
             {

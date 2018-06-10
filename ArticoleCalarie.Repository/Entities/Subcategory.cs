@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ArticoleCalarie.Repository.Entities
@@ -16,5 +17,7 @@ namespace ArticoleCalarie.Repository.Entities
 
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

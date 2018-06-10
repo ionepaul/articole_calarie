@@ -11,7 +11,7 @@
                 {
                     <li>@Html.ActionLink("Adaugă produs", "Add", "Product", routeValues: null, htmlAttributes: new { title = "Adaugă produs" })</li>
                     <li>@Html.ActionLink("Listă produse", "List", "Product", routeValues: new { pageNumber = 1 }, htmlAttributes: new { title = "Adaugă produs" })</li>
-                    <li>@Html.ActionLink("Vezi comenzile", "OrderList", "Order", routeValues: new { pageNumber = 1 }, htmlAttributes: new { title = "Vezi comenzile" })</li>
+                    <li>@Html.ActionLink("Vezi comenzile", "OrderList", "Order", routeValues: new { pageNumber = 1, status = 1 }, htmlAttributes: new { title = "Vezi comenzile" })</li>
                 }
                 else
                 {

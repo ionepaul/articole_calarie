@@ -14,7 +14,7 @@ namespace ArticoleCalarie.Repository.Repository
 
         public IEnumerable<Subcategory> GetAllByCategoryId(int categoryId)
         {
-            var subcategories = _dbset.Where(x => x.CategoryId == categoryId).Include(x => x.Category).OrderBy(x => x.Name).AsEnumerable();
+            var subcategories = _dbset.Where(x => x.CategoryId == categoryId && x.Products.Count > 0).Include(x => x.Category).OrderBy(x => x.Name).AsEnumerable();
 
             return subcategories;
         }

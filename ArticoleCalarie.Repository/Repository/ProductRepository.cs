@@ -120,7 +120,7 @@ namespace ArticoleCalarie.Repository.Repository
 
                 foreach(var product in sizeQuery)
                 {
-                    if (searchModel.Sizes.Intersect(product.Size.Split(',').ToList()).Count() > 0)
+                    if (product.Size != null && searchModel.Sizes.Intersect(product.Size.Split(',').ToList()).Count() > 0)
                     {
                         productIds.Add(product.Id);
                     }
@@ -165,8 +165,8 @@ namespace ArticoleCalarie.Repository.Repository
 
             var searchFilters = new SearchFilters
             {
-                MinPrice = subcategoryProducts.Min(p => p.Price),
-                MaxPrice = subcategoryProducts.Max(p => p.Price)
+                MinPrice = subcategoryProducts.Count() > 0 ? subcategoryProducts.Min(p => p.Price) : 0M,
+                MaxPrice = subcategoryProducts.Count() > 0 ? subcategoryProducts.Max(p => p.Price) : 0M
             };
 
             var productsColors = subcategoryProducts.Where(x => x.AvailableColors.Count > 0)

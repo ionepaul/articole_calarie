@@ -122,8 +122,8 @@ namespace ArticoleCalarie.Logic.Converters
             {
                 MinPrice = searchFilters.MinPrice,
                 MaxPrice = searchFilters.MaxPrice,
-                Colors = searchFilters.Colors.Select(x => x.ToViewModel()).ToList(),
-                Sizes = searchFilters.Sizes.ToList()
+                Colors = searchFilters.Colors != null ? searchFilters.Colors.Select(x => x.ToViewModel()).ToList() : new List<ColorViewModel>(),
+                Sizes = searchFilters.Sizes != null ? searchFilters.Sizes.ToList() : new List<string>()
             };
 
             return searchViewFilters;
