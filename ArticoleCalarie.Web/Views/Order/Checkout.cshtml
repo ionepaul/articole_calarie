@@ -138,11 +138,33 @@
                                         <div class="info-checkout">
                                             <label class="checkbox-container">
                                                 <input id="howToPay" type="checkbox" name="howToPay" value="Ramburs" checked disabled />
-                                                <label class="checkbox-label" for="howToPay">Ramburs</label>
+                                                <label class="checkbox-label" for="howToPay">Plata se va face in RAMBURS la livrarea produselor</label>
                                                 <span class="checkbox-checkmark"></span>
                                             </label>
-                                            <p>Produsele vor fi livrate la adresa ta.</p>
-                                            <p>Vei plati in ramburs valoare proudselor si costul transportului.</p>
+
+                                            <div style="padding: 5px 22px;">
+                                                <ul>
+                                                    <li>- Produsele vor fi livrate la adresa de livrare mentionata.</li>
+                                                    <li>- Veti plati in ramburs valoare proudselor si costul transportului.</li>
+                                                </ul>                        
+                                            </div>
+                           
+                                            @if (!User.Identity.IsAuthenticated)
+                                            {
+                                                <p id="terms-policy-error-msg" class="text-danger hidden">Pentru a continua comanda trebuie sa citesti si sa accepti Termenii si Conditiile, respectiv Politica de Confidentialitate.</p>
+
+                                                <label class="checkbox-container">
+                                                    <input id="terms-accepted-checkout" type="checkbox" />
+                                                    <label class="checkbox-label">Am citit si sunt de acord cu <a href="@Url.RouteUrl("terms-and-conds-url")" target="_blank" class="termsAndCondLink no-loading">termenii si conditiile.</a></label>
+                                                    <span class="checkbox-checkmark"></span>
+                                                </label>
+
+                                                <label class="checkbox-container">
+                                                    <input id="policy-accepted-checkout" type="checkbox" />
+                                                    <label class="checkbox-label">Am citit si sunt de acord cu <a href="@Url.RouteUrl("privacy-policy-url")" target="_blank" class="termsAndCondLink no-loading">politica de confidentialitate.</a></label>
+                                                    <span class="checkbox-checkmark"></span>
+                                                </label>
+                                            }
                                         </div>
                                     </div>
 
@@ -156,7 +178,7 @@
                                         <table class="shopping-cart-content checkout-tabel">
                                             <tr class="title">
                                                 <td class="product-name">Produs</td>
-                                                <td class="price">Preț</td>
+                                                <td class="price">Pret</td>
                                                 <td class="total">Total</td>
                                             </tr>
                                             @foreach (var product in Model.ShoppingItems)
@@ -198,102 +220,5 @@
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(".continue").on("click", function () {
-                $(this).closest(".hidden-content").removeClass("show");
-                $(this).closest(".parent-content").next(".parent-content").find(".show-content").click();
-            });
-
-            $("#checkout-login-btn").on("click", function () {
-                $("#login-form").submit();
-            });
-
-            $("#checkout-register-btn").on("click", function () {
-                $("#register-form").submit();
-            });
-
-            $("#checkout-save-delivery-address-btn").on("click", function () {
-                $("#delivery-address-form").submit();
-            });
-
-            $("#checkout-save-billing-address-btn").on("click", function () {
-                $("#billing-address-form").submit();
-            });
-
-            $("#guest-email-form-btn").on("click", function () {
-                $("#guest-email-form").submit();
-            });
-
-            $("#place-order-btn").on("click", function () {
-                showLoader();
-            });
-
-            $("#same-as-delivery-btn").on("change", function () {
-                var isChecked = $(this).prop("checked");
-                $(this).val(isChecked);
-
-                if (!isChecked) {
-                    $("#billing-form-container").removeClass("hidden");
-                }
-                else {
-                    $("#billing-form-container").addClass("hidden");
-                }
-            });
-
-            $("#ramburs-btn").on("click", function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                showNextContainer('#delivery-method');
-            });
-
-            noClick();
-        });
-
-        function formOnComplete() {
-            hideLoader();
-        }
-
-        function deliveryAddressOnSuccess() {
-            showNextContainer("#delivery-address-form");
-        }
-
-        function billingAddressOnSuccess() {
-            showNextContainer("#billing-address-form");
-        }
-
-        function guestEmailFormOnSuccess() {
-            showNextContainer("#guest-email-form");
-        }
-
-        function showNextContainer(id) {
-            $(id).closest(".hidden-content").removeClass("show");
-            $(id).closest(".hidden-content").closest(".parent-content").removeClass("active");
-            $(id).closest(".parent-content").next(".parent-content").find("a.show-content").removeClass("noClick");
-            $(id).closest(".parent-content").next(".parent-content").find(".show-content").click();
-        }
-
-        function noClick() {
-
-            var list = $('.list-choosen');
-            var noClickLink = $('a.noClick');
-            var links = list.find(noClickLink);
-
-            links.each(function () {
-                $(this).click(function (e) {
-                    if ($(this).hasClass('noClick')) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    }
-                });
-            });
-
-        }
-
-        function failure() {
-            console.log('failure');
-        }
-
-    </script>   
+    <script src="~/Scripts/checkout.js"></script>   
 }

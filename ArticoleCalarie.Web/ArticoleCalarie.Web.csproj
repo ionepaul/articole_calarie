@@ -313,6 +313,7 @@
     <Content Include="Scripts\account-manage.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\checkout.js" />
     <Content Include="Scripts\chosen.min.js" />
     <Content Include="Scripts\frontend.js" />
     <Content Include="Scripts\imagesloaded.pkgd.min.js" />

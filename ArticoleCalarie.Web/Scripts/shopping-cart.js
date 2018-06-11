@@ -36,10 +36,15 @@
             success: function (data) {
                 $("#shopping-cart").html(data);
                 hideLoader();
+                window.scrollTo(0, 0);
+                $("#added-to-order").fadeIn("slow");
+                setTimeout(function () {
+                    $("#added-to-order").fadeOut("slow");
+                }, 3000);
             },
             error: function (error) {
                 hideLoader();
-                alert("Eroare la incarcarea tabelelor de marimi. Faceti un refresh la pagina.");
+                window.location = "/error";
             },
             async: true,
             timeout: 60000
@@ -55,7 +60,7 @@ function deleteFromCart(productCode) {
         url: url,
         success: function (data) {
             $("#shopping-cart").html(data);
-            if (window.location.href.indexOf("cos-cumparaturi") > -1) {
+            if (window.location.href.indexOf("comanda/produse") > -1) {
                 window.location.reload();
             } else {
                 hideLoader();
@@ -63,7 +68,7 @@ function deleteFromCart(productCode) {
         },
         error: function (error) {
             hideLoader();
-            alert("Eroare la incarcarea tabelelor de marimi. Faceti un refresh la pagina.");
+            window.location = "/error";
         },
         async: true,
         timeout: 60000
