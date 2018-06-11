@@ -184,7 +184,7 @@ namespace ArticoleCalarie.Repository.Repository
                 {
                     if (sizeList != null)
                     {
-                        var itemSizes = sizeList.Split(',');
+                        var itemSizes = sizeList.Replace(" ", string.Empty).Split(',');
 
                         productsSizes.AddRange(itemSizes);
                     }

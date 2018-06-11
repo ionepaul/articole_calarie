@@ -30,9 +30,9 @@ namespace ArticoleCalarie.Web
                       "~/Content/customs-css.css",
                       "~/Content/flaticon.min.css",
                       "~/Content/font-awesome.min.css",
-                      "~/Content/jquery-ui.min.css",
                       "~/Content/animate.min.css",
-                      "~/Content/owl.carousel.min.css"));
+                      "~/Content/owl.carousel.min.css",
+                      "~/Content/nouislider.min.css"));
 
             bundles.Add(new StyleBundle("~/bundles/external").Include(
                       "~/Scripts/owl.carousel.min.js",
@@ -40,7 +40,7 @@ namespace ArticoleCalarie.Web
                       "~/Scripts/imagesloaded.pkgd.min.js",
                       "~/Scripts/isotope.pkgd.min.js",
                       "~/Scripts/mobilemenu.min.js",
-                      "~/Scripts/jquery-ui.min.js",
+                      "~/Scripts/nouislider.min.js",
                       "~/Scripts/frontend.js"));
         }
     }

@@ -206,25 +206,46 @@ jQuery(document).ready(function ($) {
     }
 
     // Price filter
-    $('.slider-range-price').each(function(){
-      var min             = parseFloat($(this).data('min'));
-      var max             = parseFloat($(this).data('max'));
-      var unit            = $(this).data('unit');
-      var value_min       = parseFloat($(this).data('value-min'));
-      var value_max       = parseFloat($(this).data('value-max'));
-      var label_reasult   = $(this).data('label-reasult');
-      var t               = $(this);
-      $('.price-filter' ).slider({
-        range: true,
-        min: min,
-        max: max,
-        values: [ value_min, value_max ],
-        slide: function (event, ui) {
-            var result = '<span class="from">' + ui.values[0].toFixed(2).replace(".", ",") + ' -' + ' </span><span class="to"> ' + ui.values[1].toFixed(2).replace(".", ",") + '</span>';
-          t.closest('.price-filter').find('.amount-range-price').html('Price: ' + result + ' ' + unit);
-        }
-      });
-    });
+    document.querySelectorAll('.nouirange').forEach(function (el) {
+        let htmlinsert = document.createElement('div');
+        let realmininput = el.querySelector('.min');
+        let realmaxinput = el.querySelector('.max');
+        realmininput.style.display = "none ";
+        realmaxinput.style.display = "none ";
+
+        let min = Number(realmininput.getAttribute('min').replace(",", "."));
+        let max = Number(realmaxinput.getAttribute('max').replace(",", "."));
+
+        el.appendChild(htmlinsert);
+
+        var startValue = Number(realmininput.getAttribute('value').replace(",","."));
+        var endValue = Number(realmaxinput.getAttribute('value').replace(",", "."));
+
+        noUiSlider.create(htmlinsert, {
+            start: [startValue, endValue],
+            connect: true,
+            range: {
+                'min': min,
+                'max': max
+            },
+            step: 1
+        });
+
+        htmlinsert.noUiSlider.on('change', function (values) {
+            let rangevals = values;
+            realmininput.value = String(values[0]);
+            realmaxinput.value = String(values[1]);
+            $("#priceFilterMin").text(values[0].replace(".", ","));
+            $("#priceFilterMax").text(values[1].replace(".", ","));
+        });
+
+        htmlinsert.noUiSlider.on('update', function (values, handle) {
+            let rangevals = values;
+            $("#priceFilterMin").text(values[0].replace(".", ","));
+            $("#priceFilterMax").text(values[1].replace(".", ","));
+        });
+    })
+
 
     //Woocommerce plus and minius
     $(document).on('click', '.quantity .plus, .quantity .minus', function (e) {

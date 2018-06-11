@@ -287,7 +287,20 @@ namespace ArticoleCalarie.Web.Controllers
         [HttpGet]
         public ActionResult ProductListSearchPartial(int subcategoryId)
         {
+            var sessionSubcategoriesFilters = Session["SubcategoriesFilters"] as Dictionary<int, SearchViewFilters> ?? new Dictionary<int, SearchViewFilters>();
+
+            if (sessionSubcategoriesFilters.ContainsKey(subcategoryId))
+            {
+                var filters = sessionSubcategoriesFilters[subcategoryId];
+
+                return PartialView("_ProductListSearch", filters);
+            }
+
             var searchFilters = _iProductLogic.GetSearchViewFiltersForSubcategory(subcategoryId);
+
+            sessionSubcategoriesFilters.Add(subcategoryId, searchFilters);
+
+            Session["SubcategoriesFilters"] = sessionSubcategoriesFilters;
 
             return PartialView("_ProductListSearch", searchFilters);
         }

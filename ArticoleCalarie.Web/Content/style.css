@@ -4300,7 +4300,6 @@ h1.contact-title {
 .widget_filter_price .amount-range-price {
   float: left;
   margin-top: 33px;
-  margin-left: -10px;
   font-size: 14px;
 }
 .widget_filter_price .amount-range-price span {
@@ -11505,6 +11504,42 @@ AUTO CLEAR
 .user-order-title {
     padding-top: 60px;
 }
+
+/*noUiSlider*/
+fieldset.nouirange {
+    border: none;
+}
+
+fieldset.nouirange .noUi-target {
+    border: none !important;
+}
+
+fieldset.nouirange .noUi-horizontal {
+    height: 4px;
+}
+
+    fieldset.nouirange .noUi-horizontal .noUi-connects {
+        background: #dbdbdb;
+    }
+
+        fieldset.nouirange .noUi-horizontal .noUi-connects .noUi-connect {
+            background: #ba3326;
+        }
+
+    fieldset.nouirange .noUi-handle {
+        height: 1em !important;
+        width: 1em !important;
+        top: -0.5em !important;
+        right: -0.5em !important;
+        border-radius: 100%;
+        background: #ba3326;
+        box-shadow: none;
+        border: none;
+    }
+
+    fieldset.nouirange .noUi-handle:before, fieldset.nouirange .noUi-handle:after {
+        display: none;
+    }
 
 
 

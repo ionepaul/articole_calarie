@@ -26,6 +26,11 @@
                         </div>
                     </div>
                     <div class="row product-grid">
+                        @if (Model.Count == 0)
+                        {
+                            <p>Din pacate nu am gasit nici un produs care sa se potriveasca cu criteriile dvs. de cautare.</p>
+                        }
+
                         @foreach (var product in Model)
                         {
                             <div class="col-ss-12 col-xs-6 col-sm-6 col-md-6 col-lg-4">
@@ -62,7 +67,7 @@
                                                 @if (product.IsOnSale)
                                                 {
                                                     <span class="del">@product.Price </span>
-                                                    <span class="ins">@product.PriceAfterSaleApplied RON</span>
+                                                            <span class="ins">@product.PriceAfterSaleApplied RON</span>
                                                 }
                                                 else
                                                 {
