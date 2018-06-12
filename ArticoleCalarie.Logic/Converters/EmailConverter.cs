@@ -29,7 +29,7 @@ namespace ArticoleCalarie.Logic.Converters
                 [EmailParametersEnum.DeliveryAddressCity.ToString().ToLower()] = order.DeliveryAddress?.City ?? string.Empty,
                 [EmailParametersEnum.DeliveryAddressCounty.ToString().ToLower()] = order.DeliveryAddress?.County ?? string.Empty,
                 [EmailParametersEnum.DeliveryAddressCountry.ToString().ToLower()] = order.DeliveryAddress?.Country ?? string.Empty,
-                [EmailParametersEnum.ViewOrderLink.ToString().ToLower()] = "order/userorderlist",
+                [EmailParametersEnum.ViewOrderLink.ToString().ToLower()] = "account/comenzile-mele",
                 [EmailParametersEnum.OrderNumber.ToString().ToLower()] = order.OrderNumber.ToString(),
                 [EmailParametersEnum.OrderDate.ToString().ToLower()] = order.OrderRegistrationDate.ToLocalTime().ToString(@"MM/dd/yyyy HH:mm", new CultureInfo("ro-RO")),
                 [EmailParametersEnum.TotalAmount.ToString().ToLower()] = (order.TotalAmount + deliveryCost).ToString("F"),

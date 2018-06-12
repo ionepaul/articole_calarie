@@ -21,7 +21,6 @@ namespace ArticoleCalarie.Repository.Entities
         [Required]
         public string City { get; set; }
 
-        [Required]
         public string PostalCode { get; set; }
 
         [Required]

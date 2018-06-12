@@ -120,7 +120,7 @@ namespace ArticoleCalarie.Repository.Repository
 
                 foreach(var product in sizeQuery)
                 {
-                    if (product.Size != null && searchModel.Sizes.Intersect(product.Size.Split(',').ToList()).Count() > 0)
+                    if (product.Size != null && searchModel.Sizes.Intersect(product.Size.Replace(" ", string.Empty).Split(',').ToList()).Count() > 0)
                     {
                         productIds.Add(product.Id);
                     }

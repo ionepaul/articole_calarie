@@ -70,7 +70,7 @@ namespace ArticoleCalarie.Logic.Converters
                 Id = product.Id,
                 ProductCode = product.ProductCode,
                 ProductName = product.ProductName,
-                SubcategoryName = product.Subcategory?.Name,
+                SubcategoryName = product.Subcategory?.Name.Trim(),
                 Brand = product.Brand?.Name,
                 Price = product.Price,
                 SalePercentage = product.SalePercentage.ToString() + "%",

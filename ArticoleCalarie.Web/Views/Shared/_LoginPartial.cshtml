@@ -9,6 +9,7 @@
             <ul class="submenu">
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
+                    <li><a href="@Url.RouteUrl("administrare-cont-url")" title="Contul Meu">Contul Meu</a></li>
                     <li>@Html.ActionLink("Adaugă produs", "Add", "Product", routeValues: null, htmlAttributes: new { title = "Adaugă produs" })</li>
                     <li>@Html.ActionLink("Listă produse", "List", "Product", routeValues: new { pageNumber = 1 }, htmlAttributes: new { title = "Adaugă produs" })</li>
                     <li>@Html.ActionLink("Vezi comenzile", "OrderList", "Order", routeValues: new { pageNumber = 1, status = 1 }, htmlAttributes: new { title = "Vezi comenzile" })</li>

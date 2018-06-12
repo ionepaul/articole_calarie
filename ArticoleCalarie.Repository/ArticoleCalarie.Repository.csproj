@@ -124,6 +124,10 @@
     <Compile Include="Migrations\201805261425333_UserFieldForPolicies.Designer.cs">
       <DependentUpon>201805261425333_UserFieldForPolicies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806121658346_non-required-postal-code.cs" />
+    <Compile Include="Migrations\201806121658346_non-required-postal-code.Designer.cs">
+      <DependentUpon>201806121658346_non-required-postal-code.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ColorDTO.cs" />
     <Compile Include="Models\OrderSearchResult.cs" />
@@ -169,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805261425333_UserFieldForPolicies.resx">
       <DependentUpon>201805261425333_UserFieldForPolicies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806121658346_non-required-postal-code.resx">
+      <DependentUpon>201806121658346_non-required-postal-code.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
