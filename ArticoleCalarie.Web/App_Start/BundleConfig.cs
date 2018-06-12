@@ -26,8 +26,8 @@ namespace ArticoleCalarie.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/style.css",                   
-                      "~/Content/customs-css.css",
+                      "~/Content/style.min.css",                   
+                      "~/Content/custom-css.min.css",
                       "~/Content/flaticon.min.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/animate.min.css",
@@ -41,7 +41,7 @@ namespace ArticoleCalarie.Web
                       "~/Scripts/isotope.pkgd.min.js",
                       "~/Scripts/mobilemenu.min.js",
                       "~/Scripts/nouislider.min.js",
-                      "~/Scripts/frontend.js"));
+                      "~/Scripts/frontend.min.js"));
         }
     }
 }

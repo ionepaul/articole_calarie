@@ -252,6 +252,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\chosen.min.css" />
+    <Content Include="Content\custom-css.min.css" />
     <Content Include="Content\customs-css.css" />
     <Content Include="Content\flaticon.min.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -262,6 +263,7 @@
     <Content Include="Content\owl.carousel.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\style.min.css" />
     <Content Include="Content\timecircles.css" />
     <Content Include="EmailTemplates\contact-email.html" />
     <Content Include="EmailTemplates\new-order-email.html" />
@@ -316,6 +318,7 @@
     <Content Include="Scripts\checkout.js" />
     <Content Include="Scripts\chosen.min.js" />
     <Content Include="Scripts\frontend.js" />
+    <Content Include="Scripts\frontend.min.js" />
     <Content Include="Scripts\imagesloaded.pkgd.min.js" />
     <Content Include="Scripts\isotope.pkgd.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -349,6 +352,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\shopping-cart.js" />
     <Content Include="Scripts\site.js" />
+    <Content Include="Scripts\site.min.js" />
     <Content Include="Scripts\timecircles.js" />
     <Content Include="Scripts\user-orders.js" />
     <Content Include="Web.config">

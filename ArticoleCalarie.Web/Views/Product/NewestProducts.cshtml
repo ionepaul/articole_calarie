@@ -73,7 +73,7 @@
                     @if (Model.PageCount > 1)
                     {
                         <div id="content-pager">
-                            @Html.PagedListPager(Model, page => Url.RouteUrl("products-on-sale-url", new { pageNumber = page }))
+                            @Html.PagedListPager(Model, page => Url.RouteUrl("newest-products-url", new { pageNumber = page }))
                         </div>
                     }
                 </div>
