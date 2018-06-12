@@ -724,7 +724,6 @@ input[type="checkbox"] {
     margin-top: 20px;
 }
 .address-details-wrapper {
-    background: #f1f2f4 url(../images/paper.png) top left repeat;
     padding: 15px 40px;
     border-radius: 5px;
     position: relative;
@@ -1036,11 +1035,13 @@ input {
   display: block;
   border-top: solid 1px transparent;
   border-bottom: solid 1px transparent;
-  padding: 0 10px;
 }
-/*#brands-list a {
+
+#brands-list li a,
+.account li a {
     padding: 0 20px;
-}*/
+}
+
 .submenu > li > a:hover {
   background-color: #f5f5f5;
   border-top: solid 1px #ebebeb;
