@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-6 facturare-adresa">
         <h4 class="form-title">Adresa de facturare</h4>
         <div id="billingAddressForm" class="contact-content @(Model.BillingAddress == null ? "" : "hidden")">
             @using (Ajax.BeginForm("SaveBillingAddress", "Account", new AjaxOptions
