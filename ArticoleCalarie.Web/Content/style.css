@@ -4303,7 +4303,7 @@ h1.contact-title {
 }
 .widget_filter_price .amount-range-price {
   float: left;
-  margin-top: 33px;
+  margin: 20px 0 20px;
   font-size: 14px;
 }
 .widget_filter_price .amount-range-price span {
