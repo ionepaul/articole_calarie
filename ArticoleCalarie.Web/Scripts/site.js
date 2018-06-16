@@ -3,6 +3,8 @@
         window.history.back();
     });
 
+    changeLogo();
+
     $("#content-pager a[href]").on("click", function () {
         showLoader();
     });
@@ -27,9 +29,9 @@
         }, 200);
     });
 
-    if ($(window).width() <= 639) {
-        $('#appLogo').attr("src", '/images/mobile_logo.png');
-    }
+    $(window).resize(function () {
+        changeLogo();
+    });
 
     $("#log-out-btn").on("click", function () {
         $("#logoutForm").submit();
@@ -151,6 +153,14 @@ function deleteFromCart(productCode) {
         async: true,
         timeout: 60000
     });
+}
+
+function changeLogo() {
+    if ($(window).width() < 639) {
+        $('#appLogo').attr("src", '/images/mobile_logo.png');
+    } else {
+        $('#appLogo').attr("src", '/images/articole-calarie-logo.png');
+    }
 }
 
 function viewProduct(categoryName, subcategoryId, subcategoryName, productCode, productNameUrl) {
