@@ -15,5 +15,6 @@ namespace ArticoleCalarie.Logic.ILogic
         Task<IdentityResult> CreateExternalAccountLogin(ExternalLoginConfirmationViewModel model, UserLoginInfo loginInfo);
         Task<UserViewModel> GetUserById(string userId);
         Task SaveUserAddress(AddressViewModel addressViewModel, string userId);
+        Task DeleteAccount(string userId);
     }
 }

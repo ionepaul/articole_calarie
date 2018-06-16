@@ -52,6 +52,16 @@ namespace ArticoleCalarie.Logic.Logic
             await _iEmailLogic.SendResetEmail(email, callbackUrl);
         }
 
+        public async Task DeleteAccount(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new Exception("Invalid User Identifier");
+            }
+
+            await _iAccountRepository.DeleteUser(userId);
+        }
+
         public async Task<SignInStatus> SignIn(LoginViewModel model)
         {
             return await _iAccountRepository.SignIn(model.Email, model.Password, model.RememberMe);

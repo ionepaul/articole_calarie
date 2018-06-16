@@ -16,5 +16,6 @@ namespace ArticoleCalarie.Repository.IRepository
         Task<UserModel> FindUserByIdAsync(string userId);
         Task UpdateUserAsync(UserModel userModel);
         Task<UserModel> GetUserFullUserInfo(string userId);
+        Task DeleteUser(string userId);
     }
 }

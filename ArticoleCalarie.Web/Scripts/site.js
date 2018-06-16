@@ -155,6 +155,27 @@ function deleteFromCart(productCode) {
     });
 }
 
+function openDeleteAccountModal() {
+    $('#delete-account-modal').modal('toggle');
+}
+
+function deleteAccount() {
+    let url = window.location.origin + '/account/deleteuser';
+    showLoader();
+    $.ajax({
+        url: url,
+        type: 'POST',
+        cache: false,
+        success: function () {
+            window.location = "/";
+
+        },
+        error: function () {
+            window.location = "/error";
+        }
+    });
+}
+
 function changeLogo() {
     if ($(window).width() < 639) {
         $('#appLogo').attr("src", '/images/mobile_logo.png');

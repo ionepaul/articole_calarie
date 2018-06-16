@@ -461,6 +461,32 @@ namespace ArticoleCalarie.Web.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task DeleteUser()
+        {
+            _logger.Info("POST > Delete User");
+
+            try
+            {
+                var userId = User.Identity.GetUserId();
+
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                if (userId != null)
+                {
+                    await _iAccountLogic.DeleteAccount(userId);
+                }
+            }
+            catch (Exception ex)
+            {
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                _logger.Info($"Failed to delete user: .Exception: {ex.Message}");
+
+                throw ex;
+            }
+        }
+
         #endregion
 
         [HttpPost]

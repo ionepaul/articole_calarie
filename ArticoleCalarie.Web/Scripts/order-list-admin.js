@@ -113,7 +113,7 @@ function changeOrderStatus(orderNumber, newStatus, id) {
             window.location.reload();
         },
         error: function () {
-            window.origin.location = "/error";
+            window.location = "/error";
         }
     });
 }
