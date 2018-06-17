@@ -86,7 +86,7 @@ namespace ArticoleCalarie.Logic.Converters
 
         private static string ToUrlString(this string s)
         {
-            s = s.ToLower().Replace(" ", "-");
+            s = s.Trim().Replace(" ", "-").Replace(", ", "-").Replace(",", "-").ToLowerInvariant();
 
             return s;
         }

@@ -74,7 +74,7 @@
                                 </li>
                                 <li class="menu-item menu-item-has-children shop">
                                     <a href="@Url.RouteUrl("subcategories-url", new { categoryName = "cal"})" class="kt-item-title no-loading" title="Produse pentru cal">CAL</a>
-                                    <div id="horse-products-list" class="mega-menu submenu">
+                                    <div id="horse-products-list" class="mega-menu submenu" style="background-image: url('../../images/horse_sub_dropdown_bg.jpg')">
                                         @Html.Action("GetNavbarSubcategories", "Subcategory", new { categoryId = (int)CategoryViewEnum.Cal })
                                     </div>
                                 </li>
@@ -146,7 +146,7 @@
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-lg-4 col-ss-12">
-                            <div class="widget custom-menu">
+                            <div style="text-transform: uppercase;" class="widget custom-menu footer-brands">
                                 <h3 class="widgettitle">BRANDS</h3>
                                 <div class="row">
                                     @Html.Action("GetLayoutBrands", "Brand", new { isNavbar = false })

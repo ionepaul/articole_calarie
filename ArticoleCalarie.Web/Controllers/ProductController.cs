@@ -312,7 +312,7 @@ namespace ArticoleCalarie.Web.Controllers
         {
             _logger.Info("VIEW > Products by brand id");
 
-            ViewBag.BrandName = brand;
+            ViewBag.BrandName = brand.Replace("-", " ");
 
             try
             {

@@ -11,12 +11,12 @@ namespace ArticoleCalarie.Web.Controllers
     public class SitemapController : Controller
     {
         private ISubcategoryLogic _iSubcategoryLogic;
-        private IProductLogic _iProductLogic;
+        private IBrandLogic _iBrandLogic;
 
-        public SitemapController(ISubcategoryLogic iSubcategoryLogic, IProductLogic iProductLogic)
+        public SitemapController(ISubcategoryLogic iSubcategoryLogic, IBrandLogic iBrandLogic)
         {
             _iSubcategoryLogic = iSubcategoryLogic;
-            _iProductLogic = iProductLogic;
+            _iBrandLogic = iBrandLogic;
         }
         
         [OutputCache(Duration = 120, VaryByParam = "none")]
@@ -113,6 +113,18 @@ namespace ArticoleCalarie.Web.Controllers
                         });
                     }
                 }
+            }
+
+            var brands = _iBrandLogic.GetAllBrands();
+
+            foreach (var brand in brands)
+            {
+                sitemapItems.Add(new SitemapItem
+                {
+                    URL = $"/produse/brand/{brand.Name.ToUrlSubcategoryName()}",
+                    Priority = ".9",
+                    DateAdded = dateAdded
+                });
             }
 
             return new SitemapActionResult(sitemapItems, website);

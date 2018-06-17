@@ -19,7 +19,7 @@
 
         public static string ToUrlProductName(this string s)
         {
-            var s1 = s.Trim().Replace(" ", "-").ToLowerInvariant();
+            var s1 = s.Trim().Replace(" ", "-").Replace(", ", "-").Replace(",","-").ToLowerInvariant();
 
             return s1;
         }
