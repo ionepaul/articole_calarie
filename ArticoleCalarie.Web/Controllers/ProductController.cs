@@ -116,7 +116,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Route("produse/{categoryName}/{subcategoryId}/{subcategoryName}", Name = "product-list-url")]
-        public async Task<ActionResult> ProductViewList(string categoryName, int subcategoryId, string subcategoryName, int page, decimal? minp, decimal? maxp, string cl = "", string sz = "")
+        public async Task<ActionResult> ProductViewList(string categoryName, int subcategoryId, string subcategoryName, int? page, decimal? minp, decimal? maxp, string cl = "", string sz = "")
         {
             _logger.Info("VIEW > Product List By Subcategory and Search Model");
 
@@ -124,6 +124,7 @@ namespace ArticoleCalarie.Web.Controllers
             ViewBag.CategoryName = categoryName;
             ViewBag.SubcategoryName = subcategoryName;
 
+            var pageNumber = page ?? 1;
             var searchViewModel = new SearchViewModel();
             var sessionSearchModel = Session["SearchModel"] as SearchViewModel;
 
@@ -132,14 +133,14 @@ namespace ArticoleCalarie.Web.Controllers
                 if ((sessionSearchModel != null && sessionSearchModel.SubcategoryId == subcategoryId && minp == null && maxp == null && string.IsNullOrEmpty(cl) && string.IsNullOrEmpty(sz)))
                 {
                     searchViewModel = sessionSearchModel;
-                    searchViewModel.PageNumber = page;
+                    searchViewModel.PageNumber = pageNumber;
                 }
                 else
                 {
                     searchViewModel = new SearchViewModel
                     {
                         SubcategoryId = subcategoryId,
-                        PageNumber = page,
+                        PageNumber = pageNumber,
                         MinPrice = minp,
                         MaxPrice = maxp,
                         ColorIds = cl,
@@ -153,7 +154,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
 
-                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(productSearchViewResult.Products, page, pageSize, productSearchViewResult.TotalCount);
+                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(productSearchViewResult.Products, pageNumber, pageSize, productSearchViewResult.TotalCount);
 
                 return View(pagedListModel);
             }

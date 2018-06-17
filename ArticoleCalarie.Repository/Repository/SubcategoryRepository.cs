@@ -32,5 +32,12 @@ namespace ArticoleCalarie.Repository.Repository
 
             return subcategories;
         }
+
+        public override IEnumerable<Subcategory> GetAll()
+        {
+            var subcategories = _dbset.Include(x => x.Category).Include(x => x.Products).AsEnumerable();
+
+            return subcategories;
+        }
     }
 }

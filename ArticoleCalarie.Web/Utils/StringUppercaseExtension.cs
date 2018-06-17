@@ -23,5 +23,12 @@
 
             return s1;
         }
+
+        public static string ToUrlSubcategoryName(this string s)
+        {
+            var s1 = s.Trim().Replace(" ", "-").ToLowerInvariant();
+
+            return s1;
+        }
     }
 }

@@ -216,7 +216,7 @@ namespace ArticoleCalarie.Repository.Repository
             var productResult = new ProductSearchResult
             {
                 TotalCount = await query.CountAsync(),
-                Products = await query.OrderBy(x => x.SalePercentage).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
+                Products = await query.OrderByDescending(x => x.DatePosted).Skip(itemsToSkip).Take(itemsPerPage).ToListAsync()
             };
 
             return productResult;

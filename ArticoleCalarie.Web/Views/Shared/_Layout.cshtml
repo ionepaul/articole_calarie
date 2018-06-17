@@ -79,7 +79,7 @@
                                     </div>
                                 </li>
                                 <li class="menu-item menu-item-has-children">
-                                    <a id="brands-section no-loading" class="kt-item-title" title="Branduri disponibile">BRANDS</a>
+                                    <a id="brands-section no-loading" class="kt-item-title no-loading" title="Branduri disponibile">BRANDS</a>
                                     <ul id="brands-list" class="submenu">
                                         @Html.Action("GetLayoutBrands", "Brand", new { isNavbar = true })
                                     </ul>
@@ -92,9 +92,10 @@
                                     <a href="@Url.RouteUrl("products-on-sale-url", new { pageNumber = 1 })">OFERTE</a>
                                 </li>
                                 
-                                <li class="menu-item">
+                                @*<li class="menu-item">
                                     <a href="@Url.RouteUrl("about-us-url")">DESPRE NOI</a>
-                                </li>
+                                </li>*@
+
                                 <li class="menu-item">
                                     <a href="@Url.RouteUrl("contact-url")">CONTACT</a>
                                 </li>
@@ -124,7 +125,7 @@
                         <div class="col-xs-6 col-sm-6 col-lg-4 col-ss-12">
                             <div class="widget widget-text">
                                 <h3 class="widgettitle">ARTICOLE CALARIE</h3>
-                                <p class="des">Maecenas lorem nibh, scelerisque nec justo gravida, commodo facilisis ipsum nulla ut porttitor.</p>
+                                <p class="des">Produse de cea mai mare calitate, de la brand-uri de renume, acum pentru tine, doar pe <a href="www.articolecalarie.ro">articolecalarie.ro</a>.</p>
                             </div>
                             <ul class="list-socials">
                                 <li><a href="https://www.facebook.com/www.articolecalarie.ro/" target="_blank" class="no-loading"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -159,7 +160,7 @@
                                     <li><a href="@Url.RouteUrl("terms-and-conds-url")">Termeni si Conditii</a></li>
                                     <li><a href="@Url.RouteUrl("privacy-policy-url")">Politica de Confidentialitate</a></li>         
                                     <li><a href="/contact">Contacteaza-ne</a></li>
-                                    <li><a href="#">Sitemap</a></li>
+                                    <li><a href="/sitemap">Sitemap</a></li>
                                 </ul>
                             </div>
                         </div>

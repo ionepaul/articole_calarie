@@ -128,5 +128,17 @@ namespace ArticoleCalarie.Logic.Converters
 
             return searchViewFilters;
         }
+
+        public static ProductMinimalInformation ToMinimalInformationModel(this Product product)
+        {
+            var productMinimalInformation = new ProductMinimalInformation
+            {
+                ProductCode = product.ProductCode,
+                ProductName = product.ProductName,
+                DateAdded = product.DatePosted
+            };
+
+            return productMinimalInformation;
+        }
     }
 }
