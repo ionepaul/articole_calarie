@@ -74,7 +74,7 @@
                                 </li>
                                 <li class="menu-item menu-item-has-children shop">
                                     <a href="@Url.RouteUrl("subcategories-url", new { categoryName = "cal"})" class="kt-item-title no-loading" title="Produse pentru cal">CAL</a>
-                                    <div id="horse-products-list" class="mega-menu submenu" style="background-image: url('../../images/horse_sub_dropdown_bg.jpg')">
+                                    <div id="horse-products-list" class="mega-menu submenu horse-subcategory">
                                         @Html.Action("GetNavbarSubcategories", "Subcategory", new { categoryId = (int)CategoryViewEnum.Cal })
                                     </div>
                                 </li>

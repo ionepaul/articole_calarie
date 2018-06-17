@@ -581,12 +581,14 @@ input[type="checkbox"] {
     left: 0;
     height: 15px;
     width: 15px;
-    background-color: #eee;
+    background-color: #ccc;
+    border: 1px solid #444;
+    border-radius: 3px;
 }
 
 /* On mouse-over, add a grey background color */
 .checkbox-container:hover input ~ .checkbox-checkmark {
-    background-color: #ccc;
+    background-color: #aaa;
 }
 
 /* When the checkbox is checked, add a #333333 background */
@@ -1065,10 +1067,14 @@ input {
   top: 100%;
   max-width: 870px;
   padding: 0 50px;
-  background-image: url('../images/rider.jpg');
+  background-image: url('../images/rider_sub_dropdown_bg.jpg');
   background-position: right top;
   background-repeat: no-repeat;
 }
+    .main-menu > li.shop .mega-menu.horse-subcategory {
+        background-image: url('../images/horse_sub_dropdown_bg.jpg');
+    }
+
 .main-menu li.shop .widget-custom-menu {
   padding-top: 50px;
   margin-bottom: 70px;

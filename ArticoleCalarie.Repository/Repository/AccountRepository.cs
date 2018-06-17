@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ArticoleCalarie.Repository.Constants;
 using ArticoleCalarie.Repository.Entities;
+using ArticoleCalarie.Repository.Enums;
 using ArticoleCalarie.Repository.Identity;
 using ArticoleCalarie.Repository.IRepository;
 using Microsoft.AspNet.Identity;
@@ -152,7 +153,10 @@ namespace ArticoleCalarie.Repository.Repository
             {
                 foreach(var order in orders)
                 {
-                    _ctx.Orders.Remove(order);
+                    if (order.OrderStatus != OrderStatus.CONFIRMED || order.OrderStatus != OrderStatus.SHIPPED)
+                    {
+                        _ctx.Orders.Remove(order);
+                    }
                 }
             }
 

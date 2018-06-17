@@ -487,6 +487,28 @@ namespace ArticoleCalarie.Web.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task UpdateNewsletterSubscription(bool isSubscribed)
+        {
+            _logger.Info("POST > Update Newsletter Subscription");
+
+            try
+            {
+                var userId = User.Identity.GetUserId();
+
+                if (userId != null)
+                {
+                    await _iAccountLogic.UpdateNewsletterSubscription(userId, isSubscribed);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Info($"Failed to update newsletter subscription. Exception: {ex.Message}");
+
+                throw ex;
+            }
+        }
+
         #endregion
 
         [HttpPost]

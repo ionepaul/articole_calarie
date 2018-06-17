@@ -1,8 +1,10 @@
 ﻿@model ArticoleCalarie.Models.UserViewModel
-
+@using ArticoleCalarie.Models
 @{
     ViewBag.Title = "Contul Meu";
     ViewBag.MetaDescription = "Administreaza contul tau pe articole-calarie.ro.";
+    var deliveryAddress = new AddressViewModel();
+    var billingAddress = new AddressViewModel();
 }
 
 @section MetaNoFollow {
@@ -23,14 +25,17 @@
             }))
             {
                 @Html.AntiForgeryToken()
-
-                @Html.Partial("_AddressFormPartial", Model.DeliveryAddress, new ViewDataDictionary()
-           {
-               TemplateInfo = new TemplateInfo()
+                if (Model.DeliveryAddress != null)
+                {
+                    deliveryAddress = Model.DeliveryAddress;
+                }
+                @Html.Partial("_AddressFormPartial", deliveryAddress, new ViewDataDictionary()
                {
-                   HtmlFieldPrefix = "DeliveryAddress"
-               }
-           })
+                   TemplateInfo = new TemplateInfo()
+                   {
+                       HtmlFieldPrefix = "DeliveryAddress"
+                   }
+               })
 
                 <div class="form-group">
                     <input id="deliveryAddressSaveBtn" type="submit" style="border: none; width: 100%" value="Salvează" class="submit send" />
@@ -65,14 +70,18 @@
             {
                 @Html.AntiForgeryToken()
 
-                @Html.Partial("_AddressFormPartial", Model.BillingAddress, new ViewDataDictionary()
-           {
-               TemplateInfo = new TemplateInfo()
-               {
-                   HtmlFieldPrefix = "BillingAddress"
-               }
-           })
-
+                if (Model.BillingAddress != null)
+                {
+                    billingAddress = Model.BillingAddress;
+                }
+                @Html.Partial("_AddressFormPartial", billingAddress, new ViewDataDictionary()
+                {
+                    TemplateInfo = new TemplateInfo()
+                    {
+                        HtmlFieldPrefix = "BillingAddress"
+                    }
+                })
+                
                 <div class="form-group">
                     <input id="billingAddressSaveBtn" type="submit" style="border: none; width: 100%" value="Salvează" class="submit send" />
                 </div>

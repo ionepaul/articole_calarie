@@ -12,6 +12,20 @@
     <div class="user-info">
         <p class="name">@User.Identity.GetUserFullName()</p>
         <p class="email"><a href="email:@User.Identity.Name">@User.Identity.Name</a></p>
+        <br />
+
+        <label class="checkbox-container">
+            @if (User.Identity.GetUserNewsletterSubscription())
+            {
+                <input id="user-newsletter-checkbox" type="checkbox" checked />
+            }
+            else
+            {
+                <input id="user-newsletter-checkbox" type="checkbox" />
+            }       
+            <label class="checkbox-label" for="newsletter">Vreau sa primesc oferte promotionale prin email.</label>
+            <span class="checkbox-checkmark"></span>
+        </label>
     </div>
 
     <div id="delete-account-modal" class="modal" tabindex="-1" role="dialog">

@@ -94,6 +94,27 @@
             timeout: 60000
         });
     });
+
+    $('#user-newsletter-checkbox').on("click", function () {
+        var isSubscribed = document.getElementById('user-newsletter-checkbox').checked;
+        let url = window.location.origin + '/account/updatenewslettersubscription?issubscribed=' + isSubscribed;
+
+        showLoader();
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            success: function () {
+                hideLoader();
+            },
+            error: function (error) {
+                hideLoader();
+                window.location = "/error";
+            },
+            async: true,
+            timeout: 60000
+        });
+    });
 });
 
 function initCookieBar() {

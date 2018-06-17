@@ -16,5 +16,6 @@ namespace ArticoleCalarie.Logic.ILogic
         Task<UserViewModel> GetUserById(string userId);
         Task SaveUserAddress(AddressViewModel addressViewModel, string userId);
         Task DeleteAccount(string userId);
+        Task UpdateNewsletterSubscription(string userId, bool isSubscribed);
     }
 }

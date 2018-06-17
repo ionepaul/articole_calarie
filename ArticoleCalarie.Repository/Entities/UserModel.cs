@@ -32,6 +32,7 @@ namespace ArticoleCalarie.Repository.Entities
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
 
             userIdentity.AddClaim(new Claim("FullName", this.FullName));
+            userIdentity.AddClaim(new Claim("NewsletterSubscription", this.IsNewsletterSubscription.ToString()));
 
             // Add custom user claims here
             return userIdentity;

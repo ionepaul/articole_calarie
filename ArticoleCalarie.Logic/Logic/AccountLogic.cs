@@ -155,6 +155,20 @@ namespace ArticoleCalarie.Logic.Logic
             await _iAccountRepository.UpdateUserAsync(userModel);
         }
 
+        public async Task UpdateNewsletterSubscription(string userId, bool isSubscribed)
+        {
+            var user = await _iAccountRepository.GetUserFullUserInfo(userId);
+
+            if (user == null)
+            {
+                return;
+            }
+
+            user.IsNewsletterSubscription = isSubscribed;
+
+            await _iAccountRepository.UpdateUserAsync(user);
+        }
+
         #endregion 
 
         #region Private Methods
