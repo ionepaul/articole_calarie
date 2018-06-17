@@ -312,7 +312,6 @@
     <Content Include="images\favicon.jpg" />
     <Content Include="images\freejump.jpg" />
     <Content Include="images\kingsland.jpeg" />
-    <Content Include="images\rider.jpg" />
     <Content Include="images\size-chart-2.jpg" />
     <Content Include="Scripts\account-manage.js" />
     <Content Include="Scripts\bootstrap.js" />
