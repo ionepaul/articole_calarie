@@ -108,9 +108,7 @@ namespace ArticoleCalarie.Web.Controllers
                     if (result.Succeeded)
                     {
                         _logger.Info($"Successfully registred user: {model.Email}.");
-
-                        ViewBag.ReturnUrl = "/account/administrare";
-
+                        
                         return RedirectToLocal(returnUrl);
                     }
 
@@ -320,7 +318,7 @@ namespace ArticoleCalarie.Web.Controllers
         {
             _logger.Info("POST > External Login Confirmation");
 
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated && string.IsNullOrEmpty(returnUrl))
             {
                 _logger.Info($"User: {model.Email} is already authenticated. Returning Account Manage View");
 
