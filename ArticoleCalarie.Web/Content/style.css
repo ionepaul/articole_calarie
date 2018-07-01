@@ -9281,6 +9281,10 @@ strong.details-section {
         line-height: 50px;
     }
 
+    .submenu li a {
+        padding: 0 40px;
+    }
+
     .main-content-home1 .main-banner {
         margin: 30px -15px;
     }
