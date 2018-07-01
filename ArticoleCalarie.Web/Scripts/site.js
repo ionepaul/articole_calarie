@@ -27,10 +27,13 @@
         setTimeout(function () {
             hideLoader();
         }, 200);
+
+        checkCarousel();
     });
 
     $(window).resize(function () {
         changeLogo();
+        checkCarousel();
     });
 
     $("#log-out-btn").on("click", function () {
@@ -138,6 +141,16 @@ function showLoader() {
 
 function hideLoader() {
     $("#spinner").addClass("hidden");
+}
+
+function checkCarousel() {
+    if ($('.owl-thumbs').length > 0) {
+        var obj = $('.owl-thumbs').first();
+        var height = $(obj).height();
+        if (height > $('.main-img').first().height()) {
+            $('.owl-carousel').first().height(height);
+        }
+    }
 }
 
 function getRelatedProducts(id) {

@@ -77,13 +77,13 @@
                             <ul id="menu-main-menu" class="main-menu clone-main-menu">
                                 <li class="menu-item menu-item-has-children shop">
                                     <!-- <span class="top-flash new"> new</span> -->
-                                    <a href="@Url.RouteUrl("subcategories-url", new { categoryName = "calaret"})" class="kt-item-title no-loading" title="Produse pentru calaret">CALARET</a>
+                                    <a class="kt-item-title no-loading" title="Produse pentru calaret">CALARET</a>
                                     <div class="mega-menu submenu">
                                         @Html.Action("GetNavbarSubcategories", "Subcategory", new { categoryId = (int)CategoryViewEnum.Calaret })
                                     </div>
                                 </li>
                                 <li class="menu-item menu-item-has-children shop">
-                                    <a href="@Url.RouteUrl("subcategories-url", new { categoryName = "cal"})" class="kt-item-title no-loading" title="Produse pentru cal">CAL</a>
+                                    <a class="kt-item-title no-loading" title="Produse pentru cal">CAL</a>
                                     <div id="horse-products-list" class="mega-menu submenu horse-subcategory">
                                         @Html.Action("GetNavbarSubcategories", "Subcategory", new { categoryId = (int)CategoryViewEnum.Cal })
                                     </div>

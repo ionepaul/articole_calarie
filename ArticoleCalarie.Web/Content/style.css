@@ -6214,6 +6214,7 @@ h1.contact-title {
   overflow: hidden;
   background: #f2f2f2;
   padding: 20px;
+  z-index: 1;
 }
     .about-product .details-info .flash.sale {
         position: absolute;
@@ -9273,6 +9274,11 @@ strong.details-section {
 
     .main-slideshow {
         margin-top: -25px;
+    }
+
+    .widget-custom-menu ul li a {
+        padding: 0 40px;
+        line-height: 50px;
     }
 
     .main-content-home1 .main-banner {
