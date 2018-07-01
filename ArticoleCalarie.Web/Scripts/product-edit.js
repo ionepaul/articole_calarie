@@ -28,6 +28,7 @@ $(document).ready(function () {
             var subcategory = ui.item.label;
             $(this).val(subcategory);
             event.preventDefault();
+            $('#SubcategoryId').val(ui.item.value);
         },
         select: function (event, ui) {
             event.preventDefault();
@@ -56,6 +57,7 @@ $(document).ready(function () {
             var brandName = ui.item.label;
             $(this).val(brandName);
             event.preventDefault();
+            $('#Brand').val(ui.item.value);
         },
         select: function (event, ui) {
             event.preventDefault();
