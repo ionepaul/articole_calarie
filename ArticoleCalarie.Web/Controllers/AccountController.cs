@@ -267,6 +267,8 @@ namespace ArticoleCalarie.Web.Controllers
                 returnUrl = "/account/administrare";
             }
 
+            ViewBag.ReturnUrl = returnUrl;
+
             try
             {
                 var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
@@ -291,7 +293,7 @@ namespace ArticoleCalarie.Web.Controllers
                         ViewBag.ReturnUrl = returnUrl;
                         ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                         var fullName = loginInfo.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:name")?.Value;
-                        return RedirectToAction("externalloginconfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email, FullName = fullName });
+                        return RedirectToAction("externalloginconfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email, FullName = fullName, ReturnUrl = returnUrl });
                 }
             }
             catch (Exception ex)
@@ -306,6 +308,8 @@ namespace ArticoleCalarie.Web.Controllers
         [AllowAnonymous]
         public ActionResult ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model)
         {
+            ViewBag.ReturnUrl = model.ReturnUrl;
+
             _logger.Info("VIEW > External Login Confirmation");
 
             return View(model);

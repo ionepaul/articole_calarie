@@ -82,11 +82,20 @@ function guestEmailFormOnSuccess() {
     showNextContainer("#guest-email-form");
 }
 
+var screenX = 120;
+
 function showNextContainer(id) {
     $(id).closest(".hidden-content").removeClass("show");
     $(id).closest(".hidden-content").closest(".parent-content").removeClass("active");
     $(id).closest(".parent-content").next(".parent-content").find("a.show-content").removeClass("noClick");
     $(id).closest(".parent-content").next(".parent-content").find(".show-content").click();
+
+    window.scroll(0, screenX);
+
+    screenX += 50;
+    if (screenX >= 270) {
+        screenX = 120;
+    }
 }
 
 function noClick() {

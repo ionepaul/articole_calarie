@@ -2,7 +2,7 @@
 @using ArticoleCalarie.Models
 @{
     ViewBag.Title = "Contul Meu";
-    ViewBag.MetaDescription = "Administreaza contul tau pe articole-calarie.ro.";
+    ViewBag.MetaDescription = "Administreaza contul tau pe articolecalarie.ro.";
     var deliveryAddress = new AddressViewModel();
     var billingAddress = new AddressViewModel();
 }
@@ -49,8 +49,22 @@
                 <div class="address-details-wrapper">
                     <p class="name">@Model.DeliveryAddress.FullName</p>
                     <p> @Model.DeliveryAddress.PhoneNumber</p>
-                    <p> @Model.DeliveryAddress.AddressLine1<span>, </span>@Model.DeliveryAddress.AddressLine2</p>
-                    <p>@Model.DeliveryAddress.PostalCode<span>, </span>@Model.DeliveryAddress.City</p>
+                    <p> 
+                        @Model.DeliveryAddress.AddressLine1
+                        @if (!string.IsNullOrEmpty(Model.DeliveryAddress.AddressLine2) && !string.IsNullOrWhiteSpace(Model.DeliveryAddress.AddressLine2))
+                        {
+                            <span>, </span>
+                        }
+                        @Model.DeliveryAddress.AddressLine2
+                    </p>
+                    <p>
+                        @Model.DeliveryAddress.City
+                        @if (!string.IsNullOrEmpty(Model.DeliveryAddress.PostalCode) && !string.IsNullOrWhiteSpace(Model.DeliveryAddress.PostalCode))
+                        {
+                            <span>, </span>
+                        }
+                        @Model.DeliveryAddress.PostalCode                       
+                    </p>
                     <p> @Model.DeliveryAddress.County<span>, </span>@Model.DeliveryAddress.Country</p>
                     <a class="address-details-edit no-loading" id="editDeliveryAddressBtn" title="Edit">Editeaza</a>
                     <img class="delivery-truck" src="../images/delivery.png" alt="imagine adresa de livrare" />
@@ -94,8 +108,22 @@
                 <div class="address-details-wrapper">
                     <p class="name">@Model.BillingAddress.FullName</p>
                     <p>@Model.BillingAddress.PhoneNumber</p>
-                    <p>@Model.BillingAddress.AddressLine1<span>, </span>@Model.BillingAddress.AddressLine2</p>
-                    <p>@Model.BillingAddress.PostalCode<span>, </span>@Model.BillingAddress.City</p>
+                    <p>
+                        @Model.BillingAddress.AddressLine1
+                        @if (!string.IsNullOrWhiteSpace(Model.BillingAddress.AddressLine2) && !string.IsNullOrEmpty(Model.BillingAddress.AddressLine2))
+                        {
+                            <span>, </span>
+                        }
+                        @Model.BillingAddress.AddressLine2
+                    </p>
+                    <p>
+                        @Model.BillingAddress.City
+                        @if (!string.IsNullOrWhiteSpace(Model.BillingAddress.PostalCode) && !string.IsNullOrEmpty(Model.BillingAddress.PostalCode))
+                        {
+                            <span>, </span>
+                        }
+                        @Model.BillingAddress.PostalCode
+                    </p>
                     <p>@Model.BillingAddress.County<span>, </span>@Model.BillingAddress.Country</p>
                     <a class="address-details-edit no-loading" id="editBillingAddressBtn" title="Edit">Editeaza</a>
                     <img class="billing" src="../images/billing.png" alt="imagine adresa de facturare" />

@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = Model.ProductName.ToFirstUppercase() + " | " + ((string)ViewBag.SubcategoryName).ToFirstUppercase() + " | " + ((string)ViewBag.CategoryName).ToFirstUppercase();
     ViewBag.MetaDescription = Model.Description.ToFirstUppercase();
+    ViewBag.MetaImage = "products/" + Model.ImagesList.FirstOrDefault();
 
     bool hasMaterialDetails = !string.IsNullOrEmpty(Model.MaterialDetails);
     bool hasSizeChart = !string.IsNullOrEmpty(Model.SizeChartImage);

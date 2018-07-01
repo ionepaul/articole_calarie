@@ -22,5 +22,7 @@ namespace ArticoleCalarie.Models
         public bool IsPrivacyPolicyAccepted { get; set; }
 
         public bool IsNewsletterSubscription { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }

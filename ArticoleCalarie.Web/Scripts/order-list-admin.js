@@ -109,9 +109,9 @@ function changeOrderStatus(orderNumber, newStatus, id) {
         },
         cache: false,
         success: function () {
+            window.location.reload();
             window.scroll(0, 0);
             hideLoader();
-            window.location.reload();
         },
         error: function () {
             window.location = "/error";

@@ -3866,8 +3866,8 @@ h1.contact-title {
   display: inline-block;
   margin-right: 10px;
 }
-.list-choosen li.active > a .number,
-.list-choosen li:hover > a .number {
+
+.list-choosen li.active > a .number {
   background-color: #444242;
 }
 
@@ -9613,7 +9613,6 @@ strong.details-section {
         position: static;
         transform: none;
         width: 100%;
-        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
     }
 
 .progress-container {

@@ -7,7 +7,7 @@
     var shoppingCart = Session["ShoppingCart"] as ShoppingCartModel;
     var totalCartItems = shoppingCart?.ShoppingItems?.Sum(x => x.Quantity) ?? 0;
     var grandTotal = 0M;
-    var howManyProducts = shoppingCart.ShoppingItems?.Sum(x => x.Quantity);
+    var howManyProducts = shoppingCart?.ShoppingItems?.Sum(x => x.Quantity) ?? 0;
     var produsTag = howManyProducts == 1 ? "produs" : "produse";
 }
 

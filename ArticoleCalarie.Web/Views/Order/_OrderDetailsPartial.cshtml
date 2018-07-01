@@ -48,10 +48,24 @@
             <h5>Adresa de livrare</h5>
             <div class="address-details-wrapper">
                 <p class="name">@Model.DeliveryAddress.FullName</p>
-                <p> @Model.DeliveryAddress.PhoneNumber</p>
-                <p> @Model.DeliveryAddress.AddressLine1<span>, </span>@Model.DeliveryAddress.AddressLine2</p>
-                <p>@Model.DeliveryAddress.PostalCode<span>, </span>@Model.DeliveryAddress.City</p>
-                <p> @Model.DeliveryAddress.County<span>, </span>@Model.DeliveryAddress.Country</p>
+                <p>@Model.DeliveryAddress.PhoneNumber</p>
+                <p>
+                    @Model.DeliveryAddress.AddressLine1
+                    @if (!string.IsNullOrEmpty(Model.DeliveryAddress.AddressLine2) && !string.IsNullOrWhiteSpace(Model.DeliveryAddress.AddressLine2))
+                    {
+                        <span>, </span>
+                    }
+                    @Model.DeliveryAddress.AddressLine2
+                </p>
+                <p>
+                    @Model.DeliveryAddress.City
+                    @if (!string.IsNullOrEmpty(Model.DeliveryAddress.PostalCode) && !string.IsNullOrWhiteSpace(Model.DeliveryAddress.PostalCode))
+                    {
+                        <span>, </span>
+                    }
+                    @Model.DeliveryAddress.PostalCode
+                </p>
+                <p>@Model.DeliveryAddress.County<span>, </span>@Model.DeliveryAddress.Country</p>
             </div>
         </div>
 
@@ -60,8 +74,22 @@
             <div class="address-details-wrapper">
                 <p class="name">@Model.BillingAddress.FullName</p>
                 <p> @Model.BillingAddress.PhoneNumber</p>
-                <p> @Model.BillingAddress.AddressLine1<span>, </span>@Model.BillingAddress.AddressLine2</p>
-                <p>@Model.BillingAddress.PostalCode<span>, </span>@Model.BillingAddress.City</p>
+                <p>
+                    @Model.BillingAddress.AddressLine1
+                    @if (!string.IsNullOrWhiteSpace(Model.BillingAddress.AddressLine2) && !string.IsNullOrEmpty(Model.BillingAddress.AddressLine2))
+                    {
+                        <span>, </span>
+                    }
+                    @Model.BillingAddress.AddressLine2
+                </p>
+                <p>
+                    @Model.BillingAddress.City
+                    @if (!string.IsNullOrWhiteSpace(Model.BillingAddress.PostalCode) && !string.IsNullOrEmpty(Model.BillingAddress.PostalCode))
+                    {
+                        <span>, </span>
+                    }
+                    @Model.BillingAddress.PostalCode
+                </p>
                 <p> @Model.BillingAddress.County<span>, </span>@Model.BillingAddress.Country</p>
             </div>
         </div>
