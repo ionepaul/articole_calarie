@@ -144,7 +144,8 @@ function hideLoader() {
 }
 
 function checkCarousel() {
-    if ($('.owl-thumbs').length > 0) {
+    let isOnDetails = window.location.pathname.indexOf('produse') > -1;
+    if (isOnDetails && $('.owl-thumbs').length > 0) {
         var obj = $('.owl-thumbs').first();
         var height = $(obj).height();
         if (height > $('.main-img').first().height()) {
