@@ -29,6 +29,7 @@
         }, 200);
 
         checkCarousel();
+        checkPagination();
     });
 
     $(window).resize(function () {
@@ -151,6 +152,12 @@ function checkCarousel() {
         if (height > $('.main-img').first().height()) {
             $('.owl-carousel').first().height(height);
         }
+    }
+}
+
+function checkPagination() {
+    if ($('.pagination').length > 0 && $('.pagination > li.disabled.PagedList-ellipses a').length > 0) {
+        $('.pagination > li.disabled.PagedList-ellipses a').addClass('no-loading');
     }
 }
 

@@ -3,6 +3,7 @@
 @using ArticoleCalarie.Web.Utils
 
 <div id="products-content">
+    <p>Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount</p>
     <table class="table">
         <tr>
             <th>
@@ -78,8 +79,6 @@
     </table>
 
     <div id="content-pager">
-        Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
-
         @Html.PagedListPager(Model, page => Url.Action("ProductListForAdmin", new { pageNumber = page, productCode = ViewBag.ProductCode }))
     </div>
 </div>

@@ -10935,6 +10935,10 @@ strong.details-section {
 .time_circles > div {
   top: 35px !important;
 }
+
+.pagination {
+    display: block;
+}
 }
 
 
