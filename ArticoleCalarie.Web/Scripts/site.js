@@ -157,7 +157,7 @@ function checkCarousel() {
 
 function checkPagination() {
     if ($('.pagination').length > 0 && $('.pagination > li.disabled.PagedList-ellipses a').length > 0) {
-        $('.pagination > li.disabled.PagedList-ellipses a').addClass('no-loading');
+        $('.pagination > li.disabled.PagedList-ellipses a').addClass('no-loading hidden');
     }
 }
 
