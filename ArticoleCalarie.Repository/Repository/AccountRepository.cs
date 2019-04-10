@@ -1,7 +1,9 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using ArticoleCalarie.Repository.Constants;
 using ArticoleCalarie.Repository.Entities;
+using ArticoleCalarie.Repository.Enums;
 using ArticoleCalarie.Repository.Identity;
 using ArticoleCalarie.Repository.IRepository;
 using Microsoft.AspNet.Identity;
@@ -124,6 +126,43 @@ namespace ArticoleCalarie.Repository.Repository
             }
 
             return user;
+        }
+
+        public async Task DeleteUser(string userId)
+        {
+            var user = await _ctx.Users.Include(x => x.DeliveryAddress).Include(x => x.BillingAddress).FirstOrDefaultAsync(x => string.Equals(x.Id, userId));
+            
+            if (user == null)
+            {
+                return;
+            }
+
+            if (user.DeliveryAddress != null)
+            {
+                _ctx.Addresses.Remove(user.DeliveryAddress);
+            }
+
+            if (user.BillingAddress != null)
+            {
+                _ctx.Addresses.Remove(user.BillingAddress);
+            }
+
+            var orders = _ctx.Orders.Where(x => string.Equals(x.UserId, userId)).ToList();
+
+            if (orders.Count > 0)
+            {
+                foreach(var order in orders)
+                {
+                    if (order.OrderStatus != OrderStatus.CONFIRMED || order.OrderStatus != OrderStatus.SHIPPED)
+                    {
+                        _ctx.Orders.Remove(order);
+                    }
+                }
+            }
+
+            _ctx.Users.Remove(user);
+
+            await SaveChangesAsync();
         }
 
         public async Task UpdateUserAsync(UserModel userModel)

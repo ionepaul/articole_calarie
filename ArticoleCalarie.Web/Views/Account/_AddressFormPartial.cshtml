@@ -53,11 +53,10 @@
 
     <div class="form-group">
         <div class="col-md-12">
-            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Country) } })
+            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "input-info", @placeholder = Html.DisplayNameFor(m => m.Country), @disabled = "disabled" } })
             @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
         </div>
     </div>
 
     @Html.HiddenFor(model => model.AddressType)
-
 </div>

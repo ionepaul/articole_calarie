@@ -52,6 +52,16 @@ namespace ArticoleCalarie.Logic.Logic
             await _iEmailLogic.SendResetEmail(email, callbackUrl);
         }
 
+        public async Task DeleteAccount(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new Exception("Invalid User Identifier");
+            }
+
+            await _iAccountRepository.DeleteUser(userId);
+        }
+
         public async Task<SignInStatus> SignIn(LoginViewModel model)
         {
             return await _iAccountRepository.SignIn(model.Email, model.Password, model.RememberMe);
@@ -69,20 +79,23 @@ namespace ArticoleCalarie.Logic.Logic
             return await _iAccountRepository.ResetPassword(model.Email, code, model.Password);
         }
 
-        public async Task<IdentityResult> CreateExternalAccountLogin(string email, string fullName, UserLoginInfo loginInfo)
+        public async Task<IdentityResult> CreateExternalAccountLogin(ExternalLoginConfirmationViewModel model, UserLoginInfo loginInfo)
         {
             var userModel = new UserModel
             {
-                UserName = email,
-                Email = email,
-                FullName = fullName
+                UserName = model.Email,
+                Email = model.Email,
+                FullName = model.FullName,
+                IsTermsAccepted = model.IsTermsAccepted,
+                IsPrivacyPolicyAccepted = model.IsPrivacyPolicyAccepted,
+                IsNewsletterSubscription = model.IsNewsletterSubscription
             };
 
             var result = await _iAccountRepository.CreateExternalAccountAndSignIn(userModel, loginInfo);
 
             if (result.Succeeded)
             {
-                await _iEmailLogic.SendWelcomeEmail(email, fullName);
+                await _iEmailLogic.SendWelcomeEmail(model.Email, model.FullName);
             }
 
             return result;
@@ -140,6 +153,20 @@ namespace ArticoleCalarie.Logic.Logic
             }
 
             await _iAccountRepository.UpdateUserAsync(userModel);
+        }
+
+        public async Task UpdateNewsletterSubscription(string userId, bool isSubscribed)
+        {
+            var user = await _iAccountRepository.GetUserFullUserInfo(userId);
+
+            if (user == null)
+            {
+                return;
+            }
+
+            user.IsNewsletterSubscription = isSubscribed;
+
+            await _iAccountRepository.UpdateUserAsync(user);
         }
 
         #endregion 

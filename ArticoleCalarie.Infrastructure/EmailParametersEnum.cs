@@ -15,6 +15,7 @@
         DeliveryAddressCountry,
         TotalAmount,
         OrderDate,
+        DeliveryCost,
         //OrderItems
         OrderItemsPart,
         ImageName,

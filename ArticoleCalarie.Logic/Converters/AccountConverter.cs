@@ -13,7 +13,10 @@ namespace ArticoleCalarie.Logic.Converters
             {
                 FullName = registerModel.FullName,
                 Email = registerModel.Email,
-                UserName = registerModel.Email
+                UserName = registerModel.Email,
+                IsTermsAccepted = registerModel.IsTermsAccepted,
+                IsPrivacyPolicyAccepted = registerModel.IsPrivacyPolicyAccepted,
+                IsNewsletterSubscription = registerModel.IsNewsletterSubscription
             };
 
             return userModel;

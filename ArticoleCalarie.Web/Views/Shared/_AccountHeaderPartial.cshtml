@@ -3,13 +3,48 @@
 <div class="manage-account-info">
     <div class="my-account">
         <ul>
-            <li class="@(ViewContext?.RouteData?.Values["Action"]?.ToString().ToLower() == "manage" ? "active" : "")"><a href="/account/manage"><i class="fa fa-user" aria-hidden="true"></i> Contul meu</a></li>
-            <li class="@(ViewContext?.RouteData?.Values["Action"]?.ToString().ToLower() == "userorderlist" ? "active" : "")"><a href="/order/userorderlist"><span class="flaticon-cart"></span> Comenzile Mele</a></li>
+            <li class="@(ViewContext?.RouteData?.Values["Action"]?.ToString().ToLower() == "manage" ? "active" : "")"><a href="@Url.RouteUrl("administrare-cont-url")"><i class="fa fa-user" aria-hidden="true"></i> Contul meu</a></li>
+            <li class="@(ViewContext?.RouteData?.Values["Action"]?.ToString().ToLower() == "userorderlist" ? "active" : "")"><a href="@Url.RouteUrl("user-orders-url")"><span class="flaticon-cart"></span> Comenzile Mele</a></li>
+            <li><a class="no-loading" href="#" onclick="openDeleteAccountModal()"><span class="fa fa-trash"></span> Sterge Cont</a></li>
             <li><a id="log-out-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Deconecteaza-te</a></li>
         </ul>
     </div>
     <div class="user-info">
         <p class="name">@User.Identity.GetUserFullName()</p>
         <p class="email"><a href="email:@User.Identity.Name">@User.Identity.Name</a></p>
+        <br />
+
+        <label class="checkbox-container">
+            @if (User.Identity.GetUserNewsletterSubscription())
+            {
+                <input id="user-newsletter-checkbox" type="checkbox" checked />
+            }
+            else
+            {
+                <input id="user-newsletter-checkbox" type="checkbox" />
+            }       
+            <label class="checkbox-label" for="newsletter">Vreau sa primesc oferte promotionale prin email.</label>
+            <span class="checkbox-checkmark"></span>
+        </label>
+    </div>
+
+    <div id="delete-account-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><b>Sterge Cont</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Sunteti sigur ca vreti <b>sa stergeti permanent</b> contul dvs de pe <a href="www.articolecalarie.ro">articolecalarie.ro</a>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="deleteAccount()">Da</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Nu</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

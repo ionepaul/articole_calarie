@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Configuration;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using ArticoleCalarie.Logic.ILogic;
 using ArticoleCalarie.Models;
@@ -20,7 +23,14 @@ namespace ArticoleCalarie.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var freeDeliveryCostValue = (string)ConfigurationManager.AppSettings["FreeDeliveryOrderValue"];
+
+            var homeViewModel = new HomeViewModel
+            {
+                FreeDeliveryCostValue = freeDeliveryCostValue
+            };
+
+            return View(homeViewModel);
         }
 
         [Route("despre-noi", Name = "about-us-url")]
@@ -74,7 +84,61 @@ namespace ArticoleCalarie.Web.Controllers
         [Route("contact/mesaj-trimis", Name = "contact-message-sent-url")]
         public ActionResult ContactMessageSent()
         {
+            _logger.Info("VIEW > Contact Message Sent.");
+
             return View();
+        }
+
+        [HttpGet]
+        [Route("termeni-si-conditii", Name = "terms-and-conds-url")]
+        public ActionResult TermsAndConditions()
+        {
+            _logger.Info("VIEW > Terms and conditions");
+
+            return View();
+        }
+
+        [HttpGet]
+        [Route("cum-folosim-cookies", Name = "how-we-use-cookies-url")]
+        public ActionResult CookieUsage()
+        {
+            _logger.Info("VIEW > Cookie Usage");
+
+            return View();
+        }
+
+        [HttpGet]
+        [Route("politica-de-confidentialitate", Name = "privacy-policy-url")]
+        public ActionResult PrivacyPolicy()
+        {
+            _logger.Info("VIEW > Privacy Policy");
+
+            return View();
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult CookieBar()
+        {
+            if (Request.Cookies["_ACP"]?.Value != null)
+            {
+                return PartialView("CookieBar", false);
+            }
+
+            return PartialView("CookieBar", true);
+        }
+
+        [HttpPost]
+        public ActionResult CookiesAccepted()
+        {
+            var _acp = new HttpCookie("_ACP")
+            {
+                Value = "true",
+                Expires = DateTime.UtcNow.AddDays(30)
+            };
+
+            Response.Cookies.Add(_acp);
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }

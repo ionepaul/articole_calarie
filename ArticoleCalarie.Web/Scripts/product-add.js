@@ -27,6 +27,7 @@ $(document).ready(function () {
             var subcategory = ui.item.label;
             $(this).val(subcategory);
             event.preventDefault();
+            $('#SubcategoryId').val(ui.item.value);
         },
         select: function (event, ui) {
             event.preventDefault();
@@ -55,6 +56,7 @@ $(document).ready(function () {
             var brandName = ui.item.label;
             $(this).val(brandName);
             event.preventDefault();
+            $('#Brand').val(ui.item.value);
         },
         select: function (event, ui) {
             event.preventDefault();
@@ -234,6 +236,7 @@ Upload.prototype.getName = function () {
 };
 Upload.prototype.doUpload = function () {
     let url = window.location.origin + '/Image/UploadImage';
+    showLoader();
 
     var that = this;
     var formData = new FormData();
@@ -260,9 +263,11 @@ Upload.prototype.doUpload = function () {
             else {
                 $('#SizeChartImage').val(data);
             }
+            hideLoader();
         },
         error: function (error) {
             alert("Eroare la salvarea imaginii. Incercati din nou.");
+            hideLoader();
         },
         async: true,
         data: formData,

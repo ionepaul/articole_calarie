@@ -17,8 +17,8 @@ namespace ArticoleCalarie.Logic.ILogic
         Task<ProductSearchViewResult> GetProductsByBrand(string brand, int pageNumber);
         Task<ProductSearchViewResult> GetProductsOnSale(int pageNumber);
         Task<IEnumerable<ProductListViewItemModel>> GetRelatedProducts(string subcategory);
-        Task<IEnumerable<ProductListViewItemModel>> GetTheNewestProductsForHome();
-        Task<IEnumerable<ProductListViewItemModel>> GetProductsOnSaleForHome();
+        IEnumerable<ProductListViewItemModel> GetTheNewestProductsForHome();
+        IEnumerable<ProductListViewItemModel> GetProductsOnSaleForHome();
         Task<ProductSearchViewResult> GetTheNewestPoducts(int pageNumber);
     }
 }

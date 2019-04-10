@@ -31,6 +31,8 @@
             success: function (result) {
                 hideLoader();
                 $('#products-content').html(result);
+                checkPagination();
+                window.scrollTo(0, 0);
             }
         });
         return false;

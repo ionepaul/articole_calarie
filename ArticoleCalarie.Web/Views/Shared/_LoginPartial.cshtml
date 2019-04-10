@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+﻿@if (Request.IsAuthenticated)
 {
     <li class="user-link-item">
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -8,14 +7,17 @@
             <li class="menu-item-has-children account">
                 <p class="hello-user"></p>
             <ul class="submenu">
-                <li>@Html.ActionLink("Contul Meu", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
-                <li>@Html.ActionLink("Comenzile Mele", "UserOrderList", "Order", routeValues: null, htmlAttributes: new { title = "Contul Meu" })</li>
-                
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
+                    <li><a href="@Url.RouteUrl("administrare-cont-url")" title="Contul Meu">Contul Meu</a></li>
                     <li>@Html.ActionLink("Adaugă produs", "Add", "Product", routeValues: null, htmlAttributes: new { title = "Adaugă produs" })</li>
                     <li>@Html.ActionLink("Listă produse", "List", "Product", routeValues: new { pageNumber = 1 }, htmlAttributes: new { title = "Adaugă produs" })</li>
-                    <li>@Html.ActionLink("Vezi comenzile", "OrderList", "Order", routeValues: new { pageNumber = 1 }, htmlAttributes: new { title = "Vezi comenzile" })</li>
+                    <li>@Html.ActionLink("Vezi comenzile", "OrderList", "Order", routeValues: new { pageNumber = 1, status = 1 }, htmlAttributes: new { title = "Vezi comenzile" })</li>
+                }
+                else
+                {
+                    <li><a href="@Url.RouteUrl("administrare-cont-url")" title="Contul Meu">Contul Meu</a></li>
+                    <li><a href="@Url.RouteUrl("user-orders-url")" title="Comenzile Mele">Comenzile Mele</a></li>
                 }
                 
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Deconecteaza-te</a></li>

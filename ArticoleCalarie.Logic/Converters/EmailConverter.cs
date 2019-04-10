@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using ArticoleCalarie.Infrastructure;
 using ArticoleCalarie.Models;
@@ -10,6 +13,14 @@ namespace ArticoleCalarie.Logic.Converters
     {
         public static Dictionary<string, string> ToOrderParametersDictionary(this Order order)
         {
+            var deliveryCost = Convert.ToDecimal(ConfigurationManager.AppSettings["DeliveryCost"]);
+            var freeDeliveryOrderValue = Convert.ToDecimal(ConfigurationManager.AppSettings["FreeDeliveryOrderValue"]);
+
+            if (order.TotalAmount >= freeDeliveryOrderValue)
+            {
+                deliveryCost = 0M;
+            }
+
             var orderParamDictionary = new Dictionary<string, string>
             {
                 [EmailParametersEnum.DeliveryAddressName.ToString().ToLower()] = order.DeliveryAddress?.FullName ?? string.Empty,
@@ -18,10 +29,11 @@ namespace ArticoleCalarie.Logic.Converters
                 [EmailParametersEnum.DeliveryAddressCity.ToString().ToLower()] = order.DeliveryAddress?.City ?? string.Empty,
                 [EmailParametersEnum.DeliveryAddressCounty.ToString().ToLower()] = order.DeliveryAddress?.County ?? string.Empty,
                 [EmailParametersEnum.DeliveryAddressCountry.ToString().ToLower()] = order.DeliveryAddress?.Country ?? string.Empty,
-                [EmailParametersEnum.ViewOrderLink.ToString().ToLower()] = "order/userorderlist",
+                [EmailParametersEnum.ViewOrderLink.ToString().ToLower()] = "account/comenzile-mele",
                 [EmailParametersEnum.OrderNumber.ToString().ToLower()] = order.OrderNumber.ToString(),
-                [EmailParametersEnum.OrderDate.ToString().ToLower()] = order.OrderRegistrationDate.ToString("MM/dd/yyyy hh:mm"),
-                [EmailParametersEnum.TotalAmount.ToString().ToLower()] = order.TotalAmount.ToString("F")
+                [EmailParametersEnum.OrderDate.ToString().ToLower()] = order.OrderRegistrationDate.ToLocalTime().ToString(@"MM/dd/yyyy HH:mm", new CultureInfo("ro-RO")),
+                [EmailParametersEnum.TotalAmount.ToString().ToLower()] = (order.TotalAmount + deliveryCost).ToString("F"),
+                [EmailParametersEnum.DeliveryCost.ToString().ToLower()] = deliveryCost.ToString("F")
             };
 
             return orderParamDictionary;
@@ -74,7 +86,7 @@ namespace ArticoleCalarie.Logic.Converters
 
         private static string ToUrlString(this string s)
         {
-            s = s.ToLower().Replace(" ", "-");
+            s = s.Trim().Replace(" ", "-").Replace(", ", "-").Replace(",", "-").ToLowerInvariant();
 
             return s;
         }

@@ -12,8 +12,10 @@ namespace ArticoleCalarie.Logic.ILogic
         Task SendResetPasswordEmail(string email, string callbackUrl);
         Task<IdentityResult> ResetPassword(ResetPasswordViewModel model);
         Task<SignInStatus> ExternalSignInAsync(ExternalLoginInfo loginInfo);
-        Task<IdentityResult> CreateExternalAccountLogin(string email, string fullName, UserLoginInfo loginInfo);
+        Task<IdentityResult> CreateExternalAccountLogin(ExternalLoginConfirmationViewModel model, UserLoginInfo loginInfo);
         Task<UserViewModel> GetUserById(string userId);
         Task SaveUserAddress(AddressViewModel addressViewModel, string userId);
+        Task DeleteAccount(string userId);
+        Task UpdateNewsletterSubscription(string userId, bool isSubscribed);
     }
 }

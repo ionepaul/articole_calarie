@@ -1,0 +1,10 @@
+﻿@model bool
+
+@{ 
+    var showBarClass = Model == true ? "" : "hidden";
+}
+
+<div class="cookies-bar @showBarClass">
+    Acest site foloseste cookie-uri pentru a oferi servicii, pentru a personaliza anunturi si pentru a analiza traficul. 
+    Afla mai multe despre <a href="@Url.RouteUrl("how-we-use-cookies-url")">modul in care folosim cookies</a> <span id="cookie-accept-btn" class="acceptCookies">Accept</span>
+</div>

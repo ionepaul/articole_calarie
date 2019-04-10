@@ -3,6 +3,7 @@
 @using ArticoleCalarie.Web.Utils
 
 <div id="products-content">
+    <p>Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount</p>
     <table class="table">
         <tr>
             <th>
@@ -50,7 +51,7 @@
                 <td>
                     @Html.ActionLink("Editează", "Edit", new { id = item.Id }) |
                     <a href="@Url.RouteUrl("product-details-url", new { categoryName = item.CategoryName.ToLower(), subcategoryId = item.SubcategoryId, subcategoryName = item.SubcategoryName.ToLower(), productCode = item.ProductCode.ToLower(), productName = item.ProductName.ToUrlProductName()})">Detalii</a> |
-                    <a onclick="openDeleteModal('@item.ProductCode')">Șterge</a>
+                    <a class="no-loading" onclick="openDeleteModal('@item.ProductCode')">Șterge</a>
 
                     <div id="@item.ProductCode" class="modal" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">
@@ -78,8 +79,6 @@
     </table>
 
     <div id="content-pager">
-        Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
-
         @Html.PagedListPager(Model, page => Url.Action("ProductListForAdmin", new { pageNumber = page, productCode = ViewBag.ProductCode }))
     </div>
 </div>

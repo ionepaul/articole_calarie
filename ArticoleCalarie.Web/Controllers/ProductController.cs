@@ -116,7 +116,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Route("produse/{categoryName}/{subcategoryId}/{subcategoryName}", Name = "product-list-url")]
-        public async Task<ActionResult> ProductViewList(string categoryName, int subcategoryId, string subcategoryName, int page, decimal? minp, decimal? maxp, string cl = "", string sz = "")
+        public async Task<ActionResult> ProductViewList(string categoryName, int subcategoryId, string subcategoryName, int? page, decimal? minp, decimal? maxp, string cl = "", string sz = "")
         {
             _logger.Info("VIEW > Product List By Subcategory and Search Model");
 
@@ -124,6 +124,7 @@ namespace ArticoleCalarie.Web.Controllers
             ViewBag.CategoryName = categoryName;
             ViewBag.SubcategoryName = subcategoryName;
 
+            var pageNumber = page ?? 1;
             var searchViewModel = new SearchViewModel();
             var sessionSearchModel = Session["SearchModel"] as SearchViewModel;
 
@@ -132,14 +133,14 @@ namespace ArticoleCalarie.Web.Controllers
                 if ((sessionSearchModel != null && sessionSearchModel.SubcategoryId == subcategoryId && minp == null && maxp == null && string.IsNullOrEmpty(cl) && string.IsNullOrEmpty(sz)))
                 {
                     searchViewModel = sessionSearchModel;
-                    searchViewModel.PageNumber = page;
+                    searchViewModel.PageNumber = pageNumber;
                 }
                 else
                 {
                     searchViewModel = new SearchViewModel
                     {
                         SubcategoryId = subcategoryId,
-                        PageNumber = page,
+                        PageNumber = pageNumber,
                         MinPrice = minp,
                         MaxPrice = maxp,
                         ColorIds = cl,
@@ -153,7 +154,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsPerPage"]);
 
-                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(productSearchViewResult.Products, page, pageSize, productSearchViewResult.TotalCount);
+                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(productSearchViewResult.Products, pageNumber, pageSize, productSearchViewResult.TotalCount);
 
                 return View(pagedListModel);
             }
@@ -179,7 +180,7 @@ namespace ArticoleCalarie.Web.Controllers
             {
                 var product = _iProductLogic.GetProductByProductCode(productCode);
 
-                var _subcategoryCookie = new HttpCookie("_RelatedProductsIn")
+                var _subcategoryCookie = new HttpCookie("_RPI")
                 {
                     Value = product.SubcategoryId,
                     Expires = DateTime.Now.AddDays(10)
@@ -198,13 +199,13 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetRelatedProducts()
+        public async Task<PartialViewResult> GetRelatedProducts()
         {
             _logger.Info("PARTIAL VIEW > Related Products");
 
             try
             {
-                var subcategory = Request.Cookies["_RelatedProductsIn"]?.Value;
+                var subcategory = Request.Cookies["_RPI"]?.Value;
 
                 var relatedProducts = await _iProductLogic.GetRelatedProducts(subcategory);
 
@@ -219,27 +220,49 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        [Route("produse/noutati", Name = "newest-products-url")]
-        public async Task<ActionResult> NewestProducts(int? pageNumber, bool isForHomePage = false)
+        [ChildActionOnly]
+        public PartialViewResult NewestProductsHome()
         {
-            if (isForHomePage)
+            _logger.Info("PARTIAL VIEW > The newest four products for home page.");
+
+            try
             {
-                _logger.Info("PARTIAL VIEW > The newest four products for home page.");
+                var newestProductsForHome = _iProductLogic.GetTheNewestProductsForHome();
 
-                try
-                {
-                    var newestProductsForHome = await _iProductLogic.GetTheNewestProductsForHome();
-
-                    return PartialView("_RelatedProductsPartial", newestProductsForHome);
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error($"Failed to get the newest four products for home page. Exception: {ex.Message}");
-
-                    return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
-                }
+                return PartialView("_RelatedProductsPartial", newestProductsForHome);
             }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to get the newest four products for home page. Exception: {ex.Message}");
 
+                return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
+            }
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public PartialViewResult ProductsOnSaleHome()
+        {
+            _logger.Info("PARTIAL VIEW > The latest four products on sale products for home page.");
+
+            try
+            {
+                var productsOnSaleForHome = _iProductLogic.GetProductsOnSaleForHome();
+
+                return PartialView("_RelatedProductsPartial", productsOnSaleForHome);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to get the lates four products on sale for home page. Exception: {ex.Message}");
+
+                return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
+            }
+        }
+
+        [HttpGet]
+        [Route("produse/noutati", Name = "newest-products-url")]
+        public async Task<ActionResult> NewestProducts(int? pageNumber)
+        {
             try
             {
                 _logger.Info("VIEW > The newest products page.");
@@ -265,7 +288,20 @@ namespace ArticoleCalarie.Web.Controllers
         [HttpGet]
         public ActionResult ProductListSearchPartial(int subcategoryId)
         {
+            var sessionSubcategoriesFilters = Session["SubcategoriesFilters"] as Dictionary<int, SearchViewFilters> ?? new Dictionary<int, SearchViewFilters>();
+
+            if (sessionSubcategoriesFilters.ContainsKey(subcategoryId))
+            {
+                var filters = sessionSubcategoriesFilters[subcategoryId];
+
+                return PartialView("_ProductListSearch", filters);
+            }
+
             var searchFilters = _iProductLogic.GetSearchViewFiltersForSubcategory(subcategoryId);
+
+            sessionSubcategoriesFilters.Add(subcategoryId, searchFilters);
+
+            Session["SubcategoriesFilters"] = sessionSubcategoriesFilters;
 
             return PartialView("_ProductListSearch", searchFilters);
         }
@@ -276,6 +312,7 @@ namespace ArticoleCalarie.Web.Controllers
         {
             _logger.Info("VIEW > Products by brand id");
 
+            brand = brand.Replace("-", " ");
             ViewBag.BrandName = brand;
 
             try
@@ -300,45 +337,27 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Route("produse/oferte", Name = "products-on-sale-url")]
-        public async Task<ActionResult> ProductsOnSale(int? pageNumber, bool isForHomePage = false)
+        public async Task<ActionResult> ProductsOnSale(int? pageNumber)
         {
-            if (!isForHomePage)
-            {
-                _logger.Info("VIEW > Products on sale");
-
-                try
-                {
-                    var page = pageNumber ?? 1;
-
-                    var products = await _iProductLogic.GetProductsOnSale(page);
-
-                    int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
-
-                    var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
-
-                    return View(pagedListModel);
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error($"Failed to get products on sale. Exception: {ex.Message}.");
-
-                    return View("Error");
-                }
-            } 
-
-            _logger.Info("PARTIAL VIEW > The latest four products on sale products for home page.");
+            _logger.Info("VIEW > Products on sale");
 
             try
             {
-                var productsOnSaleForHome = await _iProductLogic.GetProductsOnSaleForHome();
+                var page = pageNumber ?? 1;
 
-                return PartialView("_RelatedProductsPartial", productsOnSaleForHome);
+                var products = await _iProductLogic.GetProductsOnSale(page);
+
+                int pageSize = Convert.ToInt32(ConfigurationManager.AppSettings["ProductsOnSaleAndNewestPerPage"]);
+
+                var pagedListModel = new StaticPagedList<ProductListViewItemModel>(products.Products, page, pageSize, products.TotalCount);
+
+                return View(pagedListModel);
             }
             catch (Exception ex)
             {
-                _logger.Error($"Failed to get the lates four products on sale for home page. Exception: {ex.Message}");
+                _logger.Error($"Failed to get products on sale. Exception: {ex.Message}.");
 
-                return PartialView("_RelatedProductsPartial", new List<ProductListViewItemModel>());
+                return View("Error");
             }
         }
 
@@ -359,7 +378,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 return View(productViewModel);
             }
-            
+
             try
             {
                 _iProductLogic.AddProduct(productViewModel);
@@ -393,7 +412,7 @@ namespace ArticoleCalarie.Web.Controllers
             try
             {
                 _iProductLogic.UpdateProduct(productViewModel.Id, productViewModel);
-                
+
                 _logger.Info($"Successfully updated product {productViewModel.ProductName}.");
 
                 return RedirectToAction(nameof(List));

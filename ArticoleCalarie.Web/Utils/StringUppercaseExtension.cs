@@ -4,6 +4,8 @@
     {
         public static string ToFirstUppercase(this string s)
         {
+            s = s.Trim().Replace("-", " ");
+
             if (string.IsNullOrEmpty(s))
             {
                 return string.Empty;
@@ -17,7 +19,14 @@
 
         public static string ToUrlProductName(this string s)
         {
-            var s1 = s.Replace(" ", "-").ToLowerInvariant();
+            var s1 = s.Trim().Replace(" ", "-").Replace(", ", "-").Replace(",","-").ToLowerInvariant();
+
+            return s1;
+        }
+
+        public static string ToUrlSubcategoryName(this string s)
+        {
+            var s1 = s.Trim().Replace(" ", "-").ToLowerInvariant();
 
             return s1;
         }

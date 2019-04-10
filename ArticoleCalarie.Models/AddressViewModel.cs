@@ -5,6 +5,11 @@ namespace ArticoleCalarie.Models
 {
     public class AddressViewModel
     {
+        public AddressViewModel()
+        {
+            Country = "Romania";
+        }
+
         [Required(ErrorMessage = "Numele este obligatoriu.")]
         [Display(Name = "Nume Complet")]
         public string FullName { get; set; }

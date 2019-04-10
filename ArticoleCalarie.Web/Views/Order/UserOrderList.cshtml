@@ -1,6 +1,15 @@
 ﻿@model PagedList.IPagedList<ArticoleCalarie.Models.OrderViewModel>
-@using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Comenzile Mele";
+    ViewBag.MetaDescription = "Comenzile mele efectuate pe articolecalarie.ro.";
+}
+
+@section MetaNoFollow {
+    <meta name='robots' CONTENT='NOINDEX, NOFOLLOW'>
+}
+
 
 @Html.Partial("_AccountHeaderPartial")
 

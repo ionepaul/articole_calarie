@@ -3,16 +3,17 @@
 
 @{
     ViewBag.Title = "Contact";
+    ViewBag.MetaDescription = "Contacteaza-te in legatura cu orice intrebare ai depsre produsele noastre, despre site-ul nostru, articolecalarie.ro, sau despre ce produse de echitatie ai dori sa aducem pentru tine.";
 }
 
 <div class="page-wrapper">
     <div class="main-content contact-page">
-        <div class="container">
-            <h1 class="contact-title">Contact</h1>
-            <div class="contact-content">
-                <div class="info-contact">
-                    <div class="form">
-                            @using (Html.BeginRouteForm("contact-form-url", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+
+        <h1 class="contact-title">Contact</h1>
+        <div class="contact-content">
+            <div class="info-contact">
+                <div class="form">
+                    @using (Html.BeginRouteForm("contact-form-url", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                         @Html.AntiForgeryToken();
 
@@ -36,28 +37,33 @@
                             <input type="submit" style="border: none; width: 100%" value="Trimite mesajul" class="submit send" />
                         </div>
                     }
+                </div>
+                <div class="contact-details">
+                    <div class="box-contact">
+                        <h4 class="title"><span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span>Telefon</h4>
+                        <h5 class="subtitle">(+40) 722 143 392 <br /></h5>
                     </div>
-                    <div class="contact-details">
-                        <div class="box-contact">
-                            <h4 class="title"><span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span>Hotline</h4>
-                            <h5 class="subtitle">(+100) 123 456 7890 - (+100) 123 456 7899</h5>
-                        </div>
-                        <div class="box-contact">
-                            <h4 class="title"><span class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>Email Us</h4>
-                            <h5 class="subtitle">Support@maxstore.com</h5>
-                        </div>
-
-                        <div class="box-contact">
-                            <h4 class="title"><span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>Store Location</h4>
-                            <h5 class="subtitle">608 Fifth Avenue, New York, NY 10020</h5>
-                        </div>
+                    <div class="box-contact">
+                        <h4 class="title"><span class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>Email</h4>
+                        <h5 class="subtitle">contact@articolecalarie.ro</h5>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="related-items">
+            <h3 class="title supper-title"></h3>
+            <br />
+            <div id="contact-related-products"></div>
         </div>
     </div>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            getRelatedProducts('#contact-related-products');
+        });
+    </script>
 }

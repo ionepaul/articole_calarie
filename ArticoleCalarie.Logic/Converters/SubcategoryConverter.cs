@@ -1,4 +1,5 @@
-﻿using ArticoleCalarie.Models;
+﻿using System.Linq;
+using ArticoleCalarie.Models;
 using ArticoleCalarie.Repository.Entities;
 
 namespace ArticoleCalarie.Logic.Converters
@@ -10,8 +11,8 @@ namespace ArticoleCalarie.Logic.Converters
             var subcategoryViewModel = new SubcategoryViewModel
             {
                 Id = subcategory.Id,
-                Name = subcategory.Name,
-                CategoryName = subcategory.Category?.Name
+                Name = subcategory.Name.Trim(),
+                CategoryName = subcategory.Category?.Name.Trim()
             };
 
             return subcategoryViewModel;
@@ -26,6 +27,19 @@ namespace ArticoleCalarie.Logic.Converters
             };
 
             return subcategory;
+        }
+
+        public static SubcategorySitemapModel ToSitemapModel(this Subcategory subcategory)
+        {
+            var subcategorySitemapModel = new SubcategorySitemapModel
+            {
+                Id = subcategory.Id,
+                Name = subcategory.Name,
+                CategoryName = subcategory.Category?.Name.Trim(),
+                Products = subcategory.Products?.Select(x => x.ToMinimalInformationModel())
+            };
+
+            return subcategorySitemapModel;
         }
     }
 }

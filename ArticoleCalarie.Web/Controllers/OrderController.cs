@@ -28,6 +28,7 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
+        [Route("comanda/produse", Name = "shopping-cart-details-url")]
         public ActionResult ShoppingCartDetails()
         {
             _logger.Info("VIEW > Shopping Cart Details");
@@ -36,6 +37,7 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
+        [Route("comanda/checkout", Name = "checkout-url")]
         public async Task<ActionResult> Checkout()
         {
             _logger.Info("VIEW > Check out");
@@ -43,10 +45,13 @@ namespace ArticoleCalarie.Web.Controllers
             try
             {
                 var shoppingCart = Session["ShoppingCart"] as ShoppingCartModel;
+                var freeDeliveryCostValue = Convert.ToDecimal(ConfigurationManager.AppSettings["FreeDeliveryOrderValue"]);
+                var deliveryCost = Convert.ToDecimal(ConfigurationManager.AppSettings["DeliveryCost"]);
 
                 var orderViewModel = new OrderViewModel()
                 {
-                    ShoppingItems = shoppingCart.ShoppingItems
+                    ShoppingItems = shoppingCart.ShoppingItems,
+                    DeliveryCost = shoppingCart.ShoppingItems.Sum(x => x.Price) >= freeDeliveryCostValue ? 0 : deliveryCost
                 };
                 
                 if (User.Identity.IsAuthenticated)
@@ -237,7 +242,7 @@ namespace ArticoleCalarie.Web.Controllers
                 {
                     _logger.Info("User is logged in, updating billing address on profile.");
 
-                    await _iAccountLogic.SaveUserAddress(address, userId);
+                    await _iAccountLogic.SaveUserAddress(billingAddress, userId);
                 }
 
                 orderViewModel.BillingAddress = billingAddress;
@@ -271,7 +276,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 _logger.Info("Successfully saved order");
 
-                return RedirectToAction(nameof(CheckoutDone), new { orderNumber = orderNumber });
+                return RedirectToAction(nameof(CheckoutDone), new { nrComanda = orderNumber });
             }
             catch (Exception ex)
             {
@@ -282,20 +287,21 @@ namespace ArticoleCalarie.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult CheckoutDone(int orderNumber)
+        [Route("comanda/comanda-inregistrata", Name = "checkout-done-url")]
+        public ActionResult CheckoutDone(int nrComanda)
         {
             _logger.Info("VIEW > Checkout Done");
 
-            return View(orderNumber);
+            return View(nrComanda);
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> OrderList(int? pageNumber, OrderStatusViewEnum status = OrderStatusViewEnum.ALL)
+        public async Task<ActionResult> OrderList(int? pageNumber, OrderStatusViewEnum status = OrderStatusViewEnum.REGISTRED)
         {
             _logger.Info("VIEW > Admin > All orders");
 
-            ViewBag.OrderStatus = status;
+            ViewBag.OrderStatus = (int)status;
 
             try
             {
@@ -373,6 +379,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Authorize]
+        [Route("account/comenzile-mele", Name = "user-orders-url")]
         public async Task<ActionResult> UserOrderList(int? pageNumber)
         {
             _logger.Info("VIEW > User order list");
@@ -405,6 +412,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [Authorize]
+        [Route("account/comenzile-mele-partial", Name = "user-orders-partial-url")]
         public async Task<ActionResult> UserOrderListPartial(int? pageNumber)
         {
             _logger.Info("VIEW > User order list");

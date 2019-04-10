@@ -83,9 +83,11 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string returnUrl)
         {
             _logger.Info("VIEW > Register");
+
+            ViewBag.ReturnUrl = returnUrl;
 
             return View();
         }
@@ -106,9 +108,7 @@ namespace ArticoleCalarie.Web.Controllers
                     if (result.Succeeded)
                     {
                         _logger.Info($"Successfully registred user: {model.Email}.");
-
-                        ViewBag.ReturnUrl = "/home/index";
-
+                        
                         return RedirectToLocal(returnUrl);
                     }
 
@@ -135,6 +135,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("account/parola-noua", Name = "forgot-password-url")]
         public ActionResult ForgotPassword()
         {
             _logger.Info("VIEW > Forgot Password");
@@ -145,6 +146,7 @@ namespace ArticoleCalarie.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("account/parola-noua", Name = "forgot-password-post-url")]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             _logger.Info("POST > Forgot Password");
@@ -158,13 +160,13 @@ namespace ArticoleCalarie.Web.Controllers
 
             try
             {
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { }, protocol: Request.Url.Scheme);
+                var callbackUrl = Url.RouteUrl("reset-password-url", new { }, protocol: Request.Url.Scheme);
 
                 await _iAccountLogic.SendResetPasswordEmail(model.Email, callbackUrl);
 
                 _logger.Info($"Successfully sent reset password email to {model.Email}");
 
-                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                return RedirectToRoute("forgot-pass-conf-url");
             }
             catch(Exception ex)
             {
@@ -176,6 +178,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("account/confirmare-parola-noua", Name = "forgot-pass-conf-url")]
         public ActionResult ForgotPasswordConfirmation()
         {
             _logger.Info("VIEW > Forogt Password Confirmation");
@@ -185,6 +188,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("account/reseteaza-parola", Name = "reset-password-url")]
         public ActionResult ResetPassword(string code)
         {
             _logger.Info("View > Account > Reset Password");
@@ -195,6 +199,7 @@ namespace ArticoleCalarie.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("account/reseteaza-parola", Name = "reset-password-post-url")]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             _logger.Info("POST > Reset Password");
@@ -209,7 +214,7 @@ namespace ArticoleCalarie.Web.Controllers
                     {
                         _logger.Info($"Successfully reset password for user: {model.Email}");
 
-                        return RedirectToAction("ResetPasswordConfirmation", "Account");
+                        return RedirectToRoute("reset-password-success-url");
                     }
 
                     AddErrors(result);
@@ -229,6 +234,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("account/parola-resetata", Name = "reset-password-success-url")]
         public ActionResult ResetPasswordConfirmation()
         {
             _logger.Info("VIEW > Reset Password Confirmation");
@@ -256,6 +262,13 @@ namespace ArticoleCalarie.Web.Controllers
         {
             _logger.Info("GET > External Login Callback");
 
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                returnUrl = "/account/administrare";
+            }
+
+            ViewBag.ReturnUrl = returnUrl;
+
             try
             {
                 var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
@@ -264,7 +277,7 @@ namespace ArticoleCalarie.Web.Controllers
                 {
                     _logger.Info("Could not find external login info. Returning Login view.");
 
-                    return RedirectToAction("Login");
+                    return RedirectToAction("login");
                 }
 
                 // Sign in the user with this external login provider if the user already has a login
@@ -280,7 +293,7 @@ namespace ArticoleCalarie.Web.Controllers
                         ViewBag.ReturnUrl = returnUrl;
                         ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                         var fullName = loginInfo.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:name")?.Value;
-                        return RedirectToAction("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email, FullName = fullName });
+                        return RedirectToAction("externalloginconfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email, FullName = fullName, ReturnUrl = returnUrl });
                 }
             }
             catch (Exception ex)
@@ -295,6 +308,8 @@ namespace ArticoleCalarie.Web.Controllers
         [AllowAnonymous]
         public ActionResult ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model)
         {
+            ViewBag.ReturnUrl = model.ReturnUrl;
+
             _logger.Info("VIEW > External Login Confirmation");
 
             return View(model);
@@ -307,11 +322,16 @@ namespace ArticoleCalarie.Web.Controllers
         {
             _logger.Info("POST > External Login Confirmation");
 
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated && string.IsNullOrEmpty(returnUrl))
             {
                 _logger.Info($"User: {model.Email} is already authenticated. Returning Account Manage View");
 
-                return RedirectToAction(nameof(Manage));
+                return RedirectToRoute("administrare-cont-url");
+            }
+
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                returnUrl = "/account/administrare";
             }
 
             if (ModelState.IsValid)
@@ -325,10 +345,10 @@ namespace ArticoleCalarie.Web.Controllers
                     {
                         _logger.Info("Could not find external login info. Returning ExternalLoginFailure view.");
 
-                        return View("ExternalLoginFailure");
+                        return View("externalloginfailure");
                     }
 
-                    var result = await _iAccountLogic.CreateExternalAccountLogin(model.Email, model.FullName, info.Login);
+                    var result = await _iAccountLogic.CreateExternalAccountLogin(model, info.Login);
 
                     if (result.Succeeded)
                     {
@@ -367,7 +387,8 @@ namespace ArticoleCalarie.Web.Controllers
 
         #region Account Management
 
-        [HttpGet]
+        [HttpGet]   
+        [Route("account/administrare", Name = "administrare-cont-url")]
         public async Task<ActionResult> Manage()
         {
             _logger.Info("VIEW > Manage");
@@ -406,7 +427,7 @@ namespace ArticoleCalarie.Web.Controllers
 
                 _logger.Info($"Successfully saved delivery address for user: {userViewModel.Email}.");
 
-                return RedirectToAction(nameof(Manage));
+                return RedirectToRoute("administrare-cont-url");
             }
             catch (Exception ex)
             {
@@ -432,13 +453,61 @@ namespace ArticoleCalarie.Web.Controllers
 
                 _logger.Info($"Successfully saved billing address for user: {userViewModel.Email}.");
 
-                return RedirectToAction(nameof(Manage));
+                return RedirectToRoute("administrare-cont-url");
             }
             catch (Exception ex)
             {
                 _logger.Info($"Failed to save billing address for user: {userViewModel.Email}. Exception {ex.Message}.");
 
                 return View("Error");
+            }
+        }
+
+        [HttpPost]
+        public async Task DeleteUser()
+        {
+            _logger.Info("POST > Delete User");
+
+            try
+            {
+                var userId = User.Identity.GetUserId();
+
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                if (userId != null)
+                {
+                    await _iAccountLogic.DeleteAccount(userId);
+                }
+            }
+            catch (Exception ex)
+            {
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                _logger.Info($"Failed to delete user: .Exception: {ex.Message}");
+
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public async Task UpdateNewsletterSubscription(bool isSubscribed)
+        {
+            _logger.Info("POST > Update Newsletter Subscription");
+
+            try
+            {
+                var userId = User.Identity.GetUserId();
+
+                if (userId != null)
+                {
+                    await _iAccountLogic.UpdateNewsletterSubscription(userId, isSubscribed);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Info($"Failed to update newsletter subscription. Exception: {ex.Message}");
+
+                throw ex;
             }
         }
 

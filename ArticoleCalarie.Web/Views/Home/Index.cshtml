@@ -1,5 +1,9 @@
-﻿@{
-    ViewBag.Title = "Magazin echitație";
+﻿@model ArticoleCalarie.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Echipament de echitatie, Magazin de echitație, Produse pentru echitatie";
+    ViewBag.MetaDescription = "Echipamente de echitatie pentru tine si calul tau. De la pantalanoni de calarie, pinteni, cizme de echitatie la valtrape, jambieri sau frau pentru calul tau.";
+    ViewBag.MetaImage = "echipament-echitatie-competitie.jpg";
 }
 
 <div class="main-content home-page main-content-home1">
@@ -7,27 +11,27 @@
     <div class="main-slideshow">
         <div class="owl-carousel dots-style1 nav-style2" data-autoplay="true" data-autoplayTimeout="1000" data-nav="true" data-dots="true" data-loop="true" data-slidespeed="800" data-margin="30" data-responsive='{"0":{"items":1}, "640":{"items":1}, "768":{"items":1}, "1024":{"items":1}, "1200":{"items":1}}' data-height="400">
             <div class="slide-item item-background">
-                <div class="slide-img"><img src="images/s8.jpg" alt=""></div>
+                <div class="slide-img"><img src="images/echipament-echitatie-competitie.jpg" alt="echipament echitatie pentru competitie"></div>
                 <div class="slide-content-1">
-                    <h4 class="subtitle">Get a new look!</h4>
-                    <h3 class="title">WOMen’s SUNGLASSES COLLECTION 2017</h3>
-                    <a href="#" class="button">Shop Now</a>
+                    <h4 class="subtitle">Calareste in stil!</h4>
+                    <h3 class="title">Echipamentul tau de echitatie te asteapta</h3>
+                    <a href="@Url.RouteUrl("product-list-url", new { categoryName = "calaret", subcategoryId = 53, subcategoryName = "sacou", page = 1})" class="button">Vezi detalii</a>
                 </div>
             </div>
             <div class="slide-item item-background">
-                <div class="slide-img"><img src="images/s3.jpg" alt=""></div>
+                <div class="slide-img"><img src="images/jambiere-cal.jpg" alt="jambiere cal"></div>
                 <div class="slide-content-1">
-                    <h4 class="subtitle">Get a new look!</h4>
-                    <h3 class="title">WOMen’s SUNGLASSES COLLECTION 2017</h3>
-                    <a href="#" class="button">Shop Now</a>
+                    <h4 class="subtitle">Protectie superioara!</h4>
+                    <h3 class="title">Jambiere exclusiviste pentru calul tau</h3>
+                    <a href="@Url.RouteUrl("product-list-url", new { categoryName = "cal", subcategoryId = 24, subcategoryName = "jambiere", page = 1})" class="button">Vezi detalii</a>
                 </div>
             </div>
             <div class="slide-item item-background">
-                <div class="slide-img"><img src="images/s4.jpg" alt=""></div>
+                <div class="slide-img"><img src="images/echipament-echitatie.jpg" alt="echipament echitatie"></div>
                 <div class="slide-content-1">
-                    <h4 class="subtitle">Get a new look!</h4>
-                    <h3 class="title">WOMen’s SUNGLASSES COLLECTION 2017</h3>
-                    <a href="#" class="button">Shop Now</a>
+                    <h4 class="subtitle">Fi invingator!</h4>
+                    <h3 class="title">Ultimele modele de valtrap disponibile acum</h3>
+                    <a href="@Url.RouteUrl("product-list-url", new { categoryName = "cal", subcategoryId = 16, subcategoryName = "valtrap", page = 1})" class="button">Vezi detalii</a>
                 </div>
             </div>
         </div>
@@ -38,37 +42,35 @@
         <div class="row main-banner">
             <div class="col banner-1" style="background: #f1f2f4;">
                 <div class="banner-content">
-                    <h3 class="title">Floral Vintage Tshirt Campaign</h3>
-                    <p class="des">Mauris nec porta sapien. Aliquamin est ultricies, fringilla libero vel mattis.</p>
-                    <a href="#" class="button">SHOP NOW</a>
+                    <h3 class="title">Sacou Competitie Gioia Femei</h3>
+                    <p class="des">Sacou pentru competitie Equiline, foarte usor si ergonomic, cu cristale.</p>
+                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = "calaret", subcategoryId = 53, subcategoryName = "sacou", productCode = "rsa-0201", productName = "jambiere-fata-eshock" })" class="button">CUMPARA ACUM</a>
                 </div>
                 <div class="banner-image">
-                    <img src="images/women.png" alt="">
+                    <img src="images/sacou-echitatie-dama.png" alt="sacou echitatie dama">
                 </div>
             </div>
             <div class="col banner-2">
                 <div class="banner-content">
                     <h3 class="title">TRANSPORT GRATUIT</h3>
-                    <p class="des">Livrare gratuită la comenzile mai mari de 200 RON</p>
+                    <p class="des">Livrare gratuita la comenzile mai mari de @Model.FreeDeliveryCostValue RON</p>
                 </div>
                 <div class="banner-image">
-                    <h3 class="title">Jambieri eShock</h3>
-                    <img src="images/jambier.png" alt="">
-                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = "cal", subcategoryId = 24, subcategoryName = "jambiere", productCode = "hja-0117", productName = "jambiere-fata-eshock" })" class="button">CUMPARA</a>
+                    <h3 class="title">Jambieri Fata eShock</h3>
+                    <img src="images/jambieri-fata-eShock.png" alt="jambieri fata eShock">
+                    <a href="@Url.RouteUrl("product-details-url", new { categoryName = "cal", subcategoryId = 24, subcategoryName = "jambiere", productCode = "hja-0117", productName = "jambiere-fata-eshock" })" class="button">CUMPARA ACUM</a>
                 </div>
             </div>
         </div>
 
         <div class="related-items">
             <h3 class="title supper-title">REDUCERI</h3>
-            <div id="sales-products-home">
-            </div>
-        </div> 
+            @Html.Action("ProductsOnSaleHome", "Product")
+        </div>
 
         <div class="related-items">
             <h3 class="title supper-title">CELE MAI NOI PRODUSE</h3>
-            <div id="new-products-home">
-            </div>
+            @Html.Action("NewestProductsHome", "Product")
         </div>
     </div>
 </div>
@@ -79,48 +81,67 @@
     </div>
 
     <div class="logo-brand">
-        <div class="owl-carousel brands-list" data-autoplay="false" data-nav="false" data-loop="true" data-slidespeed="800" data-margin="20" data-responsive='{"0":{"items":2}, "640":{"items":2}, "768":{"items":3}, "1024":{"items":4}, "1200":{"items":4}}'>
+        <div class="owl-carousel brands-list" data-autoplay="true" data-autoplayTimeout="500" data-nav="false" data-loop="true" data-slidespeed="800" data-margin="20" data-responsive='{"0":{"items":2}, "640":{"items":2}, "768":{"items":3}, "1024":{"items":4}, "1200":{"items":4}}'>
             <div class="brand-item">
-                <a href="#"><img src="images/equiline.png" alt=""></a>
+                <a href="http://en.equiline.it/">
+                    <img src="images/equiline.png" alt="Equiline">
+                </a>
             </div>
             <div class="brand-item">
-                <a href="#"><img src="images/freejump.jpg" alt=""></a>
+                <a href="http://www.freejumpsystem.com/en/">
+                    <img src="images/freejump.png" alt="Freejump Advance Riding Experience">
+                </a>
             </div>
             <div class="brand-item">
-                <a href="#"><img src="images/kingsland.jpeg" alt=""></a>
+                <a href="http://www.kingslandequestrian.com/">
+                    <img src="images/kingsland.jpeg" alt="Kingsland Equestrian">
+                </a>
             </div>
             <div class="brand-item">
-                <a href="#"><img src="images/animo.jpg" alt=""></a>
+                <a href="https://www.animoitalia.com/en/">
+                    <img src="images/animo.png" alt="Animo. Clothing for horse riding and golf">
+                </a>
+            </div>
+            <div class="brand-item">
+                <a href="https://www.waldhausen.com/default">
+                    <img src="images/waldhausen.png" alt="Waldhausen - Die ganze Welt des Reitsports">
+                </a>
+            </div>
+            <div class="brand-item">
+                <a href="https://www.tattiniriding.com/en">
+                    <img src="images/tattini.png" alt="Tattini Riding Equestrian Wear">
+                </a>
+            </div>
+            <div class="brand-item">
+                <a href="@Url.RouteUrl("products-by-brand-url", new { brand = "swing", pageNumber = 1 })">
+                    <img src="images/swing.png" alt="Swing Equestrian Safety">
+                </a>
+            </div>
+            <div class="brand-item">
+                <a href="https://www.charlesowen.com/">
+                    <img src="images/charles-owen.png" alt="Charles Owen & Co (Bow) Ltd">
+                </a>
+            </div>
+            <div class="brand-item">
+                <a href="@Url.RouteUrl("products-by-brand-url", new { brand = "elt", pageNumber = 1 })">
+                    <img src="images/elt.png" alt="ELT Equestrian Wear">
+                </a>
+            </div>
+            <div class="brand-item">
+                <a href="https://www.equick.it/">
+                    <img src="images/equick.png" alt="eQuick Horse Boots">
+                </a>
+            </div>
+            <div class="brand-item">
+                <a href="@Url.RouteUrl("products-by-brand-url", new { brand = "likit", pageNumber = 1 })">
+                    <img src="images/likit.png" alt="Likit">
+                </a>
+            </div>
+            <div class="brand-item">
+                <a href="http://www.dyon.be">
+                    <img src="images/dyon.png" alt="Dyon">
+                </a>
             </div>
         </div>
     </div>
 </div>
-
-@section scripts {
-    @Scripts.Render("~/bundles/carousel")
-    <script>
-        $(() => {
-            let newProductsUrl = window.location.origin + '/produse/noutati?isForHomePage=true'
-
-            $.ajax({
-                type: "GET",
-                cache: false,
-                url: newProductsUrl,
-                success: function (result) {
-                    $('#new-products-home').html(result);
-                }
-            });
-
-            let productsOnSaleUrl = window.location.origin + '/produse/oferte?isForHomePage=true'
-
-            $.ajax({
-                type: "GET",
-                cache: false,
-                url: productsOnSaleUrl,
-                success: function (result) {
-                    $('#sales-products-home').html(result);
-                }
-            });
-        });
-    </script>
-}

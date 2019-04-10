@@ -2,7 +2,10 @@
 @using ArticoleCalarie.Web.Utils
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.ProductName.ToFirstUppercase() + " | " + ((string)ViewBag.SubcategoryName).ToFirstUppercase() + " | " + ((string)ViewBag.CategoryName).ToFirstUppercase();
+    ViewBag.MetaDescription = Model.Description.ToFirstUppercase();
+    ViewBag.MetaImage = "products/" + Model.ImagesList.FirstOrDefault();
+
     bool hasMaterialDetails = !string.IsNullOrEmpty(Model.MaterialDetails);
     bool hasSizeChart = !string.IsNullOrEmpty(Model.SizeChartImage);
     var sizes = !string.IsNullOrEmpty(Model.Size) ? Model.Size.Split(',') : new string[0];
@@ -17,18 +20,21 @@
             </div>
         }
         else
-        {
-            
+        {      
             <div class="breadcrumbs">
-                <a href="#">@(((string)ViewBag.CategoryName).ToFirstUppercase())</a> 
+                <a href="@Url.RouteUrl("subcategories-url", new { categoryName = (string)ViewBag.CategoryName})">@(((string)ViewBag.CategoryName).ToFirstUppercase())</a> 
                     <i class="fa fa-angle-right"></i> 
-                        <a href="@Url.RouteUrl("product-list-url", new { categoryName = ViewBag.CategoryName, subcategoryId = ViewBag.SubcategoryId, subcategoryName = ViewBag.SubcategoryName, page = 1 })">@(((string)ViewBag.SubcategoryName).ToFirstUppercase())</a>
+                        <a href="@Url.RouteUrl("product-list-url", new { categoryName = ViewBag.CategoryName, subcategoryId = ViewBag.SubcategoryId, subcategoryName = ViewBag.SubcategoryName, page = 1 })">@(((string)ViewBag.SubcategoryName).Replace("-", " ").ToFirstUppercase())</a>
                             <i class="fa fa-angle-right"></i>
                                  <span class="current">@Model.ProductName</span>
             </div>
         }
 
         <div class="product-single-content">
+            <div id="added-to-order" style="text-align: center; display: none;" class="alert alert-success">
+                <p style="font-size: 30px; padding: 10px;"><span><i class="fa fa-check-circle"></i></span></p>
+                <p>Produsul a fost adaugat cu success in cosul de cumparaturi!</p>
+            </div>
             <div class="about-product">
                 <div class="details-thumb">
                     <div class="owl-carousel has-thumbs" data-autoplay="false" data-nav="false" data-dots="false" data-loop="true" data-slidespeed="800" data-margin="30" data-responsive='{"0":{"items":1}, "640":{"items":1}, "768":{"items":1}, "1024":{"items":1}, "1200":{"items":1}}'>
@@ -88,7 +94,7 @@
                         <ul class="list-color">
                         @foreach (var color in Model.ColorsViewModel)
                          {
-                            <li><a id="@color.Name" title="@color.Name" style="background-color: @color.Hex"></a></li>
+                            <li><a class="no-loading" id="@color.Name" title="@color.Name" style="background-color: @color.Hex"></a></li>
                          }
                        </ul>
                     }
@@ -96,8 +102,8 @@
                     <div class="quantity">
                         <input id="quantity" class="input-text qty text" type="text" size="4" title="Qty" value="1" name="quantity">
                         <div class="group-quantity-button">
-                            <a class="plus" href="#"><i class="fa fa-sort-asc" aria-hidden="true"></i></a>
-                            <a class="minus" href="#"><i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+                            <a class="plus no-loading" href="#"><i class="fa fa-sort-asc" aria-hidden="true"></i></a>
+                            <a class="minus no-loading" href="#"><i class="fa fa-sort-desc" aria-hidden="true"></i></a>
                         </div>
                     </div>
                     <a id="addToCardBtn" class="add-to-cart">ADAUGĂ ÎN COȘ</a>
@@ -135,7 +141,6 @@
 }
 
 @section scripts {
-    @Scripts.Render("~/bundles/carousel")
     <script>
         var productName = '@Model.ProductName';
         var productImage = '@Model.ImagesList.First()';

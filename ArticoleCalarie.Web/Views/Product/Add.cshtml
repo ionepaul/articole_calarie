@@ -1,7 +1,12 @@
 ﻿@model ArticoleCalarie.Models.ProductViewModel
 
 @{
-    ViewBag.Title = "Adaugă produs";
+    ViewBag.Title = "Adauga produs";
+    ViewBag.MetaDescription = string.Empty;
+}
+
+@section MetaNoFollow {
+    <meta name='robots' CONTENT='NOINDEX, NOFOLLOW'>
 }
 
 <div class="page-wrapper add-product-wrapper">

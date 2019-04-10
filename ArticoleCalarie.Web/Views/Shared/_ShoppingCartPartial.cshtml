@@ -9,7 +9,7 @@
 
 <div class="minicart">
     <div class="cart-block">
-        <a href="@Url.Action("ShoppingCartDetails", "Order")" class="cart-icon"><span class="flaticon-cart"></span></a>
+        <a href="@Url.RouteUrl("shopping-cart-details-url")" class="cart-icon"><span class="flaticon-cart"></span></a>
         <span class="count">@totalCartItems</span>
     </div>
     @if (totalCartItems > 0)
@@ -42,7 +42,7 @@
             </div>
             <div class="cart-inner-price">
                 <p class="cart-inner-total"><span>TOTAL: </span> @grandTotal RON</p>
-                <a class="complete-order" href="@Url.Action("ShoppingCartDetails", "Order")">FINALIZEAZĂ COMANDA</a>
+                <a class="complete-order" href="@Url.RouteUrl("shopping-cart-details-url")">FINALIZEAZĂ COMANDA</a>
             </div>
         </div>
     }

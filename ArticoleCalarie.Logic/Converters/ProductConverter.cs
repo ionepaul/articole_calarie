@@ -70,7 +70,7 @@ namespace ArticoleCalarie.Logic.Converters
                 Id = product.Id,
                 ProductCode = product.ProductCode,
                 ProductName = product.ProductName,
-                SubcategoryName = product.Subcategory?.Name,
+                SubcategoryName = product.Subcategory?.Name.Trim(),
                 Brand = product.Brand?.Name,
                 Price = product.Price,
                 SalePercentage = product.SalePercentage.ToString() + "%",
@@ -122,11 +122,23 @@ namespace ArticoleCalarie.Logic.Converters
             {
                 MinPrice = searchFilters.MinPrice,
                 MaxPrice = searchFilters.MaxPrice,
-                Colors = searchFilters.Colors.Select(x => x.ToViewModel()).ToList(),
-                Sizes = searchFilters.Sizes.ToList()
+                Colors = searchFilters.Colors != null ? searchFilters.Colors.Select(x => x.ToViewModel()).ToList() : new List<ColorViewModel>(),
+                Sizes = searchFilters.Sizes != null ? searchFilters.Sizes.ToList() : new List<string>()
             };
 
             return searchViewFilters;
+        }
+
+        public static ProductMinimalInformation ToMinimalInformationModel(this Product product)
+        {
+            var productMinimalInformation = new ProductMinimalInformation
+            {
+                ProductCode = product.ProductCode,
+                ProductName = product.ProductName,
+                DateAdded = product.DatePosted
+            };
+
+            return productMinimalInformation;
         }
     }
 }

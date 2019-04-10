@@ -43,110 +43,140 @@
         }
     </table>
 
-    <div class="col-sm-4">
-        <h5>Adresa de livrare</h5>
-        <div class="address-details-wrapper">
-            <p class="name">@Model.DeliveryAddress.FullName</p>
-            <p> @Model.DeliveryAddress.PhoneNumber</p>
-            <p> @Model.DeliveryAddress.AddressLine1<span>, </span>@Model.DeliveryAddress.AddressLine2</p>
-            <p>@Model.DeliveryAddress.PostalCode<span>, </span>@Model.DeliveryAddress.City</p>
-            <p> @Model.DeliveryAddress.County<span>, </span>@Model.DeliveryAddress.Country</p>
+    <div class="order-details-cols-wrapper cf">
+        <div class="col-sm-4">
+            <h5>Adresa de livrare</h5>
+            <div class="address-details-wrapper">
+                <p class="name">@Model.DeliveryAddress.FullName</p>
+                <p>@Model.DeliveryAddress.PhoneNumber</p>
+                <p>
+                    @Model.DeliveryAddress.AddressLine1
+                    @if (!string.IsNullOrEmpty(Model.DeliveryAddress.AddressLine2) && !string.IsNullOrWhiteSpace(Model.DeliveryAddress.AddressLine2))
+                    {
+                        <span>, </span>
+                    }
+                    @Model.DeliveryAddress.AddressLine2
+                </p>
+                <p>
+                    @Model.DeliveryAddress.City
+                    @if (!string.IsNullOrEmpty(Model.DeliveryAddress.PostalCode) && !string.IsNullOrWhiteSpace(Model.DeliveryAddress.PostalCode))
+                    {
+                        <span>, </span>
+                    }
+                    @Model.DeliveryAddress.PostalCode
+                </p>
+                <p>@Model.DeliveryAddress.County<span>, </span>@Model.DeliveryAddress.Country</p>
+            </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <h5>Adresa de facturare</h5>
-        <div class="address-details-wrapper">
-            <p class="name">@Model.BillingAddress.FullName</p>
-            <p> @Model.BillingAddress.PhoneNumber</p>
-            <p> @Model.BillingAddress.AddressLine1<span>, </span>@Model.BillingAddress.AddressLine2</p>
-            <p>@Model.BillingAddress.PostalCode<span>, </span>@Model.BillingAddress.City</p>
-            <p> @Model.BillingAddress.County<span>, </span>@Model.BillingAddress.Country</p>
+        <div class="col-sm-4">
+            <h5>Adresa de facturare</h5>
+            <div class="address-details-wrapper">
+                <p class="name">@Model.BillingAddress.FullName</p>
+                <p> @Model.BillingAddress.PhoneNumber</p>
+                <p>
+                    @Model.BillingAddress.AddressLine1
+                    @if (!string.IsNullOrWhiteSpace(Model.BillingAddress.AddressLine2) && !string.IsNullOrEmpty(Model.BillingAddress.AddressLine2))
+                    {
+                        <span>, </span>
+                    }
+                    @Model.BillingAddress.AddressLine2
+                </p>
+                <p>
+                    @Model.BillingAddress.City
+                    @if (!string.IsNullOrWhiteSpace(Model.BillingAddress.PostalCode) && !string.IsNullOrEmpty(Model.BillingAddress.PostalCode))
+                    {
+                        <span>, </span>
+                    }
+                    @Model.BillingAddress.PostalCode
+                </p>
+                <p> @Model.BillingAddress.County<span>, </span>@Model.BillingAddress.Country</p>
+            </div>
         </div>
-    </div>
 
-    <div class="col-sm-4 actions">
-        @if (Model.OrderStatus == OrderStatusViewEnum.REGISTRED)
-        {
-            <button class="cta-button" onclick="openConfirmOrderModal('@Model.OrderNumber')">Confirma comanda</button>
+        <div class="col-sm-4 actions">
+            @if (Model.OrderStatus == OrderStatusViewEnum.REGISTRED)
+            {
+                <button class="cta-button" onclick="openConfirmOrderModal('@Model.OrderNumber')">Confirma comanda</button>
 
-            <div id="confirm-order-model-@Model.OrderNumber" class="modal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title"><b>Comanda #@Model.OrderNumber</b></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Esti sigur ca vrei confirmi <b>comanda #@Model.OrderNumber</b>?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.CONFIRMED')">Da</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Nu</button>
+                <div id="confirm-order-model-@Model.OrderNumber" class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"><b>Comanda #@Model.OrderNumber</b></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Esti sigur ca vrei confirmi <b>comanda #@Model.OrderNumber</b>?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.CONFIRMED', 'confirm-order-model-@Model.OrderNumber')">Da</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nu</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
 
-        @if (Model.OrderStatus == OrderStatusViewEnum.CONFIRMED)
-        {
-            <button class="cta-button" onclick="openShipOrderModel('@Model.OrderNumber')">Comanda a fost trimisa</button>
+            @if (Model.OrderStatus == OrderStatusViewEnum.CONFIRMED)
+            {
+                <button class="cta-button" onclick="openShipOrderModel('@Model.OrderNumber')">Comanda a fost trimisa</button>
 
-            <div id="ship-order-modal-@Model.OrderNumber" class="modal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title"><b>Comanda #@Model.OrderNumber</b></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>In cat timp va ajunge <b>comanda #@Model.OrderNumber?</b> </p>
-                            <select id="order-time">
-                                <option>1-2 zile</option>
-                                <option>2-3 zile</option>
-                                <option>3-4 zile</option>
-                                <option>4-5 zile</option>
-                                <option>5-6 zile</option>
-                                <option>6-7 zile</option>
-                            </select>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.SHIPPED')">Confirma</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuleaza</button>
+                <div id="ship-order-modal-@Model.OrderNumber" class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"><b>Comanda #@Model.OrderNumber</b></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>In cat timp va ajunge <b>comanda #@Model.OrderNumber?</b> </p>
+                                <select id="order-time">
+                                    <option>1-2 zile</option>
+                                    <option>2-3 zile</option>
+                                    <option>3-4 zile</option>
+                                    <option>4-5 zile</option>
+                                    <option>5-6 zile</option>
+                                    <option>6-7 zile</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.SHIPPED', 'ship-order-modal-@Model.OrderNumber')">Confirma</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuleaza</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
 
-        @if (Model.OrderStatus == OrderStatusViewEnum.SHIPPED)
-        {
-            <button class="cta-button" onclick="openCompleteOrderModal('@Model.OrderNumber')">Comanda a fost completa</button>
+            @if (Model.OrderStatus == OrderStatusViewEnum.SHIPPED)
+            {
+                <button class="cta-button" onclick="openCompleteOrderModal('@Model.OrderNumber')">Comanda a fost completa</button>
 
-            <div id="complete-order-modal-@Model.OrderNumber" class="modal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title"><b>Comanda #@Model.OrderNumber</b></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Esti sigur ca vrei sa marchezi <b>comanda #@Model.OrderNumber</b> ca fiind efectuata cu succes?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.COMPLETE')">Da</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Nu</button>
+                <div id="complete-order-modal-@Model.OrderNumber" class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"><b>Comanda #@Model.OrderNumber</b></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Esti sigur ca vrei sa marchezi <b>comanda #@Model.OrderNumber</b> ca fiind efectuata cu succes?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="changeOrderStatus('@Model.OrderNumber', '@OrderStatusViewEnum.COMPLETE', 'complete-order-modal-@Model.OrderNumber')">Da</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nu</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>

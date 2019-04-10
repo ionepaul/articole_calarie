@@ -9,7 +9,7 @@ namespace ArticoleCalarie.Models
         [EmailAddress(ErrorMessage = "Email-ul introdus este invalid.")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Parola este obligatorie.")]
         [StringLength(100, ErrorMessage = "{0} trebuie sa aiba cel putin {2} caractere.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Parola")]

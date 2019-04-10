@@ -11,7 +11,7 @@
             <div id="user-order-details">
                 <h4>Comanda #@item.OrderNumber</h4>
 
-                <p class="order-placed">Plasata pe @item.OrderRegistrationDate.ToShortDateString() @item.OrderRegistrationDate.ToShortTimeString() - <span class="total-ammount">Total: @item.TotalAmount RON</span><p />
+                <p class="order-placed">Plasata pe @item.OrderRegistrationDate.ToShortDateString() @item.OrderRegistrationDate.ToLocalTime().ToShortTimeString() - <span class="total-ammount">Total: @item.TotalAmount RON</span><p />
 
                 @{
                     var orderConfirmed = item.OrderStatus == OrderStatusViewEnum.CONFIRMED || item.OrderStatus == OrderStatusViewEnum.SHIPPED || item.OrderStatus == OrderStatusViewEnum.COMPLETE ? "active completed" : "";
@@ -55,30 +55,29 @@
                                 }
                                 <td class="total">@totalPrice RON</td>
                             </tr>
-                         }
+                                    }
                     </table>
                     <p class="total-order">Total: @item.TotalAmount RON</p>
                 </div>
             </div>
             <br />
             <br />
-         }
+        }
 
-         <div id="content-pager-orders" class="user-order-pagination">
-            @Html.PagedListPager(Model, page => Url.Action("UserOrderListPartial", new { pageNumber = page }))
-         </div>
+        if (Model.PageCount > 1)
+        {
+            <div id="content-pager-orders" class="user-order-pagination">
+                @Html.PagedListPager(Model, page => Url.RouteUrl("user-orders-partial-url", new { pageNumber = page }))
+            </div>
+        }
      }
      else
      {
         <h3 style="text-align: center;">Momentan nu ai efectuat nicio comanda.</h3>
-       
      }
-    <div class="related-items">
-        <h3 class="title supper-title"></h3>
-        <br />
-        <div id="orderList-related-products"></div>
-    </div>
 </div>
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

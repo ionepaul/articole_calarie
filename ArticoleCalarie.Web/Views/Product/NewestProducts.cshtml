@@ -2,6 +2,11 @@
 @using PagedList.Mvc;
 @using ArticoleCalarie.Web.Utils
 
+@{
+    ViewBag.Title = "Noutati";
+    ViewBag.MetaDescription = "Ultimele produse de echitatie, de la cele mai renumite brand-uri internationale. De la pinteni, cizme de calarie, valtrape, sa, paturi la echipamente de grajd si multe altele.";
+}
+
 <div class="page-wrapper">
     <div class="main-content category-nosidebar-page">
         <div class="container">
@@ -68,7 +73,7 @@
                     @if (Model.PageCount > 1)
                     {
                         <div id="content-pager">
-                            @Html.PagedListPager(Model, page => Url.RouteUrl("products-on-sale-url", new { pageNumber = page }))
+                            @Html.PagedListPager(Model, page => Url.RouteUrl("newest-products-url", new { pageNumber = page }))
                         </div>
                     }
                 </div>

@@ -3,9 +3,13 @@
 @using ArticoleCalarie.Web.Utils
 
 @{ 
-    var brandImage = ViewBag.BrandName + ".png";
+    ViewBag.Title = ((string)ViewBag.BrandName).ToFirstUppercase() + " | Brands";
+    ViewBag.MetaDescription = ViewBag.BrandName + " este un brand de renume in industria mondiala de echitatie fiind un recunoscut pentru calitate si rezistenta produselor sale.";
+
+    var brandImage = ViewBag.BrandName.Replace(" ", "-") + ".png";
     var brandName = ViewBag.BrandName;
 }
+
 <div class="page-wrapper">
     <div class="main-content">
         <div class="container">
@@ -16,7 +20,6 @@
                     </div>
                     <div class="brand-name">
                         <span>@brandName</span>
-                      @*  <p class="description">Today Waldhausen is being run by Klaus Reinken and Michael Manefeld. With its own brands ELT, SWING and Waldhausen, as well as distributor for famous brands such as Bates, Wintec, Nathe and Likit, Waldhausen is one of the largest wholesale retailers in the equestrian market. More than 12.000 products are available in more than 60 countries all over the world. Until today the company is faithful to Anton Waldhausen’s statement: Offering premium quality products at an excellent price-performance ratio.</p>*@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 right-content">

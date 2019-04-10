@@ -1,20 +1,28 @@
 ﻿@model PagedList.IPagedList<ArticoleCalarie.Models.OrderViewModel>
-@using PagedList.Mvc;
+@using ArticoleCalarie.Models.Enums
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Listă produse";
+    ViewBag.Title = "Comenzi";
+    ViewBag.MetaDescription = string.Empty;
+    var newIsActive = (OrderStatusViewEnum)ViewBag.OrderStatus == OrderStatusViewEnum.REGISTRED ? "active" : "";
+    var confirmedIsActive = (OrderStatusViewEnum)ViewBag.OrderStatus == OrderStatusViewEnum.CONFIRMED ? "active" : "";
+    var shippedIsActive = (OrderStatusViewEnum)ViewBag.OrderStatus == OrderStatusViewEnum.SHIPPED ? "active" : "";
+    var completeIsActive = (OrderStatusViewEnum)ViewBag.OrderStatus == OrderStatusViewEnum.COMPLETE ? "active" : "";
+}
+
+@section MetaNoFollow {
+    <meta name='robots' CONTENT='NOINDEX, NOFOLLOW'>
 }
 
 <div class="page-wrapper orders-list">
     <div class="product-list-header">
         <h3 class="form-title">Comenzi</h3>
         <div class="special-btns-container">
-            <button id="all-orders-btn" class="orders-special-btn">Toate</button>
-            <button id="completed-orders-btn" class="orders-special-btn">Complete</button>
-            <button id="registred-orders-btn" class="orders-special-btn">Noi</button>
-            <button id="shipped-orders-btn" class="orders-special-btn">Trimise</button>
-            <button id="confirmed-orders-btn" class="orders-special-btn">Confirmate</button>
+            <button id="registred-orders-btn" class="orders-special-btn @newIsActive">Noi</button>
+            <button id="confirmed-orders-btn" class="orders-special-btn @confirmedIsActive">Confirmate</button>
+            <button id="shipped-orders-btn" class="orders-special-btn @shippedIsActive">Trimise</button>
+            <button id="completed-orders-btn" class="orders-special-btn @completeIsActive">Complete</button>
         </div>
     </div>
 

@@ -1,16 +1,21 @@
 ﻿@model int
 
 @{
-    ViewBag.Title = "CheckoutDone";
+    ViewBag.Title = "Comanda #" + Model + " inregistrata cu succes";
+    ViewBag.MetaDescription = string.Empty;
 }
 
-<div class="page-wrapper container">
+@section MetaNoFollow {
+    <meta name='robots' CONTENT='NOINDEX, NOFOLLOW'>
+}
+
+<div class="page-wrapper">
     <div class="checkout-done">
         <div class="pass-confirmation">
             <div class="logo">
-                <img src="~/images/my_logo3.png" alt="Articole Călărie logo" id="appLogo">
+                <img src="~/images/articole-calarie-logo.png" alt="articole calarie logo" id="appLogo">
             </div>
-            <h2 class="checkout-done-title"> Comanda: #@Model a fost inregistrată cu succes.</h2>
+            <h2 class="checkout-done-title"> Comanda: #@Model a fost inregistrata cu succes.</h2>
             <h3 style="margin-top: 5px;">Vei primi un email cand comanda va fi confirmata.</h3>
 
             @if (User.Identity.IsAuthenticated)

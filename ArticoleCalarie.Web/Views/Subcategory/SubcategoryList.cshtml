@@ -1,0 +1,20 @@
+﻿@using ArticoleCalarie.Models
+@model IEnumerable<SubcategoryViewModel>
+
+@{
+    ViewBag.Title = "Subcategorii " + Model.First().CategoryName;
+    ViewBag.MetaDescription = "Descopera toate subcategoriile disponibile pentru " + Model.First().CategoryName.ToLower() + " de pe articolecalarie.ro si bucura-te de gama noastra larga de produse, echipamente si accesorii de echitatie, calarie.";
+}
+
+<div class="page-wrapper">
+    <p style="font-weight: 700; font-size: 18px; text-transform: uppercase">Produse disponibile pentru @Model.First().CategoryName</p>
+    <ul style="padding-left: 30px;">
+        @foreach (var subcategory in Model)
+        {
+            <li class="@(ViewContext?.RouteData?.Values["subcategoryName"]?.ToString() == subcategory.Name.ToLower().Replace(" ", "-") ? "active" : "")">
+                <a href="@Url.RouteUrl("product-list-url", new { categoryName = subcategory.CategoryName.ToLower(), subcategoryId = subcategory.Id, subcategoryName = subcategory.Name.ToLower().Replace(" ", "-"), page = 1 })">@subcategory.Name.ToUpper()</a>
+            </li>
+        }
+    </ul>
+</div>
+

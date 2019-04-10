@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using ArticoleCalarie.Repository;
 using ArticoleCalarie.Repository.Entities;
 using ArticoleCalarie.Repository.Identity;
@@ -58,8 +59,8 @@ namespace ArticoleCalarie.Web
 
             app.UseFacebookAuthentication(new FacebookAuthenticationOptions()
             {
-                AppId = "159967757965246",
-                AppSecret = "3b1b3b285bc6eeb928963a4b3d168d65",
+                AppId = ConfigurationManager.AppSettings["FacebookAppId"],
+                AppSecret = ConfigurationManager.AppSettings["FacebookAppSecret"],
                 Scope = { "email", "public_profile" },
                 Fields = { "email", "name" }
             });
