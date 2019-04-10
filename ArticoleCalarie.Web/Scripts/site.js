@@ -1,4 +1,10 @@
 ﻿$(document).ready(function () {
+    $(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted) {
+            window.location.reload();
+        }
+    });
+
     $('#back').on('click', function () {
         window.history.back();
     });
@@ -41,7 +47,7 @@
         $("#logoutForm").submit();
     });
 
-    if (window.location.hash && window.location.hash == '#_=_') {
+    if (window.location.hash && window.location.hash === '#_=_') {
         window.location.hash = '';
     }
 
