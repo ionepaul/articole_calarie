@@ -9,6 +9,8 @@
     bool hasMaterialDetails = !string.IsNullOrEmpty(Model.MaterialDetails);
     bool hasSizeChart = !string.IsNullOrEmpty(Model.SizeChartImage);
     var sizes = !string.IsNullOrEmpty(Model.Size) ? Model.Size.Split(',') : new string[0];
+
+    var brandImage = !string.IsNullOrEmpty(Model.Brand) ? Model.Brand.ToLower().Replace(" ", "-") + ".png" : "";
 }
 
 <div class="main-content product-single-page">
@@ -73,6 +75,13 @@
                             <span class="ins">@Model.Price RON</span>
                         }
                     </div>
+
+                    @if (!string.IsNullOrEmpty(brandImage))
+                    {
+                        <div style="margin-top: 15px">
+                            <img height="80" src="~/images/@brandImage" />
+                        </div>
+                    }
 
                     @if (sizes.Count() > 0)
                     {
