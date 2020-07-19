@@ -95,6 +95,7 @@ namespace ArticoleCalarie.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [ValidateGoogleCaptcha]
         public async Task<ActionResult> Register(RegisterViewModel model, string returnUrl)
         {
             _logger.Info("POST > Register");

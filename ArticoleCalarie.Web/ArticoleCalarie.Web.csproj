@@ -226,6 +226,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Attributes\ValidateGoogleCaptchaAttribute.cs" />
     <Compile Include="Bootstraper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
@@ -242,6 +243,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReCaptcha\GoogleCaptchaHelper.cs" />
+    <Compile Include="ReCaptcha\GoogleCaptchaSettings.cs" />
+    <Compile Include="ReCaptcha\InvalidGoogleCaptchaHelper.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\IdentityExtensions.cs" />
     <Compile Include="Utils\SitemapActionResult.cs" />

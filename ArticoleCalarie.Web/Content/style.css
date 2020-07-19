@@ -985,6 +985,8 @@ input {
   color: #a7a7a7;
 } 
 .submenu {
+  max-height: 400px;
+  overflow-y: scroll;
   position: absolute;
   z-index: 99;
   background-color: #ffffff;
@@ -11617,23 +11619,3 @@ fieldset.nouirange .noUi-horizontal {
     fieldset.nouirange .noUi-handle:before, fieldset.nouirange .noUi-handle:after {
         display: none;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
