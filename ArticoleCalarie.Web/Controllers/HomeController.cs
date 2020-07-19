@@ -52,6 +52,7 @@ namespace ArticoleCalarie.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateGoogleCaptcha]
         [Route("contact-form", Name = "contact-form-url")]
         public async Task<ActionResult> Contact(ContactPageModel contactModel)
         {
