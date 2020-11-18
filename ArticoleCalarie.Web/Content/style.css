@@ -8885,6 +8885,13 @@ strong.details-section {
   }
 }
 
+.main-product-banner-image {
+    max-width: unset;
+    height: 300px;
+    padding: 20px;
+    width: auto;
+}
+
 /*---REPONSIVE---*/
 @media(max-width: 1500px) {
 .header.layout8 .main-menu > li.logo {
@@ -10070,6 +10077,15 @@ strong.details-section {
 .comingsoon-content .time_circles > div > h4, .kt-countdown .box-count .text {
   font-size: 18px;
 }
+
+    .main-product-banner-image {
+        max-width: unset;
+        height: 250px;
+        padding: 20px;
+        width: auto !important;
+    }
+
+
 }
 @media(max-width: 767px) {
 
@@ -10520,6 +10536,13 @@ strong.details-section {
 .add-product-form {
     width: 100%;
 }
+
+    .main-product-banner-image {
+        max-width: unset;
+        height: 250px;
+        padding: 40px;
+        width: auto;
+    }
 }
 @media(max-width: 639px) {
 
